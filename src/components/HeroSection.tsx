@@ -1,5 +1,3 @@
-import QuoteForm from "@/components/QuoteForm";
-
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white">
@@ -17,35 +15,13 @@ const HeroSection = () => {
         }}
       ></div>
       
-      {/* Image Collage */}
+      {/* Hero Image */}
       <div className="absolute top-0 right-0 w-1/2 h-full z-10 overflow-hidden">
-        <div className="grid grid-cols-2 gap-2 h-full p-4">
-          <div className="space-y-2">
-            <img 
-              src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
-              alt="House framing construction" 
-              className="w-full h-2/3 object-cover rounded-xl shadow-lg"
-            />
-            <img 
-              src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png" 
-              alt="Construction tools and materials" 
-              className="w-full h-1/3 object-cover rounded-xl shadow-lg"
-            />
-          </div>
-          <div className="space-y-2 pt-8">
-            <img 
-              src="/lovable-uploads/073b7385-c711-4d21-bdf2-a27e21f46e1c.png" 
-              alt="Framing work in progress" 
-              className="w-full h-1/3 object-cover rounded-xl shadow-lg"
-            />
-            <img 
-              src="/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png" 
-              alt="Professional construction team" 
-              className="w-full h-2/3 object-cover rounded-xl shadow-lg"
-            />
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-construction-white via-construction-white/30 to-transparent"></div>
+        <img 
+          src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
+          alt="House framing construction" 
+          className="w-full h-full object-cover"
+        />
       </div>
       
       {/* Decorative Elements */}
@@ -54,8 +30,8 @@ const HeroSection = () => {
       
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[calc(100vh-5rem)]">
-          <div className="text-construction-dark text-center lg:text-left">
+        <div className="min-h-[calc(100vh-5rem)] flex items-center">
+          <div className="text-construction-dark text-center lg:text-left max-w-2xl">
             <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-construction-green/20 mb-6 lg:mb-8">
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
@@ -66,7 +42,7 @@ const HeroSection = () => {
               <span className="text-construction-green">Foundation</span> of Every Home
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
             
@@ -84,15 +60,6 @@ const HeroSection = () => {
                 <span className="font-medium text-sm sm:text-base">100% On Schedule</span>
               </div>
             </div>
-            
-            {/* Mobile quote form call-to-action */}
-            <div className="lg:hidden text-center">
-              <p className="text-construction-gray mb-4 font-medium">Get your free quote in minutes →</p>
-            </div>
-          </div>
-          
-          <div className="w-full max-w-md mx-auto lg:mx-0 lg:max-w-lg">
-            <QuoteForm />
           </div>
         </div>
       </div>
