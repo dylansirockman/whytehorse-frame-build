@@ -102,32 +102,28 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto" style={{ transform: `translateY(${translateY * 0.2}px)`, opacity: opacity }}>
             <div className="relative w-full aspect-[4/5] transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white">
-                {images.map((image, index) => {
-                  let translateClass = 'translate-x-full'; // Default: off screen right
-                  
-                  if (index === currentImageIndex) {
-                    translateClass = 'translate-x-0'; // Current: center
-                  } else if (index === currentImageIndex - 1 || (currentImageIndex === 0 && index === images.length - 1)) {
-                    translateClass = '-translate-x-full'; // Previous: off screen left
-                  }
-                  
-                  return (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-transform duration-700 ease-in-out ${translateClass}`}
-                    >
-                      <img 
-                        src={image}
-                        alt="Construction project showcase" 
-                        className="w-full h-full object-cover rounded-3xl"
-                      />
-                    </div>
-                  );
-                })}
+              <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative">
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
+                      index === currentImageIndex 
+                        ? 'translate-x-0' 
+                        : index > currentImageIndex 
+                        ? 'translate-x-full' 
+                        : '-translate-x-full'
+                    }`}
+                  >
+                    <img 
+                      src={image}
+                      alt="Construction project showcase" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
                 
                 {/* Animated gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20 rounded-3xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
                 
                 {/* Slideshow indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
