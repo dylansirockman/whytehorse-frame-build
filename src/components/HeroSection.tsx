@@ -59,12 +59,12 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-5rem)]">
           
           {/* Text Content */}
-          <div className="w-full lg:w-1/2 text-center lg:text-left animate-slide-up">
+          <div className="w-full lg:w-[55%] text-center lg:text-left animate-slide-up max-w-3xl mx-auto lg:mx-0">
             <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-construction-green/20 mb-6 lg:mb-8 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10 leading-[1.1] sm:leading-[1.05]" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
               Building the Strong
               <br />
               <span className="text-construction-green">Foundation</span> of Every Home
