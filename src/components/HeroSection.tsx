@@ -69,14 +69,16 @@ const HeroSection = () => {
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             <div className="relative inline-block mb-6 lg:mb-8">
               <div 
-                className="bg-gradient-to-b from-construction-green/20 to-construction-green/10 backdrop-blur-sm px-8 sm:px-12 py-4 sm:py-5 border-2 border-construction-green/30 shadow-lg"
+                className="backdrop-blur-sm px-8 sm:px-12 py-4 sm:py-5 shadow-lg"
                 style={{
+                  background: 'linear-gradient(to bottom, #8B4513 0%, #A0522D  20%, #CD853F  40%, #D2691E  60%, #8B4513 100%)',
                   clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
                   transform: 'translateY(6px)',
-                  boxShadow: '0 8px 25px -8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.1)'
+                  boxShadow: '0 8px 25px -8px rgba(139, 69, 19, 0.3), inset 0 2px 4px rgba(255,255,255,0.1)',
+                  border: '2px solid #654321'
                 }}
               >
-                <span className="text-construction-green font-bold text-xs sm:text-sm uppercase tracking-[0.15em] drop-shadow-sm">PROFESSIONAL FRAMING CONTRACTORS</span>
+                <span className="text-amber-100 font-bold text-xs sm:text-sm uppercase tracking-[0.15em] drop-shadow-lg">PROFESSIONAL FRAMING CONTRACTORS</span>
               </div>
             </div>
             
