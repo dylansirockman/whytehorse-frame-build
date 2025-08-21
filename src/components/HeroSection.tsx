@@ -39,45 +39,47 @@ const HeroSection = () => {
       
       {/* Hero Image Slideshow */}
       <div className="absolute top-16 right-8 w-5/12 h-4/5 z-10">
-        <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
-          {images.map((image, index) => (
-            <div
-              key={`${index}-${currentImageIndex}`}
-              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                index === currentImageIndex
-                  ? 'opacity-100 scale-100 rotate-3 z-10 animate-fade-in'
-                  : 'opacity-0 scale-95 rotate-6 z-0'
-              }`}
-            >
-              <img 
-                src={image}
-                alt="Construction project showcase" 
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
+        <div className="relative w-full h-full transform rotate-3 hover:rotate-1 transition-transform duration-500">
+          <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+            {images.map((image, index) => (
+              <div
+                key={`${index}-${currentImageIndex}`}
+                className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                  index === currentImageIndex
+                    ? 'opacity-100 scale-100 z-10'
+                    : 'opacity-0 scale-95 z-0'
+                }`}
+              >
+                <img 
+                  src={image}
+                  alt="Construction project showcase" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+            
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            
+            {/* Slideshow indicators */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
+                    index === currentImageIndex 
+                      ? 'bg-construction-green shadow-lg scale-125 animate-pulse' 
+                      : 'bg-white/40 hover:bg-white/60'
+                  }`}
+                />
+              ))}
             </div>
-          ))}
-          
-          {/* Animated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+          </div>
           
           {/* Floating accent elements */}
           <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
           <div className="absolute -top-6 -left-6 w-24 h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
-          
-          {/* Slideshow indicators */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
-                  index === currentImageIndex 
-                    ? 'bg-construction-green shadow-lg scale-125 animate-pulse' 
-                    : 'bg-white/40 hover:bg-white/60'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
       
