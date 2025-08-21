@@ -133,7 +133,7 @@ const HeroSection = () => {
                 
                 {/* Instagram Button */}
                 <button 
-                  className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30"
+                  className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
                   onClick={(e) => {
                     e.stopPropagation();
                     window.open('https://instagram.com', '_blank');
