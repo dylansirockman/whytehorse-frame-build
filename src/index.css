@@ -59,8 +59,8 @@ All colors MUST be HSL.
     --shadow-form: 0 25px 50px -12px hsl(220 13% 13% / 0.25);
     
     /* Typography */
-    --font-heading: "Inter", sans-serif;
-    --font-body: "Inter", sans-serif;
+    --font-heading: "Poppins", sans-serif;
+    --font-body: "Poppins", sans-serif;
     
     /* Spacing */
     --section-padding: 7rem;
