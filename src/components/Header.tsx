@@ -5,11 +5,13 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-construction-white/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-6 h-24 flex items-center justify-between">
         <div className="flex items-center">
-          <img 
-            src="/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png" 
-            alt="WhyteHorse Contracting" 
-            className="h-20 w-auto"
-          />
+          <div className="text-2xl lg:text-3xl font-bold">
+            <span className="text-construction-dark">Whyte</span>
+            <span className="text-construction-green">Horse</span>
+            <div className="text-xs lg:text-sm font-medium text-construction-gray uppercase tracking-wider -mt-1">
+              Contracting
+            </div>
+          </div>
         </div>
         
         <nav className="hidden lg:flex items-center space-x-12">
