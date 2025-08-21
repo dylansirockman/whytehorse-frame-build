@@ -5,13 +5,13 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white">
       {/* Grid Pattern Background */}
       <div 
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-60"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(158, 158, 158, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(158, 158, 158, 0.1) 1px, transparent 1px)
+            linear-gradient(rgba(158, 158, 158, 0.25) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(158, 158, 158, 0.25) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: '32px 32px'
         }}
       ></div>
       
