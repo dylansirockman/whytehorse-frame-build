@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Instagram } from "lucide-react";
 
 const HeroSection = () => {
   const images = [
@@ -129,6 +130,17 @@ const HeroSection = () => {
                 
                 {/* Animated gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+                
+                {/* Instagram Button */}
+                <button 
+                  className="absolute top-4 right-4 z-30 bg-white/90 hover:bg-white text-construction-dark hover:text-construction-green p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open('https://instagram.com', '_blank');
+                  }}
+                >
+                  <Instagram size={20} />
+                </button>
                 
                 {/* Slideshow indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
