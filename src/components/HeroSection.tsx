@@ -69,13 +69,14 @@ const HeroSection = () => {
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             <div className="relative inline-block mb-6 lg:mb-8">
               <div 
-                className="bg-construction-green/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 border border-construction-green/20"
+                className="bg-gradient-to-b from-construction-green/20 to-construction-green/10 backdrop-blur-sm px-8 sm:px-12 py-4 sm:py-5 border-2 border-construction-green/30 shadow-lg"
                 style={{
-                  clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
-                  transform: 'translateY(8px)'
+                  clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
+                  transform: 'translateY(6px)',
+                  boxShadow: '0 8px 25px -8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.1)'
                 }}
               >
-                <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
+                <span className="text-construction-green font-bold text-xs sm:text-sm uppercase tracking-[0.15em] drop-shadow-sm">PROFESSIONAL FRAMING CONTRACTORS</span>
               </div>
             </div>
             
