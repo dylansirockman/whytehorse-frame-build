@@ -64,7 +64,7 @@ const HeroSection = () => {
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10 leading-[1.1] sm:leading-[1.05]" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10 leading-[1.3] sm:leading-[1.25] animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
               Building the Strong
               <br />
               <span className="text-construction-green">Foundation</span> of Every Home
