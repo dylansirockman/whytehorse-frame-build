@@ -46,22 +46,22 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-5rem)]">
           
           {/* Text Content */}
-          <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-construction-green/20 mb-6 lg:mb-8">
+          <div className="w-full lg:w-1/2 text-center lg:text-left animate-slide-up">
+            <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-construction-green/20 mb-6 lg:mb-8 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
               Building the Strong
               <br />
               <span className="text-construction-green">Foundation</span> of Every Home
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
