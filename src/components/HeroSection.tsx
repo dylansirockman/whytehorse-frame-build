@@ -69,7 +69,7 @@ const HeroSection = () => {
                   onClick={() => setCurrentImageIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
                     index === currentImageIndex 
-                      ? 'bg-construction-green shadow-lg scale-125 animate-pulse' 
+                      ? 'bg-construction-green shadow-lg scale-125' 
                       : 'bg-white/40 hover:bg-white/60'
                   }`}
                 />
