@@ -34,7 +34,7 @@ const HeroSection = () => {
   const translateY = scrollY * 0.7;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white" style={{ opacity, transform: `translateY(${translateY}px)` }}>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 sm:pt-40 lg:pt-44 bg-construction-white" style={{ opacity, transform: `translateY(${translateY}px)` }}>
       {/* Grid Pattern Background */}
       <div 
         className="absolute inset-0"
