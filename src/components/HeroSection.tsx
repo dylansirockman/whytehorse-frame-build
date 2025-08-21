@@ -67,7 +67,7 @@ const HeroSection = () => {
           
           {/* Text Content */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
-            <div className="inline-block bg-gradient-to-r from-construction-green/15 to-construction-green/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-green/30 shadow-lg shadow-construction-green/20 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-green/25 transition-all duration-300 hover:scale-105">
+            <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             

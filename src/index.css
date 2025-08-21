@@ -40,6 +40,9 @@ All colors MUST be HSL.
     --construction-green: 158 45% 22%;
     --construction-green-light: 158 45% 30%;
     --construction-green-dark: 158 45% 18%;
+    --construction-secondary: 35 85% 65%;
+    --construction-secondary-light: 35 85% 75%;
+    --construction-secondary-dark: 35 85% 55%;
     --construction-dark: 220 13% 13%;
     --construction-gray: 220 8% 46%;
     --construction-light: 220 8% 98%;
