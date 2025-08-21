@@ -24,7 +24,7 @@ const HeroSection = () => {
           alt="House framing construction" 
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-construction-green/5 to-construction-white/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-construction-white/90 to-transparent"></div>
       </div>
       
       {/* Decorative Elements */}
