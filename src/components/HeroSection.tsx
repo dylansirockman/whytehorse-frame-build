@@ -56,7 +56,7 @@ const HeroSection = () => {
       
       {/* Content Container */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ transform: `translateY(${translateY * 0.3}px)` }}>
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-5rem)]">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           
           {/* Text Content */}
           <div className="w-full lg:w-[55%] text-center lg:text-left animate-slide-up max-w-3xl mx-auto lg:mx-0">
