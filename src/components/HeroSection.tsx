@@ -16,12 +16,16 @@ const HeroSection = () => {
       ></div>
       
       {/* Hero Image */}
-      <div className="absolute top-0 right-0 w-1/2 h-full z-10 overflow-hidden">
-        <img 
-          src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
-          alt="House framing construction" 
-          className="w-full h-full object-cover"
-        />
+      <div className="absolute top-16 right-8 w-5/12 h-4/5 z-10">
+        <div className="relative w-full h-full">
+          <img 
+            src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
+            alt="House framing construction" 
+            className="w-full h-full object-cover rounded-3xl shadow-2xl transform rotate-3 hover:rotate-1 transition-transform duration-500"
+          />
+          <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-construction-green/20 rounded-full blur-2xl"></div>
+          <div className="absolute -top-6 -left-6 w-24 h-24 bg-construction-green/15 rounded-full blur-xl"></div>
+        </div>
       </div>
       
       {/* Decorative Elements */}
