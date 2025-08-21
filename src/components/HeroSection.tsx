@@ -18,13 +18,13 @@ const HeroSection = () => {
       ></div>
       
       {/* Background Image */}
-      <div className="absolute top-0 right-0 w-1/2 h-full z-10">
+      <div className="absolute top-0 right-0 w-1/2 h-full z-10 overflow-hidden">
         <img 
           src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
           alt="House framing construction" 
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-construction-white/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-construction-white via-construction-white/50 to-construction-white/50"></div>
       </div>
       
       {/* Decorative Elements */}
