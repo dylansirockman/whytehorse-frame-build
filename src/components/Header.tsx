@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-construction-white/95 backdrop-blur-md border-b border-border shadow-sm">
-      <div className="container mx-auto px-6 h-36 sm:h-40 lg:h-44 flex items-center justify-between">
+      <div className="container mx-auto px-6 h-24 flex items-center justify-between">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png" 
             alt="WhyteHorse Contracting" 
-            className="h-32 sm:h-36 lg:h-40 w-auto"
+            className="h-20 w-auto"
           />
         </div>
         
