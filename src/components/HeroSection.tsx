@@ -10,8 +10,8 @@ const HeroSection = () => {
             linear-gradient(90deg, rgba(158, 158, 158, 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '32px 32px',
-          mask: 'radial-gradient(circle at top left, white 0%, rgba(255,255,255,0.4) 25%, transparent 50%)',
-          WebkitMask: 'radial-gradient(circle at top left, white 0%, rgba(255,255,255,0.4) 25%, transparent 50%)'
+          mask: 'radial-gradient(ellipse 80% 100% at top left, white 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.2) 65%, transparent 85%)',
+          WebkitMask: 'radial-gradient(ellipse 80% 100% at top left, white 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.2) 65%, transparent 85%)'
         }}
       ></div>
       
