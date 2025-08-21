@@ -16,7 +16,7 @@ const HeroSection = () => {
       setCurrentImageIndex((prevIndex) => 
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000);
+    }, 10000); // Changed to 10 seconds
     
     return () => clearInterval(interval);
   }, [images.length]);
