@@ -55,9 +55,16 @@ export default {
 				construction: {
 					green: 'hsl(var(--construction-green))',
 					'green-light': 'hsl(var(--construction-green-light))',
+					'green-dark': 'hsl(var(--construction-green-dark))',
 					dark: 'hsl(var(--construction-dark))',
 					gray: 'hsl(var(--construction-gray))',
-					light: 'hsl(var(--construction-light))'
+					light: 'hsl(var(--construction-light))',
+					white: 'hsl(var(--construction-white))'
+				},
+				gradient: {
+					hero: 'var(--gradient-hero)',
+					section: 'var(--gradient-section)',
+					card: 'var(--gradient-card)'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

@@ -39,21 +39,29 @@ All colors MUST be HSL.
     /* Construction-focused design tokens */
     --construction-green: 158 45% 22%;
     --construction-green-light: 158 45% 30%;
+    --construction-green-dark: 158 45% 18%;
     --construction-dark: 220 13% 13%;
     --construction-gray: 220 8% 46%;
-    --construction-light: 220 8% 96%;
+    --construction-light: 220 8% 98%;
+    --construction-white: 0 0% 100%;
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220 13% 13% / 0.8), hsl(158 45% 22% / 0.9));
-    --gradient-section: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 8% 98%));
+    /* Premium gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 13% 13% / 0.85), hsl(158 45% 22% / 0.8));
+    --gradient-section: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 8% 99%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 8% 98%));
     
-    /* Shadows */
-    --shadow-construction: 0 10px 30px -10px hsl(220 13% 13% / 0.2);
-    --shadow-card: 0 4px 20px -4px hsl(220 13% 13% / 0.1);
+    /* Premium shadows */
+    --shadow-premium: 0 20px 60px -10px hsl(220 13% 13% / 0.15);
+    --shadow-card: 0 8px 30px -8px hsl(220 13% 13% / 0.12);
+    --shadow-form: 0 25px 50px -12px hsl(220 13% 13% / 0.25);
     
     /* Typography */
     --font-heading: "Inter", sans-serif;
     --font-body: "Inter", sans-serif;
+    
+    /* Spacing */
+    --section-padding: 7rem;
+    --container-padding: 2rem;
 
     --radius: 0.5rem;
 
