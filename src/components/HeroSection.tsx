@@ -10,6 +10,7 @@ const HeroSection = () => {
   ];
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,8 +22,19 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
+  const opacity = 1 - scrollProgress;
+  const translateY = scrollY * 0.5;
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white" style={{ opacity, transform: `translateY(${translateY}px)` }}>
       {/* Grid Pattern Background */}
       <div 
         className="absolute inset-0"
@@ -33,16 +45,17 @@ const HeroSection = () => {
           `,
           backgroundSize: '32px 32px',
           mask: 'linear-gradient(to bottom, white 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 75%, transparent 100%)',
-          WebkitMask: 'linear-gradient(to bottom, white 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 75%, transparent 100%)'
+          WebkitMask: 'linear-gradient(to bottom, white 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 75%, transparent 100%)',
+          opacity: opacity * 0.8
         }}
       ></div>
       
       {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-4 lg:left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-5"></div>
-      <div className="absolute bottom-1/4 right-4 lg:right-20 w-48 h-48 bg-construction-green/8 rounded-full blur-3xl z-5"></div>
+      <div className="absolute top-1/4 left-4 lg:left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-5" style={{ opacity: opacity * 0.6 }}></div>
+      <div className="absolute bottom-1/4 right-4 lg:right-20 w-48 h-48 bg-construction-green/8 rounded-full blur-3xl z-5" style={{ opacity: opacity * 0.4 }}></div>
       
       {/* Content Container */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ transform: `translateY(${translateY * 0.3}px)` }}>
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-5rem)]">
           
           {/* Text Content */}
@@ -78,7 +91,7 @@ const HeroSection = () => {
           </div>
           
           {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto" style={{ transform: `translateY(${translateY * 0.2}px)`, opacity: opacity }}>
             <div className="relative w-full aspect-[4/5] transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white">
                 {images.map((image, index) => (
