@@ -40,26 +40,26 @@ const HeroSection = () => {
       {/* Hero Image Slideshow */}
       <div className="absolute top-16 right-8 w-5/12 h-4/5 z-10">
         <div className="relative w-full h-full transform rotate-3 hover:rotate-1 transition-transform duration-500">
-          <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+          <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white">
             {images.map((image, index) => (
               <div
                 key={`${index}-${currentImageIndex}`}
                 className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
                   index === currentImageIndex
-                    ? 'opacity-100 scale-100 z-10'
+                    ? 'opacity-100 scale-100 z-10 animate-fade-in'
                     : 'opacity-0 scale-95 z-0'
                 }`}
               >
                 <img 
                   src={image}
                   alt="Construction project showcase" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-3xl hover:scale-105 transition-transform duration-700"
                 />
               </div>
             ))}
             
             {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20 rounded-3xl"></div>
             
             {/* Slideshow indicators */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
