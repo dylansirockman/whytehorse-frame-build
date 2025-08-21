@@ -32,8 +32,8 @@ const HeroSection = () => {
             linear-gradient(90deg, rgba(158, 158, 158, 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '32px 32px',
-          mask: 'radial-gradient(ellipse 80% 100% at top left, white 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.2) 65%, transparent 85%)',
-          WebkitMask: 'radial-gradient(ellipse 80% 100% at top left, white 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.2) 65%, transparent 85%)'
+          mask: 'linear-gradient(to bottom, white 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.4) 60%, transparent 85%)',
+          WebkitMask: 'linear-gradient(to bottom, white 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.4) 60%, transparent 85%)'
         }}
       ></div>
       
