@@ -29,9 +29,9 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
+  const scrollProgress = Math.min(scrollY / (window.innerHeight * 0.6), 1);
   const opacity = 1 - scrollProgress;
-  const translateY = scrollY * 0.5;
+  const translateY = scrollY * 0.7;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white" style={{ opacity, transform: `translateY(${translateY}px)` }}>
