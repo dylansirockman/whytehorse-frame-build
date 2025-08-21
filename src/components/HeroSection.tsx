@@ -106,16 +106,18 @@ const HeroSection = () => {
                 {images.map((image, index) => (
                   <div
                     key={`${index}-${currentImageIndex}`}
-                    className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                    className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
                       index === currentImageIndex
-                        ? 'opacity-100 scale-100 z-10 animate-fade-in'
-                        : 'opacity-0 scale-95 z-0'
+                        ? 'translate-x-0 z-10'
+                        : index === (currentImageIndex + 1) % images.length
+                        ? 'translate-x-full z-0'
+                        : 'translate-x-[-100%] z-0'
                     }`}
                   >
                     <img 
                       src={image}
                       alt="Construction project showcase" 
-                      className="w-full h-full object-cover rounded-3xl hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover rounded-3xl"
                     />
                   </div>
                 ))}
