@@ -71,14 +71,14 @@ const HeroSection = () => {
               <div 
                 className="backdrop-blur-sm px-8 sm:px-12 py-4 sm:py-5 shadow-lg"
                 style={{
-                  background: '#8B4513',
+                  background: 'linear-gradient(to bottom, #A0522D, #8B4513)',
                   clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
                   transform: 'translateY(6px)',
-                  boxShadow: '0 8px 25px -8px rgba(139, 69, 19, 0.3)',
+                  boxShadow: '0 6px 20px -8px rgba(139, 69, 19, 0.4), inset 0 1px 2px rgba(255,255,255,0.1)',
                   border: '1px solid #654321'
                 }}
               >
-                <span className="text-amber-100 font-bold text-xs sm:text-sm uppercase tracking-[0.15em]">PROFESSIONAL FRAMING CONTRACTORS</span>
+                <span className="text-amber-100 font-bold text-xs sm:text-sm uppercase tracking-[0.15em] drop-shadow-sm">PROFESSIONAL FRAMING CONTRACTORS</span>
               </div>
             </div>
             
