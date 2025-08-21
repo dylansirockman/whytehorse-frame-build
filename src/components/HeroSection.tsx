@@ -8,11 +8,12 @@ const HeroSection = () => {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            radial-gradient(circle at top left, rgba(158, 158, 158, 0.6) 0%, rgba(158, 158, 158, 0.3) 40%, transparent 70%),
             linear-gradient(rgba(158, 158, 158, 0.25) 1px, transparent 1px),
             linear-gradient(90deg, rgba(158, 158, 158, 0.25) 1px, transparent 1px)
           `,
-          backgroundSize: 'cover, 32px 32px, 32px 32px'
+          backgroundSize: '32px 32px',
+          mask: 'radial-gradient(circle at top left, white 0%, white 30%, transparent 70%)',
+          WebkitMask: 'radial-gradient(circle at top left, white 0%, white 30%, transparent 70%)'
         }}
       ></div>
       
