@@ -3,8 +3,20 @@ import QuoteForm from "@/components/QuoteForm";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-construction-white">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full">
+      {/* Grid Pattern Background */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(158, 158, 158, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(158, 158, 158, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      ></div>
+      
+      {/* Background Image */}
+      <div className="absolute top-0 right-0 w-1/2 h-full z-10">
         <img 
           src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
           alt="House framing construction" 
@@ -14,11 +26,11 @@ const HeroSection = () => {
       </div>
       
       {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-20 w-48 h-48 bg-construction-green/8 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/4 left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-5"></div>
+      <div className="absolute bottom-1/4 right-20 w-48 h-48 bg-construction-green/8 rounded-full blur-3xl z-5"></div>
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-20 container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div className="text-construction-dark">
           <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-6 py-3 rounded-full border border-construction-green/20 mb-8">
             <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
