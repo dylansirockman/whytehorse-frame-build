@@ -38,7 +38,7 @@ const HeroSection = () => {
       ></div>
       
       {/* Hero Image Slideshow */}
-      <div className="absolute top-16 right-8 w-5/12 h-4/5 z-10">
+      <div className="absolute top-1/2 transform -translate-y-1/2 right-8 w-5/12 h-3/5 z-10">
         <div className="relative w-full h-full transform rotate-3 hover:rotate-1 transition-transform duration-500">
           <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white">
             {images.map((image, index) => (
