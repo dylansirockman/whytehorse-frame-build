@@ -6,8 +6,7 @@ const HeroSection = () => {
     "/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png",
     "/lovable-uploads/073b7385-c711-4d21-bdf2-a27e21f46e1c.png",
     "/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png",
-    "/lovable-uploads/7f4a1d23-20ba-4078-85b6-248cba2c8d83.png",
-    "/lovable-uploads/a1ba7767-1cbb-44b9-8f4c-28d79e8d894b.png"
+    "/lovable-uploads/7f4a1d23-20ba-4078-85b6-248cba2c8d83.png"
   ];
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -40,26 +39,43 @@ const HeroSection = () => {
       
       {/* Hero Image Slideshow */}
       <div className="absolute top-16 right-8 w-5/12 h-4/5 z-10">
-        <div className="relative w-full h-full">
-          <img 
-            key={currentImageIndex}
-            src={images[currentImageIndex]}
-            alt="Construction project showcase" 
-            className="w-full h-full object-cover rounded-3xl shadow-2xl transform rotate-3 hover:rotate-1 transition-all duration-500 animate-fade-in"
-          />
-          <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-construction-green/20 rounded-full blur-2xl"></div>
-          <div className="absolute -top-6 -left-6 w-24 h-24 bg-construction-green/15 rounded-full blur-xl"></div>
+        <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
+                index === currentImageIndex
+                  ? 'opacity-100 scale-100 rotate-3 z-10'
+                  : index === (currentImageIndex - 1 + images.length) % images.length
+                  ? 'opacity-0 scale-95 rotate-6 z-0'
+                  : 'opacity-0 scale-110 rotate-0 z-0'
+              }`}
+            >
+              <img 
+                src={image}
+                alt="Construction project showcase" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          ))}
+          
+          {/* Animated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+          
+          {/* Floating accent elements */}
+          <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-construction-green/20 rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute -top-6 -left-6 w-24 h-24 bg-construction-green/15 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           
           {/* Slideshow indicators */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
                   index === currentImageIndex 
-                    ? 'bg-construction-green shadow-lg' 
-                    : 'bg-white/40 hover:bg-white/60'
+                    ? 'bg-construction-green shadow-lg scale-125 animate-pulse' 
+                    : 'bg-white/40 hover:bg-white/60 hover:scale-110'
                 }`}
               />
             ))}
