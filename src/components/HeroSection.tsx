@@ -133,13 +133,13 @@ const HeroSection = () => {
                 
                 {/* Instagram Button */}
                 <button 
-                  className="absolute top-4 right-4 z-30 bg-white/90 hover:bg-white text-construction-dark hover:text-construction-green p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                  className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 animate-pulse"
                   onClick={(e) => {
                     e.stopPropagation();
                     window.open('https://instagram.com', '_blank');
                   }}
                 >
-                  <Instagram size={20} />
+                  <Instagram size={24} strokeWidth={2.5} />
                 </button>
                 
                 {/* Slideshow indicators */}
