@@ -33,6 +33,12 @@ const HeroSection = () => {
   const opacity = 1 - scrollProgress;
   const translateY = scrollY * 0.7;
 
+  const handleImageClick = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 bg-construction-white" style={{ opacity, transform: `translateY(${translateY}px)` }}>
       {/* Grid Pattern Background */}
@@ -101,7 +107,7 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto" style={{ transform: `translateY(${translateY * 0.2}px)`, opacity: opacity }}>
             <div className="relative w-full aspect-[4/5] transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative">
+              <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
                 {images.map((image, index) => (
                   <div
                     key={index}
