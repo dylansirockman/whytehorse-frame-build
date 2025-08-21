@@ -66,7 +66,7 @@ const HeroSection = () => {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10 animate-slide-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
               <div className="mb-2 sm:mb-3">Building the Strong</div>
-              <div><span className="text-construction-green">Foundation</span> of Every Home</div>
+              <div><span className="text-construction-green">Bones</span> of Every Home</div>
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
