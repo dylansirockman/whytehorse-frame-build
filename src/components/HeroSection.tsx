@@ -67,8 +67,16 @@ const HeroSection = () => {
           
           {/* Text Content */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
-            <div className="inline-block bg-construction-green/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-construction-green/20 mb-6 lg:mb-8">
-              <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
+            <div className="relative inline-block mb-6 lg:mb-8">
+              <div 
+                className="bg-construction-green/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 border border-construction-green/20"
+                style={{
+                  clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
+                  transform: 'translateY(8px)'
+                }}
+              >
+                <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
+              </div>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10">
