@@ -17,14 +17,35 @@ const HeroSection = () => {
         }}
       ></div>
       
-      {/* Background Image */}
+      {/* Image Collage */}
       <div className="absolute top-0 right-0 w-1/2 h-full z-10 overflow-hidden">
-        <img 
-          src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
-          alt="House framing construction" 
-          className="w-full h-full object-cover scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-construction-white via-construction-white/50 to-construction-white/50"></div>
+        <div className="grid grid-cols-2 gap-2 h-full p-4">
+          <div className="space-y-2">
+            <img 
+              src="/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png" 
+              alt="House framing construction" 
+              className="w-full h-2/3 object-cover rounded-xl shadow-lg"
+            />
+            <img 
+              src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png" 
+              alt="Construction tools and materials" 
+              className="w-full h-1/3 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+          <div className="space-y-2 pt-8">
+            <img 
+              src="/lovable-uploads/073b7385-c711-4d21-bdf2-a27e21f46e1c.png" 
+              alt="Framing work in progress" 
+              className="w-full h-1/3 object-cover rounded-xl shadow-lg"
+            />
+            <img 
+              src="/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png" 
+              alt="Professional construction team" 
+              className="w-full h-2/3 object-cover rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-construction-white via-construction-white/30 to-transparent"></div>
       </div>
       
       {/* Decorative Elements */}
