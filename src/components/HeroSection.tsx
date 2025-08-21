@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   const images = [
@@ -72,6 +73,15 @@ const HeroSection = () => {
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '0.7s', animationFillMode: 'both' }}>
+              <Button variant="hero" size="lg" className="text-base font-semibold">
+                Get Quote
+              </Button>
+              <Button variant="outline" size="lg" className="text-base font-semibold border-2 border-construction-green text-construction-green hover:bg-construction-green hover:text-white">
+                Contact Us
+              </Button>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
