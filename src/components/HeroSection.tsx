@@ -161,10 +161,12 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
             {/* Crane Cable */}
-            <div className="crane-cable absolute top-0 left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32"
+            <div className="crane-cable absolute left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 
+                           top-0 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32
+                           sm:top-0 lg:top-0" 
                  style={{ 
                    height: '120px',
-                   animation: 'crane-cable 2s ease-out forwards'
+                   animation: 'crane-cable-mobile 2s ease-out forwards'
                  }}>
               {/* Cable hook */}
               <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">

@@ -15,6 +15,18 @@
   100% { height: 100%; opacity: 1; }
 }
 
+@keyframes crane-cable-mobile {
+  0% { height: 0%; opacity: 0; transform: translateX(-50%) translateY(50px); }
+  30% { height: 100%; opacity: 1; transform: translateX(-50%) translateY(-20px); }
+  100% { height: 100%; opacity: 1; transform: translateX(-50%) translateY(-20px); }
+}
+
+@media (min-width: 640px) {
+  .crane-cable {
+    animation: crane-cable 2s ease-out forwards !important;
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .crane-swing-container {
