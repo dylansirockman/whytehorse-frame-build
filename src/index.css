@@ -153,11 +153,8 @@ All colors MUST be HSL.
   
   /* Accessibility: Respect prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
-    .animate-blueprint-reveal,
-    .animate-slide-lock,
-    .animate-ruler-expand,
-    .animate-stacked-build,
-    .animate-slide-up {
+    .animate-text-beam-in,
+    .animate-text-lock-in {
       animation: none;
       opacity: 1;
       transform: none;
@@ -174,67 +171,30 @@ All colors MUST be HSL.
   }
 }
 
-/* Construction-themed text animations */
-@keyframes blueprint-reveal {
+/* Professional construction-themed text animations */
+@keyframes text-beam-in {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
-    border-left: 2px solid hsl(var(--construction-gray) / 0.3);
-  }
-  50% {
-    opacity: 0.7;
-    transform: translateX(0);
-    border-left: 2px solid hsl(var(--construction-green) / 0.6);
+    transform: translateY(12px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
-    border-left: 2px solid transparent;
+    transform: translateY(0);
   }
 }
 
-@keyframes slide-lock {
+@keyframes text-lock-in {
   0% {
     opacity: 0;
-    transform: translateY(-15px) translateX(-10px);
+    transform: translateY(8px);
   }
-  70% {
-    opacity: 0.9;
-    transform: translateY(2px) translateX(0);
+  90% {
+    opacity: 1;
+    transform: translateY(-1px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) translateX(0);
-  }
-}
-
-@keyframes ruler-expand {
-  0% {
-    width: 0;
-    opacity: 0;
-  }
-  50% {
-    width: 100%;
-    opacity: 0.5;
-  }
-  100% {
-    width: 100%;
-    opacity: 0;
-  }
-}
-
-@keyframes stacked-build {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  60% {
-    opacity: 0.8;
-    transform: translateY(-2px) scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 

@@ -124,25 +124,20 @@ const HeroSection = () => {
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <div className="relative">
-              {/* Ruler line for headline */}
-              <div className="absolute -left-4 top-0 h-0.5 bg-construction-green/30 animate-ruler-expand" style={{ animationDelay: '0.2s' }}></div>
-              
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10">
-                <div className="mb-2 sm:mb-3 animate-blueprint-reveal" style={{ animationDelay: '0.4s' }}>
-                  Building the Strong
-                </div>
-                <div className="animate-slide-lock" style={{ animationDelay: '0.8s' }}>
-                  <span className="text-construction-green animate-stacked-build" style={{ animationDelay: '1.2s' }}>Bones</span> of Every Home
-                </div>
-              </h1>
-            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10">
+              <div className="mb-2 sm:mb-3 animate-text-beam-in" style={{ animationDelay: '0.2s' }}>
+                Building the Strong
+              </div>
+              <div className="animate-text-beam-in" style={{ animationDelay: '0.3s' }}>
+                <span className="text-construction-green">Bones</span> of Every Home
+              </div>
+            </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-lock" style={{ animationDelay: '1.4s' }}>
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-text-lock-in" style={{ animationDelay: '0.5s' }}>
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '1.6s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-text-lock-in" style={{ animationDelay: '0.7s' }}>
               <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
@@ -151,16 +146,16 @@ const HeroSection = () => {
               </Button>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray animate-slide-lock" style={{ animationDelay: '1.8s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-text-beam-in" style={{ animationDelay: '0.9s' }}>
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray animate-slide-lock" style={{ animationDelay: '2.0s' }}>
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">15+ Years Experience</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray animate-slide-lock" style={{ animationDelay: '2.2s' }}>
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">100% On Schedule</span>
               </div>
