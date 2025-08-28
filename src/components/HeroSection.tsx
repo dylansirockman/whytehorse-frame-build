@@ -44,7 +44,7 @@ const HeroSection = () => {
         }}
       ></div>
       
-      {/* Construction Tools Overlay - Enhanced visibility */}
+      {/* Construction Tools Overlay - Enhanced visibility with text area fade */}
       <div 
         className="absolute inset-0 z-5"
         style={{
@@ -52,58 +52,60 @@ const HeroSection = () => {
           backgroundSize: '1200px 800px',
           backgroundRepeat: 'repeat',
           backgroundPosition: '0 0, 600px 400px',
-          opacity: 0.7
+          opacity: 0.7,
+          mask: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)',
+          WebkitMask: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)'
         }}
       ></div>
       
-      {/* Layered construction elements with depth */}
+      {/* Layered construction elements with depth - reduced opacity near text */}
       <div className="absolute inset-0 z-5">
-        {/* Foreground elements - higher opacity */}
+        {/* Foreground elements - positioned away from text area */}
         <div 
-          className="absolute top-1/4 right-1/5 w-40 h-2 bg-construction-dark/20 transform rotate-12 shadow-sm"
+          className="absolute top-1/4 right-1/5 w-40 h-2 bg-construction-dark/12 transform rotate-12 shadow-sm"
           style={{
-            background: 'repeating-linear-gradient(90deg, rgba(31, 41, 55, 0.2), rgba(31, 41, 55, 0.2) 12px, transparent 12px, transparent 14px)'
+            background: 'repeating-linear-gradient(90deg, rgba(31, 41, 55, 0.12), rgba(31, 41, 55, 0.12) 12px, transparent 12px, transparent 14px)'
           }}
         ></div>
         
-        {/* Mid-ground blueprint corner with measurements */}
-        <div className="absolute bottom-1/3 left-1/5 opacity-15">
-          <div className="w-24 h-24 border-l-3 border-b-3 border-construction-dark/40 relative">
-            <div className="absolute -bottom-6 left-0 text-sm text-construction-dark/50 font-mono font-semibold">90°</div>
-            <div className="absolute -left-8 bottom-6 text-xs text-construction-dark/40 font-mono rotate-90 origin-bottom-left">24"</div>
+        {/* Mid-ground blueprint corner - moved away from text */}
+        <div className="absolute bottom-1/3 right-1/4 opacity-10">
+          <div className="w-24 h-24 border-l-3 border-b-3 border-construction-dark/30 relative">
+            <div className="absolute -bottom-6 left-0 text-sm text-construction-dark/40 font-mono font-semibold">90°</div>
+            <div className="absolute -left-8 bottom-6 text-xs text-construction-dark/30 font-mono rotate-90 origin-bottom-left">24"</div>
           </div>
         </div>
         
-        {/* Enhanced level tool */}
-        <div className="absolute top-2/3 right-1/4 opacity-18">
-          <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
-            <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-construction-dark/25 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-inner"></div>
-            <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/15 transform -translate-y-1/2"></div>
-            <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/15 transform -translate-y-1/2"></div>
+        {/* Enhanced level tool - kept on right side */}
+        <div className="absolute top-2/3 right-1/4 opacity-12">
+          <div className="w-32 h-4 bg-construction-dark/8 rounded-full relative shadow-sm">
+            <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-construction-dark/18 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-inner"></div>
+            <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2"></div>
+            <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2"></div>
           </div>
         </div>
         
-        {/* Background elements - lower opacity */}
-        <div className="absolute top-1/2 left-1/3 opacity-8">
-          <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/30 transform rotate-45"></div>
+        {/* Background elements - very subtle */}
+        <div className="absolute top-1/2 right-1/3 opacity-4">
+          <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/20 transform rotate-45"></div>
         </div>
         
-        {/* Measurement marks scattered */}
-        <div className="absolute top-1/6 left-1/2 opacity-12">
+        {/* Measurement marks - positioned away from text */}
+        <div className="absolute top-1/6 right-1/4 opacity-8">
           <div className="flex items-center space-x-1">
-            <div className="w-0.5 h-3 bg-construction-dark/30"></div>
-            <div className="w-0.5 h-2 bg-construction-dark/20"></div>
-            <div className="w-0.5 h-2 bg-construction-dark/20"></div>
-            <div className="w-0.5 h-3 bg-construction-dark/30"></div>
-            <span className="text-xs text-construction-dark/25 font-mono ml-2">16"</span>
+            <div className="w-0.5 h-3 bg-construction-dark/20"></div>
+            <div className="w-0.5 h-2 bg-construction-dark/15"></div>
+            <div className="w-0.5 h-2 bg-construction-dark/15"></div>
+            <div className="w-0.5 h-3 bg-construction-dark/20"></div>
+            <span className="text-xs text-construction-dark/18 font-mono ml-2">16"</span>
           </div>
         </div>
         
-        {/* Diagonal construction line for flow */}
+        {/* Diagonal construction line - very subtle */}
         <div 
-          className="absolute top-1/3 left-0 w-full h-0.5 bg-construction-dark/8 transform -rotate-12 origin-left"
+          className="absolute top-1/3 left-0 w-full h-0.5 bg-construction-dark/4 transform -rotate-12 origin-left"
           style={{
-            background: 'repeating-linear-gradient(90deg, rgba(31, 41, 55, 0.08), rgba(31, 41, 55, 0.08) 20px, transparent 20px, transparent 25px)'
+            background: 'repeating-linear-gradient(90deg, rgba(31, 41, 55, 0.04), rgba(31, 41, 55, 0.04) 20px, transparent 20px, transparent 25px)'
           }}
         ></div>
       </div>
