@@ -150,16 +150,6 @@ All colors MUST be HSL.
   .animate-scroll:hover {
     animation-play-state: paused;
   }
-  
-  /* Accessibility: Respect prefers-reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-    .animate-text-beam-in,
-    .animate-text-lock-in {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
 }
 
 @keyframes scroll {
@@ -168,33 +158,6 @@ All colors MUST be HSL.
   }
   100% {
     transform: translateX(-50%);
-  }
-}
-
-/* Professional construction-themed text animations */
-@keyframes text-beam-in {
-  0% {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes text-lock-in {
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  90% {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
