@@ -159,8 +159,26 @@ const HeroSection = () => {
           </div>
           
           {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto">
-            <div className="relative w-full aspect-[4/5] transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
+            {/* Crane Cable */}
+            <div className="crane-cable absolute top-0 left-1/2 w-0.5 bg-construction-dark/30 z-10 transform -translate-x-1/2 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32" 
+                 style={{ 
+                   height: '120px',
+                   animation: 'crane-cable 2s ease-out forwards'
+                 }}>
+              {/* Cable hook */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">
+                <div className="w-2 h-3 border-l border-r border-construction-dark/40 rounded-b-sm"></div>
+              </div>
+            </div>
+            
+            {/* Swinging Image Container */}
+            <div className="crane-swing-container relative w-full aspect-[4/5] transform-gpu origin-top" 
+                 style={{ 
+                   animation: 'crane-swing 3.5s ease-in-out infinite',
+                   animationDelay: '2s'
+                 }}>
+              <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
                 {images.map((image, index) => (
                   <div
@@ -211,9 +229,10 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Floating accent elements */}
-              <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
-              <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+                {/* Floating accent elements */}
+                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
+                <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+              </div>
             </div>
           </div>
           
