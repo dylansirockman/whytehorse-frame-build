@@ -44,6 +44,43 @@ const HeroSection = () => {
         }}
       ></div>
       
+      {/* Construction Tools Overlay */}
+      <div 
+        className="absolute inset-0 text-construction-dark/50 z-5"
+        style={{
+          backgroundImage: `url('/construction-overlay.svg')`,
+          backgroundSize: '1200px 800px',
+          backgroundRepeat: 'repeat',
+          backgroundPosition: '0 0, 600px 400px',
+          opacity: 0.4
+        }}
+      ></div>
+      
+      {/* Subtle parallax construction elements */}
+      <div className="absolute inset-0 z-5">
+        {/* Ruler element */}
+        <div 
+          className="absolute top-1/3 left-1/4 w-32 h-1 bg-construction-dark/5 transform -rotate-12"
+          style={{
+            boxShadow: 'inset 0 0 0 1px rgba(31, 41, 55, 0.05)',
+            background: 'repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(31, 41, 55, 0.05) 8px, rgba(31, 41, 55, 0.05) 9px)'
+          }}
+        ></div>
+        
+        {/* Blueprint corner */}
+        <div className="absolute bottom-1/4 left-1/6 opacity-5">
+          <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/20"></div>
+          <div className="absolute -bottom-4 left-0 text-xs text-construction-dark/30 font-mono">90°</div>
+        </div>
+        
+        {/* Level tool */}
+        <div className="absolute top-1/2 right-1/3 opacity-6">
+          <div className="w-20 h-3 bg-construction-dark/5 rounded-full relative">
+            <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-construction-dark/10 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+          </div>
+        </div>
+      </div>
+      
       {/* Decorative Elements */}
       <div className="absolute top-1/4 left-4 lg:left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-5"></div>
       <div className="absolute bottom-1/4 right-4 lg:right-20 w-48 h-48 bg-construction-green/8 rounded-full blur-3xl z-5"></div>
