@@ -25,55 +25,55 @@ const HeroSection = () => {
 
   // === Typewriter headline (Precision → Speed → Integrity → Framing, then lock) ===
   const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
+  type Phase = "typing" | "pausing" | "deleting" | "done";
   const [wordIndex, setWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [locked, setLocked] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [phase, setPhase] = useState<Phase>("typing");
 
   useEffect(() => {
-    if (locked) return;
+    const current = headlineWords[wordIndex];
+    let t: number | undefined;
 
-    const target = headlineWords[wordIndex];
-    // speeds
-    const TYPE_MS = 70;       // per character when typing
-    const DELETE_MS = 50;     // per character when deleting
-    const HOLD_MS = 2000;     // hold full word before delete / advance
+    const TYPE_MS = 70;    // per character
+    const DELETE_MS = 45;  // per character
+    const HOLD_MS = 2000;  // time a full word stays visible
 
-    if (!isDeleting) {
-      // typing forward
-      if (displayText.length < target.length) {
-        const timeout = setTimeout(() => {
-          setDisplayText(target.slice(0, displayText.length + 1));
+    if (phase === "typing") {
+      if (typed.length < current.length) {
+        t = window.setTimeout(() => {
+          setTyped(current.slice(0, typed.length + 1));
         }, TYPE_MS);
-        return () => clearTimeout(timeout);
       } else {
-        // full word shown
+        // full word finished
         if (wordIndex === headlineWords.length - 1) {
-          // last word "Framing" → lock after hold
-          const timeout = setTimeout(() => {
-            setLocked(true);
-          }, HOLD_MS);
-          return () => clearTimeout(timeout);
+          // last word "Framing" -> lock after hold
+          t = window.setTimeout(() => setPhase("done"), HOLD_MS);
         } else {
-          // hold, then start deleting
-          const timeout = setTimeout(() => setIsDeleting(true), HOLD_MS);
-          return () => clearTimeout(timeout);
+          // brief pause (so total visible ≈ HOLD_MS), then start deleting
+          t = window.setTimeout(() => setPhase("deleting"), HOLD_MS);
         }
       }
-    } else {
-      // deleting
-      if (displayText.length > 0) {
-        const timeout = setTimeout(() => {
-          setDisplayText(target.slice(0, displayText.length - 1));
+    } else if (phase === "deleting") {
+      if (typed.length > 0) {
+        t = window.setTimeout(() => {
+          setTyped(current.slice(0, typed.length - 1));
         }, DELETE_MS);
-        return () => clearTimeout(timeout);
       } else {
-        // move to next word and type forward again
-        setIsDeleting(false);
-        setWordIndex((i) => Math.min(i + 1, headlineWords.length - 1)); // clamp to last index
+        // move to next word and type again
+        setWordIndex((i) => i + 1);
+        setPhase("typing");
+      }
+    } else if (phase === "done") {
+      // ensure we end showing the full final word exactly
+      if (typed !== current) {
+        t = window.setTimeout(() => setTyped(current), 0);
       }
     }
-  }, [displayText, isDeleting, wordIndex, locked]); // eslint-disable-line
+
+    return () => {
+      if (t) window.clearTimeout(t);
+    };
+  }, [typed, phase, wordIndex, headlineWords]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
@@ -173,13 +173,12 @@ const HeroSection = () => {
 
             {/* Typewriter headline (locks on “Framing”) */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
-              <span
-                className="inline-block text-construction-green"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {displayText}
-                <span className="inline-block w-[1ch] align-baseline border-r-2 border-construction-green ml-0.5 animate-caret" />
+              <span className="text-construction-green" aria-live="polite" aria-atomic="true">
+                {typed}
+                {/* caret only while animating */}
+                {phase !== "done" && (
+                  <span className="inline-block w-[1ch] align-baseline border-r-2 border-construction-green ml-0.5 animate-caret" />
+                )}
               </span>{" "}
               you can rely on
             </h1>
