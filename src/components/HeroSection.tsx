@@ -155,7 +155,7 @@ const HeroSection = () => {
 
           {/* Image + Crane */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* CRANE OVERLAY (pulley only, above image, centered) */}
+            {/* CRANE OVERLAY (pulley **wheel only**, above image, centered) */}
             <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
               <svg
                 className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
@@ -164,9 +164,7 @@ const HeroSection = () => {
                 viewBox="0 0 40 40"
                 aria-hidden="true"
               >
-                {/* Pulley block */}
-                <rect x="14" y="5" width="12" height="20" fill="rgba(31,41,55,0.85)" rx="2" />
-                {/* Pulley wheel */}
+                {/* wheel only (no block rect) */}
                 <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
               </svg>
             </div>
@@ -196,7 +194,7 @@ const HeroSection = () => {
                 >
                   <line
                     x1="50"
-                    y1="0"
+                    y1="4"   /* start slightly below wheel center so there’s no dot overlap */
                     x2="50"
                     y2="120"
                     stroke="#1F2937"
@@ -212,17 +210,11 @@ const HeroSection = () => {
                   <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded" />
                 </div>
 
-                {/* Hook block — minimal (no top connector) */}
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none"
-                  style={{ top: "-12px" }}  // adjust -10 to -14 if needed
-                >
-                  {/* block */}
+                {/* Hook block — minimal */}
+                <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-12px" }}>
                   <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
-                    {/* subtle face detail */}
                     <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
                     <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
-                    {/* hook only (no square above) */}
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
                       <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg bg-gradient-to-br from-gray-600 to-gray-800" />
                     </div>
