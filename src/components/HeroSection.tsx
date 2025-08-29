@@ -161,7 +161,7 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative overflow-visible">
             
-            {/* Fixed Crane Arm Group - NO ANIMATION */}
+            {/* Fixed Crane Arm Group - SINGLE ARM ONLY */}
             <div className="craneArmGroup absolute top-0 left-0 pointer-events-none z-20">
               <svg width="200" height="120" style={{ transform: 'translate(-15%, -60%)' }}>
                 {/* Main horizontal truss beam */}
@@ -218,11 +218,6 @@ const HeroSection = () => {
                         fill="rgba(31, 41, 55, 0.6)" 
                         stroke="rgba(255, 255, 255, 0.2)" 
                         strokeWidth="1" />
-                
-                {/* Vertical support mast */}
-                <rect x="-2" y="20" width="6" height="60" 
-                      fill="rgba(31, 41, 55, 0.6)" 
-                      rx="2" />
               </svg>
             </div>
             
@@ -236,8 +231,8 @@ const HeroSection = () => {
               
               {/* Vertical Cable from Pulley to Hook */}
               <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-40" 
-                   style={{ top: '-20px', width: '3px', height: '60px' }}>
-                <div className="w-full h-full bg-[#1F2937] opacity-90 relative shadow-sm">
+                   style={{ top: '-20px', width: '3px', height: '34px' }}>
+                <div className="w-full h-full bg-[#1F2937] relative shadow-sm">
                   {/* Cable highlight */}
                   <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25"></div>
                   {/* Cable strands detail */}
