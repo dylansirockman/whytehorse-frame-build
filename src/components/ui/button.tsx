@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "btn-secondary-modern text-construction-green hover:text-construction-green-dark rounded-lg min-h-[48px]",
         ghost: "hover:bg-accent hover:text-accent-foreground rounded-lg",
         link: "text-construction-green underline-offset-4 hover:underline",
-        hero: "btn-primary-modern text-white rounded-xl font-semibold uppercase tracking-wide min-h-[48px]",
+        hero: "btn-primary-modern text-white rounded-xl font-semibold min-h-[48px]",
         cta: "btn-primary-modern text-white rounded-lg font-semibold min-h-[48px]",
       },
       size: {
