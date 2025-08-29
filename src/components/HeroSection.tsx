@@ -213,16 +213,21 @@ const HeroSection = () => {
                 </div>
 
                 {/* Hook block (above image) */}
-                <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none"
+                  style={{ top: "-12px" }}  // was -14px; adjust to taste
+                >
                   <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
+                    {/* face details */}
                     <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
                     <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
+                
+                    {/* actual hook */}
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
                       <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg bg-gradient-to-br from-gray-600 to-gray-800 relative" />
                     </div>
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
-                      <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded" />
-                    </div>
+                
+                    {/* NOTE: removed the small square connector above the block */}
                   </div>
                 </div>
 
