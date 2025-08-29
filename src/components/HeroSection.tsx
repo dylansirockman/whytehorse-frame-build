@@ -29,7 +29,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-visible pt-24 pb-20 bg-construction-white z-0">
       {/* Grid Pattern Background */}
       <div 
         className="absolute inset-0"
@@ -159,74 +159,10 @@ const HeroSection = () => {
           </div>
           
           {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            
-            {/* PHASE 2: Crane Overlay Layer - ABOVE IMAGE */}
-            <div className="craneOverlay absolute inset-0 pointer-events-none z-60">
-              {/* PHASE 5: Single Crane Arm - Fixed, Decorative Only */}
-              <svg className="absolute top-0 left-0" 
-                   width="200" 
-                   height="120"
-                   style={{ transform: 'translate(-15%, -60%)' }}>
-                {/* Main horizontal truss beam */}
-                <rect x="0" y="60" width="180" height="8" 
-                      fill="rgba(31, 41, 55, 0.7)" 
-                      rx="2" />
-                
-                {/* Top beam */}
-                <rect x="0" y="52" width="180" height="4" 
-                      fill="rgba(31, 41, 55, 0.5)" 
-                      rx="1" />
-                
-                {/* Bottom beam */}
-                <rect x="0" y="72" width="180" height="4" 
-                      fill="rgba(31, 41, 55, 0.5)" 
-                      rx="1" />
-                
-                {/* Diagonal cross-bracing */}
-                <line x1="20" y1="52" x2="40" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                <line x1="40" y1="52" x2="20" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                
-                <line x1="60" y1="52" x2="80" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                <line x1="80" y1="52" x2="60" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                
-                <line x1="100" y1="52" x2="120" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                <line x1="120" y1="52" x2="100" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                
-                <line x1="140" y1="52" x2="160" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                <line x1="160" y1="52" x2="140" y2="76" 
-                      stroke="rgba(31, 41, 55, 0.4)" 
-                      strokeWidth="2" />
-                
-                {/* Pulley block at end of arm */}
-                <rect x="170" y="55" width="12" height="18" 
-                      fill="rgba(31, 41, 55, 0.8)" 
-                      rx="2" />
-                
-                {/* Pulley wheel */}
-                <circle cx="176" cy="64" r="4" 
-                        fill="rgba(31, 41, 55, 0.6)" 
-                        stroke="rgba(255, 255, 255, 0.2)" 
-                        strokeWidth="1" />
-              </svg>
-            </div>
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative overflow-visible">
             
             {/* PHASE 3: Load Group - Moves with Image (inherits rotation) */}
-            <div className="loadGroup relative w-full aspect-[4/5] transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
+            <div className="loadGroup absolute left-1/2 top-0 transform -translate-x-1/2 w-full aspect-[4/5] z-60 transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
                  style={{ 
                    transformOrigin: 'top center',
                    animation: 'crane-swing 3.5s ease-in-out infinite alternate',
@@ -234,7 +170,7 @@ const HeroSection = () => {
                  }}>
               
               {/* PHASE 4: Cable - Vertical from Above */}
-              <div className="cable absolute left-1/2 transform -translate-x-1/2 bg-[#1F2937] opacity-90 z-60 pointer-events-none"
+              <div className="cable absolute left-1/2 transform -translate-x-1/2 bg-[#1F2937] opacity-90 z-55 pointer-events-none"
                    style={{ top: '-140px', height: '140px', width: '2px' }}>
                 {/* Cable highlight */}
                 <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25"></div>
@@ -334,6 +270,70 @@ const HeroSection = () => {
                 <div className="absolute -bottom-6 -right-6 w-6 h-6 bg-construction-secondary/20 rounded-full blur-md animate-pulse delay-1000"></div>
                 <div className="absolute top-1/3 -left-6 w-2 h-2 bg-construction-green/40 rounded-full blur-sm animate-pulse delay-500"></div>
               </div>
+            </div>
+            
+            {/* PHASE 2: Crane Overlay Layer - ABOVE IMAGE, PLACED LAST IN DOM */}
+            <div className="craneOverlay absolute inset-0 pointer-events-none z-60">
+              {/* PHASE 5: Single Crane Arm - Fixed, Decorative Only */}
+              <svg className="absolute top-0 left-0" 
+                   width="200" 
+                   height="120"
+                   style={{ transform: 'translate(-15%, -60%)' }}>
+                {/* Main horizontal truss beam */}
+                <rect x="0" y="60" width="180" height="8" 
+                      fill="rgba(31, 41, 55, 0.7)" 
+                      rx="2" />
+                
+                {/* Top beam */}
+                <rect x="0" y="52" width="180" height="4" 
+                      fill="rgba(31, 41, 55, 0.5)" 
+                      rx="1" />
+                
+                {/* Bottom beam */}
+                <rect x="0" y="72" width="180" height="4" 
+                      fill="rgba(31, 41, 55, 0.5)" 
+                      rx="1" />
+                
+                {/* Diagonal cross-bracing */}
+                <line x1="20" y1="52" x2="40" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="40" y1="52" x2="20" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="60" y1="52" x2="80" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="80" y1="52" x2="60" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="100" y1="52" x2="120" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="120" y1="52" x2="100" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="140" y1="52" x2="160" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="160" y1="52" x2="140" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                {/* Pulley block at end of arm */}
+                <rect x="170" y="55" width="12" height="18" 
+                      fill="rgba(31, 41, 55, 0.8)" 
+                      rx="2" />
+                
+                {/* Pulley wheel */}
+                <circle cx="176" cy="64" r="4" 
+                        fill="rgba(31, 41, 55, 0.6)" 
+                        stroke="rgba(255, 255, 255, 0.2)" 
+                        strokeWidth="1" />
+              </svg>
             </div>
           </div>
         </div>
