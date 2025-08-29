@@ -160,86 +160,84 @@ const HeroSection = () => {
           
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* Crane Arm with Truss Structure */}
+            {/* Fixed Crane Arm with Truss Structure */}
             <svg className="absolute top-0 left-0 pointer-events-none z-10" 
                  width="100%" 
-                 height="200"
-                 style={{ transform: 'translate(-15%, -25%)' }}>
+                 height="120"
+                 style={{ transform: 'translate(-15%, -60%)' }}>
               {/* Main horizontal truss beam */}
-              <rect x="0" y="40" width="180" height="8" 
+              <rect x="0" y="60" width="180" height="8" 
                     fill="rgba(31, 41, 55, 0.7)" 
                     rx="2" />
               
               {/* Top beam */}
-              <rect x="0" y="32" width="180" height="4" 
-                    fill="rgba(31, 41, 55, 0.5)" 
-                    rx="1" />
-              
-              {/* Bottom beam */}
               <rect x="0" y="52" width="180" height="4" 
                     fill="rgba(31, 41, 55, 0.5)" 
                     rx="1" />
               
+              {/* Bottom beam */}
+              <rect x="0" y="72" width="180" height="4" 
+                    fill="rgba(31, 41, 55, 0.5)" 
+                    rx="1" />
+              
               {/* Diagonal cross-bracing */}
-              <line x1="20" y1="32" x2="40" y2="56" 
+              <line x1="20" y1="52" x2="40" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
-              <line x1="40" y1="32" x2="20" y2="56" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              
-              <line x1="60" y1="32" x2="80" y2="56" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              <line x1="80" y1="32" x2="60" y2="56" 
+              <line x1="40" y1="52" x2="20" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
               
-              <line x1="100" y1="32" x2="120" y2="56" 
+              <line x1="60" y1="52" x2="80" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
-              <line x1="120" y1="32" x2="100" y2="56" 
+              <line x1="80" y1="52" x2="60" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
               
-              <line x1="140" y1="32" x2="160" y2="56" 
+              <line x1="100" y1="52" x2="120" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
-              <line x1="160" y1="32" x2="140" y2="56" 
+              <line x1="120" y1="52" x2="100" y2="76" 
+                    stroke="rgba(31, 41, 55, 0.4)" 
+                    strokeWidth="2" />
+              
+              <line x1="140" y1="52" x2="160" y2="76" 
+                    stroke="rgba(31, 41, 55, 0.4)" 
+                    strokeWidth="2" />
+              <line x1="160" y1="52" x2="140" y2="76" 
                     stroke="rgba(31, 41, 55, 0.4)" 
                     strokeWidth="2" />
               
               {/* Pulley block at end of arm */}
-              <rect x="170" y="35" width="12" height="18" 
+              <rect x="170" y="55" width="12" height="18" 
                     fill="rgba(31, 41, 55, 0.8)" 
                     rx="2" />
               
               {/* Pulley wheel */}
-              <circle cx="176" cy="44" r="4" 
+              <circle cx="176" cy="64" r="4" 
                       fill="rgba(31, 41, 55, 0.6)" 
                       stroke="rgba(255, 255, 255, 0.2)" 
                       strokeWidth="1" />
               
               {/* Vertical support mast */}
-              <rect x="-2" y="0" width="6" height="60" 
+              <rect x="-2" y="20" width="6" height="60" 
                     fill="rgba(31, 41, 55, 0.6)" 
                     rx="2" />
             </svg>
             
-            {/* Complete Crane Load System */}
-            <div className="crane-load-system absolute left-1/2 transform -translate-x-1/2 z-20"
+            {/* Swinging Image Container with Crane System */}
+            <div className="crane-swing-container relative w-full aspect-[4/5] transform-gpu origin-top" 
                  style={{ 
-                   top: '-60px',
                    animation: 'crane-swing 4s ease-in-out infinite',
-                   animationDelay: '2s',
-                   transformOrigin: 'top center'
+                   animationDelay: '2s'
                  }}>
               
-              {/* Main lifting cable */}
-              <div className="absolute left-1/2 transform -translate-x-1/2" 
-                   style={{ top: '0px' }}>
+              {/* Lifting cable from crane arm to image */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-20" 
+                   style={{ top: '-80px' }}>
                 <div className="w-1 bg-gradient-to-b from-gray-600 to-gray-700 relative shadow-sm" 
-                     style={{ height: '120px' }}>
+                     style={{ height: '100px' }}>
                   {/* Cable highlight */}
                   <div className="absolute left-0 top-0 w-0.5 h-full bg-white/20"></div>
                   {/* Cable strands detail */}
@@ -248,8 +246,8 @@ const HeroSection = () => {
               </div>
               
               {/* Hook block assembly */}
-              <div className="absolute left-1/2 transform -translate-x-1/2" 
-                   style={{ top: '115px' }}>
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-30" 
+                   style={{ top: '15px' }}>
                 {/* Main hook block */}
                 <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
                   {/* Hook block details */}
@@ -265,91 +263,83 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Lifting spreader bar */}
-              <div className="absolute left-1/2 transform -translate-x-1/2" 
-                   style={{ top: '140px' }}>
+              {/* Lifting spreader bar attached to image */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-30">
                 <div className="w-40 h-2 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded-sm shadow-lg border border-gray-800 relative">
                   {/* Spreader bar lifting points */}
                   <div className="absolute -top-1 left-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
                   <div className="absolute -top-1 right-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
                   
-                  {/* Center connection point */}
-                  <div className="absolute -top-2 left-1/2 w-4 h-3 bg-gray-700 rounded transform -translate-x-1/2 border border-gray-800 shadow-sm">
-                    <div className="absolute top-0.5 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
+                  {/* Center connection point to hook */}
+                  <div className="absolute -top-3 left-1/2 w-4 h-4 bg-gray-700 rounded transform -translate-x-1/2 border border-gray-800 shadow-sm">
+                    <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
                   </div>
                   
                   {/* Metallic highlight on bar */}
                   <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
                   
-                  {/* Connection straps */}
+                  {/* Connection straps to image */}
                   <div className="absolute -bottom-1 left-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
                   <div className="absolute -bottom-1 right-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
                 </div>
               </div>
               
-              {/* Swinging Image Container - connected to spreader bar */}
-              <div className="relative w-full aspect-[4/5] transform-gpu" 
-                   style={{ 
-                     top: '145px',
-                     maxWidth: '320px'
-                   }}>
-                
-                <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+              {/* ORIGINAL HERO IMAGE CONTENT */}
+              <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
                 <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
-                {images.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                      index === currentImageIndex 
-                        ? 'translate-x-0' 
-                        : index > currentImageIndex 
-                        ? 'translate-x-full' 
-                        : '-translate-x-full'
-                    }`}
-                  >
-                    <img 
-                      src={image}
-                      alt="Construction project showcase" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-                
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
-                
-                {/* Instagram Button */}
-                <button 
-                  className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open('https://instagram.com', '_blank');
-                  }}
-                >
-                  <Instagram size={24} strokeWidth={2.5} />
-                </button>
-                
-                {/* Slideshow indicators */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-                  {images.map((_, index) => (
-                    <button
+                  {images.map((image, index) => (
+                    <div
                       key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
+                      className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
                         index === currentImageIndex 
-                          ? 'bg-construction-green shadow-lg scale-125' 
-                          : 'bg-white/40 hover:bg-white/60'
+                          ? 'translate-x-0' 
+                          : index > currentImageIndex 
+                          ? 'translate-x-full' 
+                          : '-translate-x-full'
                       }`}
-                    />
+                    >
+                      <img 
+                        src={image}
+                        alt="Construction project showcase" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   ))}
+                  
+                  {/* Animated gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+                  
+                  {/* Instagram Button */}
+                  <button 
+                    className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open('https://instagram.com', '_blank');
+                    }}
+                  >
+                    <Instagram size={24} strokeWidth={2.5} />
+                  </button>
+                  
+                  {/* Slideshow indicators */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+                    {images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
+                          index === currentImageIndex 
+                            ? 'bg-construction-green shadow-lg scale-125' 
+                            : 'bg-white/40 hover:bg-white/60'
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
+                
                 {/* Floating accent elements */}
                 <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
                 <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
               </div>
-            </div>
             </div>
           </div>
           
