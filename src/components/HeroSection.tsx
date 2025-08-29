@@ -29,7 +29,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
+    <section className="relative overflow-visible min-h-[68vh] flex items-center justify-center pt-24 pb-20 bg-construction-white">
       {/* Grid Pattern Background */}
       <div 
         className="absolute inset-0"
@@ -116,7 +116,7 @@ const HeroSection = () => {
       
       {/* Content Container */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(68vh-8rem)] lg:min-h-[calc(68vh-7rem)] pt-8 lg:pt-6">
           
           {/* Text Content */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
@@ -235,23 +235,21 @@ const HeroSection = () => {
       </div>
 
       {/* Overlapping CTA Buttons */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20" style={{ bottom: '-24px' }}>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Button 
-            variant="hero" 
-            size="lg" 
-            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
-          >
-            Get Quote
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
-          >
-            Contact Us
-          </Button>
-        </div>
+      <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 z-50 flex gap-4 max-sm:flex-col max-sm:gap-3 max-sm:-bottom-5">
+        <Button 
+          variant="hero" 
+          size="lg" 
+          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
+        >
+          Get Quote
+        </Button>
+        <Button 
+          variant="outline" 
+          size="lg" 
+          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
+        >
+          Contact Us
+        </Button>
       </div>
     </section>
   );
