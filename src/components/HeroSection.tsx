@@ -133,7 +133,7 @@ const HeroSection = () => {
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
             
-            {/* CTA buttons moved to the notched divider */}
+            {/* CTA buttons moved to overlapping position */}
             
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
@@ -234,100 +234,23 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Notched Divider with Embedded CTA Buttons */}
-      <div className="relative">
-        {/* Version A: Curved Notch - Toggle visibility by changing hidden class */}
-        <div className="relative">
-          {/* Curved Notch SVG */}
-          <svg 
-            className="absolute bottom-0 left-0 w-full h-16 z-10" 
-            viewBox="0 0 1200 64" 
-            preserveAspectRatio="none"
-            style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.08))' }}
+      {/* Overlapping CTA Buttons */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20" style={{ bottom: '-24px' }}>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Button 
+            variant="hero" 
+            size="lg" 
+            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
           >
-            <defs>
-              <filter id="innerShadow">
-                <feOffset dx="0" dy="-2"/>
-                <feGaussianBlur stdDeviation="3" result="offset-blur"/>
-                <feFlood floodColor="#000000" floodOpacity="0.15"/>
-                <feComposite in="SourceGraphic" in2="offset-blur" operator="out"/>
-              </filter>
-            </defs>
-            {/* Main section background continues */}
-            <rect x="0" y="0" width="1200" height="64" fill="hsl(var(--construction-white))"/>
-            {/* Curved notch cut-out */}
-            <path 
-              d="M 0 0 L 450 0 Q 600 56 750 0 L 1200 0 L 1200 64 L 0 64 Z" 
-              fill="hsl(var(--muted))"
-              filter="url(#innerShadow)"
-            />
-          </svg>
-          
-          {/* Embedded CTA Buttons - Curved Version */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 z-20">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in">
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 animate-slide-up-delayed-1"
-              >
-                Get Quote
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm animate-slide-up-delayed-2"
-              >
-                Contact Us
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Version B: Angled Divider - Toggle visibility by changing hidden class */}
-        <div className="relative hidden">
-          {/* Angled Divider SVG */}
-          <svg 
-            className="absolute bottom-0 left-0 w-full h-16 z-10" 
-            viewBox="0 0 1200 64" 
-            preserveAspectRatio="none"
-            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.06))' }}
+            Get Quote
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
           >
-            {/* Main section background continues */}
-            <rect x="0" y="0" width="1200" height="64" fill="hsl(var(--construction-white))"/>
-            {/* Angled divider */}
-            <polygon 
-              points="0,0 1200,20 1200,64 0,64" 
-              fill="hsl(var(--muted))"
-            />
-            {/* Precision stroke line */}
-            <line 
-              x1="0" y1="0" 
-              x2="1200" y2="20" 
-              stroke="hsl(var(--border))" 
-              strokeWidth="1"
-            />
-          </svg>
-          
-          {/* Embedded CTA Buttons - Angled Version */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 z-20">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in">
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
-              >
-                Get Quote
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
-              >
-                Contact Us
-              </Button>
-            </div>
-          </div>
+            Contact Us
+          </Button>
         </div>
       </div>
     </section>
