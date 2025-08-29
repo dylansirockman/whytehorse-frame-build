@@ -159,11 +159,15 @@ const HeroSection = () => {
           </div>
           
           {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative overflow-visible">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
             
-            {/* Fixed Crane Arm Group - SINGLE ARM ONLY */}
-            <div className="craneArmGroup absolute top-0 left-0 pointer-events-none z-20">
-              <svg width="200" height="120" style={{ transform: 'translate(-15%, -60%)' }}>
+            {/* PHASE 2: Crane Overlay Layer - NO LAYOUT IMPACT */}
+            <div className="craneOverlay absolute inset-0 pointer-events-none z-40">
+              {/* PHASE 5: Single Crane Arm - Fixed, Decorative Only */}
+              <svg className="absolute top-0 left-0" 
+                   width="200" 
+                   height="120"
+                   style={{ transform: 'translate(-15%, -60%)' }}>
                 {/* Main horizontal truss beam */}
                 <rect x="0" y="60" width="180" height="8" 
                       fill="rgba(31, 41, 55, 0.7)" 
@@ -221,46 +225,37 @@ const HeroSection = () => {
               </svg>
             </div>
             
-            {/* Load Group: Image + Bar + Hook + Cable - SWINGS & ROTATES TOGETHER */}
-            <div className="loadGroup absolute left-1/2 top-0 transform -translate-x-1/2 w-full aspect-[4/5] pointer-events-auto z-40 overflow-visible transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
+            {/* PHASE 3: Load Group - Moves with Image (inherits rotation) */}
+            <div className="loadGroup relative w-full aspect-[4/5] transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
                  style={{ 
                    transformOrigin: 'top center',
                    animation: 'crane-swing 3.5s ease-in-out infinite alternate',
                    animationDelay: '2s'
                  }}>
               
-              {/* Vertical Cable from Pulley to Hook */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-40" 
-                   style={{ top: '-20px', width: '3px', height: '34px' }}>
-                <div className="w-full h-full bg-[#1F2937] relative shadow-sm">
-                  {/* Cable highlight */}
-                  <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25"></div>
-                  {/* Cable strands detail */}
-                  <div className="absolute right-0 top-0 w-0.5 h-full bg-black/15"></div>
-                </div>
+              {/* PHASE 4: Cable - Vertical from Above */}
+              <div className="cable absolute left-1/2 transform -translate-x-1/2 bg-[#1F2937] opacity-90 z-40 pointer-events-none"
+                   style={{ top: '-140px', height: '140px', width: '2px' }}>
+                {/* Cable highlight */}
+                <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25"></div>
               </div>
               
-              {/* Lifting Spreader Bar - Full Width at Top of Image */}
-              <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm shadow-lg relative z-50 pointer-events-none">
-                {/* Spreader bar lifting points */}
+              {/* PHASE 4: Lifting Bar - Flush on Top Edge */}
+              <div className="liftingBar absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-45 pointer-events-none">
+                {/* Metallic highlight */}
+                <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
+                
+                {/* Lifting points */}
                 <div className="absolute -top-1 left-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
                 <div className="absolute -top-1 right-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
                 
-                {/* Center connection point to hook */}
-                <div className="absolute -top-[14px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
-                  <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
-                </div>
-                
-                {/* Metallic highlight on bar */}
-                <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
-                
-                {/* Connection straps to image */}
+                {/* Connection straps */}
                 <div className="absolute -bottom-1 left-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
                 <div className="absolute -bottom-1 right-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
               </div>
               
-              {/* Hook Block - Snapped to Center of Bar */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-50" 
+              {/* PHASE 4: Hook Block - Centered, Touching Bar */}
+              <div className="hookBlock absolute left-1/2 transform -translate-x-1/2 z-50 pointer-events-none"
                    style={{ top: '-14px' }}>
                 {/* Main hook block */}
                 <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
@@ -274,11 +269,16 @@ const HeroSection = () => {
                       <div className="absolute -top-0.5 left-0 w-1 h-1 bg-white/30 rounded-full"></div>
                     </div>
                   </div>
+                  
+                  {/* Center connection point */}
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
+                    <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
+                  </div>
                 </div>
               </div>
               
-              {/* HERO IMAGE */}
-              <div className="relative w-full h-full z-30">
+              {/* PHASE 1: Hero Image - Restored to Original */}
+              <div className="heroImage relative w-full h-full pointer-events-auto z-40">
                 <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
                   {images.map((image, index) => (
                     <div
