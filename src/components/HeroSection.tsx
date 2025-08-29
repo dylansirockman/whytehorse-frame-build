@@ -153,8 +153,22 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Image + “Crane” */}
+          {/* Image + Crane */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
+            {/* CRANE OVERLAY (pulley **wheel only**, above image, centered) */}
+            <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
+              <svg
+                className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+                aria-hidden="true"
+              >
+                {/* wheel only (no block rect) */}
+                <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+              </svg>
+            </div>
+
             {/* OUTER: pendulum swing */}
             <div
               className="swingGroup relative w-full aspect-[4/5] z-[60]"
@@ -171,17 +185,16 @@ const HeroSection = () => {
             >
               {/* INNER: crooked → straight on hover */}
               <div className="tiltGroup relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500">
-                {/* Cable (SVG, thin, BEHIND image, extends above to imply source) */}
+                {/* Cable (SVG, thin, behind image) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
                   preserveAspectRatio="none"
                   aria-hidden="true"
                 >
-                  {/* From above the group (y=0) down to the bar plane (y=120) */}
                   <line
                     x1="50"
-                    y1="0"
+                    y1="4"   /* start slightly below wheel center so there’s no dot overlap */
                     x2="50"
                     y2="120"
                     stroke="#1F2937"
@@ -256,10 +269,7 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  {/* subtle floating dots */}
-                  <div className="absolute -top-4 -left-4 w-4 h-4 bg-construction-green/30 rounded-full blur-sm animate-pulse" />
-                  <div className="absolute -bottom-6 -right-6 w-6 h-6 bg-construction-secondary/20 rounded-full blur-md animate-pulse delay-1000" />
-                  <div className="absolute top-1/3 -left-6 w-2 h-2 bg-construction-green/40 rounded-full blur-sm animate-pulse delay-500" />
+                  
                 </div>
               </div>
             </div>
