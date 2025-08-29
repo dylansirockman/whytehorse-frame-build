@@ -159,10 +159,10 @@ const HeroSection = () => {
           </div>
           
           {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative overflow-visible">
             {/* Fixed Crane Arm with Truss Structure */}
-            <svg className="absolute top-0 left-0 pointer-events-none z-10" 
-                 width="100%" 
+            <svg className="absolute top-0 left-0 pointer-events-none z-30" 
+                 width="200" 
                  height="120"
                  style={{ transform: 'translate(-15%, -60%)' }}>
               {/* Main horizontal truss beam */}
@@ -226,66 +226,65 @@ const HeroSection = () => {
                     rx="2" />
             </svg>
             
-            {/* Swinging Image Container with Crane System */}
-            <div className="crane-swing-container relative w-full aspect-[4/5] transform-gpu origin-top" 
+            {/* Vertical Cable from Crane Arm */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-40" 
+                 style={{ top: '-20px' }}>
+              <div className="w-1 bg-gradient-to-b from-gray-600 to-gray-700 relative shadow-sm" 
+                   style={{ height: '60px' }}>
+                {/* Cable highlight */}
+                <div className="absolute left-0 top-0 w-0.5 h-full bg-white/20"></div>
+                {/* Cable strands detail */}
+                <div className="absolute right-0 top-0 w-0.5 h-full bg-black/10"></div>
+              </div>
+            </div>
+            
+            {/* Hook Block at end of Cable */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-40" 
+                 style={{ top: '35px' }}>
+              {/* Main hook block */}
+              <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
+                {/* Hook block details */}
+                <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm"></div>
+                <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm"></div>
+                
+                {/* Actual hook */}
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
+                  <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg relative bg-gradient-to-br from-gray-600 to-gray-800">
+                    <div className="absolute -top-0.5 left-0 w-1 h-1 bg-white/30 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Load Group: Image + Lifting Bar (swings together) */}
+            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 z-40 pointer-events-auto"
                  style={{ 
+                   transformOrigin: 'top center',
                    animation: 'crane-swing 4s ease-in-out infinite',
                    animationDelay: '2s'
                  }}>
               
-              {/* Lifting cable from crane arm to image */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 z-20" 
-                   style={{ top: '-80px' }}>
-                <div className="w-1 bg-gradient-to-b from-gray-600 to-gray-700 relative shadow-sm" 
-                     style={{ height: '100px' }}>
-                  {/* Cable highlight */}
-                  <div className="absolute left-0 top-0 w-0.5 h-full bg-white/20"></div>
-                  {/* Cable strands detail */}
-                  <div className="absolute right-0 top-0 w-0.5 h-full bg-black/10"></div>
+              {/* Lifting Spreader Bar */}
+              <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm shadow-lg relative">
+                {/* Spreader bar lifting points */}
+                <div className="absolute -top-1 left-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
+                <div className="absolute -top-1 right-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
+                
+                {/* Center connection point to hook */}
+                <div className="absolute -top-[14px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
+                  <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
                 </div>
+                
+                {/* Metallic highlight on bar */}
+                <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
+                
+                {/* Connection straps to image */}
+                <div className="absolute -bottom-1 left-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
+                <div className="absolute -bottom-1 right-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
               </div>
               
-              {/* Hook block assembly */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 z-30" 
-                   style={{ top: '15px' }}>
-                {/* Main hook block */}
-                <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
-                  {/* Hook block details */}
-                  <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm"></div>
-                  <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm"></div>
-                  
-                  {/* Actual hook */}
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
-                    <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg relative bg-gradient-to-br from-gray-600 to-gray-800">
-                      <div className="absolute -top-0.5 left-0 w-1 h-1 bg-white/30 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Lifting spreader bar attached to image */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-30">
-                <div className="w-40 h-2 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded-sm shadow-lg border border-gray-800 relative">
-                  {/* Spreader bar lifting points */}
-                  <div className="absolute -top-1 left-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
-                  <div className="absolute -top-1 right-6 w-2 h-2 bg-gray-800 rounded-full border border-gray-900 shadow-sm"></div>
-                  
-                  {/* Center connection point to hook */}
-                  <div className="absolute -top-3 left-1/2 w-4 h-4 bg-gray-700 rounded transform -translate-x-1/2 border border-gray-800 shadow-sm">
-                    <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded"></div>
-                  </div>
-                  
-                  {/* Metallic highlight on bar */}
-                  <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
-                  
-                  {/* Connection straps to image */}
-                  <div className="absolute -bottom-1 left-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
-                  <div className="absolute -bottom-1 right-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
-                </div>
-              </div>
-              
-              {/* ORIGINAL HERO IMAGE CONTENT */}
-              <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+              {/* HERO IMAGE CONTENT */}
+              <div className="relative w-full aspect-[4/5] transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500 max-w-md sm:max-w-lg lg:max-w-xl">
                 <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
                   {images.map((image, index) => (
                     <div
@@ -337,12 +336,12 @@ const HeroSection = () => {
                 </div>
                 
                 {/* Floating accent elements */}
-                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
-                <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+                <div className="absolute -top-4 -left-4 w-4 h-4 bg-construction-green/30 rounded-full blur-sm animate-pulse"></div>
+                <div className="absolute -bottom-6 -right-6 w-6 h-6 bg-construction-secondary/20 rounded-full blur-md animate-pulse delay-1000"></div>
+                <div className="absolute top-1/3 -left-6 w-2 h-2 bg-construction-green/40 rounded-full blur-sm animate-pulse delay-500"></div>
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </section>
