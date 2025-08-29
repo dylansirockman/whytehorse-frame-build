@@ -155,21 +155,24 @@ const HeroSection = () => {
 
           {/* Image + Crane */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* CRANE OVERLAY (pulley only, above image, centered) */}
-            <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
-              <svg
-                className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                aria-hidden="true"
-              >
-                {/* Pulley block */}
-                <rect x="14" y="5" width="12" height="20" fill="rgba(31,41,55,0.85)" rx="2" />
-                {/* Pulley wheel */}
-                <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-              </svg>
-            </div>
+            {/* CRANE OVERLAY — pulley wheel only */}
+          <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
+            <svg
+              className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              aria-hidden="true"
+            >
+              {/* Pulley wheel only (no rectangular housing) */}
+              <circle
+                cx="20" cy="15" r="5"
+                fill="rgba(31,41,55,0.6)"
+                stroke="rgba(255,255,255,0.25)"
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
 
             {/* OUTER: pendulum swing */}
             <div
@@ -213,21 +216,16 @@ const HeroSection = () => {
                 </div>
 
                 {/* Hook block (above image) */}
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none"
-                  style={{ top: "-12px" }}  // was -14px; adjust to taste
-                >
+                <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
                   <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
-                    {/* face details */}
                     <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
                     <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
-                
-                    {/* actual hook */}
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
                       <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg bg-gradient-to-br from-gray-600 to-gray-800 relative" />
                     </div>
-                
-                    {/* NOTE: removed the small square connector above the block */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
+                      <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded" />
+                    </div>
                   </div>
                 </div>
 
