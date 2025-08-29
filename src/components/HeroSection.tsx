@@ -19,12 +19,10 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const handleImageClick = () => {
+  const handleImageClick = () =>
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
 
   // === Typewriter headline ===
-  // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
   const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
   const [wordIndex, setWordIndex] = useState(0);
@@ -68,13 +66,30 @@ const HeroSection = () => {
     };
   }, [typed, phase, wordIndex, headlineWords]);
 
-  // Trigger entrance animations on mount
-  const [mounted, setMounted] = useState(false);
+  // ===== Delayed drop control =====
+  const [mounted, setMounted] = useState(false);           // ensure DOM painted
+  const [pageReady, setPageReady] = useState(false);       // window 'load'
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false); // img onLoad
+
   useEffect(() => {
-    // Slight timeout to ensure DOM paints before anims start
     const id = window.setTimeout(() => setMounted(true), 30);
     return () => window.clearTimeout(id);
   }, []);
+
+  useEffect(() => {
+    const onLoad = () => {
+      // Small delay to ensure layout settles
+      setTimeout(() => setPageReady(true), 200);
+    };
+    if (document.readyState === "complete") {
+      onLoad();
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+      return () => window.removeEventListener("load", onLoad);
+    }
+  }, []);
+
+  const dropReady = mounted && pageReady && firstImageLoaded;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
@@ -154,11 +169,7 @@ const HeroSection = () => {
 
             {/* Typewriter headline */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
-              <span
-                className="relative text-construction-green"
-                aria-live="polite"
-                aria-atomic="true"
-              >
+              <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
@@ -201,7 +212,7 @@ const HeroSection = () => {
 
           {/* Image + “Crane” */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* OUTER: lower-in from header, then pendulum starts */}
+            {/* OUTER: delayed lower-in from header, then pendulum */}
             <div
               className="relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={
@@ -209,8 +220,7 @@ const HeroSection = () => {
                   ["--swing-angle" as any]: "3.2deg",
                   ["--swing-lift" as any]: "3px",
                   ["--swing-duration" as any]: "4.2s",
-                  animation: mounted
-                    // Two animations: first lower in, then keep swinging
+                  animation: dropReady
                     ? "heroLowerIn 900ms cubic-bezier(0.2,0.7,0.2,1) forwards, pendulum var(--swing-duration) infinite 900ms"
                     : undefined,
                   transformOrigin: "top center",
@@ -219,7 +229,7 @@ const HeroSection = () => {
             >
               {/* INNER: crooked → straight on hover */}
               <div className="relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500 transform-gpu">
-                {/* Cable (grows as it lowers) */}
+                {/* Cable (reveals as it lowers) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
@@ -236,8 +246,7 @@ const HeroSection = () => {
                     strokeLinecap="round"
                     vectorEffect="non-scaling-stroke"
                     shapeRendering="geometricPrecision"
-                    className={mounted ? "animate-cableGrow" : ""}
-                    // Path length equals 120 (y2 - y1). Dash trick animates reveal.
+                    className={dropReady ? "animate-cableGrow" : ""}
                     style={{ strokeDasharray: 120, strokeDashoffset: 120 }}
                   />
                 </svg>
@@ -275,7 +284,13 @@ const HeroSection = () => {
                             : "-translate-x-full"
                         }`}
                       >
-                        <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
+                        <img
+                          src={image}
+                          alt="Construction project showcase"
+                          className="w-full h-full object-cover"
+                          // We only need to know that the first image is ready
+                          onLoad={index === 0 ? () => setFirstImageLoaded(true) : undefined}
+                        />
                       </div>
                     ))}
 
@@ -326,7 +341,7 @@ const HeroSection = () => {
           animation: heroFadeIn 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
         }
 
-        /* Image group lowers from header, then pendulum takes over */
+        /* Image group lowers from header, then pendulum starts */
         @keyframes heroLowerIn {
           0%   { transform: translateY(-30vh) rotate(0deg); }
           70%  { transform: translateY(0) rotate(0deg); }
@@ -363,7 +378,7 @@ const HeroSection = () => {
         }
         .animate-caret { animation: caret 1s step-end infinite; }
 
-        /* Respect reduced motion */
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .animate-heroFadeIn { animation: none !important; opacity: 1 !important; transform: none !important; }
           .animate-cableGrow { animation: none !important; stroke-dashoffset: 0 !important; }
