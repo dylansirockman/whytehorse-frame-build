@@ -23,28 +23,22 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  // === Typewriter headline ===
-  // Start on "Framing", hold, then cycle Precision → Speed → Integrity → Framing (lock)
-  const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
-  type Phase = "initialPause" | "typing" | "pausing" | "deleting" | "done";
-  const [wordIndex, setWordIndex] = useState(0);          // starts at "Framing"
-  const [typed, setTyped] = useState("Framing");          // show full "Framing" immediately
-  const [phase, setPhase] = useState<Phase>("initialPause");
+  // === Typewriter headline (Precision → Speed → Integrity → Framing, then lock) ===
+  const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
+  type Phase = "typing" | "pausing" | "deleting" | "done";
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typed, setTyped] = useState("");
+  const [phase, setPhase] = useState<Phase>("typing");
 
   useEffect(() => {
     const current = headlineWords[wordIndex];
     let t: number | undefined;
 
-    // timings (slightly slower typing)
-    const TYPE_MS = 90;          // per character
-    const DELETE_MS = 60;        // per character
-    const HOLD_MS = 2100;        // normal full-word hold
-    const INITIAL_HOLD_MS = 3000; // initial longer hold on "Framing"
+    const TYPE_MS = 70;    // per character
+    const DELETE_MS = 45;  // per character
+    const HOLD_MS = 2000;  // time a full word stays visible
 
-    if (phase === "initialPause") {
-      // hold on initial "Framing" a bit longer, then start deleting to cycle
-      t = window.setTimeout(() => setPhase("deleting"), INITIAL_HOLD_MS);
-    } else if (phase === "typing") {
+    if (phase === "typing") {
       if (typed.length < current.length) {
         t = window.setTimeout(() => {
           setTyped(current.slice(0, typed.length + 1));
@@ -52,15 +46,13 @@ const HeroSection = () => {
       } else {
         // full word finished
         if (wordIndex === headlineWords.length - 1) {
-          // final "Framing" → lock after a normal hold
+          // last word "Framing" -> lock after hold
           t = window.setTimeout(() => setPhase("done"), HOLD_MS);
         } else {
-          t = window.setTimeout(() => setPhase("pausing"), HOLD_MS);
+          // brief pause (so total visible ≈ HOLD_MS), then start deleting
+          t = window.setTimeout(() => setPhase("deleting"), HOLD_MS);
         }
       }
-    } else if (phase === "pausing") {
-      // brief hold before deleting
-      t = window.setTimeout(() => setPhase("deleting"), 0);
     } else if (phase === "deleting") {
       if (typed.length > 0) {
         t = window.setTimeout(() => {
@@ -72,7 +64,7 @@ const HeroSection = () => {
         setPhase("typing");
       }
     } else if (phase === "done") {
-      // ensure final word is fully set (safety)
+      // ensure we end showing the full final word exactly
       if (typed !== current) {
         t = window.setTimeout(() => setTyped(current), 0);
       }
@@ -179,15 +171,24 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Typewriter headline */}
+            {/* Typewriter headline (locks on “Framing”) */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
-              <span className="text-construction-green" aria-live="polite" aria-atomic="true">
+              <span
+                className="relative text-construction-green"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 {typed}
-                {/* caret only while animating (not during initialPause or done) */}
                 {(phase === "typing" || phase === "deleting") && (
-                  <span className="inline-block w-[1ch] align-baseline border-r-2 border-construction-green ml-0.5 animate-caret" />
+                  // zero-width caret, absolutely positioned so it doesn't push text
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret"
+                  />
                 )}
-              </span>{" "}
+              </span>
+              {/* keep a normal single space before the static text */}
+              {" "}
               you can rely on
             </h1>
 
