@@ -74,9 +74,9 @@ All colors MUST be HSL.
     --ring: 158 45% 22%;
 
     /* Construction-focused design tokens */
-    --construction-green: 158 64% 37%;
-    --construction-green-light: 158 64% 42%;
-    --construction-green-dark: 158 64% 32%;
+    --construction-green: 158 64% 32%;
+    --construction-green-light: 158 64% 37%;
+    --construction-green-dark: 158 64% 27%;
     --construction-secondary: 35 85% 65%;
     --construction-secondary-light: 35 85% 75%;
     --construction-secondary-dark: 35 85% 55%;
@@ -86,8 +86,8 @@ All colors MUST be HSL.
     --construction-white: 0 0% 100%;
     
     /* Button gradients */
-    --gradient-primary: linear-gradient(180deg, hsl(158 64% 37%), hsl(158 64% 32%));
-    --gradient-primary-hover: linear-gradient(180deg, hsl(158 64% 42%), hsl(158 64% 35%));
+    --gradient-primary: linear-gradient(180deg, hsl(158 64% 32%), hsl(158 64% 27%));
+    --gradient-primary-hover: linear-gradient(180deg, hsl(158 64% 37%), hsl(158 64% 30%));
     --gradient-secondary: linear-gradient(180deg, transparent, transparent);
     
     /* Premium gradients */
@@ -240,7 +240,7 @@ All colors MUST be HSL.
 
 .btn-primary-modern:hover {
   background: var(--gradient-primary-hover);
-  box-shadow: 0 4px 12px hsl(158 64% 37% / 0.2);
+  box-shadow: 0 4px 12px hsl(158 64% 32% / 0.2);
   transform: translateY(-1px) scale(1.02);
 }
 
@@ -253,7 +253,7 @@ All colors MUST be HSL.
 .btn-secondary-modern:hover {
   background: hsl(var(--construction-green) / 0.05);
   border-color: hsl(var(--construction-green-dark));
-  box-shadow: 0 2px 8px hsl(158 64% 37% / 0.15);
+  box-shadow: 0 2px 8px hsl(158 64% 32% / 0.15);
 }
 
 /* Accessibility - reduced motion */
