@@ -1,31 +1,189 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Menu, X, Phone } from "lucide-react";
+
+const NAV = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#contact", label: "Contact" },
+];
 
 const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("");
+
+  // Solidify header on scroll
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Track active section (simple hash + scroll position)
+  useEffect(() => {
+    const sectionIds = NAV.map(n => n.href.replace("#", ""));
+    const nodes = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (nodes.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    nodes.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Close mobile when navigating
+  const handleNavClick = () => setOpen(false);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-construction-white/95 backdrop-blur-md border-b border-border shadow-sm">
-      <div className="container mx-auto px-6 h-24 flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="text-2xl lg:text-3xl font-bold">
-            <span className="text-construction-dark">Whyte</span>
-            <span className="text-construction-green">Horse</span>
-            <div className="text-xs lg:text-sm font-medium text-construction-gray uppercase tracking-wider -mt-1">
-              Contracting
+    <header
+      className={[
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled
+          ? "bg-white/85 backdrop-blur-md border-b border-black/10 shadow-sm"
+          : "bg-white/60 backdrop-blur-md border-b border-transparent"
+      ].join(" ")}
+      role="banner"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top row */}
+        <div className="h-20 flex items-center justify-between gap-4">
+          {/* Brand */}
+          <a href="#" className="flex items-center group" aria-label="WhyteHorse Contracting - Home">
+            <div className="flex flex-col leading-none">
+              <span className="text-2xl lg:text-3xl font-bold tracking-tight">
+                <span className="text-construction-dark">Whyte</span>
+                <span className="text-construction-green">Horse</span>
+              </span>
+              <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-construction-gray group-hover:text-construction-dark/80 transition-colors">
+                Contracting
+              </span>
             </div>
+          </a>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
+            {NAV.map((item) => {
+              const isActive = active === item.href.replace("#", "");
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={handleNavClick}
+                  className={[
+                    "relative font-medium transition-colors",
+                    "text-construction-dark hover:text-construction-green"
+                  ].join(" ")}
+                >
+                  {item.label}
+                  {/* underline on hover */}
+                  <span className="absolute left-0 -bottom-1 h-px w-0 bg-construction-green/80 transition-all duration-300 group-hover:w-full peer-hover:w-full"></span>
+                  {/* active dot/underline */}
+                  {isActive && (
+                    <span className="absolute left-0 -bottom-1 h-[2px] w-full rounded bg-construction-green"></span>
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <a
+              href="tel:+14035550123"
+              className="hidden md:inline-flex items-center gap-2 text-construction-dark font-medium hover:text-construction-green transition-colors"
+            >
+              <Phone className="h-4 w-4 opacity-70" />
+              (403) 555-0123
+            </a>
+
+            <Button
+              variant="hero"
+              size="sm"
+              className="hidden md:inline-flex font-semibold px-4 py-2 rounded-xl
+                         bg-gradient-to-b from-[#23D3A0] to-[#10B981]
+                         text-white shadow-[0_6px_20px_rgba(16,185,129,0.25)]
+                         border border-white/40 hover:brightness-[1.03] transition"
+            >
+              Get Quote
+            </Button>
+
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-black/10 bg-white/70 hover:bg-white transition"
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
-        
-        <nav className="hidden lg:flex items-center space-x-12">
-          <a href="#about" className="text-construction-dark hover:text-construction-green transition-colors font-medium">About</a>
-          <a href="#services" className="text-construction-dark hover:text-construction-green transition-colors font-medium">Services</a>
-          <a href="#process" className="text-construction-dark hover:text-construction-green transition-colors font-medium">Process</a>
-          <a href="#contact" className="text-construction-dark hover:text-construction-green transition-colors font-medium">Contact</a>
-        </nav>
-        
-        <div className="flex items-center space-x-4">
-          <span className="hidden md:block text-construction-dark font-medium">(403) 555-0123</span>
-          <Button variant="hero" size="sm" className="hidden md:block">
-            Get Quote
-          </Button>
+
+        {/* Mobile Sheet / Drawer */}
+        <div
+          id="mobile-menu"
+          className={[
+            "lg:hidden overflow-hidden transition-[max-height,opacity] duration-300",
+            open ? "max-h-[320px] opacity-100" : "max-h-0 opacity-0"
+          ].join(" ")}
+        >
+          <div className="pb-6 border-t border-black/10">
+            <nav className="flex flex-col py-3" aria-label="Mobile">
+              {NAV.map((item) => {
+                const isActive = active === item.href.replace("#", "");
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className={[
+                      "px-1 py-3 text-base font-medium transition-colors",
+                      isActive
+                        ? "text-construction-green"
+                        : "text-construction-dark hover:text-construction-green"
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </nav>
+
+            <div className="mt-2 flex flex-col gap-3">
+              <a
+                href="tel:+14035550123"
+                className="inline-flex items-center gap-2 text-construction-dark hover:text-construction-green transition-colors"
+              >
+                <Phone className="h-4 w-4 opacity-70" />
+                (403) 555-0123
+              </a>
+              <Button
+                variant="hero"
+                size="sm"
+                className="font-semibold px-4 py-2 rounded-xl
+                           bg-gradient-to-b from-[#23D3A0] to-[#10B981]
+                           text-white shadow-[0_6px_20px_rgba(16,185,129,0.25)]
+                           border border-white/40 hover:brightness-[1.03] transition w-fit"
+              >
+                Get Quote
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
