@@ -326,10 +326,9 @@ const HeroSection = () => {
                 </div>
               </div>
               
-                {/* Floating accent elements */}
-                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
-                <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
-              </div>
+              {/* Floating accent elements */}
+              <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
+              <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
             </div>
           </div>
         </div>
