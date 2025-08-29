@@ -24,19 +24,19 @@ const HeroSection = () => {
   };
 
   // === Typewriter headline (Precision → Speed → Integrity → Framing, then lock) ===
-  const headlineWords = ["Framing","Precision", "Speed", "Integrity", "Framing"];
+  const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
   type Phase = "typing" | "pausing" | "deleting" | "done";
   const [wordIndex, setWordIndex] = useState(0);
-  const [typed, setTyped] = useState("Framing");
-  const [phase, setPhase] = useState<"initialPause" | "typing" | "pausing" | "deleting" | "done">("initialPause");
+  const [typed, setTyped] = useState("");
+  const [phase, setPhase] = useState<Phase>("typing");
 
   useEffect(() => {
     const current = headlineWords[wordIndex];
     let t: number | undefined;
 
-    const TYPE_MS = 90;    // per character
+    const TYPE_MS = 70;    // per character
     const DELETE_MS = 45;  // per character
-    const HOLD_MS = 300;  // time a full word stays visible
+    const HOLD_MS = 2000;  // time a full word stays visible
 
     if (phase === "typing") {
       if (typed.length < current.length) {
@@ -173,15 +173,22 @@ const HeroSection = () => {
 
             {/* Typewriter headline (locks on “Framing”) */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
-              <span className="text-construction-green" aria-live="polite" aria-atomic="true">
+              <span
+                className="relative text-construction-green"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 {typed}
-                {/* caret only while animating */}
-                {phase !== "done" && (
-                  <span className="inline-block w-[1ch] align-baseline border-r-2 border-construction-green ml-0.5 animate-caret" />
+                {(phase === "typing" || phase === "deleting" || phase === "initialPause") && (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret"
+                  />
                 )}
               </span>{" "}
               you can rely on
             </h1>
+
 
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
