@@ -179,17 +179,19 @@ const HeroSection = () => {
                 animationDelay: "2s",
               }}
             >
-              {/* Cable (SVG line for crisp edges) */}
+              {/* Cable (inline SVG for visibility and crispness) */}
               <svg
-                className="absolute inset-0 z-[55] pointer-events-none"
+                className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[65] pointer-events-none"
+                viewBox="0 0 100 220"
+                preserveAspectRatio="none"
                 vectorEffect="non-scaling-stroke"
                 shapeRendering="geometricPrecision"
               >
                 <line
-                  x1="50%"
-                  y1="-120px"
-                  x2="50%"
-                  y2="0"
+                  x1="50"
+                  y1="0"
+                  x2="50"
+                  y2="120"
                   stroke="#1F2937"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -197,12 +199,12 @@ const HeroSection = () => {
               </svg>
 
               {/* Lifting bar */}
-              <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[60] pointer-events-none">
+              <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[66] pointer-events-none">
                 <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded" />
               </div>
 
               {/* Hook block */}
-              <div className="absolute left-1/2 -translate-x-1/2 z-[60] pointer-events-none" style={{ top: "-14px" }}>
+              <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
                 <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
                   <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
                   <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
