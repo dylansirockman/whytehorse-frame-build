@@ -181,7 +181,7 @@ const HeroSection = () => {
             >
               {/* Cable (inline SVG for visibility and crispness) */}
               <svg
-                className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[65] pointer-events-none"
+                className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                 viewBox="0 0 100 220"
                 preserveAspectRatio="none"
                 vectorEffect="non-scaling-stroke"
@@ -193,7 +193,7 @@ const HeroSection = () => {
                   x2="50"
                   y2="120"
                   stroke="#1F2937"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                 />
               </svg>
