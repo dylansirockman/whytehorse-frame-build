@@ -23,6 +23,33 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
+  // === Revolving-door headline logic ===
+  const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [locked, setLocked] = useState(false);
+  const [flip, setFlip] = useState(false);
+
+  useEffect(() => {
+    if (locked) return;
+
+    const tick = () => {
+      setFlip(true);
+      setTimeout(() => setFlip(false), 500); // match flip animation duration
+
+      setHeadlineIndex((i) => {
+        const next = (i + 1) % headlineWords.length;
+        if (next === headlineWords.length - 1) {
+          // once “Framing” appears, allow ~2s then lock
+          setTimeout(() => setLocked(true), 2000);
+        }
+        return next;
+      });
+    };
+
+    const interval = setInterval(tick, 2000);
+    return () => clearInterval(interval);
+  }, [locked, headlineWords.length]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
       {/* Grid Pattern Background */}
@@ -75,10 +102,9 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* "Level tool" accent WITHOUT the inner grey dot */}
+        {/* Level tool accent (inner grey dot removed) */}
         <div className="absolute top-2/3 right-1/4 opacity-[0.12]">
           <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
-            {/* removed the inner w-3 h-3 grey circle that caused the dot */}
             <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
             <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
           </div>
@@ -120,12 +146,23 @@ const HeroSection = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10">
-              <div className="mb-2 sm:mb-3">Building the Strong</div>
-              <div>
-                <span className="text-construction-green">Bones</span> of Every Home
-              </div>
-            </h1>
+            {/* Revolving-door headline (locks on “Framing”) */}
+            <div style={{ perspective: "800px" }}>
+              <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#1F2937] leading-tight">
+                <span
+                  className={[
+                    "inline-block will-change-transform pr-2",
+                    "text-construction-green",
+                    flip ? "headline-flip" : "",
+                  ].join(" ")}
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {headlineWords[headlineIndex]}
+                </span>
+                <span className="inline">you can rely on</span>
+              </h1>
+            </div>
 
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
@@ -181,7 +218,6 @@ const HeroSection = () => {
                   preserveAspectRatio="none"
                   aria-hidden="true"
                 >
-                  {/* From above the group (y=0) down to the bar plane (y=120) */}
                   <line
                     x1="50"
                     y1="0"
@@ -259,7 +295,7 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  {/* removed subtle floating dots (green/secondary circles) */}
+                  {/* (removed floating decorative dots) */}
                 </div>
               </div>
             </div>
@@ -267,7 +303,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Keyframes for realistic pendulum */}
+      {/* Keyframes for pendulum + headline flip */}
       <style>{`
         @keyframes pendulum {
           0% {
@@ -282,8 +318,19 @@ const HeroSection = () => {
             transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
           }
         }
+        .headline-flip {
+          animation: headline-flip-keyframe 500ms ease both;
+          transform-origin: 50% 70%;
+        }
+        @keyframes headline-flip-keyframe {
+          0%   { transform: rotateX(0deg); opacity: 1; filter: blur(0px); }
+          40%  { transform: rotateX(-70deg); opacity: 0.7; filter: blur(0.3px); }
+          60%  { transform: rotateX(70deg); opacity: 0.7; filter: blur(0.3px); }
+          100% { transform: rotateX(0deg); opacity: 1; filter: blur(0px); }
+        }
         @media (prefers-reduced-motion: reduce) {
           .swingGroup { animation: none !important; }
+          .headline-flip { animation: none !important; }
         }
       `}</style>
     </section>
