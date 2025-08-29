@@ -159,24 +159,14 @@ const HeroSection = () => {
             <div className="craneArmGroup absolute z-[70] top-0 left-1/2 -translate-x-1/2 pointer-events-none">
               <svg
                 className="absolute -top-[120px]"
-                width="320"
-                height="140"
-                viewBox="0 0 320 140"
+                width="40"
+                height="30"
+                viewBox="0 0 40 30"
                 aria-hidden="true"
               >
-                {/* Truss beams */}
-                <rect x="0" y="76" width="320" height="8" fill="rgba(31,41,55,0.7)" rx="2" />
-                <rect x="0" y="68" width="320" height="4" fill="rgba(31,41,55,0.5)" rx="1" />
-                <rect x="0" y="88" width="320" height="4" fill="rgba(31,41,55,0.5)" rx="1" />
-                {[0, 40, 80, 120, 160, 200, 240, 280].map((x) => (
-                  <g key={x}>
-                    <line x1={x + 12} y1="68" x2={x + 28} y2="92" stroke="rgba(31,41,55,0.4)" strokeWidth="2" />
-                    <line x1={x + 28} y1="68" x2={x + 12} y2="92" stroke="rgba(31,41,55,0.4)" strokeWidth="2" />
-                  </g>
-                ))}
-                {/* Pulley centered */}
-                <rect x="154" y="70" width="12" height="20" fill="rgba(31,41,55,0.85)" rx="2" />
-                <circle cx="160" cy="80" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                {/* Pulley block and wheel only */}
+                <rect x="14" y="5" width="12" height="20" fill="rgba(31,41,55,0.85)" rx="2" />
+                <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
               </svg>
             </div>
 
