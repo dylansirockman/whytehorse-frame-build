@@ -161,8 +161,8 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
             
-            {/* PHASE 2: Crane Overlay Layer - NO LAYOUT IMPACT */}
-            <div className="craneOverlay absolute inset-0 pointer-events-none z-40">
+            {/* PHASE 2: Crane Overlay Layer - ABOVE IMAGE */}
+            <div className="craneOverlay absolute inset-0 pointer-events-none z-60">
               {/* PHASE 5: Single Crane Arm - Fixed, Decorative Only */}
               <svg className="absolute top-0 left-0" 
                    width="200" 
@@ -234,14 +234,14 @@ const HeroSection = () => {
                  }}>
               
               {/* PHASE 4: Cable - Vertical from Above */}
-              <div className="cable absolute left-1/2 transform -translate-x-1/2 bg-[#1F2937] opacity-90 z-40 pointer-events-none"
+              <div className="cable absolute left-1/2 transform -translate-x-1/2 bg-[#1F2937] opacity-90 z-60 pointer-events-none"
                    style={{ top: '-140px', height: '140px', width: '2px' }}>
                 {/* Cable highlight */}
                 <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25"></div>
               </div>
               
               {/* PHASE 4: Lifting Bar - Flush on Top Edge */}
-              <div className="liftingBar absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-45 pointer-events-none">
+              <div className="liftingBar absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-60 pointer-events-none">
                 {/* Metallic highlight */}
                 <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded"></div>
                 
@@ -255,7 +255,7 @@ const HeroSection = () => {
               </div>
               
               {/* PHASE 4: Hook Block - Centered, Touching Bar */}
-              <div className="hookBlock absolute left-1/2 transform -translate-x-1/2 z-50 pointer-events-none"
+              <div className="hookBlock absolute left-1/2 transform -translate-x-1/2 z-60 pointer-events-none"
                    style={{ top: '-14px' }}>
                 {/* Main hook block */}
                 <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
