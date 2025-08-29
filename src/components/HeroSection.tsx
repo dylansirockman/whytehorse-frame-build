@@ -23,32 +23,57 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  // === Revolving-door headline logic ===
+  // === Typewriter headline (Precision → Speed → Integrity → Framing, then lock) ===
   const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
-  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
   const [locked, setLocked] = useState(false);
-  const [flip, setFlip] = useState(false);
 
   useEffect(() => {
     if (locked) return;
 
-    const tick = () => {
-      setFlip(true);
-      setTimeout(() => setFlip(false), 500); // match flip animation duration
+    const target = headlineWords[wordIndex];
+    // speeds
+    const TYPE_MS = 70;       // per character when typing
+    const DELETE_MS = 50;     // per character when deleting
+    const HOLD_MS = 2000;     // hold full word before delete / advance
 
-      setHeadlineIndex((i) => {
-        const next = (i + 1) % headlineWords.length;
-        if (next === headlineWords.length - 1) {
-          // once “Framing” appears, allow ~2s then lock
-          setTimeout(() => setLocked(true), 2000);
+    if (!isDeleting) {
+      // typing forward
+      if (displayText.length < target.length) {
+        const timeout = setTimeout(() => {
+          setDisplayText(target.slice(0, displayText.length + 1));
+        }, TYPE_MS);
+        return () => clearTimeout(timeout);
+      } else {
+        // full word shown
+        if (wordIndex === headlineWords.length - 1) {
+          // last word "Framing" → lock after hold
+          const timeout = setTimeout(() => {
+            setLocked(true);
+          }, HOLD_MS);
+          return () => clearTimeout(timeout);
+        } else {
+          // hold, then start deleting
+          const timeout = setTimeout(() => setIsDeleting(true), HOLD_MS);
+          return () => clearTimeout(timeout);
         }
-        return next;
-      });
-    };
-
-    const interval = setInterval(tick, 2000);
-    return () => clearInterval(interval);
-  }, [locked, headlineWords.length]);
+      }
+    } else {
+      // deleting
+      if (displayText.length > 0) {
+        const timeout = setTimeout(() => {
+          setDisplayText(target.slice(0, displayText.length - 1));
+        }, DELETE_MS);
+        return () => clearTimeout(timeout);
+      } else {
+        // move to next word and type forward again
+        setIsDeleting(false);
+        setWordIndex((i) => Math.min(i + 1, headlineWords.length - 1)); // clamp to last index
+      }
+    }
+  }, [displayText, isDeleting, wordIndex, locked]); // eslint-disable-line
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
@@ -146,23 +171,18 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Revolving-door headline (locks on “Framing”) */}
-            <div style={{ perspective: "800px" }}>
-              <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#1F2937] leading-tight">
-                <span
-                  className={[
-                    "inline-block will-change-transform pr-2",
-                    "text-construction-green",
-                    flip ? "headline-flip" : "",
-                  ].join(" ")}
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  {headlineWords[headlineIndex]}
-                </span>
-                <span className="inline">you can rely on</span>
-              </h1>
-            </div>
+            {/* Typewriter headline (locks on “Framing”) */}
+            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
+              <span
+                className="inline-block text-construction-green"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {displayText}
+                <span className="inline-block w-[1ch] align-baseline border-r-2 border-construction-green ml-0.5 animate-caret" />
+              </span>{" "}
+              you can rely on
+            </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
@@ -295,7 +315,7 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  {/* (removed floating decorative dots) */}
+                  {/* (no decorative dots) */}
                 </div>
               </div>
             </div>
@@ -303,7 +323,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Keyframes for pendulum + headline flip */}
+      {/* Keyframes for pendulum + caret */}
       <style>{`
         @keyframes pendulum {
           0% {
@@ -318,19 +338,16 @@ const HeroSection = () => {
             transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
           }
         }
-        .headline-flip {
-          animation: headline-flip-keyframe 500ms ease both;
-          transform-origin: 50% 70%;
+        @keyframes caret {
+          0%, 49% { opacity: 1; }
+          50%, 100% { opacity: 0; }
         }
-        @keyframes headline-flip-keyframe {
-          0%   { transform: rotateX(0deg); opacity: 1; filter: blur(0px); }
-          40%  { transform: rotateX(-70deg); opacity: 0.7; filter: blur(0.3px); }
-          60%  { transform: rotateX(70deg); opacity: 0.7; filter: blur(0.3px); }
-          100% { transform: rotateX(0deg); opacity: 1; filter: blur(0px); }
+        .animate-caret {
+          animation: caret 1s step-end infinite;
         }
         @media (prefers-reduced-motion: reduce) {
           .swingGroup { animation: none !important; }
-          .headline-flip { animation: none !important; }
+          .animate-caret { animation: none !important; }
         }
       `}</style>
     </section>
