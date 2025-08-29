@@ -23,51 +23,48 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  // === Typewriter headline (Precision → Speed → Integrity → Framing, then lock) ===
-  const headlineWords = ["Precision", "Speed", "Integrity", "Framing"];
-  type Phase = "typing" | "pausing" | "deleting" | "done";
-  const [wordIndex, setWordIndex] = useState(0);
-  const [typed, setTyped] = useState("");
-  const [phase, setPhase] = useState<Phase>("typing");
+  // === Typewriter headline ===
+  // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
+  const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
+  type Phase = "initialPause" | "typing" | "deleting" | "done";
+  const [wordIndex, setWordIndex] = useState(0);          // starts at "Framing"
+  const [typed, setTyped] = useState("Framing");          // show "Framing" immediately
+  const [phase, setPhase] = useState<Phase>("initialPause");
 
   useEffect(() => {
     const current = headlineWords[wordIndex];
     let t: number | undefined;
 
-    const TYPE_MS = 70;    // per character
-    const DELETE_MS = 45;  // per character
-    const HOLD_MS = 2000;  // time a full word stays visible
+    // timings (slightly slower typing + longer initial hold)
+    const TYPE_MS = 90;
+    const DELETE_MS = 60;
+    const HOLD_MS = 2100;       // normal hold for intermediate words and final before lock
+    const INITIAL_HOLD_MS = 5000; // initial 5s hold on "Framing"
 
-    if (phase === "typing") {
+    if (phase === "initialPause") {
+      t = window.setTimeout(() => setPhase("deleting"), INITIAL_HOLD_MS);
+    } else if (phase === "typing") {
       if (typed.length < current.length) {
-        t = window.setTimeout(() => {
-          setTyped(current.slice(0, typed.length + 1));
-        }, TYPE_MS);
+        t = window.setTimeout(() => setTyped(current.slice(0, typed.length + 1)), TYPE_MS);
       } else {
-        // full word finished
+        // full word typed
         if (wordIndex === headlineWords.length - 1) {
-          // last word "Framing" -> lock after hold
-          t = window.setTimeout(() => setPhase("done"), HOLD_MS);
+          t = window.setTimeout(() => setPhase("done"), HOLD_MS); // final lock
         } else {
-          // brief pause (so total visible ≈ HOLD_MS), then start deleting
           t = window.setTimeout(() => setPhase("deleting"), HOLD_MS);
         }
       }
     } else if (phase === "deleting") {
       if (typed.length > 0) {
-        t = window.setTimeout(() => {
-          setTyped(current.slice(0, typed.length - 1));
-        }, DELETE_MS);
+        t = window.setTimeout(() => setTyped(current.slice(0, typed.length - 1)), DELETE_MS);
       } else {
-        // move to next word and type again
+        // advance to next word and type
         setWordIndex((i) => i + 1);
         setPhase("typing");
       }
     } else if (phase === "done") {
-      // ensure we end showing the full final word exactly
-      if (typed !== current) {
-        t = window.setTimeout(() => setTyped(current), 0);
-      }
+      // ensure final word fully shown
+      if (typed !== current) setTyped(current);
     }
 
     return () => {
@@ -127,7 +124,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Level tool accent (inner grey dot removed) */}
+        {/* Level tool accent (inner dot removed) */}
         <div className="absolute top-2/3 right-1/4 opacity-[0.12]">
           <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
             <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
@@ -162,7 +159,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:minh-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
@@ -171,7 +168,7 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Typewriter headline (locks on “Framing”) */}
+            {/* Typewriter headline (zero-width caret, shows during initialPause/typing/deleting) */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
               <span
                 className="relative text-construction-green"
@@ -179,7 +176,7 @@ const HeroSection = () => {
                 aria-atomic="true"
               >
                 {typed}
-                {(phase === "typing" || phase === "deleting" || phase === "initialPause") && (
+                {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
                     aria-hidden="true"
                     className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret"
@@ -188,7 +185,6 @@ const HeroSection = () => {
               </span>{" "}
               you can rely on
             </h1>
-
 
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
