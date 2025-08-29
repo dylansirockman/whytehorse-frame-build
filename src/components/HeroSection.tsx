@@ -161,82 +161,81 @@ const HeroSection = () => {
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative overflow-visible">
             
-            {/* Fixed Crane Arm with Truss Structure */}
-            <svg className="absolute top-0 left-0 pointer-events-none z-30" 
-                 width="200" 
-                 height="120"
-                 style={{ transform: 'translate(-15%, -60%)' }}>
-              {/* Main horizontal truss beam */}
-              <rect x="0" y="60" width="180" height="8" 
-                    fill="rgba(31, 41, 55, 0.7)" 
-                    rx="2" />
-              
-              {/* Top beam */}
-              <rect x="0" y="52" width="180" height="4" 
-                    fill="rgba(31, 41, 55, 0.5)" 
-                    rx="1" />
-              
-              {/* Bottom beam */}
-              <rect x="0" y="72" width="180" height="4" 
-                    fill="rgba(31, 41, 55, 0.5)" 
-                    rx="1" />
-              
-              {/* Diagonal cross-bracing */}
-              <line x1="20" y1="52" x2="40" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              <line x1="40" y1="52" x2="20" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              
-              <line x1="60" y1="52" x2="80" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              <line x1="80" y1="52" x2="60" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              
-              <line x1="100" y1="52" x2="120" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              <line x1="120" y1="52" x2="100" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              
-              <line x1="140" y1="52" x2="160" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              <line x1="160" y1="52" x2="140" y2="76" 
-                    stroke="rgba(31, 41, 55, 0.4)" 
-                    strokeWidth="2" />
-              
-              {/* Pulley block at end of arm */}
-              <rect x="170" y="55" width="12" height="18" 
-                    fill="rgba(31, 41, 55, 0.8)" 
-                    rx="2" />
-              
-              {/* Pulley wheel */}
-              <circle cx="176" cy="64" r="4" 
+            {/* Fixed Crane Arm Group */}
+            <div className="craneArmGroup absolute top-0 left-0 pointer-events-none z-20">
+              <svg width="200" height="120" style={{ transform: 'translate(-15%, -60%)' }}>
+                {/* Main horizontal truss beam */}
+                <rect x="0" y="60" width="180" height="8" 
+                      fill="rgba(31, 41, 55, 0.7)" 
+                      rx="2" />
+                
+                {/* Top beam */}
+                <rect x="0" y="52" width="180" height="4" 
+                      fill="rgba(31, 41, 55, 0.5)" 
+                      rx="1" />
+                
+                {/* Bottom beam */}
+                <rect x="0" y="72" width="180" height="4" 
+                      fill="rgba(31, 41, 55, 0.5)" 
+                      rx="1" />
+                
+                {/* Diagonal cross-bracing */}
+                <line x1="20" y1="52" x2="40" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="40" y1="52" x2="20" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="60" y1="52" x2="80" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="80" y1="52" x2="60" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="100" y1="52" x2="120" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="120" y1="52" x2="100" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                <line x1="140" y1="52" x2="160" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                <line x1="160" y1="52" x2="140" y2="76" 
+                      stroke="rgba(31, 41, 55, 0.4)" 
+                      strokeWidth="2" />
+                
+                {/* Pulley block at end of arm */}
+                <rect x="170" y="55" width="12" height="18" 
+                      fill="rgba(31, 41, 55, 0.8)" 
+                      rx="2" />
+                
+                {/* Pulley wheel */}
+                <circle cx="176" cy="64" r="4" 
+                        fill="rgba(31, 41, 55, 0.6)" 
+                        stroke="rgba(255, 255, 255, 0.2)" 
+                        strokeWidth="1" />
+                
+                {/* Vertical support mast */}
+                <rect x="-2" y="20" width="6" height="60" 
                       fill="rgba(31, 41, 55, 0.6)" 
-                      stroke="rgba(255, 255, 255, 0.2)" 
-                      strokeWidth="1" />
-              
-              {/* Vertical support mast */}
-              <rect x="-2" y="20" width="6" height="60" 
-                    fill="rgba(31, 41, 55, 0.6)" 
-                    rx="2" />
-            </svg>
+                      rx="2" />
+              </svg>
+            </div>
             
-            {/* Swinging Load Group: Everything that moves together */}
-            <div className="relative w-full aspect-[4/5] transform-gpu"
+            {/* Load Group: Everything that swings and rotates together */}
+            <div className="loadGroup relative w-full aspect-[4/5] transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
                  style={{ 
                    transformOrigin: 'top center',
-                   animation: 'crane-swing 4s ease-in-out infinite',
+                   animation: 'crane-swing 3.5s ease-in-out infinite alternate',
                    animationDelay: '2s'
                  }}>
               
               {/* Vertical Cable from Crane Arm */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-40" 
+              <div className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-30" 
                    style={{ top: '-20px' }}>
                 <div className="w-1 bg-gradient-to-b from-gray-600 to-gray-700 relative shadow-sm" 
                      style={{ height: '60px' }}>
@@ -284,9 +283,9 @@ const HeroSection = () => {
                 <div className="absolute -bottom-1 right-8 w-1 h-2 bg-gray-700 rounded-sm border border-gray-800"></div>
               </div>
               
-              {/* ORIGINAL HERO IMAGE - RESTORED */}
-              <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
+              {/* HERO IMAGE - CROOKED BY DEFAULT, STRAIGHT ON HOVER */}
+              <div className="relative w-full h-full">
+                <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer z-30" onClick={handleImageClick}>
                   {images.map((image, index) => (
                     <div
                       key={index}
