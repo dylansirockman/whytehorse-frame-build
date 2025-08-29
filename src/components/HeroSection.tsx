@@ -170,55 +170,72 @@ const HeroSection = () => {
               </svg>
             </div>
 
-            {/* LOAD GROUP (swings + crooked/hover straight) */}
+            {/* SWING GROUP (outer pendulum) */}
             <div
-              className="loadGroup relative w-full aspect-[4/5] rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500 z-[60]"
+              className="swingGroup relative w-full aspect-[4/5] z-[60]"
               style={{
                 transformOrigin: "top center",
-                animation: "crane-swing 4s ease-in-out infinite alternate",
-                animationDelay: "2s",
+                animation: "pendulum var(--swing-duration, 4.2s) ease-in-out infinite",
+                animationDelay: "-1.8s",
+                willChange: "transform",
+              } as React.CSSProperties & {
+                "--swing-angle": string;
+                "--swing-lift": string;
+                "--swing-duration": string;
+              } & {
+                "--swing-angle": "3.2deg";
+                "--swing-lift": "3px";
+                "--swing-duration": "4.2s";
               }}
             >
-              {/* Cable (inline SVG for visibility and crispness) */}
-              <svg
-                className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
-                viewBox="0 0 100 220"
-                preserveAspectRatio="none"
-                vectorEffect="non-scaling-stroke"
-                shapeRendering="geometricPrecision"
+              {/* TILT GROUP (inner crooked/hover straight) */}
+              <div
+                className="tiltGroup relative w-full h-full rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
+                style={{
+                  transformOrigin: "top center",
+                  willChange: "transform",
+                }}
               >
-                <line
-                  x1="50"
-                  y1="0"
-                  x2="50"
-                  y2="120"
-                  stroke="#1F2937"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
+                {/* Cable (inline SVG for visibility and crispness) */}
+                <svg
+                  className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
+                  viewBox="0 0 100 220"
+                  preserveAspectRatio="none"
+                  vectorEffect="non-scaling-stroke"
+                  shapeRendering="geometricPrecision"
+                >
+                  <line
+                    x1="50"
+                    y1="0"
+                    x2="50"
+                    y2="120"
+                    stroke="#1F2937"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
 
-              {/* Lifting bar */}
-              <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[66] pointer-events-none">
-                <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded" />
-              </div>
+                {/* Lifting bar */}
+                <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[66] pointer-events-none">
+                  <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded" />
+                </div>
 
-              {/* Hook block */}
-              <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
-                <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
-                  <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
-                  <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-                    <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg bg-gradient-to-br from-gray-600 to-gray-800 relative" />
-                  </div>
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
-                    <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded" />
+                {/* Hook block */}
+                <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
+                  <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
+                    <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
+                    <div className="absolute bottom-1 left-1 right-1 h-0.5 bg-black/20 rounded-sm" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
+                      <div className="w-3 h-4 border-l-2 border-b-2 border-gray-700 rounded-bl-lg bg-gradient-to-br from-gray-600 to-gray-800 relative" />
+                    </div>
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-700 rounded border border-gray-800 shadow-sm">
+                      <div className="absolute top-1 left-0.5 right-0.5 h-0.5 bg-white/20 rounded" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* IMAGE (under crane) */}
-              <div className="heroImage relative w-full h-full pointer-events-auto z-40">
+                {/* IMAGE (under crane) */}
+                <div className="heroImage relative w-full h-full pointer-events-auto z-40">
                 <div
                   className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer"
                   onClick={handleImageClick}
@@ -273,13 +290,26 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+        </div>
       </div>
 
-      {/* Keyframes for the swing */}
+      {/* Keyframes for the pendulum swing */}
       <style>{`
-        @keyframes crane-swing {
-          0%   { transform: rotate(-3deg); }
-          100% { transform: rotate(3deg); }
+        @keyframes pendulum {
+          0% {
+            rotate: var(--swing-angle);
+            translateY: var(--swing-lift);
+            animation-timing-function: cubic-bezier(0.34, 0.04, 0.42, 1);
+          }
+          50% {
+            rotate: calc(var(--swing-angle) * -1);
+            translateY: var(--swing-lift);
+            animation-timing-function: cubic-bezier(0.34, 0.04, 0.42, 1);
+          }
+          100% {
+            rotate: var(--swing-angle);
+            translateY: var(--swing-lift);
+          }
         }
       `}</style>
     </section>
