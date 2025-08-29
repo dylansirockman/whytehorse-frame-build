@@ -124,9 +124,8 @@ const HeroSection = () => {
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold mb-6 text-balance max-w-[46ch] lg:max-w-[46ch] xl:max-w-[50ch]">
-              <div className="mb-2 sm:mb-3">Building the Strong</div>
-              <div><span className="text-construction-green">Bones</span> of Every Home</div>
+            <h1 className="text-6xl xl:text-7xl leading-tight font-bold mb-6 text-balance max-w-[46ch]">
+              Building the Strong <span className="text-construction-green">Bones</span> of Every Home
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 text-construction-gray leading-relaxed max-w-2xl">
@@ -151,8 +150,8 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Hero Image Slideshow - Overlapping */}
-          <div className="absolute z-40 w-full max-w-md sm:max-w-lg lg:max-w-xl right-4 lg:right-8 bottom-[-36px] pointer-events-none">
+          {/* Hero Image Slideshow */}
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
             {/* Crane Cable */}
             <div className="crane-cable absolute left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 
                            top-0 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32
@@ -234,22 +233,106 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Left-Aligned Overlapping CTA Buttons */}
-      <div className="absolute z-50 flex gap-4 items-center max-sm:flex-col max-sm:gap-3" style={{ bottom: '-24px', left: 'max(2rem, calc((100vw - 80rem) / 2))' }}>
-        <Button 
-          variant="hero" 
-          size="lg" 
-          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 pointer-events-auto"
-        >
-          Get Quote
-        </Button>
-        <Button 
-          variant="outline" 
-          size="lg" 
-          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm pointer-events-auto"
-        >
-          Contact Us
-        </Button>
+      {/* Overhang Layer - Creates Visual Overlap Without Layout Shift */}
+      <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-40">
+        {/* Left-Aligned CTA Buttons */}
+        <div className="pointer-events-auto absolute z-50 flex gap-4 max-sm:flex-col max-sm:gap-3" style={{ left: 'var(--container-padding, 1.5rem)', bottom: '-24px' }}>
+          <Button 
+            variant="hero" 
+            size="lg" 
+            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
+          >
+            Get Quote
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
+          >
+            Contact Us
+          </Button>
+        </div>
+
+        {/* Dangling Hero Image - Right Side Overlap */}
+        <div className="absolute pointer-events-none z-45 w-full max-w-md sm:max-w-lg lg:max-w-xl" style={{ right: 'var(--container-padding, 1.5rem)', bottom: '-36px' }}>
+          {/* Crane Cable */}
+          <div className="crane-cable absolute left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 
+                         top-0 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32
+                         sm:top-0 lg:top-0" 
+               style={{ 
+                 height: '120px',
+                 animation: 'crane-cable-mobile 2s ease-out forwards'
+               }}>
+            {/* Cable hook */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">
+              <div className="w-2 h-3 border-l border-r border-construction-dark/40 rounded-b-sm"></div>
+            </div>
+          </div>
+          
+          {/* Swinging Image Container */}
+          <div className="crane-swing-container relative w-full aspect-[4/5] transform-gpu origin-top" 
+               style={{ 
+                 animation: 'crane-swing 3.5s ease-in-out infinite',
+                 animationDelay: '2s'
+               }}>
+            <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
+                    index === currentImageIndex 
+                      ? 'translate-x-0' 
+                      : index > currentImageIndex 
+                      ? 'translate-x-full' 
+                      : '-translate-x-full'
+                  }`}
+                >
+                  <img 
+                    src={image}
+                    alt="Construction project showcase" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+              
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20"></div>
+              
+              {/* Instagram Button */}
+              <button 
+                className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://instagram.com', '_blank');
+                }}
+              >
+                <Instagram size={24} strokeWidth={2.5} />
+              </button>
+              
+              {/* Slideshow indicators */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-500 hover-scale ${
+                      index === currentImageIndex 
+                        ? 'bg-construction-green shadow-lg scale-125' 
+                        : 'bg-white/40 hover:bg-white/60'
+                    }`}
+                  />
+                ))}
+                </div>
+              </div>
+              
+                {/* Floating accent elements */}
+                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 w-16 sm:w-24 lg:w-32 h-16 sm:h-24 lg:h-32 bg-construction-green/20 rounded-full blur-2xl pulse-slow"></div>
+                <div className="absolute -top-2 sm:-top-6 -left-2 sm:-left-6 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 bg-construction-green/15 rounded-full blur-xl pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

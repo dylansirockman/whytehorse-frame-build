@@ -14,11 +14,8 @@ const ClientShowcaseSection = () => {
   const duplicatedClients = [...clients, ...clients];
 
   return (
-    <section 
-      className="relative z-0 overflow-visible pt-10 py-16 bg-gray-50"
-      style={{ scrollMarginTop: '96px' }}
-    >
-      <div className="container mx-auto px-4 scroll-mt-24">
+    <section className="relative z-0 overflow-visible py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-construction-dark">
             Trusted by Alberta's Top Builders
