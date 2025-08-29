@@ -27,19 +27,18 @@ const HeroSection = () => {
   // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
   const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
-  const [wordIndex, setWordIndex] = useState(0);          // starts at "Framing"
-  const [typed, setTyped] = useState("Framing");          // show "Framing" immediately
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typed, setTyped] = useState("Framing");
   const [phase, setPhase] = useState<Phase>("initialPause");
 
   useEffect(() => {
     const current = headlineWords[wordIndex];
     let t: number | undefined;
 
-    // timings (slightly slower typing + longer initial hold)
     const TYPE_MS = 90;
     const DELETE_MS = 60;
-    const HOLD_MS = 2100;       // normal hold for intermediate words and final before lock
-    const INITIAL_HOLD_MS = 5000; // initial 5s hold on "Framing"
+    const HOLD_MS = 2100;
+    const INITIAL_HOLD_MS = 5000;
 
     if (phase === "initialPause") {
       t = window.setTimeout(() => setPhase("deleting"), INITIAL_HOLD_MS);
@@ -47,9 +46,8 @@ const HeroSection = () => {
       if (typed.length < current.length) {
         t = window.setTimeout(() => setTyped(current.slice(0, typed.length + 1)), TYPE_MS);
       } else {
-        // full word typed
         if (wordIndex === headlineWords.length - 1) {
-          t = window.setTimeout(() => setPhase("done"), HOLD_MS); // final lock
+          t = window.setTimeout(() => setPhase("done"), HOLD_MS);
         } else {
           t = window.setTimeout(() => setPhase("deleting"), HOLD_MS);
         }
@@ -58,12 +56,10 @@ const HeroSection = () => {
       if (typed.length > 0) {
         t = window.setTimeout(() => setTyped(current.slice(0, typed.length - 1)), DELETE_MS);
       } else {
-        // advance to next word and type
         setWordIndex((i) => i + 1);
         setPhase("typing");
       }
     } else if (phase === "done") {
-      // ensure final word fully shown
       if (typed !== current) setTyped(current);
     }
 
@@ -74,7 +70,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
-      {/* Grid Pattern Background */}
+      {/* Grid Pattern Background (kept) */}
       <div
         className="absolute inset-0"
         style={{
@@ -89,73 +85,56 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Construction Tools Overlay */}
+      {/* Subtle House Blueprint Background (very faint, behind everything) */}
       <div
-        className="absolute inset-0 z-[5]"
+        className="absolute inset-0 z-[1] opacity-[0.06] pointer-events-none"
         style={{
-          backgroundImage: `url('/construction-overlay.svg')`,
-          backgroundSize: "1200px 800px",
-          backgroundRepeat: "repeat",
-          backgroundPosition: "0 0, 600px 400px",
-          opacity: 0.7,
-          mask: "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)",
-          WebkitMask:
-            "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)",
+          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+            <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'>
+              <rect width='1200' height='800' fill='none'/>
+              <!-- house outline -->
+              <g stroke='${'#1F2937'}' stroke-opacity='0.7' fill='none' stroke-width='1.5'>
+                <!-- base -->
+                <rect x='250' y='420' width='700' height='220' />
+                <!-- roof -->
+                <path d='M230 420 L600 220 L970 420' />
+                <!-- ridge line -->
+                <line x1='600' y1='220' x2='600' y2='270' stroke-dasharray='6 6'/>
+                <!-- door -->
+                <rect x='560' y='520' width='80' height='120' />
+                <line x1='600' y1='520' x2='600' y2='640' />
+                <!-- left window -->
+                <rect x='340' y='500' width='120' height='80' />
+                <line x1='400' y1='500' x2='400' y2='580' />
+                <line x1='340' y1='540' x2='460' y2='540' />
+                <!-- right window -->
+                <rect x='740' y='500' width='120' height='80' />
+                <line x1='800' y1='500' x2='800' y2='580' />
+                <line x1='740' y1='540' x2='860' y2='540' />
+                <!-- fascia/roof detail -->
+                <line x1='300' y1='420' x2='900' y2='420' />
+                <line x1='270' y1='440' x2='930' y2='440' stroke-dasharray='4 8'/>
+                <!-- dimension guides -->
+                <g stroke-opacity='0.45' stroke-dasharray='8 8'>
+                  <line x1='250' y1='660' x2='950' y2='660' />
+                  <line x1='250' y1='680' x2='950' y2='680' />
+                  <line x1='250' y1='700' x2='250' y2='420' />
+                  <line x1='950' y1='700' x2='950' y2='420' />
+                </g>
+                <!-- cross braces (light) -->
+                <g stroke-opacity='0.25'>
+                  <line x1='250' y1='420' x2='600' y2='640' />
+                  <line x1='950' y1='420' x2='600' y2='640' />
+                </g>
+              </g>
+            </svg>
+          `)}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "1400px 900px",
+          backgroundPosition: "center 35%",
+          filter: "saturate(0.4) contrast(0.9)", // keeps it understated
         }}
       />
-
-      {/* Light blueprint accents */}
-      <div className="absolute inset-0 z-[5]">
-        <div
-          className="absolute top-1/4 right-[20%] w-40 h-2 transform rotate-12 shadow-sm"
-          style={{
-            background:
-              "repeating-linear-gradient(90deg, rgba(31,41,55,0.12), rgba(31,41,55,0.12) 12px, transparent 12px, transparent 14px)",
-          }}
-        />
-        <div className="absolute bottom-1/3 right-1/4 opacity-[0.10]">
-          <div className="w-24 h-24 border-l-[3px] border-b-[3px] border-construction-dark/30 relative">
-            <div className="absolute -bottom-6 left-0 text-sm text-construction-dark/40 font-mono font-semibold">
-              90°
-            </div>
-            <div className="absolute -left-8 bottom-6 text-xs text-construction-dark/30 font-mono rotate-90 origin-bottom-left">
-              24"
-            </div>
-          </div>
-        </div>
-
-        {/* Level tool accent (inner dot removed) */}
-        <div className="absolute top-2/3 right-1/4 opacity-[0.12]">
-          <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
-            <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
-            <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
-          </div>
-        </div>
-
-        <div className="absolute top-1/2 right-1/3 opacity-[0.04]">
-          <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/20 transform rotate-45" />
-        </div>
-        <div className="absolute top-[16.66%] right-1/4 opacity-[0.08]">
-          <div className="flex items-center space-x-1">
-            <div className="w-0.5 h-3 bg-construction-dark/20" />
-            <div className="w-0.5 h-2 bg-construction-dark/15" />
-            <div className="w-0.5 h-2 bg-construction-dark/15" />
-            <div className="w-0.5 h-3 bg-construction-dark/20" />
-            <span className="text-xs text-construction-dark/20 font-mono ml-2">16"</span>
-          </div>
-        </div>
-        <div
-          className="absolute top-1/3 left-0 w-full h-0.5 transform -rotate-12 origin-left opacity-[0.04]"
-          style={{
-            background:
-              "repeating-linear-gradient(90deg, rgba(31,41,55,0.04), rgba(31,41,55,0.04) 20px, transparent 20px, transparent 25px)",
-          }}
-        />
-      </div>
-
-      {/* Decorative glows */}
-      <div className="absolute top-1/4 left-4 lg:left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-[5]" />
-      <div className="absolute bottom-1/4 right-4 lg:right-20 w-48 h-48 bg-construction-green/10 rounded-full blur-3xl z-[5]" />
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -168,7 +147,7 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Typewriter headline (zero-width caret, shows during initialPause/typing/deleting) */}
+            {/* Typewriter headline (starts on "Framing", 5s pause, cycles, locks) */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
               <span
                 className="relative text-construction-green"
