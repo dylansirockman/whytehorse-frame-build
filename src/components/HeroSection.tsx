@@ -74,92 +74,68 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
-      {/* Grid Pattern Background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(158,158,158,0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(158,158,158,0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: "32px 32px",
-          mask: "linear-gradient(to bottom, white 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 75%, transparent 100%)",
-          WebkitMask:
-            "linear-gradient(to bottom, white 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 75%, transparent 100%)",
-        }}
-      />
-
-      {/* Construction Tools Overlay */}
-      <div
-        className="absolute inset-0 z-[5]"
-        style={{
-          backgroundImage: `url('/construction-overlay.svg')`,
-          backgroundSize: "1200px 800px",
-          backgroundRepeat: "repeat",
-          backgroundPosition: "0 0, 600px 400px",
-          opacity: 0.7,
-          mask: "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)",
-          WebkitMask:
-            "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0.8) 65%, rgba(255,255,255,1) 100%)",
-        }}
-      />
-
-      {/* Light blueprint accents */}
-      <div className="absolute inset-0 z-[5]">
+      {/* ===== Blueprint Background (subtle) ===== */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Paper tint + vignette */}
         <div
-          className="absolute top-1/4 right-[20%] w-40 h-2 transform rotate-12 shadow-sm"
+          className="absolute inset-0"
           style={{
             background:
-              "repeating-linear-gradient(90deg, rgba(31,41,55,0.12), rgba(31,41,55,0.12) 12px, transparent 12px, transparent 14px)",
+              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.04), transparent 60%)",
           }}
         />
-        <div className="absolute bottom-1/3 right-1/4 opacity-[0.10]">
-          <div className="w-24 h-24 border-l-[3px] border-b-[3px] border-construction-dark/30 relative">
-            <div className="absolute -bottom-6 left-0 text-sm text-construction-dark/40 font-mono font-semibold">
-              90°
-            </div>
-            <div className="absolute -left-8 bottom-6 text-xs text-construction-dark/30 font-mono rotate-90 origin-bottom-left">
-              24"
-            </div>
-          </div>
-        </div>
-
-        {/* Level tool accent (inner dot removed) */}
-        <div className="absolute top-2/3 right-1/4 opacity-[0.12]">
-          <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
-            <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
-            <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
-          </div>
-        </div>
-
-        <div className="absolute top-1/2 right-1/3 opacity-[0.04]">
-          <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/20 transform rotate-45" />
-        </div>
-        <div className="absolute top-[16.66%] right-1/4 opacity-[0.08]">
-          <div className="flex items-center space-x-1">
-            <div className="w-0.5 h-3 bg-construction-dark/20" />
-            <div className="w-0.5 h-2 bg-construction-dark/15" />
-            <div className="w-0.5 h-2 bg-construction-dark/15" />
-            <div className="w-0.5 h-3 bg-construction-dark/20" />
-            <span className="text-xs text-construction-dark/20 font-mono ml-2">16"</span>
-          </div>
-        </div>
+        {/* Fine grid (32px) */}
         <div
-          className="absolute top-1/3 left-0 w-full h-0.5 transform -rotate-12 origin-left opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
-            background:
-              "repeating-linear-gradient(90deg, rgba(31,41,55,0.04), rgba(31,41,55,0.04) 20px, transparent 20px, transparent 25px)",
+            backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+              <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'>
+                <path d='M 32 0 H 0 V 32' fill='none' stroke='#1F2937' stroke-opacity='0.9' stroke-width='1' stroke-linecap='round'/>
+              </svg>
+            `)}")`,
+            backgroundRepeat: "repeat",
+          }}
+        />
+        {/* Bold grid (every 5 cells → 160px) */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+              <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
+                <path d='M 160 0 H 0 V 160' fill='none' stroke='#1F2937' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round'/>
+              </svg>
+            `)}")`,
+            backgroundRepeat: "repeat",
+          }}
+        />
+        {/* Ultra-faint blueprint cues (dimension arrows / notes) */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'>
+                <g stroke='#1F2937' stroke-width='1' fill='none' stroke-opacity='0.8'>
+                  <!-- dimension line -->
+                  <line x1='200' y1='620' x2='1000' y2='620' stroke-dasharray='6 10'/>
+                  <path d='M200 620 l14 -8 v16 z' />
+                  <path d='M1000 620 l-14 -8 v16 z' />
+                  <!-- small note ticks -->
+                  <line x1='420' y1='380' x2='470' y2='380' />
+                  <line x1='445' y1='355' x2='445' y2='405' />
+                </g>
+              </svg>
+            `)}")`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center 65%",
+            backgroundSize: "1200px 800px",
           }}
         />
       </div>
-
-      {/* Decorative glows */}
-      <div className="absolute top-1/4 left-4 lg:left-10 w-32 h-32 bg-construction-green/5 rounded-full blur-3xl z-[5]" />
-      <div className="absolute bottom-1/4 right-4 lg:right-20 w-48 h-48 bg-construction-green/10 rounded-full blur-3xl z-[5]" />
+      {/* ===== /Blueprint Background ===== */}
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:minh-[calc(100vh-7rem)] pt-8 lg:pt-6">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
