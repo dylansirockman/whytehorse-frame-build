@@ -160,17 +160,57 @@ const HeroSection = () => {
           
           {/* Hero Image Slideshow */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* Crane Cable */}
-            <div className="crane-cable absolute left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 
-                           top-0 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32
-                           sm:top-0 lg:top-0" 
+            {/* Crane Arm SVG */}
+            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-10" 
+                 viewBox="0 0 400 300" 
+                 style={{ transform: 'translate(-20%, -40%)' }}>
+              {/* Main crane boom */}
+              <line x1="0" y1="60" x2="180" y2="120" 
+                    stroke="rgba(31, 41, 55, 0.5)" 
+                    strokeWidth="4" 
+                    strokeLinecap="round" />
+              
+              {/* Crane support bracing */}
+              <line x1="30" y1="80" x2="90" y2="95" 
+                    stroke="rgba(31, 41, 55, 0.3)" 
+                    strokeWidth="2" />
+              <line x1="60" y1="95" x2="120" y2="105" 
+                    stroke="rgba(31, 41, 55, 0.3)" 
+                    strokeWidth="2" />
+              
+              {/* Crane mast */}
+              <line x1="0" y1="0" x2="0" y2="120" 
+                    stroke="rgba(31, 41, 55, 0.4)" 
+                    strokeWidth="5" 
+                    strokeLinecap="round" />
+            </svg>
+            
+            {/* Crane Cable System */}
+            <div className="crane-cable-system absolute left-1/2 transform -translate-x-1/2 z-20"
                  style={{ 
-                   height: '120px',
-                   animation: 'crane-cable-mobile 2s ease-out forwards'
+                   top: '-80px',
+                   animation: 'crane-swing 3.5s ease-in-out infinite',
+                   animationDelay: '2s'
                  }}>
-              {/* Cable hook */}
+              {/* Main cable */}
+              <div className="w-1 bg-construction-dark/50 relative" 
+                   style={{ height: '140px' }}>
+                {/* Cable highlight */}
+                <div className="absolute left-0 top-0 w-0.5 h-full bg-white/20"></div>
+              </div>
+              
+              {/* Hook assembly */}
               <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">
-                <div className="w-2 h-3 border-l border-r border-construction-dark/40 rounded-b-sm"></div>
+                {/* Pulley block */}
+                <div className="w-6 h-4 bg-construction-dark/60 rounded-sm relative mb-1 border border-construction-dark/80">
+                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-construction-dark/40 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+                  <div className="absolute top-0 left-1/2 w-0.5 h-1 bg-white/30 transform -translate-x-1/2"></div>
+                </div>
+                
+                {/* Hook */}
+                <div className="w-3 h-4 border-l-2 border-b-2 border-construction-dark/70 rounded-bl-lg relative">
+                  <div className="absolute -top-0.5 left-0 w-1 h-1 bg-white/40 rounded-full"></div>
+                </div>
               </div>
             </div>
             
@@ -180,6 +220,20 @@ const HeroSection = () => {
                    animation: 'crane-swing 3.5s ease-in-out infinite',
                    animationDelay: '2s'
                  }}>
+              
+              {/* Steel attachment frame */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-30">
+                <div className="w-32 h-3 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 rounded-sm shadow-lg border border-gray-700 relative">
+                  {/* Lifting points */}
+                  <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-700 rounded-full border border-gray-800"></div>
+                  <div className="absolute -top-1 right-4 w-2 h-2 bg-gray-700 rounded-full border border-gray-800"></div>
+                  {/* Center connection */}
+                  <div className="absolute -top-2 left-1/2 w-3 h-3 bg-gray-600 rounded transform -translate-x-1/2 border border-gray-700"></div>
+                  {/* Metallic highlight */}
+                  <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/20 rounded"></div>
+                </div>
+              </div>
+              
               <div className="relative w-full h-full transform rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer" onClick={handleImageClick}>
                 {images.map((image, index) => (
