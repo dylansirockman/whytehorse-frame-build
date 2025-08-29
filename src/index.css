@@ -74,9 +74,9 @@ All colors MUST be HSL.
     --ring: 158 45% 22%;
 
     /* Construction-focused design tokens */
-    --construction-green: 158 45% 22%;
-    --construction-green-light: 158 45% 30%;
-    --construction-green-dark: 158 45% 18%;
+    --construction-green: 158 64% 37%;
+    --construction-green-light: 158 64% 42%;
+    --construction-green-dark: 158 64% 32%;
     --construction-secondary: 35 85% 65%;
     --construction-secondary-light: 35 85% 75%;
     --construction-secondary-dark: 35 85% 55%;
@@ -84,6 +84,11 @@ All colors MUST be HSL.
     --construction-gray: 220 8% 46%;
     --construction-light: 220 8% 98%;
     --construction-white: 0 0% 100%;
+    
+    /* Button gradients */
+    --gradient-primary: linear-gradient(180deg, hsl(158 64% 37%), hsl(158 64% 32%));
+    --gradient-primary-hover: linear-gradient(180deg, hsl(158 64% 42%), hsl(158 64% 35%));
+    --gradient-secondary: linear-gradient(180deg, transparent, transparent);
     
     /* Premium gradients */
     --gradient-hero: linear-gradient(135deg, hsl(220 13% 13% / 0.85), hsl(158 45% 22% / 0.8));
@@ -218,4 +223,43 @@ All colors MUST be HSL.
 
 .construction-float:nth-child(3) {
   animation-delay: -4s;
+}
+
+/* Modern button animations */
+@keyframes button-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-primary-modern {
+  background: var(--gradient-primary);
+  border: 1px solid hsl(0 0% 0% / 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary-modern:hover {
+  background: var(--gradient-primary-hover);
+  box-shadow: 0 4px 12px hsl(158 64% 37% / 0.2);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.btn-secondary-modern {
+  background: transparent;
+  border: 1px solid hsl(var(--construction-green));
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-secondary-modern:hover {
+  background: hsl(var(--construction-green) / 0.05);
+  border-color: hsl(var(--construction-green-dark));
+  box-shadow: 0 2px 8px hsl(158 64% 37% / 0.15);
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary-modern:hover,
+  .btn-secondary-modern:hover {
+    transform: none;
+  }
 }

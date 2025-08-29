@@ -137,7 +137,7 @@ const HeroSection = () => {
               <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
-              <Button variant="outline" size="lg" className="text-base font-semibold border-2 border-construction-green text-construction-green hover:bg-construction-green hover:text-white">
+              <Button variant="outline" size="lg" className="text-base font-semibold">
                 Contact Us
               </Button>
             </div>
