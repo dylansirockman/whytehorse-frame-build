@@ -172,20 +172,29 @@ const HeroSection = () => {
 
             {/* LOAD GROUP (swings + crooked/hover straight) */}
             <div
-              className="loadGroup relative w-full aspect-[4/5] transform-gpu rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500 z-[60]"
+              className="loadGroup relative w-full aspect-[4/5] rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500 z-[60]"
               style={{
                 transformOrigin: "top center",
                 animation: "crane-swing 4s ease-in-out infinite alternate",
                 animationDelay: "2s",
               }}
             >
-              {/* Cable (swings with load) */}
-              <div
-                className="absolute left-1/2 -translate-x-1/2 bg-[#1F2937] opacity-90 z-[55] pointer-events-none"
-                style={{ top: "-120px", height: "120px", width: "2px" }}
+              {/* Cable (SVG line for crisp edges) */}
+              <svg
+                className="absolute inset-0 z-[55] pointer-events-none"
+                vectorEffect="non-scaling-stroke"
+                shapeRendering="geometricPrecision"
               >
-                <div className="absolute left-0 top-0 w-0.5 h-full bg-white/25" />
-              </div>
+                <line
+                  x1="50%"
+                  y1="-120px"
+                  x2="50%"
+                  y2="0"
+                  stroke="#1F2937"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
 
               {/* Lifting bar */}
               <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[60] pointer-events-none">
