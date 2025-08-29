@@ -55,7 +55,7 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Light blueprint accents (fixed invalid classes) */}
+      {/* Light blueprint accents */}
       <div className="absolute inset-0 z-[5]">
         <div
           className="absolute top-1/4 right-[20%] w-40 h-2 transform rotate-12 shadow-sm"
@@ -155,54 +155,44 @@ const HeroSection = () => {
 
           {/* Image + Crane */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* CRANE ARM GROUP (fixed, never animates) */}
-            <div className="craneArmGroup absolute z-[70] top-0 left-1/2 -translate-x-1/2 pointer-events-none">
+            {/* CRANE OVERLAY (pulley only, above image, centered) */}
+            <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
               <svg
-                className="absolute -top-[120px]"
+                className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
                 width="40"
-                height="30"
-                viewBox="0 0 40 30"
+                height="40"
+                viewBox="0 0 40 40"
                 aria-hidden="true"
               >
-                {/* Pulley block and wheel only */}
+                {/* Pulley block */}
                 <rect x="14" y="5" width="12" height="20" fill="rgba(31,41,55,0.85)" rx="2" />
+                {/* Pulley wheel */}
                 <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
               </svg>
             </div>
 
-            {/* SWING GROUP (outer pendulum) */}
+            {/* OUTER: pendulum swing */}
             <div
               className="swingGroup relative w-full aspect-[4/5] z-[60]"
-              style={{
-                transformOrigin: "top center",
-                animation: "pendulum var(--swing-duration, 4.2s) ease-in-out infinite",
-                animationDelay: "-1.8s",
-                willChange: "transform",
-              } as React.CSSProperties & {
-                "--swing-angle": string;
-                "--swing-lift": string;
-                "--swing-duration": string;
-              } & {
-                "--swing-angle": "3.2deg";
-                "--swing-lift": "3px";
-                "--swing-duration": "4.2s";
-              }}
-            >
-              {/* TILT GROUP (inner crooked/hover straight) */}
-              <div
-                className="tiltGroup relative w-full h-full rotate-1 sm:rotate-2 lg:rotate-3 hover:rotate-0 transition-transform duration-500"
-                style={{
+              style={
+                {
+                  ["--swing-angle" as any]: "3.2deg",
+                  ["--swing-lift" as any]: "3px",
+                  ["--swing-duration" as any]: "4.2s",
+                  animation: "pendulum var(--swing-duration) infinite",
                   transformOrigin: "top center",
                   willChange: "transform",
-                }}
-              >
-                {/* Cable (inline SVG for visibility and crispness) */}
+                } as React.CSSProperties
+              }
+            >
+              {/* INNER: crooked → straight on hover */}
+              <div className="tiltGroup relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500">
+                {/* Cable (SVG, thin, behind image) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
                   preserveAspectRatio="none"
-                  vectorEffect="non-scaling-stroke"
-                  shapeRendering="geometricPrecision"
+                  aria-hidden="true"
                 >
                   <line
                     x1="50"
@@ -212,15 +202,17 @@ const HeroSection = () => {
                     stroke="#1F2937"
                     strokeWidth="1.5"
                     strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                    shapeRendering="geometricPrecision"
                   />
                 </svg>
 
-                {/* Lifting bar */}
+                {/* Lifting bar (above image) */}
                 <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[66] pointer-events-none">
                   <div className="absolute top-0.5 left-2 right-2 h-0.5 bg-white/15 rounded" />
                 </div>
 
-                {/* Hook block */}
+                {/* Hook block (above image) */}
                 <div className="absolute left-1/2 -translate-x-1/2 z-[67] pointer-events-none" style={{ top: "-14px" }}>
                   <div className="w-8 h-6 bg-gradient-to-b from-gray-600 to-gray-800 rounded-sm relative shadow-lg border border-gray-700">
                     <div className="absolute top-1 left-1 right-1 h-1 bg-white/15 rounded-sm" />
@@ -234,82 +226,82 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* IMAGE (under crane) */}
+                {/* IMAGE (under crane parts) */}
                 <div className="heroImage relative w-full h-full pointer-events-auto z-40">
-                <div
-                  className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer"
-                  onClick={handleImageClick}
-                >
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                        index === currentImageIndex
-                          ? "translate-x-0"
-                          : index > currentImageIndex
-                          ? "translate-x-full"
-                          : "-translate-x-full"
-                      }`}
-                    >
-                      <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
-                    </div>
-                  ))}
-
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20" />
-
-                  <button
-                    className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open("https://instagram.com", "_blank");
-                    }}
+                  <div
+                    className="w-full h-full overflow-hidden rounded-3xl shadow-2xl bg-white relative cursor-pointer"
+                    onClick={handleImageClick}
                   >
-                    <Instagram size={24} strokeWidth={2.5} />
-                  </button>
-
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
-                    {images.map((_, index) => (
-                      <button
+                    {images.map((image, index) => (
+                      <div
                         key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-500 ${
+                        className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
                           index === currentImageIndex
-                            ? "bg-construction-green shadow-lg scale-125"
-                            : "bg-white/40 hover:bg-white/60"
+                            ? "translate-x-0"
+                            : index > currentImageIndex
+                            ? "translate-x-full"
+                            : "-translate-x-full"
                         }`}
-                      />
+                      >
+                        <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
+                      </div>
                     ))}
-                  </div>
-                </div>
 
-                {/* subtle floating dots */}
-                <div className="absolute -top-4 -left-4 w-4 h-4 bg-construction-green/30 rounded-full blur-sm animate-pulse" />
-                <div className="absolute -bottom-6 -right-6 w-6 h-6 bg-construction-secondary/20 rounded-full blur-md animate-pulse delay-1000" />
-                <div className="absolute top-1/3 -left-6 w-2 h-2 bg-construction-green/40 rounded-full blur-sm animate-pulse delay-500" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20" />
+
+                    <button
+                      className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open("https://instagram.com", "_blank");
+                      }}
+                    >
+                      <Instagram size={24} strokeWidth={2.5} />
+                    </button>
+
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-3 h-3 rounded-full transition-all duration-500 ${
+                            index === currentImageIndex
+                              ? "bg-construction-green shadow-lg scale-125"
+                              : "bg-white/40 hover:bg-white/60"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* subtle floating dots */}
+                  <div className="absolute -top-4 -left-4 w-4 h-4 bg-construction-green/30 rounded-full blur-sm animate-pulse" />
+                  <div className="absolute -bottom-6 -right-6 w-6 h-6 bg-construction-secondary/20 rounded-full blur-md animate-pulse delay-1000" />
+                  <div className="absolute top-1/3 -left-6 w-2 h-2 bg-construction-green/40 rounded-full blur-sm animate-pulse delay-500" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
 
-      {/* Keyframes for the pendulum swing */}
+      {/* Keyframes for realistic pendulum */}
       <style>{`
         @keyframes pendulum {
           0% {
-            rotate: var(--swing-angle);
-            translateY: var(--swing-lift);
+            transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
             animation-timing-function: cubic-bezier(0.34, 0.04, 0.42, 1);
           }
           50% {
-            rotate: calc(var(--swing-angle) * -1);
-            translateY: var(--swing-lift);
+            transform: rotate(calc(var(--swing-angle) * -1)) translateY(var(--swing-lift));
             animation-timing-function: cubic-bezier(0.34, 0.04, 0.42, 1);
           }
           100% {
-            rotate: var(--swing-angle);
-            translateY: var(--swing-lift);
+            transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
           }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .swingGroup { animation: none !important; }
         }
       `}</style>
     </section>
