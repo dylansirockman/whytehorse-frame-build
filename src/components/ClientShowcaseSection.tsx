@@ -15,7 +15,7 @@ const ClientShowcaseSection = () => {
 
   return (
     <section 
-      className="relative z-0 overflow-visible pt-12 py-16 bg-gray-50"
+      className="relative z-0 overflow-visible pt-10 py-16 bg-gray-50"
       style={{ scrollMarginTop: '96px' }}
     >
       <div className="container mx-auto px-4 scroll-mt-24">

@@ -29,7 +29,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative overflow-visible min-h-[68vh] flex items-center justify-center pt-24 pb-20 bg-construction-white">
+    <section className="relative overflow-visible min-h-[64vh] flex items-center justify-center pt-24 pb-20 bg-construction-white">
       {/* Grid Pattern Background */}
       <div 
         className="absolute inset-0"
@@ -116,43 +116,43 @@ const HeroSection = () => {
       
       {/* Content Container */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(68vh-8rem)] lg:min-h-[calc(68vh-7rem)] pt-8 lg:pt-6">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(64vh-8rem)] lg:min-h-[calc(64vh-7rem)] pt-8 lg:pt-6">
           
           {/* Text Content */}
-          <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
+          <div className="w-full lg:w-[55%] text-left max-w-3xl mx-auto lg:mx-0">
             <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">PROFESSIONAL FRAMING CONTRACTORS</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 lg:mb-10">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold mb-6 text-balance max-w-[46ch] lg:max-w-[46ch] xl:max-w-[50ch]">
               <div className="mb-2 sm:mb-3">Building the Strong</div>
               <div><span className="text-construction-green">Bones</span> of Every Home</div>
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 text-construction-gray leading-relaxed max-w-2xl">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
             
-            {/* CTA buttons moved to overlapping position */}
+            {/* CTA buttons moved to left-aligned overlapping position */}
             
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8">
+              <div className="flex items-center text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+              <div className="flex items-center text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">15+ Years Experience</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+              <div className="flex items-center text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4"></div>
                 <span className="font-medium text-sm sm:text-base">100% On Schedule</span>
               </div>
             </div>
           </div>
           
-          {/* Hero Image Slideshow */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
+          {/* Hero Image Slideshow - Overlapping */}
+          <div className="absolute z-40 w-full max-w-md sm:max-w-lg lg:max-w-xl right-4 lg:right-8 bottom-[-36px] pointer-events-none">
             {/* Crane Cable */}
             <div className="crane-cable absolute left-1/2 w-0.5 bg-construction-dark/30 z-0 transform -translate-x-1/2 
                            top-0 -translate-y-20 sm:-translate-y-24 lg:-translate-y-32
@@ -234,19 +234,19 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Overlapping CTA Buttons */}
-      <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 z-50 flex gap-4 max-sm:flex-col max-sm:gap-3 max-sm:-bottom-5">
+      {/* Left-Aligned Overlapping CTA Buttons */}
+      <div className="absolute z-50 flex gap-4 items-center max-sm:flex-col max-sm:gap-3" style={{ bottom: '-24px', left: 'max(2rem, calc((100vw - 80rem) / 2))' }}>
         <Button 
           variant="hero" 
           size="lg" 
-          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3"
+          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 pointer-events-auto"
         >
           Get Quote
         </Button>
         <Button 
           variant="outline" 
           size="lg" 
-          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm"
+          className="text-base font-semibold shadow-lg hover:shadow-xl min-h-[48px] px-6 py-3 bg-white/95 backdrop-blur-sm pointer-events-auto"
         >
           Contact Us
         </Button>
