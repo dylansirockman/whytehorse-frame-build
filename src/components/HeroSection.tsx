@@ -74,13 +74,16 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* "Level tool" accent WITHOUT the inner grey dot */}
         <div className="absolute top-2/3 right-1/4 opacity-[0.12]">
           <div className="w-32 h-4 bg-construction-dark/10 rounded-full relative shadow-sm">
-            <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-construction-dark/20 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-inner" />
+            {/* removed the inner w-3 h-3 grey circle that caused the dot */}
             <div className="absolute -left-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
             <div className="absolute -right-2 top-1/2 w-1 h-6 bg-construction-dark/10 transform -translate-y-1/2" />
           </div>
         </div>
+
         <div className="absolute top-1/2 right-1/3 opacity-[0.04]">
           <div className="w-16 h-16 border-l-2 border-b-2 border-construction-dark/20 transform rotate-45" />
         </div>
@@ -153,22 +156,8 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Image + Crane */}
+          {/* Image + “Crane” */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* CRANE OVERLAY (pulley **wheel only**, above image, centered) */}
-            <div className="craneOverlay absolute inset-0 pointer-events-none z-[70]">
-              <svg
-                className="absolute left-1/2 -translate-x-1/2 -top-[40px]"
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                aria-hidden="true"
-              >
-                {/* wheel only (no block rect) */}
-                <circle cx="20" cy="15" r="5" fill="rgba(31,41,55,0.6)" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-              </svg>
-            </div>
-
             {/* OUTER: pendulum swing */}
             <div
               className="swingGroup relative w-full aspect-[4/5] z-[60]"
@@ -185,16 +174,17 @@ const HeroSection = () => {
             >
               {/* INNER: crooked → straight on hover */}
               <div className="tiltGroup relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500">
-                {/* Cable (SVG, thin, behind image) */}
+                {/* Cable (SVG, thin, BEHIND image, extends above to imply source) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
                   preserveAspectRatio="none"
                   aria-hidden="true"
                 >
+                  {/* From above the group (y=0) down to the bar plane (y=120) */}
                   <line
                     x1="50"
-                    y1="4"   /* start slightly below wheel center so there’s no dot overlap */
+                    y1="0"
                     x2="50"
                     y2="120"
                     stroke="#1F2937"
@@ -269,7 +259,7 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  
+                  {/* removed subtle floating dots (green/secondary circles) */}
                 </div>
               </div>
             </div>
