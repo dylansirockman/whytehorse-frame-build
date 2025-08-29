@@ -256,10 +256,48 @@ All colors MUST be HSL.
   box-shadow: 0 2px 8px hsl(158 64% 32% / 0.15);
 }
 
+/* Notched divider button animations */
+@keyframes slide-up-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animate-slide-up-delayed-1 {
+  opacity: 0;
+  animation: slide-up-entrance 0.35s ease-out 0.1s forwards;
+}
+
+.animate-slide-up-delayed-2 {
+  opacity: 0;
+  animation: slide-up-entrance 0.35s ease-out 0.2s forwards;
+}
+
+/* Button micro-interactions */
+.shadow-lg {
+  box-shadow: 0 10px 25px -5px hsl(220 13% 13% / 0.15), 0 10px 10px -5px hsl(220 13% 13% / 0.04);
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 40px -10px hsl(158 64% 32% / 0.2), 0 10px 20px -5px hsl(220 13% 13% / 0.1);
+}
+
 /* Accessibility - reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .btn-primary-modern:hover,
   .btn-secondary-modern:hover {
     transform: none;
+  }
+  
+  .animate-slide-up-delayed-1,
+  .animate-slide-up-delayed-2 {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
