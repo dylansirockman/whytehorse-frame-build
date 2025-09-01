@@ -19,27 +19,24 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const handleImageClick = () => {
+  const handleImageClick = () =>
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
 
   // === Typewriter headline ===
-  // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
   const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
-  const [wordIndex, setWordIndex] = useState(0);          // starts at "Framing"
-  const [typed, setTyped] = useState("Framing");          // show "Framing" immediately
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typed, setTyped] = useState("Framing");
   const [phase, setPhase] = useState<Phase>("initialPause");
 
   useEffect(() => {
     const current = headlineWords[wordIndex];
     let t: number | undefined;
 
-    // timings (slightly slower typing + longer initial hold)
     const TYPE_MS = 90;
     const DELETE_MS = 60;
-    const HOLD_MS = 2100;       // normal hold for intermediate words and final before lock
-    const INITIAL_HOLD_MS = 5000; // initial 5s hold on "Framing"
+    const HOLD_MS = 2100;
+    const INITIAL_HOLD_MS = 5000;
 
     if (phase === "initialPause") {
       t = window.setTimeout(() => setPhase("deleting"), INITIAL_HOLD_MS);
@@ -47,9 +44,8 @@ const HeroSection = () => {
       if (typed.length < current.length) {
         t = window.setTimeout(() => setTyped(current.slice(0, typed.length + 1)), TYPE_MS);
       } else {
-        // full word typed
         if (wordIndex === headlineWords.length - 1) {
-          t = window.setTimeout(() => setPhase("done"), HOLD_MS); // final lock
+          t = window.setTimeout(() => setPhase("done"), HOLD_MS);
         } else {
           t = window.setTimeout(() => setPhase("deleting"), HOLD_MS);
         }
@@ -58,12 +54,10 @@ const HeroSection = () => {
       if (typed.length > 0) {
         t = window.setTimeout(() => setTyped(current.slice(0, typed.length - 1)), DELETE_MS);
       } else {
-        // advance to next word and type
         setWordIndex((i) => i + 1);
         setPhase("typing");
       }
     } else if (phase === "done") {
-      // ensure final word fully shown
       if (typed !== current) setTyped(current);
     }
 
@@ -71,6 +65,31 @@ const HeroSection = () => {
       if (t) window.clearTimeout(t);
     };
   }, [typed, phase, wordIndex, headlineWords]);
+
+  // ===== Delayed drop control =====
+  const [mounted, setMounted] = useState(false);           // ensure DOM painted
+  const [pageReady, setPageReady] = useState(false);       // window 'load'
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false); // img onLoad
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setMounted(true), 30);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    const onLoad = () => {
+      // Small delay to ensure layout settles
+      setTimeout(() => setPageReady(true), 200);
+    };
+    if (document.readyState === "complete") {
+      onLoad();
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+      return () => window.removeEventListener("load", onLoad);
+    }
+  }, []);
+
+  const dropReady = mounted && pageReady && firstImageLoaded;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
@@ -108,18 +127,16 @@ const HeroSection = () => {
             backgroundRepeat: "repeat",
           }}
         />
-        {/* Ultra-faint blueprint cues (dimension arrows / notes) */}
+        {/* Ultra-faint blueprint cues */}
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
               <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'>
                 <g stroke='#1F2937' stroke-width='1' fill='none' stroke-opacity='0.8'>
-                  <!-- dimension line -->
                   <line x1='200' y1='620' x2='1000' y2='620' stroke-dasharray='6 10'/>
                   <path d='M200 620 l14 -8 v16 z' />
                   <path d='M1000 620 l-14 -8 v16 z' />
-                  <!-- small note ticks -->
                   <line x1='420' y1='380' x2='470' y2='380' />
                   <line x1='445' y1='355' x2='445' y2='405' />
                 </g>
@@ -136,21 +153,23 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
-          {/* Text */}
-          <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
+          {/* Text (grouped entrance animation) */}
+          <div
+            className={[
+              "w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0",
+              "opacity-0 translate-y-3 will-change-transform",
+              mounted ? "animate-heroFadeIn" : "",
+            ].join(" ")}
+          >
             <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">
                 PROFESSIONAL FRAMING CONTRACTORS
               </span>
             </div>
 
-            {/* Typewriter headline (zero-width caret, shows during initialPause/typing/deleting) */}
+            {/* Typewriter headline */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
-              <span
-                className="relative text-construction-green"
-                aria-live="polite"
-                aria-atomic="true"
-              >
+              <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
@@ -193,23 +212,24 @@ const HeroSection = () => {
 
           {/* Image + “Crane” */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* OUTER: pendulum swing */}
+            {/* OUTER: delayed lower-in from header, then pendulum */}
             <div
-              className="swingGroup relative w-full aspect-[4/5] z-[60]"
+              className="relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={
                 {
                   ["--swing-angle" as any]: "3.2deg",
                   ["--swing-lift" as any]: "3px",
                   ["--swing-duration" as any]: "4.2s",
-                  animation: "pendulum var(--swing-duration) infinite",
+                  animation: dropReady
+                    ? "heroLowerIn 900ms cubic-bezier(0.2,0.7,0.2,1) forwards, pendulum var(--swing-duration) infinite 900ms"
+                    : undefined,
                   transformOrigin: "top center",
-                  willChange: "transform",
                 } as React.CSSProperties
               }
             >
               {/* INNER: crooked → straight on hover */}
-              <div className="tiltGroup relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500">
-                {/* Cable (SVG, thin, BEHIND image, extends above to imply source) */}
+              <div className="relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500 transform-gpu">
+                {/* Cable (reveals as it lowers) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
@@ -226,6 +246,8 @@ const HeroSection = () => {
                     strokeLinecap="round"
                     vectorEffect="non-scaling-stroke"
                     shapeRendering="geometricPrecision"
+                    className={dropReady ? "animate-cableGrow" : ""}
+                    style={{ strokeDasharray: 120, strokeDashoffset: 120 }}
                   />
                 </svg>
 
@@ -262,7 +284,13 @@ const HeroSection = () => {
                             : "-translate-x-full"
                         }`}
                       >
-                        <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
+                        <img
+                          src={image}
+                          alt="Construction project showcase"
+                          className="w-full h-full object-cover"
+                          // We only need to know that the first image is ready
+                          onLoad={index === 0 ? () => setFirstImageLoaded(true) : undefined}
+                        />
                       </div>
                     ))}
 
@@ -301,8 +329,34 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Keyframes for pendulum + caret */}
+      {/* Keyframes for pendulum + caret + entrances */}
       <style>{`
+        /* Left column entrance */
+        @keyframes heroFadeIn {
+          0% { opacity: 0; transform: translateY(12px); }
+          60% { opacity: 1; transform: translateY(0); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-heroFadeIn {
+          animation: heroFadeIn 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+        }
+
+        /* Image group lowers from header, then pendulum starts */
+        @keyframes heroLowerIn {
+          0%   { transform: translateY(-30vh) rotate(0deg); }
+          70%  { transform: translateY(0) rotate(0deg); }
+          85%  { transform: translateY(-3px) rotate(0deg); }
+          100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Cable grows as it lowers (matches 900ms lower-in duration) */
+        @keyframes cableGrow {
+          from { stroke-dashoffset: 120; }
+          to   { stroke-dashoffset: 0; }
+        }
+        .animate-cableGrow { animation: cableGrow 900ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+
+        /* Existing pendulum */
         @keyframes pendulum {
           0% {
             transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
@@ -316,14 +370,18 @@ const HeroSection = () => {
             transform: rotate(var(--swing-angle)) translateY(var(--swing-lift));
           }
         }
+
+        /* Caret blink */
         @keyframes caret {
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0; }
         }
-        .animate-caret {
-          animation: caret 1s step-end infinite;
-        }
+        .animate-caret { animation: caret 1s step-end infinite; }
+
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
+          .animate-heroFadeIn { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .animate-cableGrow { animation: none !important; stroke-dashoffset: 0 !important; }
           .swingGroup { animation: none !important; }
           .animate-caret { animation: none !important; }
         }
