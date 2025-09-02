@@ -92,7 +92,10 @@ const HeroSection = () => {
   const dropReady = mounted && pageReady && firstImageLoaded;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-0 bg-gradient-to-b from-[#10B981] to-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-0">
+      {/* Gradient Background Layer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#10B981] to-white -z-10" />
+      
       {/* ===== Blueprint Background (subtle) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Paper tint + vignette */}
@@ -151,7 +154,7 @@ const HeroSection = () => {
       {/* ===== /Blueprint Background ===== */}
 
       {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text (grouped entrance animation) */}
           <div
