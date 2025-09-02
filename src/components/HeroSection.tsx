@@ -92,7 +92,7 @@ const HeroSection = () => {
   const dropReady = mounted && pageReady && firstImageLoaded;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white snap-start scroll-mt-24">
       {/* ===== Blueprint Background (subtle) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Paper tint + vignette */}
