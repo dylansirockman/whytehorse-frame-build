@@ -67,9 +67,9 @@ const HeroSection = () => {
   }, [typed, phase, wordIndex, headlineWords]);
 
   // ===== Delayed drop control =====
-  const [mounted, setMounted] = useState(false);
-  const [pageReady, setPageReady] = useState(false);
-  const [firstImageLoaded, setFirstImageLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);           // ensure DOM painted
+  const [pageReady, setPageReady] = useState(false);       // window 'load'
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false); // img onLoad
 
   useEffect(() => {
     const id = window.setTimeout(() => setMounted(true), 30);
@@ -78,6 +78,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     const onLoad = () => {
+      // Small delay to ensure layout settles
       setTimeout(() => setPageReady(true), 200);
     };
     if (document.readyState === "complete") {
@@ -91,25 +92,20 @@ const HeroSection = () => {
   const dropReady = mounted && pageReady && firstImageLoaded;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20">
-      {/* === BACKGROUND LAYERS === */}
-
-      {/* 1) Green → White gradient (behind everything) */}
-      <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#10B981] via-[#10B981]/70 to-white" />
-
-      {/* 2) Subtle blueprint overlays (kept very faint, above gradient but below content) */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
+      {/* ===== Blueprint Background (subtle) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Paper tint + vignette (slightly softened for white text legibility) */}
+        {/* Paper tint + vignette */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.03), transparent 60%)",
+              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.04), transparent 60%)",
           }}
         />
         {/* Fine grid (32px) */}
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
               <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'>
@@ -119,9 +115,9 @@ const HeroSection = () => {
             backgroundRepeat: "repeat",
           }}
         />
-        {/* Bold grid (160px) */}
+        {/* Bold grid (every 5 cells → 160px) */}
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
               <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
@@ -133,7 +129,7 @@ const HeroSection = () => {
         />
         {/* Ultra-faint blueprint cues */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
               <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'>
@@ -152,7 +148,7 @@ const HeroSection = () => {
           }}
         />
       </div>
-      {/* === /BACKGROUND LAYERS === */}
+      {/* ===== /Blueprint Background ===== */}
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,55 +161,50 @@ const HeroSection = () => {
               mounted ? "animate-heroFadeIn" : "",
             ].join(" ")}
           >
-            {/* Eyebrow pill */}
-            <div className="inline-block bg-white/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-white/30 shadow-lg shadow-black/10 mb-6 lg:mb-8 transition-all duration-300">
-              <span className="text-white font-semibold text-xs sm:text-sm uppercase tracking-wider">
+            <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
+              <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">
                 PROFESSIONAL FRAMING CONTRACTORS
               </span>
             </div>
 
             {/* Typewriter headline */}
-            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.35)]">
-              <span className="relative" aria-live="polite" aria-atomic="true">
+            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
+              <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-white animate-caret"
+                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret"
                   />
                 )}
               </span>{" "}
               you can rely on
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-white/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start">
-              <Button className="rounded-xl bg-[#1F2937] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-90">
+              <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
-              <Button
-                variant="outline"
-                className="rounded-xl border border-white/70 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
-              >
+              <Button variant="outline" size="lg" className="text-base font-semibold">
                 Contact Us
               </Button>
             </div>
 
-            {/* Stats */}
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start text-white/90">
-              <div className="flex items-center justify-center lg:justify-start">
-                <div className="w-3 h-3 bg-white/90 rounded-full mr-3 lg:mr-4" />
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start">
-                <div className="w-3 h-3 bg-white/90 rounded-full mr-3 lg:mr-4" />
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">15+ Years Experience</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start">
-                <div className="w-3 h-3 bg-white/90 rounded-full mr-3 lg:mr-4" />
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">100% On Schedule</span>
               </div>
             </div>
@@ -297,12 +288,13 @@ const HeroSection = () => {
                           src={image}
                           alt="Construction project showcase"
                           className="w-full h-full object-cover"
+                          // We only need to know that the first image is ready
                           onLoad={index === 0 ? () => setFirstImageLoaded(true) : undefined}
                         />
                       </div>
                     ))}
 
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-[#10B981]/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 hover:opacity-100 transition-opacity duration-500 z-20" />
 
                     <button
                       className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-125 hover:shadow-pink-500/30 hover:rotate-12"
@@ -321,7 +313,7 @@ const HeroSection = () => {
                           onClick={() => setCurrentImageIndex(index)}
                           className={`w-3 h-3 rounded-full transition-all duration-500 ${
                             index === currentImageIndex
-                              ? "bg-[#10B981] shadow-lg scale-125"
+                              ? "bg-construction-green shadow-lg scale-125"
                               : "bg-white/40 hover:bg-white/60"
                           }`}
                         />
