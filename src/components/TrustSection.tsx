@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 const TrustSection = () => {
   return (
-    <section className="py-24 bg-construction-dark text-white">
+    <section className="py-24 bg-gradient-to-b from-[#1F2937] via-[#1F2937]/90 to-white/5 text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
