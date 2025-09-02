@@ -1,3 +1,4 @@
+// src/pages/Index.tsx
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ClientShowcaseSection from "@/components/ClientShowcaseSection";
@@ -10,17 +11,20 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <>
       <Header />
-      <HeroSection />
-      <AboutSection />
-      <ClientShowcaseSection />  
-      <ServicesSection />
-      <ProcessSection />
-      <TrustSection />
-      <CTASection />
+      <main className="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth [scroll-padding-top:6rem]">
+        <HeroSection />
+        <AboutSection />
+        <ClientShowcaseSection />
+        <ServicesSection />
+        <ProcessSection />
+        <TrustSection />
+        <CTASection />
+        {/* You can keep Footer outside snap or make it a snap page too */}
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
