@@ -150,6 +150,11 @@ const HeroSection = () => {
       </div>
       {/* ===== /Blueprint Background ===== */}
 
+      {/* ===== Soft bottom fade-out to white (seamless handoff to next section) ===== */}
+      {/* Sits above blueprint layers (z-10) but below content (z-20), so it never covers text */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[15vh] z-10 bg-gradient-to-b from-transparent to-white" />
+      {/* ===== /Soft fade ===== */}
+
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
