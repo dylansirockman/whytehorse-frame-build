@@ -1,7 +1,7 @@
 const AboutSection = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden bg-white">
-      {/* ===== Page fold / shadow to separate from Hero ===== */}
+      {/* ===== Page fold / shadow (separates from Hero) ===== */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-8 z-20 bg-gradient-to-b from-black/[0.08] to-transparent" />
 
       {/* ===== Blueprint background (grid + scribbles) ===== */}
@@ -51,11 +51,7 @@ const AboutSection = () => {
           }}
         />
         {/* Faint blueprint scribbles/dimensions */}
-        <svg
-          className="absolute inset-0 opacity-[0.03]"
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="none"
-        >
+        <svg className="absolute inset-0 opacity-[0.03]" viewBox="0 0 1200 800" preserveAspectRatio="none">
           <g stroke="#1F2937" strokeWidth="1" fill="none">
             <line x1="220" y1="620" x2="980" y2="620" strokeDasharray="6 10" />
             <path d="M220 620 l14 -8 v16 z" />
@@ -66,76 +62,97 @@ const AboutSection = () => {
         </svg>
       </div>
 
-      {/* ===== Floorplate wrapper (one “level” that contains image + text) ===== */}
+      {/* ===== Floorplate wrapper (one “level” for image + text) ===== */}
       <div className="relative z-10 container mx-auto px-6">
-        <div className="relative rounded-[28px] p-8 sm:p-10 lg:p-12">
-          {/* Floorplan “walls” (one continuous outline that curves around both blocks) */}
+        <div className="relative rounded-[28px]">
+          {/* --- Blueprint “walls” (rect + rect + hallway curve) --- */}
           <svg
             className="pointer-events-none absolute inset-0 z-0"
             viewBox="0 0 1000 600"
             preserveAspectRatio="none"
           >
             <defs>
-              {/* faint inner glow to sell blueprint ink */}
               <filter id="bp-glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur" />
+                <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="b" />
                 <feMerge>
-                  <feMergeNode in="blur" />
+                  <feMergeNode in="b" />
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
 
-            {/* Single continuous “wall” path:
-                - wraps left block (image), S-curves through a hallway,
-                - wraps right block (text)
-                The coordinates are in viewBox units so the path scales responsively. */}
+            {/*
+              ─────────── HOW TO TUNE (if you need to nudge) ───────────
+              These numbers assume a typical container width. If your layout
+              shifts, tweak the x/y/width/height of the two rects below.
+              Left rect wraps the IMAGE. Right rect wraps the TEXT.
+            */}
+
+            {/* Left “room” around IMAGE */}
+            <rect
+              x="70" y="220" width="520" height="260" rx="26" ry="26"
+              fill="none"
+              stroke="#1F2937"
+              strokeOpacity="0.22"
+              strokeWidth="2.2"
+              strokeDasharray="12 14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#bp-glow)"
+            />
+
+            {/* Right “room” around TEXT */}
+            <rect
+              x="600" y="115" width="330" height="420" rx="26" ry="26"
+              fill="none"
+              stroke="#1F2937"
+              strokeOpacity="0.22"
+              strokeWidth="2.2"
+              strokeDasharray="12 14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#bp-glow)"
+            />
+
+            {/* Curved hallway connecting rooms (top-left of right room to top-right of left room) */}
             <path
               d="
-                M 110 120
-                Q 110 100 130 100
-                L 470 100
-                Q 510 100 530 130
-                C 545 150 555 160 580 160
-                L 880 160
-                Q 900 160 900 180
-                L 900 500
-                Q 900 520 880 520
-                L 600 520
-                Q 565 520 540 490
-                C 525 472 510 460 480 460
-                L 130 460
-                Q 110 460 110 440
-                Z
+                M 600 180
+                C 560 180, 535 170, 520 170
+                S 480 190, 450 200
+                C 420 210, 370 210, 330 210
+                "
+              fill="none"
+              stroke="#1F2937"
+              strokeOpacity="0.22"
+              strokeWidth="2.2"
+              strokeDasharray="12 14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#bp-glow)"
+            />
+
+            {/* Lower hallway pass (bottom-right of left room toward right room’s stat block) */}
+            <path
+              d="
+                M 590 430
+                C 560 440, 540 445, 520 445
+                S 480 440, 460 438
               "
               fill="none"
               stroke="#1F2937"
               strokeOpacity="0.22"
               strokeWidth="2.2"
               strokeDasharray="12 14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               filter="url(#bp-glow)"
             />
-
-            {/* Corner ticks (tiny) */}
-            <g stroke="#1F2937" strokeOpacity="0.25" strokeWidth="2">
-              {/* near top-left */}
-              <line x1="120" y1="118" x2="140" y2="118" />
-              <line x1="112" y1="128" x2="112" y2="148" />
-              {/* near bottom-left */}
-              <line x1="120" y1="442" x2="140" y2="442" />
-              <line x1="112" y1="432" x2="112" y2="412" />
-              {/* near top-right */}
-              <line x1="880" y1="168" x2="900" y2="168" />
-              <line x1="892" y1="160" x2="892" y2="180" />
-              {/* near bottom-right */}
-              <line x1="880" y1="512" x2="900" y2="512" />
-              <line x1="892" y1="504" x2="892" y2="484" />
-            </g>
           </svg>
 
-          {/* Two “rooms” on this level */}
+          {/* Two blocks laid out inside the “level” */}
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center relative z-10">
-            {/* Left room: image block */}
+            {/* Left: Image */}
             <div className="relative">
               <img
                 src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
@@ -144,7 +161,7 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* Right room: text block */}
+            {/* Right: Text */}
             <div className="relative">
               <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6 backdrop-blur-[1px]">
                 <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
@@ -189,7 +206,7 @@ const AboutSection = () => {
               </div>
             </div>
           </div>
-          {/* /rooms */}
+          {/* /grid */}
         </div>
       </div>
     </section>
