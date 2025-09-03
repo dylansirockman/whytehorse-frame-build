@@ -77,7 +77,7 @@ const AboutSection = () => {
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid gap-20 items-center lg:grid-cols-[1fr_1.4fr]">
           {/* === Image column with blueprint outline === */}
           <div className="relative">
             {/* Outline frame */}
@@ -102,7 +102,7 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* === Text column with blueprint outline === */}
+          {/* === Text column with blueprint outline (wider on desktop) === */}
           <div className="relative">
             <div className="relative rounded-2xl p-6 border-2 border-dashed border-construction-dark/10">
               {/* inner faint line */}
