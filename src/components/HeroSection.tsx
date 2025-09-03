@@ -24,7 +24,7 @@ const HeroSection = () => {
 
   // === Typewriter headline ===
   // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
-  const headlineWords = ["Framing", "Precision", "Speed", "Integrity", "Framing"];
+  const headlineWords = ["Framing", "Precision", "Deadlines", "Integrity", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
   const [wordIndex, setWordIndex] = useState(0); // starts at "Framing"
   const [typed, setTyped] = useState("Framing");
