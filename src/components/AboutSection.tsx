@@ -77,7 +77,7 @@ const AboutSection = () => {
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
-        <div className="grid gap-12 items-center lg:grid-cols-[1fr_1.4fr]">
+        <div className="grid gap-12 items-center lg:grid-cols-[1fr_1.2fr]">
           {/* === Image column with blueprint outline === */}
           <div className="relative">
             {/* Outline frame - Object Line (thick solid) */}
