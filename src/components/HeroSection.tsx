@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
-import HeadingPill from "@/components/ui/HeadingPill";
 
 const HeroSection = () => {
   const images = [
@@ -135,7 +134,11 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text (grouped entrance animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0 animate-heroFadeIn">
-            <HeadingPill label="Professional Framing Contractors" icon="blueprint" className="mb-6 lg:mb-8" />
+            <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
+              <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">
+                PROFESSIONAL FRAMING CONTRACTORS
+              </span>
+            </div>
 
             {/* Typewriter headline */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">

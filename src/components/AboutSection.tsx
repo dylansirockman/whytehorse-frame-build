@@ -1,5 +1,3 @@
-import HeadingPill from "@/components/ui/HeadingPill";
-
 const AboutSection = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden bg-white">
@@ -82,10 +80,10 @@ const AboutSection = () => {
         <div className="grid gap-12 items-center lg:grid-cols-[1fr_1.4fr]">
           {/* === Image column with blueprint outline === */}
           <div className="relative">
-            {/* Outline frame */}
-            <div className="relative rounded-2xl p-4 border-2 border-dashed border-construction-dark/10">
-              {/* inner faint line */}
-              <div className="pointer-events-none absolute inset-2 rounded-xl border border-construction-dark/10" />
+            {/* Outline frame - Object Line (thick solid) */}
+            <div className="relative rounded-2xl p-4 border-2 border-solid border-construction-dark/15">
+              {/* inner faint line - Hidden Line (thin dashed) */}
+              <div className="pointer-events-none absolute inset-2 rounded-xl border border-dashed border-construction-dark/8" />
               {/* corner ticks */}
               <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
@@ -106,9 +104,11 @@ const AboutSection = () => {
 
           {/* === Text column with blueprint outline (wider on desktop) === */}
           <div className="relative">
-            <div className="relative rounded-2xl p-6 border-2 border-dashed border-construction-dark/10">
-              {/* inner faint line */}
-              <div className="pointer-events-none absolute inset-3 rounded-xl border border-construction-dark/10" />
+            {/* Cutting Plane Line (thick dashed) */}
+            <div className="relative rounded-2xl p-6 border-2 border-construction-dark/12" 
+                 style={{ borderStyle: "dashed", borderWidth: "2px" }}>
+              {/* inner center line (thin dash-dot) */}
+              <div className="pointer-events-none absolute inset-3 rounded-xl border border-dotted border-construction-dark/8" />
               {/* corner ticks */}
               <div className="pointer-events-none absolute -top-2 left-8 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -left-2 top-8 h-px w-4 bg-construction-dark/15" />
@@ -120,7 +120,11 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -right-2 bottom-8 h-px w-4 bg-construction-dark/15" />
 
               {/* tag */}
-              <HeadingPill label="About WhyteHorse" icon="ruler" className="mb-6" />
+              <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
+                <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
+                  About WhyteHorse
+                </span>
+              </div>
 
               {/* heading */}
               <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight">

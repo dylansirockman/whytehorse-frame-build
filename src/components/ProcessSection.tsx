@@ -1,5 +1,4 @@
 import { CheckCircle } from "lucide-react";
-import HeadingPill from "@/components/ui/HeadingPill";
 
 const processSteps = [
   {
@@ -33,7 +32,9 @@ const ProcessSection = () => {
     <section id="process" className="py-32 bg-construction-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <HeadingPill label="Our Process" icon="compass" className="mb-6" />
+          <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
+            <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">Our Process</span>
+          </div>
           
           <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6">
             Systematic Excellence
