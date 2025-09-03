@@ -217,7 +217,7 @@ const HeroSection = () => {
 
           {/* Image + “Crane” */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
-            {/* OUTER: delayed lower-in from header, then pendulum */}
+            {/* OUTER: just pendulum, no drop-down */}
             <div
               className="relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={
@@ -225,16 +225,15 @@ const HeroSection = () => {
                   ["--swing-angle" as any]: "3.2deg",
                   ["--swing-lift" as any]: "3px",
                   ["--swing-duration" as any]: "4.2s",
-                  animation: dropReady
-                    ? "heroLowerIn 900ms cubic-bezier(0.2,0.7,0.2,1) forwards, pendulum var(--swing-duration) infinite 900ms"
-                    : undefined,
+                  // Only pendulum now, no heroLowerIn
+                  animation: "pendulum var(--swing-duration) infinite",
                   transformOrigin: "top center",
                 } as React.CSSProperties
               }
             >
               {/* INNER: crooked → straight on hover */}
               <div className="relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500 transform-gpu">
-                {/* Cable (reveals as it lowers) */}
+                {/* Cable (static, no grow) */}
                 <svg
                   className="absolute inset-0 w-full h-[calc(100%+120px)] -top-[120px] z-[30] pointer-events-none"
                   viewBox="0 0 100 220"
@@ -251,10 +250,11 @@ const HeroSection = () => {
                     strokeLinecap="round"
                     vectorEffect="non-scaling-stroke"
                     shapeRendering="geometricPrecision"
-                    className={dropReady ? "animate-cableGrow" : ""}
-                    style={{ strokeDasharray: 120, strokeDashoffset: 120 }}
+                    // removed animate-cableGrow
+                    style={{ strokeDasharray: 120, strokeDashoffset: 0 }}
                   />
                 </svg>
+
 
                 {/* Lifting bar (above image) */}
                 <div className="absolute top-0 left-0 w-full h-[6px] bg-[#1F2937] rounded-sm z-[66] pointer-events-none">
