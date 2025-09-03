@@ -66,7 +66,7 @@ const Header = () => {
             <div className="flex flex-col leading-none">
               <span className="text-2xl lg:text-3xl font-bold tracking-tight">
                 <span className="text-construction-dark">Whyte</span>
-                <span className="text-construction-green">Horse</span>
+                <span className="text-construction-green">horse</span>
               </span>
               <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-construction-gray group-hover:text-construction-dark/80 transition-colors">
                 Contracting
