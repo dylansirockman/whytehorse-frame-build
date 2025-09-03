@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin } from "lucide-react";
+import HeadingPill from "@/components/ui/HeadingPill";
 
 const CTASection = () => {
   return (
@@ -7,9 +8,7 @@ const CTASection = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
-              <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">Ready to Start?</span>
-            </div>
+            <HeadingPill label="Ready to Start?" icon="blueprint" className="mb-6" />
             
             <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6 leading-tight">
               Start Your Next Build

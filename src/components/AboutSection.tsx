@@ -1,3 +1,5 @@
+import HeadingPill from "@/components/ui/HeadingPill";
+
 const AboutSection = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden bg-white">
@@ -118,11 +120,7 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -right-2 bottom-8 h-px w-4 bg-construction-dark/15" />
 
               {/* tag */}
-              <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
-                <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
-                  About WhyteHorse
-                </span>
-              </div>
+              <HeadingPill label="About WhyteHorse" icon="ruler" className="mb-6" />
 
               {/* heading */}
               <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight">
