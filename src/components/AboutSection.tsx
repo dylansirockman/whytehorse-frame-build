@@ -95,7 +95,7 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
               {/* content */}
               <img
-                src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
+                src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
                 alt="House construction framing"
                 className="relative w-full rounded-xl shadow-[var(--shadow-premium)]"
               />
