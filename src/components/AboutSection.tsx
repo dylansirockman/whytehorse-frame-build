@@ -103,7 +103,7 @@ const AboutSection = () => {
           </div>
 
           {/* Actual 2-col content inside the unified “level” */}
-          <div className="grid gap-12 lg:gap-16 items-center lg:[grid-template-columns:0.9fr_1.1fr]">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image zone */}
             <div className="relative">
               {/* subtle inner outline to echo floorplan zoning */}
@@ -115,7 +115,7 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* Text zone (wider on lg+) */}
+            {/* Text zone */}
             <div className="relative">
               <div className="absolute -inset-3 rounded-2xl border border-[rgba(31,41,55,0.08)]" />
               <div className="relative">
