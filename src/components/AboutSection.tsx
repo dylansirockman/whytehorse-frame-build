@@ -70,82 +70,148 @@ const AboutSection = () => {
           }}
         />
       </div>
+      {/* ===== /Blueprint background ===== */}
 
-      {/* ===== Fold effect ===== */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
-      <div className="absolute top-0 right-0 w-12 h-12 bg-white shadow-lg -rotate-45 origin-top-right z-10" />
-
-      {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Image */}
-          <div className="relative">
-            <div className="absolute -top-4 -left-4 w-full h-full bg-construction-green/5 rounded-2xl"></div>
-            <img
-              src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
-              alt="House construction framing"
-              className="relative w-full rounded-2xl shadow-[var(--shadow-premium)]"
+        {/* ===== Unified floorplan “level” wrapper around BOTH image + text ===== */}
+        <div className="relative rounded-3xl bg-white/70 backdrop-blur-[1px] p-6 sm:p-8 lg:p-12 shadow-[var(--shadow-card)]">
+          {/* Floorplan outline overlay */}
+          <svg
+            className="pointer-events-none absolute inset-0 -z-[1]"
+            aria-hidden="true"
+          >
+            {/* Outer dashed rectangle */}
+            <rect
+              x="8" y="8"
+              width="calc(100% - 16px)"
+              height="calc(100% - 16px)"
+              fill="none"
+              stroke="rgba(31,41,55,0.35)"
+              strokeWidth="1.5"
+              strokeDasharray="8 8"
+              rx="18"
             />
-          </div>
+            {/* Inner faint inset */}
+            <rect
+              x="20" y="20"
+              width="calc(100% - 40px)"
+              height="calc(100% - 40px)"
+              fill="none"
+              stroke="rgba(31,41,55,0.15)"
+              strokeWidth="1"
+              rx="14"
+            />
+            {/* Corner ticks */}
+            <g stroke="rgba(31,41,55,0.35)" strokeWidth="2">
+              {/* TL */}
+              <line x1="26" y1="40" x2="70" y2="40" />
+              <line x1="40" y1="26" x2="40" y2="70" />
+              {/* TR */}
+              <line x1="calc(100% - 26)" y1="40" x2="calc(100% - 70)" y2="40" />
+              <line x1="calc(100% - 40)" y1="26" x2="calc(100% - 40)" y2="70" />
+              {/* BL */}
+              <line x1="26" y1="calc(100% - 40)" x2="70" y2="calc(100% - 40)" />
+              <line x1="40" y1="calc(100% - 26)" x2="40" y2="calc(100% - 70)" />
+              {/* BR */}
+              <line x1="calc(100% - 26)" y1="calc(100% - 40)" x2="calc(100% - 70)" y2="calc(100% - 40)" />
+              <line x1="calc(100% - 40)" y1="calc(100% - 26)" x2="calc(100% - 40)" y2="calc(100% - 70)" />
+            </g>
+            {/* Label (top-left) */}
+            <text
+              x="28"
+              y="32"
+              fill="rgba(31,41,55,0.45)"
+              fontSize="12"
+              fontFamily="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+            >
+              LEVEL A — ABOUT
+            </text>
+            {/* Dimension hint (bottom-center) */}
+            <g stroke="rgba(31,41,55,0.25)" strokeWidth="1" fill="none">
+              <line x1="80" y1="calc(100% - 22)" x2="calc(100% - 80)" y2="calc(100% - 22)" strokeDasharray="6 8" />
+              <path d="M80 calc(100% - 22) l10 -6 v12 z" />
+              <path d="M calc(100% - 80) calc(100% - 22) l-10 -6 v12 z" />
+            </g>
+          </svg>
 
-          {/* Text */}
-          <div>
-            <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
-              <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
-                About WhyteHorse
-              </span>
+          {/* Actual 2-col content inside the unified “level” */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Image */}
+            <div className="relative">
+              {/* subtle inner highlight strip, like a plan callout */}
+              <div className="absolute -inset-3 rounded-2xl border border-[rgba(31,41,55,0.08)]" />
+              <img
+                src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
+                alt="House construction framing"
+                className="relative w-full rounded-2xl shadow-[var(--shadow-premium)]"
+              />
             </div>
 
-            <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight">
-              Framing Excellence
-              <br />
-              <span className="text-construction-green">Built to Last</span>
-            </h2>
+            {/* Text */}
+            <div className="relative">
+              {/* faint inner outline to match the image side */}
+              <div className="absolute -inset-3 rounded-2xl border border-[rgba(31,41,55,0.08)]" />
+              <div className="relative">
+                <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
+                  <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
+                    About WhyteHorse
+                  </span>
+                </div>
 
-            <div className="space-y-6 text-lg text-construction-gray leading-relaxed">
-              <p>
-                Framing isn't just one of many services — it's all we do. Our
-                crews are dedicated specialists who ensure every project starts
-                strong, stays on schedule, and meets the highest standards of
-                quality.
-              </p>
+                <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight">
+                  Framing Excellence
+                  <br />
+                  <span className="text-construction-green">Built to Last</span>
+                </h2>
 
-              <p>
-                With years of experience in residential construction across
-                Alberta, we understand that proper framing is the foundation of
-                every successful build. That's why builders trust us to deliver
-                structural integrity that stands the test of time.
-              </p>
+                <div className="space-y-6 text-lg text-construction-gray leading-relaxed">
+                  <p>
+                    Framing isn't just one of many services — it's all we do. Our
+                    crews are dedicated specialists who ensure every project starts
+                    strong, stays on schedule, and meets the highest standards of
+                    quality.
+                  </p>
+
+                  <p>
+                    With years of experience in residential construction across
+                    Alberta, we understand that proper framing is the foundation of
+                    every successful build. That's why builders trust us to deliver
+                    structural integrity that stands the test of time.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-8 mt-12 p-8 bg-gradient-to-br from-construction-light to-construction-white rounded-2xl border border-construction-light">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-construction-green mb-2">
+                      500+
+                    </div>
+                    <div className="text-sm text-construction-gray font-medium">
+                      Projects Completed
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-construction-green mb-2">
+                      15+
+                    </div>
+                    <div className="text-sm text-construction-gray font-medium">
+                      Years Experience
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-construction-green mb-2">
+                      100%
+                    </div>
+                    <div className="text-sm text-construction-gray font-medium">
+                      On Schedule
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-8 mt-12 p-8 bg-gradient-to-br from-construction-light to-construction-white rounded-2xl border border-construction-light">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">
-                  500+
-                </div>
-                <div className="text-sm text-construction-gray font-medium">
-                  Projects Completed
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">
-                  15+
-                </div>
-                <div className="text-sm text-construction-gray font-medium">
-                  Years Experience
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">
-                  100%
-                </div>
-                <div className="text-sm text-construction-gray font-medium">
-                  On Schedule
-                </div>
-              </div>
-            </div>
+            {/* /Text */}
           </div>
         </div>
+        {/* /Unified floorplan wrapper */}
       </div>
     </section>
   );
