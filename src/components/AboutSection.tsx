@@ -1,13 +1,10 @@
 const AboutSection = () => {
-  return (
-    <section id="about" className="relative py-32 overflow-hidden bg-white">
+  return <section id="about" className="relative py-32 overflow-hidden bg-white">
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Fine grid */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
+        <div className="absolute inset-0" style={{
+        backgroundImage: `
               repeating-linear-gradient(
                 to right,
                 rgba(31,41,55,0.03) 0,
@@ -22,14 +19,11 @@ const AboutSection = () => {
                 transparent 1px,
                 transparent 32px
               )
-            `,
-          }}
-        />
+            `
+      }} />
         {/* Bold grid every ~160px */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
+        <div className="absolute inset-0" style={{
+        backgroundImage: `
               repeating-linear-gradient(
                 to right,
                 rgba(31,41,55,0.025) 0,
@@ -44,15 +38,10 @@ const AboutSection = () => {
                 transparent 1.5px,
                 transparent 160px
               )
-            `,
-          }}
-        />
+            `
+      }} />
         {/* Faint blueprint scribbles/dimensions */}
-        <svg
-          className="absolute inset-0 opacity-[0.03]"
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="none"
-        >
+        <svg className="absolute inset-0 opacity-[0.03]" viewBox="0 0 1200 800" preserveAspectRatio="none">
           <g stroke="#1F2937" strokeWidth="1" fill="none">
             <line x1="200" y1="600" x2="1000" y2="600" strokeDasharray="6 10" />
             <path d="M200 600 l14 -8 v16 z" />
@@ -62,18 +51,14 @@ const AboutSection = () => {
           </g>
         </svg>
         {/* Soft paper vignette */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)",
-          }}
-        />
+        <div className="absolute inset-0" style={{
+        background: "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)"
+      }} />
       </div>
 
       {/* ===== Fold effect ===== */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
-      <div className="absolute top-0 right-0 w-12 h-12 bg-white shadow-lg -rotate-45 origin-top-right z-10" />
+      
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
@@ -92,11 +77,7 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
               {/* content */}
-              <img
-                src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
-                alt="House construction framing"
-                className="relative w-full rounded-xl shadow-[var(--shadow-premium)]"
-              />
+              <img src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png" alt="House construction framing" className="relative w-full rounded-xl shadow-[var(--shadow-premium)]" />
             </div>
           </div>
 
@@ -151,8 +132,6 @@ const AboutSection = () => {
           {/* === /Text column === */}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
