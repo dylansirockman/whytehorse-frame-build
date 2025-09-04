@@ -21,9 +21,8 @@ const Index = () => {
         <ProcessSection />
         <TrustSection />
         <CTASection />
-        {/* You can keep Footer outside snap or make it a snap page too */}
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 };
