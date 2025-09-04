@@ -290,19 +290,3 @@ All colors MUST be HSL.
     transform: none;
   }
 }
-
-/* --- Scroll-snap container setup --- */
-html, body, #root {
-  height: 100%;
-}
-
-body {
-  /* prevent the page itself from scrolling; let <main> handle it */
-  overflow: hidden;
-}
-
-/* nicer feel on touch devices (optional) */
-main {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-}

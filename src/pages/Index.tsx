@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <>
       <Header />
-      <main className="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth [scroll-padding-top:6rem]">
+      <main className="scroll-smooth [scroll-padding-top:6rem]">
         <HeroSection />
         <AboutSection />
         <ClientShowcaseSection />
