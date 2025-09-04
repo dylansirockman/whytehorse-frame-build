@@ -132,16 +132,16 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
-          {/* Text (grouped entrance animation) */}
-          <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0 animate-heroFadeIn">
-            <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105">
+          {/* Text (staggered reveal animation) */}
+          <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
+            <div className="inline-block bg-gradient-to-r from-construction-secondary/20 to-construction-secondary/10 backdrop-blur-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-construction-secondary/40 shadow-lg shadow-construction-secondary/15 mb-6 lg:mb-8 hover:shadow-xl hover:shadow-construction-secondary/25 transition-all duration-300 hover:scale-105 animate-slideUpStagger" style={{ animationDelay: '0.1s' }}>
               <span className="text-construction-green font-semibold text-xs sm:text-sm uppercase tracking-wider">
                 PROFESSIONAL FRAMING CONTRACTORS
               </span>
             </div>
 
             {/* Typewriter headline */}
-            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937]">
+            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger" style={{ animationDelay: '0.3s' }}>
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
@@ -154,11 +154,11 @@ const HeroSection = () => {
               you can rely on
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger" style={{ animationDelay: '0.5s' }}>
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.7s' }}>
               <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
@@ -167,7 +167,7 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.9s' }}>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
@@ -292,16 +292,23 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Keyframes for pendulum + caret + text entrance */}
+      {/* Keyframes for pendulum + caret + modern staggered entrance */}
       <style>{`
-        /* Left column entrance */
-        @keyframes heroFadeIn {
-          0% { opacity: 0; transform: translateY(12px); }
-          60% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 1; transform: translateY(0); }
+        /* Modern staggered slide-up entrance */
+        @keyframes slideUpStagger {
+          0% { 
+            opacity: 0; 
+            transform: translateY(24px) scale(0.98);
+            filter: blur(2px);
+          }
+          100% { 
+            opacity: 1; 
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+          }
         }
-        .animate-heroFadeIn {
-          animation: heroFadeIn 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+        .animate-slideUpStagger {
+          animation: slideUpStagger 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
 
         /* Pendulum */
@@ -328,7 +335,7 @@ const HeroSection = () => {
 
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
-          .animate-heroFadeIn { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .animate-slideUpStagger { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
           .swingGroup { animation: none !important; }
           .animate-caret { animation: none !important; }
         }
