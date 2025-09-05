@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import BlueprintPillHeader from './BlueprintPillHeader';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -106,10 +107,13 @@ const AboutSection = () => {
           {/* === Text column (clean, no blueprint outline) === */}
           <div className="relative">
             {/* tag */}
-            <div className={`inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-4 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.2s' : '0s' }}>
-              <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">
-                About WhyteHorse
-              </span>
+            <div className={`flex justify-center lg:justify-start mb-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-4 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.2s' : '0s' }}>
+              <BlueprintPillHeader 
+                index="1"
+                title="Company Profile"
+                metaRight="Est. 2019"
+                as="div"
+              />
             </div>
 
             {/* heading */}
