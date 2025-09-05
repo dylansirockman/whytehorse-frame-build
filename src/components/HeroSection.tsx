@@ -184,7 +184,7 @@ const HeroSection = () => {
           </div>
 
           {/* Image + “Crane” */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop">
             {/* Pendulum only */}
             <div
               className="relative w-full aspect-[4/5] z-[60] will-change-transform"
@@ -333,9 +333,25 @@ const HeroSection = () => {
         }
         .animate-caret { animation: caret 1s step-end infinite; }
 
+        /* One-time drop animation for Hero image wrapper */
+        @keyframes imageDrop {
+          0% {
+            transform: translateY(-24px);
+            opacity: 0.8;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        .animate-imageDrop {
+          animation: imageDrop 800ms ease-out both;
+        }
+
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .animate-slideUpStagger { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+          .animate-imageDrop { animation: none !important; opacity: 1 !important; transform: none !important; }
           .swingGroup { animation: none !important; }
           .animate-caret { animation: none !important; }
         }
