@@ -135,14 +135,7 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
-            <div className="flex justify-center lg:justify-start mb-6 lg:mb-8 animate-slideUpStagger" style={{ animationDelay: '0.1s' }}>
-              <BlueprintPillHeader 
-                index="0"
-                title="Professional Framing Contractors"
-                metaRight="Alberta Licensed"
-                as="div"
-              />
-            </div>
+            
 
             {/* Typewriter headline */}
             <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger" style={{ animationDelay: '0.3s' }}>
