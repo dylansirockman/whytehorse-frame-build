@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-
 interface BlueprintPillHeaderProps {
   index?: number | string;
   title: string;
@@ -9,49 +8,14 @@ interface BlueprintPillHeaderProps {
   className?: string;
   dense?: boolean;
 }
-
 const BlueprintPillHeader: React.FC<BlueprintPillHeaderProps> = ({
   index,
   title,
   metaRight,
   as: Component = 'h2',
   className,
-  dense = false,
+  dense = false
 }) => {
-  return (
-    <Component
-      className={cn(
-        'flex items-center gap-3 mb-6',
-        dense ? 'py-2' : 'py-3',
-        className
-      )}
-    >
-      {/* Index Box */}
-      {index && (
-        <div className="shrink-0 border-[1.5px] border-slate-900 px-2 py-1 leading-none">
-          <span className="text-sm font-medium text-slate-900 select-none">
-            {index}
-          </span>
-        </div>
-      )}
-
-      {/* Title with underline */}
-      <div className="relative uppercase font-semibold tracking-wider text-sm md:text-base text-slate-900 pb-0.5">
-        {title}
-        <span className="absolute left-0 -bottom-[2px] w-full h-[1.5px] bg-slate-900/90" />
-      </div>
-
-      {/* Rule/Line extension */}
-      <div className="flex-1 h-[1.5px] bg-slate-900/80 min-w-[20px]" />
-
-      {/* Right Meta */}
-      {metaRight && (
-        <div className="uppercase text-[11px] tracking-widest font-normal text-slate-900/80 whitespace-nowrap">
-          {metaRight}
-        </div>
-      )}
-    </Component>
-  );
+  return;
 };
-
 export default BlueprintPillHeader;
