@@ -1,4 +1,5 @@
 import { Home, Plus, Building, Wrench } from "lucide-react";
+import BlueprintPillHeader from './BlueprintPillHeader';
 
 const services = [
   {
@@ -32,8 +33,13 @@ const ServicesSection = () => {
     <section id="services" className="py-32 bg-gradient-to-b from-construction-light to-construction-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
-            <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">Our Services</span>
+          <div className="flex justify-center mb-6">
+            <BlueprintPillHeader 
+              index="2"
+              title="Service Portfolio"
+              metaRight="Rev. 2024.1"
+              as="div"
+            />
           </div>
           
           <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6">

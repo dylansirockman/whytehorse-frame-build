@@ -27,13 +27,20 @@ const processSteps = [
   }
 ];
 
+import BlueprintPillHeader from './BlueprintPillHeader';
+
 const ProcessSection = () => {
   return (
     <section id="process" className="py-32 bg-construction-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <div className="inline-block bg-construction-green/10 px-4 py-2 rounded-full mb-6">
-            <span className="text-construction-green font-semibold text-sm uppercase tracking-wider">Our Process</span>
+          <div className="flex justify-center mb-6">
+            <BlueprintPillHeader 
+              index="3"
+              title="Construction Method"
+              metaRight="Scale 1/4&quot; = 1'-0&quot;"
+              as="div"
+            />
           </div>
           
           <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6">
