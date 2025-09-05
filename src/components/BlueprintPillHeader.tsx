@@ -19,7 +19,7 @@ const BlueprintPillHeader: React.FC<BlueprintPillHeaderProps> = ({
   dense = false,
 }) => {
   return (
-    <Component 
+    <Component
       className={cn(
         'flex items-center gap-3 mb-6',
         dense ? 'py-2' : 'py-3',
@@ -34,15 +34,16 @@ const BlueprintPillHeader: React.FC<BlueprintPillHeaderProps> = ({
           </span>
         </div>
       )}
-      
-      {/* Title */}
-      <div className="uppercase font-semibold tracking-wider text-sm md:text-base text-slate-900">
+
+      {/* Title with underline */}
+      <div className="relative uppercase font-semibold tracking-wider text-sm md:text-base text-slate-900 pb-0.5">
         {title}
+        <span className="absolute left-0 -bottom-[2px] w-full h-[1.5px] bg-slate-900/90" />
       </div>
-      
-      {/* Rule/Line */}
-      <div className="flex-1 h-px bg-slate-900/80 translate-y-[1px] min-w-[20px]" />
-      
+
+      {/* Rule/Line extension */}
+      <div className="flex-1 h-[1.5px] bg-slate-900/80 min-w-[20px]" />
+
       {/* Right Meta */}
       {metaRight && (
         <div className="uppercase text-[11px] tracking-widest font-normal text-slate-900/80 whitespace-nowrap">
