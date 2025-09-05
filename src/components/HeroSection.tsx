@@ -336,7 +336,7 @@ const HeroSection = () => {
         /* One-time drop animation for Hero image wrapper */
         @keyframes imageDrop {
           0% {
-            transform: translateY(-24px);
+            transform: translateY(-56px);
             opacity: 0.8;
           }
           100% {
