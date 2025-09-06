@@ -319,13 +319,17 @@ const HeroSection = () => {
               ].map((client, index) => (
                 <div
                   key={`${client.name}-${index}`}
-                  className="flex items-center justify-center flex-shrink-0"
-                  style={{ minWidth: '160px' }}
+                  className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
+                  style={{ 
+                    width: '140px', 
+                    height: '60px',
+                    minWidth: '140px'
+                  }}
                 >
                   <img
                     src={client.logo}
                     alt={`Client: ${client.name}`}
-                    className="max-h-8 md:max-h-10 w-auto opacity-40 hover:opacity-60 transition-opacity duration-300 grayscale hover:grayscale-0 transform-gpu"
+                    className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
                     loading="lazy"
                   />
                 </div>
