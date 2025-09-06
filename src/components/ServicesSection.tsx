@@ -47,9 +47,9 @@ const ServicesSection = () => {
       <div className="relative z-20 container mx-auto px-6">
         {/* Header */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ease-out motion-reduce:transition-none ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 motion-reduce:translate-y-0"
-          }`}
+          className={`text-center mb-16 transition-[opacity,transform,filter] duration-700 ease-out motion-reduce:transition-none
+            ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-2 blur-[1px] motion-reduce:translate-y-0 motion-reduce:blur-0"}
+          `}
         >
           <div className="flex justify-center mb-5">
             <BlueprintPillHeader index="2" title="Service Portfolio" metaRight="Rev. 2025.1" as="div" />
@@ -66,15 +66,15 @@ const ServicesSection = () => {
         <div className="grid lg:grid-cols-2 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
-            const delay = 0.12 + i * 0.06;
+            const delay = 0.12 + i * 0.08; // card stagger
             return (
               <article
                 key={service.title}
                 tabIndex={0}
                 className={`relative group rounded-2xl border border-construction-dark/10 bg-white/80 backdrop-blur-sm shadow-sm outline-none
-                            transition-all duration-600 ease-out motion-reduce:transition-none
-                            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 motion-reduce:translate-y-0"}
-                            hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-construction-green/50`}
+                  transition-[opacity,transform,box-shadow,filter] duration-600 ease-out motion-reduce:transition-none
+                  ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 motion-reduce:translate-y-0"}
+                  hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-construction-green/50`}
                 style={{ transitionDelay: isVisible ? `${delay}s` : "0s" }}
                 aria-label={service.title}
               >
@@ -85,23 +85,52 @@ const ServicesSection = () => {
                 <div className="p-8">
                   {/* Icon + Title */}
                   <div className="flex items-start gap-4 mb-3">
-                    <div className="w-12 h-12 rounded-xl bg-construction-green/10 grid place-items-center shrink-0">
-                      <Icon className="w-7 h-7 text-construction-green" aria-hidden="true" />
+                    {/* Icon pop-in */}
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-construction-green/10 grid place-items-center shrink-0
+                        transition-[opacity,transform,filter,background-color] duration-500 ease-out
+                        ${isVisible ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-[0.5px]"}
+                        group-hover:bg-construction-green
+                      `}
+                      style={{ transitionDelay: isVisible ? `${delay + 0.05}s` : "0s" }}
+                    >
+                      <Icon className="w-7 h-7 text-construction-green transition-colors duration-300 group-hover:text-white" aria-hidden="true" />
                     </div>
-                    <h3 className="text-xl font-semibold text-construction-dark leading-snug">
+
+                    {/* Title slide-in */}
+                    <h3
+                      className={`text-xl font-semibold text-construction-dark leading-snug
+                        transition-[opacity,transform,filter] duration-600 ease-out
+                        ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                      `}
+                      style={{ transitionDelay: isVisible ? `${delay + 0.1}s` : "0s" }}
+                    >
                       {service.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-construction-gray leading-relaxed mb-5">
+                  <p
+                    className={`text-construction-gray leading-relaxed mb-5
+                      transition-[opacity,transform,filter] duration-600 ease-out
+                      ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                    `}
+                    style={{ transitionDelay: isVisible ? `${delay + 0.18}s` : "0s" }}
+                  >
                     {service.description}
                   </p>
 
-                  {/* Features */}
+                  {/* Features (cascade) */}
                   <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-sm text-construction-gray">
+                    {service.features.map((feature, idx) => (
+                      <li
+                        key={feature}
+                        className={`flex items-center text-sm text-construction-gray
+                          transition-[opacity,transform,filter] duration-500 ease-out
+                          ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                        `}
+                        style={{ transitionDelay: isVisible ? `${delay + 0.22 + idx * 0.05}s` : "0s" }}
+                      >
                         <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-construction-green" />
                         {feature}
                       </li>
@@ -111,8 +140,25 @@ const ServicesSection = () => {
 
                 {/* Light divider + tags */}
                 <div className="px-8 pb-6">
-                  <div className="h-px bg-construction-dark/10 mb-3" />
-                  <div className="flex flex-wrap gap-2">
+                  {/* Divider wipe */}
+                  <div className="h-px overflow-hidden mb-3">
+                    <div
+                      className={`h-px bg-construction-dark/10 origin-left
+                        transition-transform duration-700 ease-out
+                        ${isVisible ? "scale-x-100" : "scale-x-0"}
+                      `}
+                      style={{ transitionDelay: isVisible ? `${delay + 0.22 + service.features.length * 0.05 + 0.05}s` : "0s" }}
+                    />
+                  </div>
+
+                  {/* Tags fade-up */}
+                  <div
+                    className={`flex flex-wrap gap-2
+                      transition-[opacity,transform,filter] duration-600 ease-out
+                      ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                    `}
+                    style={{ transitionDelay: isVisible ? `${delay + 0.22 + service.features.length * 0.05 + 0.12}s` : "0s" }}
+                  >
                     <span className="text-[11px] uppercase tracking-wider text-construction-gray/80 bg-construction-white px-2 py-1 rounded">
                       Specialist Crew
                     </span>
