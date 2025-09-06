@@ -22,12 +22,19 @@ const AboutSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  return <section ref={sectionRef} id="about" className="relative py-32 overflow-hidden bg-white">
+  return (
+    <section
+      ref={sectionRef}
+      id="about"
+      className="relative py-32 overflow-hidden bg-white"
+    >
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Fine grid */}
-        <div className="absolute inset-0" style={{
-        backgroundImage: `
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
               repeating-linear-gradient(
                 to right,
                 rgba(31,41,55,0.03) 0,
@@ -42,11 +49,14 @@ const AboutSection = () => {
                 transparent 1px,
                 transparent 32px
               )
-            `
-      }} />
+            `,
+          }}
+        />
         {/* Bold grid every ~160px */}
-        <div className="absolute inset-0" style={{
-        backgroundImage: `
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
               repeating-linear-gradient(
                 to right,
                 rgba(31,41,55,0.025) 0,
@@ -61,12 +71,23 @@ const AboutSection = () => {
                 transparent 1.5px,
                 transparent 160px
               )
-            `
-      }} />
+            `,
+          }}
+        />
         {/* Faint blueprint scribbles/dimensions */}
-        <svg className="absolute inset-0 opacity-[0.03]" viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <svg
+          className="absolute inset-0 opacity-[0.03]"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+        >
           <g stroke="#1F2937" strokeWidth="1" fill="none">
-            <line x1="200" y1="600" x2="1000" y2="600" strokeDasharray="6 10" />
+            <line
+              x1="200"
+              y1="600"
+              x2="1000"
+              y2="600"
+              strokeDasharray="6 10"
+            />
             <path d="M200 600 l14 -8 v16 z" />
             <path d="M1000 600 l-14 -8 v16 z" />
             <line x1="420" y1="380" x2="470" y2="380" />
@@ -74,20 +95,29 @@ const AboutSection = () => {
           </g>
         </svg>
         {/* Soft paper vignette */}
-        <div className="absolute inset-0" style={{
-        background: "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)"
-      }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)",
+          }}
+        />
       </div>
 
       {/* ===== Fold effect ===== */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
-      
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
         <div className="grid gap-12 items-center lg:grid-cols-[1fr_1.2fr]">
           {/* === Image column with blueprint outline === */}
-          <div className={`relative transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+          <div
+            className={`relative transition-all duration-1000 ease-out ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-8"
+            }`}
+          >
             <div className="relative rounded-2xl p-4 border-2 border-solid border-construction-dark/15">
               <div className="pointer-events-none absolute inset-2 rounded-xl border border-dashed border-construction-dark/8" />
               {/* corner ticks */}
@@ -100,15 +130,26 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
               {/* content */}
-              <img src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png" alt="House construction framing" className="relative w-full rounded-xl shadow-[var(--shadow-premium)]" />
+              <img
+                src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
+                alt="House construction framing"
+                className="relative w-full rounded-xl shadow-[var(--shadow-premium)]"
+              />
             </div>
           </div>
 
-          {/* === Text column (clean, no blueprint outline) === */}
+          {/* === Text column === */}
           <div className="relative">
             {/* tag */}
-            <div className={`flex justify-center lg:justify-start mb-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-4 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.2s' : '0s' }}>
-              <BlueprintPillHeader 
+            <div
+              className={`flex justify-center lg:justify-start mb-6 transition-all duration-700 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0 blur-0"
+                  : "opacity-0 translate-y-4 blur-sm"
+              }`}
+              style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}
+            >
+              <BlueprintPillHeader
                 index="1"
                 title="Company Profile"
                 metaRight="Est. 2019"
@@ -117,14 +158,28 @@ const AboutSection = () => {
             </div>
 
             {/* heading */}
-            <h2 className={`text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight transition-all duration-800 ease-out ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-6 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.4s' : '0s' }}>
+            <h2
+              className={`text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight transition-all duration-800 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0 blur-0"
+                  : "opacity-0 translate-y-6 blur-sm"
+              }`}
+              style={{ transitionDelay: isVisible ? "0.4s" : "0s" }}
+            >
               Framing Excellence
               <br />
               <span className="text-construction-green">Built to Last</span>
             </h2>
 
             {/* body */}
-            <div className={`space-y-6 text-lg text-construction-gray leading-relaxed transition-all duration-900 ease-out ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-4 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.6s' : '0s' }}>
+            <div
+              className={`space-y-6 text-lg text-construction-gray leading-relaxed transition-all duration-900 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0 blur-0"
+                  : "opacity-0 translate-y-4 blur-sm"
+              }`}
+              style={{ transitionDelay: isVisible ? "0.6s" : "0s" }}
+            >
               <p>
                 Framing isn't just one of many services — it's all we do. Our
                 crews are dedicated specialists who ensure every project starts
@@ -139,7 +194,7 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* stats card */}
+            {/* === NEW stats card === */}
             <div
               className={`relative mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out ${
                 isVisible
@@ -148,7 +203,7 @@ const AboutSection = () => {
               }`}
               style={{ transitionDelay: isVisible ? "0.8s" : "0s" }}
             >
-              {/* faint blueprint corner ticks */}
+              {/* corner ticks */}
               <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/20" />
               <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/20" />
               <div className="pointer-events-none absolute -top-2 right-6 h-4 w-px bg-construction-dark/20" />
@@ -157,7 +212,7 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-construction-dark/20" />
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/20" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/20" />
-            
+
               {/* stat blocks */}
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
@@ -167,7 +222,7 @@ const AboutSection = () => {
                   Projects
                 </div>
               </div>
-            
+
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
                   15+
@@ -176,7 +231,7 @@ const AboutSection = () => {
                   Years
                 </div>
               </div>
-            
+
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
                   100%
@@ -186,10 +241,12 @@ const AboutSection = () => {
                 </div>
               </div>
             </div>
-
+          </div>
           {/* === /Text column === */}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default AboutSection;
