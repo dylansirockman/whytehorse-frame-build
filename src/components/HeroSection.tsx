@@ -299,9 +299,10 @@ const HeroSection = () => {
           <div className="relative overflow-hidden">
             {/* Continuous scrolling container */}
             <div 
-              className="flex gap-x-12 animate-scroll will-change-transform"
+              className="flex animate-scroll will-change-transform"
               style={{
-                width: 'calc(200% + 6rem)', // Account for larger gap
+                gap: '3rem',
+                width: 'fit-content',
               }}
             >
               {[
@@ -398,10 +399,10 @@ const HeroSection = () => {
         /* Scrolling animation for client logos - smooth infinite scroll */
         @keyframes scroll {
           0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(-50%, 0, 0); }
+          100% { transform: translate3d(calc(-100% - 1.5rem), 0, 0); }
         }
         .animate-scroll {
-          animation: scroll 45s linear infinite;
+          animation: scroll 30s linear infinite;
           backface-visibility: hidden;
           perspective: 1000px;
         }
