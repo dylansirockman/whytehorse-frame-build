@@ -194,7 +194,7 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* === NEW stats card === */}
+            {/* === NEW stats card (smaller numbers) === */}
             <div
               className={`relative mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out ${
                 isVisible
@@ -215,7 +215,7 @@ const AboutSection = () => {
 
               {/* stat blocks */}
               <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   500+
                 </div>
                 <div className="text-xs uppercase tracking-wider text-construction-gray">
@@ -224,7 +224,7 @@ const AboutSection = () => {
               </div>
 
               <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   15+
                 </div>
                 <div className="text-xs uppercase tracking-wider text-construction-gray">
@@ -233,7 +233,7 @@ const AboutSection = () => {
               </div>
 
               <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   100%
                 </div>
                 <div className="text-xs uppercase tracking-wider text-construction-gray">
