@@ -11,12 +11,53 @@ const services = [
 
 const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
+
+  // per-card refs + visibility
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [revealed, setRevealed] = useState<boolean[]>(() => services.map(() => false));
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([entry]) => entry.isIntersecting && setIsVisible(true), { threshold: 0.1, rootMargin: "-50px" });
-    sectionRef.current && obs.observe(sectionRef.current);
-    return () => obs.disconnect();
+    // Reveal header only when ~30% of the section is on screen
+    const sectionObs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSectionVisible(true);
+          sectionObs.disconnect();
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: "0px 0px -20% 0px", // avoid firing too early
+      }
+    );
+    if (sectionRef.current) sectionObs.observe(sectionRef.current);
+    return () => sectionObs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // Reveal each card as it enters viewport
+    const cardObs = new IntersectionObserver(
+      (entries) => {
+        setRevealed((prev) => {
+          const next = [...prev];
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              const idx = Number((e.target as HTMLElement).dataset.index);
+              if (!Number.isNaN(idx)) next[idx] = true;
+            }
+          }
+          return next;
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -10% 0px",
+      }
+    );
+
+    cardRefs.current.forEach((el) => el && cardObs.observe(el));
+    return () => cardObs.disconnect();
   }, []);
 
   return (
@@ -45,10 +86,10 @@ const ServicesSection = () => {
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6">
-        {/* Header */}
+        {/* Header (reveals only when section enters) */}
         <div
           className={`text-center mb-16 transition-[opacity,transform,filter] duration-700 ease-out motion-reduce:transition-none
-            ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-2 blur-[1px] motion-reduce:translate-y-0 motion-reduce:blur-0"}
+            ${sectionVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-2 blur-[1px] motion-reduce:translate-y-0 motion-reduce:blur-0"}
           `}
         >
           <div className="flex justify-center mb-5">
@@ -66,19 +107,22 @@ const ServicesSection = () => {
         <div className="grid lg:grid-cols-2 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
-            const delay = 0.12 + i * 0.08; // card stagger
+            const baseDelay = 0.05; // base delay once a card is visible
+            const isCardVisible = revealed[i];
             return (
               <article
                 key={service.title}
+                data-index={i}
+                ref={(el) => (cardRefs.current[i] = el)}
                 tabIndex={0}
                 className={`relative group rounded-2xl border border-construction-dark/10 bg-white/80 backdrop-blur-sm shadow-sm outline-none
                   transition-[opacity,transform,box-shadow,filter] duration-600 ease-out motion-reduce:transition-none
-                  ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 motion-reduce:translate-y-0"}
+                  ${isCardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 motion-reduce:translate-y-0"}
                   hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-construction-green/50`}
-                style={{ transitionDelay: isVisible ? `${delay}s` : "0s" }}
+                style={{ transitionDelay: isCardVisible ? `${baseDelay}s` : "0s" }}
                 aria-label={service.title}
               >
-                {/* Minimal corner ticks (top-left only, super subtle) */}
+                {/* Minimal corner ticks */}
                 <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
                 <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
 
@@ -89,10 +133,10 @@ const ServicesSection = () => {
                     <div
                       className={`w-12 h-12 rounded-xl bg-construction-green/10 grid place-items-center shrink-0
                         transition-[opacity,transform,filter,background-color] duration-500 ease-out
-                        ${isVisible ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-[0.5px]"}
+                        ${isCardVisible ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-[0.5px]"}
                         group-hover:bg-construction-green
                       `}
-                      style={{ transitionDelay: isVisible ? `${delay + 0.05}s` : "0s" }}
+                      style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.04}s` : "0s" }}
                     >
                       <Icon className="w-7 h-7 text-construction-green transition-colors duration-300 group-hover:text-white" aria-hidden="true" />
                     </div>
@@ -101,9 +145,9 @@ const ServicesSection = () => {
                     <h3
                       className={`text-xl font-semibold text-construction-dark leading-snug
                         transition-[opacity,transform,filter] duration-600 ease-out
-                        ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                        ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
                       `}
-                      style={{ transitionDelay: isVisible ? `${delay + 0.1}s` : "0s" }}
+                      style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.08}s` : "0s" }}
                     >
                       {service.title}
                     </h3>
@@ -113,23 +157,23 @@ const ServicesSection = () => {
                   <p
                     className={`text-construction-gray leading-relaxed mb-5
                       transition-[opacity,transform,filter] duration-600 ease-out
-                      ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
                     `}
-                    style={{ transitionDelay: isVisible ? `${delay + 0.18}s` : "0s" }}
+                    style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.14}s` : "0s" }}
                   >
                     {service.description}
                   </p>
 
-                  {/* Features (cascade) */}
+                  {/* Features (cascade after card is visible) */}
                   <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
                     {service.features.map((feature, idx) => (
                       <li
                         key={feature}
                         className={`flex items-center text-sm text-construction-gray
                           transition-[opacity,transform,filter] duration-500 ease-out
-                          ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                          ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
                         `}
-                        style={{ transitionDelay: isVisible ? `${delay + 0.22 + idx * 0.05}s` : "0s" }}
+                        style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.18 + idx * 0.05}s` : "0s" }}
                       >
                         <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-construction-green" />
                         {feature}
@@ -145,9 +189,9 @@ const ServicesSection = () => {
                     <div
                       className={`h-px bg-construction-dark/10 origin-left
                         transition-transform duration-700 ease-out
-                        ${isVisible ? "scale-x-100" : "scale-x-0"}
+                        ${isCardVisible ? "scale-x-100" : "scale-x-0"}
                       `}
-                      style={{ transitionDelay: isVisible ? `${delay + 0.22 + service.features.length * 0.05 + 0.05}s` : "0s" }}
+                      style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.18 + services[i].features.length * 0.05 + 0.05}s` : "0s" }}
                     />
                   </div>
 
@@ -155,9 +199,9 @@ const ServicesSection = () => {
                   <div
                     className={`flex flex-wrap gap-2
                       transition-[opacity,transform,filter] duration-600 ease-out
-                      ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
                     `}
-                    style={{ transitionDelay: isVisible ? `${delay + 0.22 + service.features.length * 0.05 + 0.12}s` : "0s" }}
+                    style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.18 + services[i].features.length * 0.05 + 0.12}s` : "0s" }}
                   >
                     <span className="text-[11px] uppercase tracking-wider text-construction-gray/80 bg-construction-white px-2 py-1 rounded">
                       Specialist Crew
