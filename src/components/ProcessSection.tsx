@@ -56,8 +56,12 @@ const ProcessSection = () => {
       id="process"
       className="relative py-32 overflow-hidden bg-white"
     >
-      {/* Blueprint background */}
+      {/* ===== Top paper fold / shadow ===== */}
+      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
+
+      {/* ===== Blueprint background ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* fine grid */}
         <div
           className="absolute inset-0"
           style={{
@@ -67,6 +71,7 @@ const ProcessSection = () => {
             `,
           }}
         />
+        {/* soft vignette */}
         <div
           className="absolute inset-0"
           style={{
@@ -76,8 +81,9 @@ const ProcessSection = () => {
         />
       </div>
 
-      {/* Content */}
+      {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
+        {/* header */}
         <div
           className={`text-center mb-20 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
@@ -100,6 +106,7 @@ const ProcessSection = () => {
           </p>
         </div>
 
+        {/* steps */}
         <div className="space-y-24">
           {processSteps.map((step, i) => (
             <div
@@ -111,6 +118,7 @@ const ProcessSection = () => {
               }`}
               style={{ transitionDelay: isVisible ? `${0.2 + i * 0.1}s` : "0s" }}
             >
+              {/* text */}
               <div className={i % 2 === 1 ? "lg:col-start-2" : ""}>
                 <div className="flex items-center mb-6">
                   <div className="w-20 h-20 rounded-xl border-2 border-dashed border-construction-green flex items-center justify-center text-2xl font-bold text-construction-green mr-6 bg-white shadow-[var(--shadow-card)]">
@@ -135,14 +143,64 @@ const ProcessSection = () => {
                 </ul>
               </div>
 
+              {/* image (construction plan frame variants) */}
               <div className={i % 2 === 1 ? "lg:col-start-1" : ""}>
                 <div className="relative">
-                  <div className="absolute -top-3 -right-3 w-full h-full border-2 border-dashed border-construction-dark/10 rounded-2xl" />
+                  {/* Variant A: dashed offset (step 1) */}
+                  {i % 4 === 0 && (
+                    <div
+                      className="absolute -top-3 -right-3 w-full h-full rounded-2xl border-2 border-dashed border-construction-dark/10"
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {/* Variant B: subtle inset dashed (step 2) */}
+                  {i % 4 === 1 && (
+                    <div
+                      className="absolute inset-3 rounded-xl border border-dashed border-construction-dark/10"
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {/* Variant C: corner ticks (step 3) */}
+                  {i % 4 === 2 && (
+                    <>
+                      <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/20" />
+                      <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/20" />
+                      <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/20" />
+                      <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/20" />
+                    </>
+                  )}
+
+                  {/* Variant D: faint dimension lines overlay (step 4) */}
+                  {i % 4 === 3 && (
+                    <svg
+                      className="absolute inset-0 opacity-[0.18]"
+                      viewBox="0 0 1200 800"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <g stroke="#1F2937" strokeWidth="1" fill="none">
+                        <line x1="120" y1="680" x2="1080" y2="680" strokeDasharray="6 10" />
+                        <path d="M120 680 l14 -8 v16 z" />
+                        <path d="M1080 680 l-14 -8 v16 z" />
+                        <line x1="240" y1="540" x2="300" y2="540" />
+                        <line x1="270" y1="510" x2="270" y2="570" />
+                      </g>
+                    </svg>
+                  )}
+
+                  {/* image */}
                   <img
                     src={step.image}
                     alt={step.title}
                     className="relative w-full rounded-2xl shadow-[var(--shadow-premium)]"
                   />
+
+                  {/* small plan label (consistent, minimal) */}
+                  <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider text-construction-gray/80 bg-white/80 backdrop-blur-sm px-2 py-1 rounded">
+                    {step.number} • {step.title}
+                  </span>
                 </div>
               </div>
             </div>
