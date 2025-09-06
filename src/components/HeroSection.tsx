@@ -305,21 +305,17 @@ const HeroSection = () => {
               }}
             >
               {[
-                { name: "Logoipsum Script", logo: "/lovable-uploads/d765f7a6-5fda-4db4-94c0-d05847ca9ef2.png" },
-                { name: "Logoipsum Modern", logo: "/lovable-uploads/c5ce4688-67e6-45b4-b475-c2a18a045dcc.png" },
-                { name: "Logoipsum Foundation", logo: "/lovable-uploads/0127c606-619f-4468-afea-9f677d92de43.png" },
-                { name: "Department of Fictional Logos", logo: "/lovable-uploads/a0d07b3a-0d65-4dd6-8fd3-9cb69e06efcb.png" },
-                { name: "Logoipsum Blue", logo: "/lovable-uploads/bcd5906a-6b19-4217-bcaa-fbd0111acaa8.png" },
-                { name: "Logoipsum Green", logo: "/lovable-uploads/6bcde3c7-7bef-4928-bd1e-917b312b0824.png" },
-                { name: "Logoipsum Orange", logo: "/lovable-uploads/f37c6130-3e11-49bb-8638-c3e4f00d2836.png" },
+                { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
+                { name: "Bedrock Homes", logo: "/lovable-uploads/a39212c1-3db0-4de7-a94a-1d4c68d8884f.png" },
+                { name: "Akash Homes", logo: "/lovable-uploads/6cb38c0c-452e-4c06-94df-ff31e39d1954.png" },
+                { name: "Homes by AVI", logo: "/lovable-uploads/7524530b-4e9d-4a6f-9b38-3606a9374006.png" },
+                { name: "Parkwood Master Builder", logo: "/lovable-uploads/1a853731-dd2b-4f87-ab58-4b7dcf683ddb.png" },
                 // Duplicate for seamless loop
-                { name: "Logoipsum Script", logo: "/lovable-uploads/d765f7a6-5fda-4db4-94c0-d05847ca9ef2.png" },
-                { name: "Logoipsum Modern", logo: "/lovable-uploads/c5ce4688-67e6-45b4-b475-c2a18a045dcc.png" },
-                { name: "Logoipsum Foundation", logo: "/lovable-uploads/0127c606-619f-4468-afea-9f677d92de43.png" },
-                { name: "Department of Fictional Logos", logo: "/lovable-uploads/a0d07b3a-0d65-4dd6-8fd3-9cb69e06efcb.png" },
-                { name: "Logoipsum Blue", logo: "/lovable-uploads/bcd5906a-6b19-4217-bcaa-fbd0111acaa8.png" },
-                { name: "Logoipsum Green", logo: "/lovable-uploads/6bcde3c7-7bef-4928-bd1e-917b312b0824.png" },
-                { name: "Logoipsum Orange", logo: "/lovable-uploads/f37c6130-3e11-49bb-8638-c3e4f00d2836.png" },
+                { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
+                { name: "Bedrock Homes", logo: "/lovable-uploads/a39212c1-3db0-4de7-a94a-1d4c68d8884f.png" },
+                { name: "Akash Homes", logo: "/lovable-uploads/6cb38c0c-452e-4c06-94df-ff31e39d1954.png" },
+                { name: "Homes by AVI", logo: "/lovable-uploads/7524530b-4e9d-4a6f-9b38-3606a9374006.png" },
+                { name: "Parkwood Master Builder", logo: "/lovable-uploads/1a853731-dd2b-4f87-ab58-4b7dcf683ddb.png" },
               ].map((client, index) => (
                 <div
                   key={`${client.name}-${index}`}
