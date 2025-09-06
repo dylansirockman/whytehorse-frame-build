@@ -305,23 +305,21 @@ const HeroSection = () => {
               }}
             >
               {[
-                { name: "Builder One", logo: "/client-logo1.svg" },
-                { name: "Construction Co", logo: "/client-logo2.svg" },
-                { name: "Homes Ltd", logo: "/client-logo3.svg" },
-                { name: "Prairie Build", logo: "/client-logo4.svg" },
-                { name: "Alberta Framing", logo: "/client-logo5.svg" },
-                { name: "Summit Builders", logo: "/client-logo6.svg" },
-                { name: "Rockwood Homes", logo: "/client-logo7.svg" },
-                { name: "Northern Contractors", logo: "/client-logo8.svg" },
+                { name: "Logoipsum Script", logo: "/lovable-uploads/d765f7a6-5fda-4db4-94c0-d05847ca9ef2.png" },
+                { name: "Logoipsum Modern", logo: "/lovable-uploads/c5ce4688-67e6-45b4-b475-c2a18a045dcc.png" },
+                { name: "Logoipsum Foundation", logo: "/lovable-uploads/0127c606-619f-4468-afea-9f677d92de43.png" },
+                { name: "Department of Fictional Logos", logo: "/lovable-uploads/a0d07b3a-0d65-4dd6-8fd3-9cb69e06efcb.png" },
+                { name: "Logoipsum Blue", logo: "/lovable-uploads/bcd5906a-6b19-4217-bcaa-fbd0111acaa8.png" },
+                { name: "Logoipsum Green", logo: "/lovable-uploads/6bcde3c7-7bef-4928-bd1e-917b312b0824.png" },
+                { name: "Logoipsum Orange", logo: "/lovable-uploads/f37c6130-3e11-49bb-8638-c3e4f00d2836.png" },
                 // Duplicate for seamless loop
-                { name: "Builder One", logo: "/client-logo1.svg" },
-                { name: "Construction Co", logo: "/client-logo2.svg" },
-                { name: "Homes Ltd", logo: "/client-logo3.svg" },
-                { name: "Prairie Build", logo: "/client-logo4.svg" },
-                { name: "Alberta Framing", logo: "/client-logo5.svg" },
-                { name: "Summit Builders", logo: "/client-logo6.svg" },
-                { name: "Rockwood Homes", logo: "/client-logo7.svg" },
-                { name: "Northern Contractors", logo: "/client-logo8.svg" },
+                { name: "Logoipsum Script", logo: "/lovable-uploads/d765f7a6-5fda-4db4-94c0-d05847ca9ef2.png" },
+                { name: "Logoipsum Modern", logo: "/lovable-uploads/c5ce4688-67e6-45b4-b475-c2a18a045dcc.png" },
+                { name: "Logoipsum Foundation", logo: "/lovable-uploads/0127c606-619f-4468-afea-9f677d92de43.png" },
+                { name: "Department of Fictional Logos", logo: "/lovable-uploads/a0d07b3a-0d65-4dd6-8fd3-9cb69e06efcb.png" },
+                { name: "Logoipsum Blue", logo: "/lovable-uploads/bcd5906a-6b19-4217-bcaa-fbd0111acaa8.png" },
+                { name: "Logoipsum Green", logo: "/lovable-uploads/6bcde3c7-7bef-4928-bd1e-917b312b0824.png" },
+                { name: "Logoipsum Orange", logo: "/lovable-uploads/f37c6130-3e11-49bb-8638-c3e4f00d2836.png" },
               ].map((client, index) => (
                 <div
                   key={`${client.name}-${index}`}
