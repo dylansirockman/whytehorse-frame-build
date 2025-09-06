@@ -3,6 +3,14 @@ import BlueprintPillHeader from './BlueprintPillHeader';
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
 
+const LOGOS = [
+  { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
+  { name: "Bedrock Homes", logo: "/lovable-uploads/a39212c1-3db0-4de7-a94a-1d4c68d8884f.png" },
+  { name: "Akash Homes", logo: "/lovable-uploads/6cb38c0c-452e-4c06-94df-ff31e39d1954.png" },
+  { name: "Homes by AVI", logo: "/lovable-uploads/7524530b-4e9d-4a6f-9b38-3606a9374006.png" },
+  { name: "Parkwood Master Builder", logo: "/lovable-uploads/1a853731-dd2b-4f87-ab58-4b7dcf683ddb.png" },
+];
+
 const HeroSection = () => {
   const images = [
     "/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png",
@@ -135,10 +143,7 @@ const HeroSection = () => {
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             {/* Typewriter headline */}
-            <h1
-              className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger"
-              style={{ animationDelay: '0.3s' }}
-            >
+            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger" style={{ animationDelay: '0.3s' }}>
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
@@ -151,17 +156,11 @@ const HeroSection = () => {
               you can rely on
             </h1>
 
-            <p
-              className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger"
-              style={{ animationDelay: '0.5s' }}
-            >
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger" style={{ animationDelay: '0.5s' }}>
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
 
-            <div
-              className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger"
-              style={{ animationDelay: '0.7s' }}
-            >
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.7s' }}>
               <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
@@ -170,10 +169,7 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            <div
-              className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger"
-              style={{ animationDelay: '0.9s' }}
-            >
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.9s' }}>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
@@ -310,37 +306,28 @@ const HeroSection = () => {
           </div>
 
           <div className="relative overflow-hidden" aria-label="Trusted by logos">
+            {/* The track contains TWO copies of the exact same sequence; we animate -50% for a seamless loop */}
             <div
-              className="flex animate-scroll will-change-transform"
-              style={{ gap: '3rem', width: 'fit-content' }}
+              className="flex w-max will-change-transform animate-marquee"
+              style={{ gap: '3rem' }}
             >
-              {[
-                { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
-                { name: "Bedrock Homes", logo: "/lovable-uploads/a39212c1-3db0-4de7-a94a-1d4c68d8884f.png" },
-                { name: "Akash Homes", logo: "/lovable-uploads/6cb38c0c-452e-4c06-94df-ff31e39d1954.png" },
-                { name: "Homes by AVI", logo: "/lovable-uploads/7524530b-4e9d-4a6f-9b38-3606a9374006.png" },
-                { name: "Parkwood Master Builder", logo: "/lovable-uploads/1a853731-dd2b-4f87-ab58-4b7dcf683ddb.png" },
-                // Duplicate for seamless loop
-                { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
-                { name: "Bedrock Homes", logo: "/lovable-uploads/a39212c1-3db0-4de7-a94a-1d4c68d8884f.png" },
-                { name: "Akash Homes", logo: "/lovable-uploads/6cb38c0c-452e-4c06-94df-ff31e39d1954.png" },
-                { name: "Homes by AVI", logo: "/lovable-uploads/7524530b-4e9d-4a6f-9b38-3606a9374006.png" },
-                { name: "Parkwood Master Builder", logo: "/lovable-uploads/1a853731-dd2b-4f87-ab58-4b7dcf683ddb.png" },
-              ].map((client, index) => (
-                <div
-                  key={`${client.name}-${index}`}
-                  className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
-                  style={{ width: '140px', height: '60px', minWidth: '140px' }}
-                  aria-label={client.name}
-                >
-                  <img
-                    src={client.logo}
-                    alt={`Client: ${client.name}`}
-                    className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              {[0, 1].map((rep) =>
+                LOGOS.map((client, index) => (
+                  <div
+                    key={`${client.name}-${rep}-${index}`}
+                    className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
+                    style={{ width: '140px', height: '60px', minWidth: '140px' }}
+                    aria-label={client.name}
+                  >
+                    <img
+                      src={client.logo}
+                      alt={`Client: ${client.name}`}
+                      className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -390,28 +377,20 @@ const HeroSection = () => {
 
         /* One-time drop animation for Hero image wrapper */
         @keyframes imageDrop {
-          0% {
-            transform: translateY(-56px);
-            opacity: 0.8;
-          }
-          100% {
-            transform: translateY(0);
-            opacity: 1;
-          }
+          0% { transform: translateY(-56px); opacity: 0.8; }
+          100% { transform: translateY(0); opacity: 1; }
         }
-        .animate-imageDrop {
-          animation: imageDrop 800ms ease-out both;
-        }
+        .animate-imageDrop { animation: imageDrop 800ms ease-out both; }
 
-        /* Scrolling animation for client logos - smooth infinite scroll */
-        @keyframes scroll {
-          0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(calc(-100% - 1.5rem), 0, 0); }
+        /* Seamless infinite marquee:
+           Track width is 2x the single sequence. Moving -50% aligns sequence #2 with the container start.
+        */
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
         }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-          backface-visibility: hidden;
-          perspective: 1000px;
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
         }
 
         /* Reduced motion */
@@ -420,7 +399,7 @@ const HeroSection = () => {
           .animate-imageDrop { animation: none !important; opacity: 1 !important; transform: none !important; }
           .swingGroup { animation: none !important; }
           .animate-caret { animation: none !important; }
-          .animate-scroll { animation: none !important; }
+          .animate-marquee { animation: none !important; }
         }
       `}</style>
     </section>
