@@ -1,7 +1,6 @@
 // src/pages/Index.tsx
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import ClientShowcaseSection from "@/components/ClientShowcaseSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -16,7 +15,6 @@ const Index = () => {
       <main className="scroll-smooth [scroll-padding-top:6rem]">
         <HeroSection />
         <AboutSection />
-        <ClientShowcaseSection />
         <ServicesSection />
         <ProcessSection />
         <TrustSection />

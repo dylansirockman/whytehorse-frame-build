@@ -287,6 +287,58 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Trusted by section at bottom of Hero */}
+        <div className="relative z-20 mt-16 lg:mt-20 pb-8">
+          <div className="text-center mb-8">
+            <h3 className="text-lg md:text-xl font-semibold text-construction-gray mb-6">
+              Trusted by Alberta's Top Builders
+            </h3>
+          </div>
+
+          <div className="relative overflow-hidden">
+            {/* Continuous scrolling container */}
+            <div 
+              className="flex gap-x-8 animate-scroll"
+              style={{
+                width: 'calc(200% + 4rem)', // Account for gap
+              }}
+            >
+              {[
+                { name: "Builder One", logo: "/client-logo1.svg" },
+                { name: "Construction Co", logo: "/client-logo2.svg" },
+                { name: "Homes Ltd", logo: "/client-logo3.svg" },
+                { name: "Prairie Build", logo: "/client-logo4.svg" },
+                { name: "Alberta Framing", logo: "/client-logo5.svg" },
+                { name: "Summit Builders", logo: "/client-logo6.svg" },
+                { name: "Rockwood Homes", logo: "/client-logo7.svg" },
+                { name: "Northern Contractors", logo: "/client-logo8.svg" },
+                // Duplicate for seamless loop
+                { name: "Builder One", logo: "/client-logo1.svg" },
+                { name: "Construction Co", logo: "/client-logo2.svg" },
+                { name: "Homes Ltd", logo: "/client-logo3.svg" },
+                { name: "Prairie Build", logo: "/client-logo4.svg" },
+                { name: "Alberta Framing", logo: "/client-logo5.svg" },
+                { name: "Summit Builders", logo: "/client-logo6.svg" },
+                { name: "Rockwood Homes", logo: "/client-logo7.svg" },
+                { name: "Northern Contractors", logo: "/client-logo8.svg" },
+              ].map((client, index) => (
+                <div
+                  key={`${client.name}-${index}`}
+                  className="flex items-center justify-center flex-shrink-0"
+                  style={{ minWidth: '200px' }}
+                >
+                  <img
+                    src={client.logo}
+                    alt={`Client: ${client.name}`}
+                    className="max-h-10 md:max-h-12 w-auto opacity-40 hover:opacity-60 transition-opacity duration-300 grayscale hover:grayscale-0"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Keyframes for pendulum + caret + modern staggered entrance */}
@@ -345,12 +397,22 @@ const HeroSection = () => {
           animation: imageDrop 800ms ease-out both;
         }
 
+        /* Scrolling animation for client logos */
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .animate-slideUpStagger { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
           .animate-imageDrop { animation: none !important; opacity: 1 !important; transform: none !important; }
           .swingGroup { animation: none !important; }
           .animate-caret { animation: none !important; }
+          .animate-scroll { animation: none !important; }
         }
       `}</style>
     </section>
