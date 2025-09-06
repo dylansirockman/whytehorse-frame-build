@@ -104,8 +104,9 @@ const AboutSection = () => {
         />
       </div>
 
-      {/* ===== Fold effect ===== */}
+      {/* ===== Fold effects ===== */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/10 to-transparent z-10" />
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
@@ -194,7 +195,7 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* === NEW stats card (smaller numbers) === */}
+            {/* Stats card */}
             <div
               className={`relative mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out ${
                 isVisible
@@ -203,17 +204,6 @@ const AboutSection = () => {
               }`}
               style={{ transitionDelay: isVisible ? "0.8s" : "0s" }}
             >
-              {/* corner ticks */}
-              <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -top-2 right-6 h-4 w-px bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -right-2 top-6 h-px w-4 bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -bottom-2 left-6 h-4 w-px bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/20" />
-              <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/20" />
-
-              {/* stat blocks */}
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   500+
@@ -222,7 +212,6 @@ const AboutSection = () => {
                   Projects
                 </div>
               </div>
-
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   15+
@@ -231,7 +220,6 @@ const AboutSection = () => {
                   Years
                 </div>
               </div>
-
               <div className="flex flex-col items-center justify-center p-6">
                 <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   100%
