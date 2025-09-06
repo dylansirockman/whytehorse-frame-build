@@ -24,10 +24,9 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
   // === Typewriter headline ===
-  // Start on "Framing" (visible), hold 5s, then cycle: Precision → Speed → Integrity → Framing, and lock.
   const headlineWords = ["Framing", "Precision", "Deadlines", "Integrity", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
-  const [wordIndex, setWordIndex] = useState(0); // starts at "Framing"
+  const [wordIndex, setWordIndex] = useState(0);
   const [typed, setTyped] = useState("Framing");
   const [phase, setPhase] = useState<Phase>("initialPause");
 
@@ -131,14 +130,15 @@ const HeroSection = () => {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[15vh] z-10 bg-gradient-to-b from-transparent to-white" />
 
       {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 md:pb-28">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
-            
-
             {/* Typewriter headline */}
-            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger" style={{ animationDelay: '0.3s' }}>
+            <h1
+              className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger"
+              style={{ animationDelay: '0.3s' }}
+            >
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
@@ -151,11 +151,17 @@ const HeroSection = () => {
               you can rely on
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger" style={{ animationDelay: '0.5s' }}>
+            <p
+              className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger"
+              style={{ animationDelay: '0.5s' }}
+            >
               Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.7s' }}>
+            <div
+              className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger"
+              style={{ animationDelay: '0.7s' }}
+            >
               <Button variant="hero" size="lg" className="text-base font-semibold">
                 Get Quote
               </Button>
@@ -164,7 +170,10 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.9s' }}>
+            <div
+              className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger"
+              style={{ animationDelay: '0.9s' }}
+            >
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
                 <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
@@ -262,11 +271,12 @@ const HeroSection = () => {
                         e.stopPropagation();
                         window.open("https://instagram.com", "_blank");
                       }}
+                      aria-label="Open Instagram"
                     >
                       <Instagram size={24} strokeWidth={2.5} />
                     </button>
 
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-30" role="tablist" aria-label="Hero image pagination">
                       {images.map((_, index) => (
                         <button
                           key={index}
@@ -276,34 +286,33 @@ const HeroSection = () => {
                               ? "bg-construction-green shadow-lg scale-125"
                               : "bg-white/40 hover:bg-white/60"
                           }`}
+                          aria-label={`Go to slide ${index + 1}`}
+                          aria-selected={index === currentImageIndex}
+                          role="tab"
                         />
                       ))}
                     </div>
                   </div>
-
-                  {/* (no decorative dots) */}
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div> {/* end content wrapper */}
 
-        {/* Trusted by section at bottom of Hero */}
-        <div className="relative z-20 mt-16 lg:mt-20 pb-8">
-          <div className="text-center mb-8">
-            <h3 className="text-lg md:text-xl font-semibold text-construction-gray mb-6">
-              Trusted by Alberta's Top Builders
+      {/* ===== Anchored "Trusted by" band (inside Hero bottom) ===== */}
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
+          <div className="text-center mb-4">
+            <h3 className="text-sm md:text-base font-semibold text-construction-gray">
+              Trusted by Alberta&apos;s Top Builders
             </h3>
           </div>
 
-          <div className="relative overflow-hidden">
-            {/* Continuous scrolling container */}
-            <div 
+          <div className="relative overflow-hidden" aria-label="Trusted by logos">
+            <div
               className="flex animate-scroll will-change-transform"
-              style={{
-                gap: '3rem',
-                width: 'fit-content',
-              }}
+              style={{ gap: '3rem', width: 'fit-content' }}
             >
               {[
                 { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
@@ -321,11 +330,8 @@ const HeroSection = () => {
                 <div
                   key={`${client.name}-${index}`}
                   className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
-                  style={{ 
-                    width: '140px', 
-                    height: '60px',
-                    minWidth: '140px'
-                  }}
+                  style={{ width: '140px', height: '60px', minWidth: '140px' }}
+                  aria-label={client.name}
                 >
                   <img
                     src={client.logo}
@@ -339,6 +345,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      {/* ===== /Anchored "Trusted by" ===== */}
 
       {/* Keyframes for pendulum + caret + modern staggered entrance */}
       <style>{`
