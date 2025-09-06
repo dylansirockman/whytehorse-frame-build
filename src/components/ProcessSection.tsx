@@ -6,31 +6,35 @@ const processSteps = [
   {
     number: "01",
     title: "Layout & Planning",
-    description: "Precise measurements and layout according to architectural plans with detailed material calculations.",
+    description:
+      "Precise measurements and layout according to architectural plans with detailed material calculations.",
     image: "/lovable-uploads/a1ba7767-1cbb-44b9-8f4c-28d79e8d894b.png",
     checks: ["Precision measurements", "Accurate material takeoffs", "Code-compliant layout"],
   },
   {
-    number: "02", 
+    number: "02",
     title: "Floor Systems",
-    description: "Foundation and floor joist installation with structural integrity and proper load distribution.",
+    description:
+      "Foundation and floor joist installation with structural integrity and proper load distribution.",
     image: "/lovable-uploads/7f4a1d23-20ba-4078-85b6-248cba2c8d83.png",
     checks: ["Engineered joists", "Load distribution", "Moisture protection"],
   },
   {
     number: "03",
-    title: "Walls & Openings", 
-    description: "Wall framing with precise door and window openings, ensuring proper structural support.",
+    title: "Walls & Openings",
+    description:
+      "Wall framing with precise door and window openings, ensuring proper structural support.",
     image: "/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png",
     checks: ["Plumb & level walls", "Structural openings", "Sheathing alignment"],
   },
   {
     number: "04",
     title: "Roof Systems",
-    description: "Complete roof framing and truss installation with engineered precision and weather protection.",
+    description:
+      "Complete roof framing and truss installation with engineered precision and weather protection.",
     image: "/lovable-uploads/073b7385-c711-4d21-bdf2-a27e21f46e1c.png",
     checks: ["Engineered trusses", "Weather protection", "Fast installation"],
-  }
+  },
 ];
 
 const ProcessSection = () => {
@@ -38,10 +42,10 @@ const ProcessSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([entry]) => entry.isIntersecting && setIsVisible(true), {
-      threshold: 0.1,
-      rootMargin: "-50px"
-    });
+    const obs = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      { threshold: 0.1, rootMargin: "-50px" }
+    );
     sectionRef.current && obs.observe(sectionRef.current);
     return () => obs.disconnect();
   }, []);
@@ -65,7 +69,10 @@ const ProcessSection = () => {
         />
         <div
           className="absolute inset-0"
-          style={{ background: "radial-gradient(1200px 600px at 50% 12%, rgba(2,6,23,0.02), transparent 60%)" }}
+          style={{
+            background:
+              "radial-gradient(1200px 600px at 50% 12%, rgba(2,6,23,0.02), transparent 60%)",
+          }}
         />
       </div>
 
@@ -77,10 +84,10 @@ const ProcessSection = () => {
           }`}
         >
           <div className="flex justify-center mb-6">
-            <BlueprintPillHeader 
+            <BlueprintPillHeader
               index="3"
               title="Construction Method"
-              metaRight='Scale 1/4" = 1\'-0"'
+              metaRight={`Scale 1/4" = 1'-0"`}
               as="div"
             />
           </div>
@@ -88,7 +95,8 @@ const ProcessSection = () => {
             Systematic <span className="text-construction-green">Excellence</span>
           </h2>
           <p className="text-xl text-construction-gray max-w-3xl mx-auto leading-relaxed">
-            A proven methodology that ensures quality, speed, and precision at every stage of your framing project.
+            A proven methodology that ensures quality, speed, and precision at every stage of your
+            framing project.
           </p>
         </div>
 
