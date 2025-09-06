@@ -299,9 +299,9 @@ const HeroSection = () => {
           <div className="relative overflow-hidden">
             {/* Continuous scrolling container */}
             <div 
-              className="flex gap-x-8 animate-scroll"
+              className="flex gap-x-12 animate-scroll will-change-transform"
               style={{
-                width: 'calc(200% + 4rem)', // Account for gap
+                width: 'calc(200% + 6rem)', // Account for larger gap
               }}
             >
               {[
@@ -324,12 +324,12 @@ const HeroSection = () => {
                 <div
                   key={`${client.name}-${index}`}
                   className="flex items-center justify-center flex-shrink-0"
-                  style={{ minWidth: '200px' }}
+                  style={{ minWidth: '160px' }}
                 >
                   <img
                     src={client.logo}
                     alt={`Client: ${client.name}`}
-                    className="max-h-10 md:max-h-12 w-auto opacity-40 hover:opacity-60 transition-opacity duration-300 grayscale hover:grayscale-0"
+                    className="max-h-8 md:max-h-10 w-auto opacity-40 hover:opacity-60 transition-opacity duration-300 grayscale hover:grayscale-0 transform-gpu"
                     loading="lazy"
                   />
                 </div>
@@ -395,13 +395,15 @@ const HeroSection = () => {
           animation: imageDrop 800ms ease-out both;
         }
 
-        /* Scrolling animation for client logos */
+        /* Scrolling animation for client logos - smooth infinite scroll */
         @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
         }
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 45s linear infinite;
+          backface-visibility: hidden;
+          perspective: 1000px;
         }
 
         /* Reduced motion */
