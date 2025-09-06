@@ -140,21 +140,53 @@ const AboutSection = () => {
             </div>
 
             {/* stats card */}
-            <div className={`grid grid-cols-3 gap-8 mt-12 p-8 bg-gradient-to-br from-construction-light to-construction-white rounded-2xl border border-construction-light transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0 scale-100 blur-0' : 'opacity-0 translate-y-8 scale-95 blur-sm'}`} style={{ transitionDelay: isVisible ? '0.8s' : '0s' }}>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">500+</div>
-                <div className="text-sm text-construction-gray font-medium">Projects Completed</div>
+            <div
+              className={`relative mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0 scale-100 blur-0"
+                  : "opacity-0 translate-y-8 scale-95 blur-sm"
+              }`}
+              style={{ transitionDelay: isVisible ? "0.8s" : "0s" }}
+            >
+              {/* faint blueprint corner ticks */}
+              <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -top-2 right-6 h-4 w-px bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -right-2 top-6 h-px w-4 bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -bottom-2 left-6 h-4 w-px bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/20" />
+              <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/20" />
+            
+              {/* stat blocks */}
+              <div className="flex flex-col items-center justify-center p-6">
+                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                  500+
+                </div>
+                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                  Projects
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">15+</div>
-                <div className="text-sm text-construction-gray font-medium">Years Experience</div>
+            
+              <div className="flex flex-col items-center justify-center p-6">
+                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                  15+
+                </div>
+                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                  Years
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-construction-green mb-2">100%</div>
-                <div className="text-sm text-construction-gray font-medium">On Schedule</div>
+            
+              <div className="flex flex-col items-center justify-center p-6">
+                <div className="text-5xl font-bold text-construction-green mb-1 tracking-tight">
+                  100%
+                </div>
+                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                  On Schedule
+                </div>
               </div>
             </div>
-          </div>
+
           {/* === /Text column === */}
         </div>
       </div>
