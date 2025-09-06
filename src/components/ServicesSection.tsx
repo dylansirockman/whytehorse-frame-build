@@ -116,8 +116,7 @@ const ServicesSection = () => {
         />
       </div>
 
-      {/* Fold effect */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
+      
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-6">
