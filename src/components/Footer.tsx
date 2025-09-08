@@ -32,18 +32,18 @@ const Footer = () => {
       <div className="relative z-20 container mx-auto px-6 py-16">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Brand / blurb */}
-          <div className="flex items-center group" aria-label="WhyteHorse Contracting - Home">
-            <div className="flex flex-col leading-none">
-              <span className="text-2xl lg:text-3xl font-bold tracking-tight">
-                <span className="text-white">Whyte</span>
-                <span className="text-construction-green">horse</span>
-              </span>
-              <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-white/70 group-hover:text-white transition-colors">
-                Contracting
-              </span>
+          <div>
+            <div className="flex items-center group" aria-label="WhyteHorse Contracting - Logo">
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl lg:text-3xl font-bold tracking-tight">
+                  <span className="text-white">Whyte</span>
+                  <span className="text-construction-green">horse</span>
+                </span>
+                <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-white/70 group-hover:text-white transition-colors">
+                  Contracting
+                </span>
+              </div>
             </div>
-          </div>
-
 
             <p className="mt-5 text-white/80 leading-relaxed max-w-xs">
               Framing specialists delivering structural integrity—on spec and on
