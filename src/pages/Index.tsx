@@ -9,27 +9,50 @@ import TrustSection from "@/components/TrustSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
-/** Smooth anchor scrolling with header offset + graceful cancellation */
+/** Smooth anchor scrolling with dynamic header offset + a11y + graceful cancel */
 function SmoothScrolling({
-  headerHeight = 96,       // px; adjust if your header is taller/shorter
-  durationMs = 600,        // total animation time
+  headerHeight = 96,   // Fallback if header can't be measured
+  durationMs = 650,
 }: {
   headerHeight?: number;
   durationMs?: number;
 }) {
+  // --- Helpers (scoped to this component) ---
+  const getHeaderEl = () =>
+    document.querySelector<HTMLElement>('header[role="banner"]');
+
+  const getHeaderPx = (fallback: number) => {
+    const el = getHeaderEl();
+    return el ? Math.round(el.getBoundingClientRect().height) : fallback;
+  };
+
+  // Keep CSS var in sync so both JS scroll and native :target use the same offset
+  const syncHeaderVar = (fallback: number) => {
+    const px = getHeaderPx(fallback);
+    document.documentElement.style.setProperty("--app-header-h", `${px}px`);
+    return px;
+  };
+
   useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") return;
+
+    const prefersReduced =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
     const easeInOutCubic = (t: number) =>
       t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     let rafId: number | null = null;
     let cancelling = false;
 
-    const cancelers = [
-      ["wheel", { passive: true }],
-      ["touchstart", { passive: true }],
-      ["keydown", { passive: true }],
-      ["mousedown", { passive: true }],
-    ] as const;
+    // Ensure var is set immediately
+    syncHeaderVar(headerHeight);
+
+    // Update var on resize and scroll (your header style/height changes on scroll)
+    const onResize = () => syncHeaderVar(headerHeight);
+    const onScrollVar = () => syncHeaderVar(headerHeight);
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("scroll", onScrollVar, { passive: true });
 
     const cancel = () => {
       cancelling = true;
@@ -37,34 +60,40 @@ function SmoothScrolling({
         cancelAnimationFrame(rafId);
         rafId = null;
       }
-      // Remove cancel listeners after cancel
-      cancelers.forEach(([evt, opts]) => window.removeEventListener(evt, cancel, opts as any));
+      removeCancelListeners();
     };
 
-    const onClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-      const link = target.closest<HTMLAnchorElement>('a[href^="#"]');
-      if (!link) return;
+    const cancelOpts: AddEventListenerOptions = { passive: true, capture: false };
+    const addCancelListeners = () => {
+      window.addEventListener("wheel", cancel, cancelOpts);
+      window.addEventListener("touchstart", cancel, cancelOpts);
+      window.addEventListener("keydown", cancel, cancelOpts);
+      window.addEventListener("mousedown", cancel, cancelOpts);
+    };
+    const removeCancelListeners = () => {
+      window.removeEventListener("wheel", cancel, cancelOpts);
+      window.removeEventListener("touchstart", cancel, cancelOpts);
+      window.removeEventListener("keydown", cancel, cancelOpts);
+      window.removeEventListener("mousedown", cancel, cancelOpts);
+    };
 
-      const hash = decodeURIComponent(link.getAttribute("href") || "");
-      if (hash === "#" || hash.length < 2) return;
-
-      const el = document.getElementById(hash.slice(1));
-      if (!el) return;
-
-      e.preventDefault();
-
-      // Starting/ending positions
+    const scrollToTarget = (el: HTMLElement) => {
       const startY = window.scrollY;
       const rect = el.getBoundingClientRect();
-      const destY = rect.top + window.scrollY - headerHeight;
+      const hh = syncHeaderVar(headerHeight); // measure live header height
+      const destY = rect.top + window.scrollY - hh;
+
+      if (prefersReduced || durationMs <= 0) {
+        window.scrollTo(0, destY);
+        el.setAttribute("tabindex", "-1");
+        el.focus({ preventScroll: true });
+        el.removeAttribute("tabindex");
+        return;
+      }
 
       const start = performance.now();
       cancelling = false;
-
-      // Add cancel listeners for user intent override
-      cancelers.forEach(([evt, opts]) => window.addEventListener(evt, cancel, opts as any));
+      addCancelListeners();
 
       const step = (now: number) => {
         if (cancelling) return;
@@ -75,27 +104,74 @@ function SmoothScrolling({
         if (t < 1) {
           rafId = requestAnimationFrame(step);
         } else {
-          // Focus the target for a11y after scroll completes
-          (el as HTMLElement).setAttribute("tabindex", "-1");
-          (el as HTMLElement).focus({ preventScroll: true });
-          (el as HTMLElement).removeAttribute("tabindex");
-
-          // Clean up listeners
-          cancelers.forEach(([evt, opts]) => window.removeEventListener(evt, cancel, opts as any));
+          el.setAttribute("tabindex", "-1");
+          el.focus({ preventScroll: true });
+          el.removeAttribute("tabindex");
+          removeCancelListeners();
         }
       };
 
       rafId = requestAnimationFrame(step);
     };
 
-    document.addEventListener("click", onClick);
+    const isSamePageHash = (link: HTMLAnchorElement) => {
+      try {
+        const url = new URL(link.href, window.location.href);
+        return (
+          url.origin === window.location.origin &&
+          url.pathname === window.location.pathname &&
+          url.hash.startsWith("#") &&
+          url.hash.length > 1
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    const clickHandler = (e: MouseEvent) => {
+      // Only left-click without modifiers
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const link = target.closest<HTMLAnchorElement>('a[href^="#"], a[href*="#"]');
+      if (!link || !isSamePageHash(link)) return;
+
+      const hash = decodeURIComponent(link.hash);
+      const el = document.getElementById(hash.slice(1));
+      if (!el) return;
+
+      e.preventDefault();
+      scrollToTarget(el);
+      // Keep URL in sync (optional: comment out if you don't want history entries)
+      history.pushState(null, "", hash);
+    };
+
+    const handleHashJump = () => {
+      const { hash } = window.location;
+      if (!hash || hash.length < 2) return;
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (!el) return;
+      // Allow layout to settle before measuring
+      queueMicrotask(() => scrollToTarget(el));
+    };
+
+    document.addEventListener("click", clickHandler, { capture: true });
+    window.addEventListener("load", handleHashJump, { once: true });
+    window.addEventListener("hashchange", handleHashJump);
+
     return () => {
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", clickHandler, { capture: true } as any);
+      window.removeEventListener("load", handleHashJump as any);
+      window.removeEventListener("hashchange", handleHashJump as any);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScrollVar);
       cancel();
     };
   }, [headerHeight, durationMs]);
 
-  // Nothing to render
   return null;
 }
 
@@ -106,9 +182,10 @@ const Index = () => {
       {/* scroll-padding provides native offset for :target jumps; CSS var also used below */}
       <main
         className="scroll-smooth [scroll-padding-top:6rem]"
+        // Inline default; JS keeps --app-header-h in sync with real header height
         style={{ ["--app-header-h" as any]: "96px" }}
       >
-        {/* Global style to make deep links land cleanly without editing each section */}
+        {/* Make any <section id="..."> land cleanly without per-section edits */}
         <style>{`
           section[id] { scroll-margin-top: var(--app-header-h, 96px); }
         `}</style>
