@@ -76,7 +76,10 @@ const HeroSection = () => {
   }, [typed, phase, wordIndex, headlineWords]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white"
+    >
       {/* ===== Blueprint Background (subtle) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Paper tint + vignette */}
