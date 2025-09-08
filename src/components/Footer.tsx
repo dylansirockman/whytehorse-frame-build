@@ -33,13 +33,25 @@ const Footer = () => {
         <div className="grid gap-12 md:grid-cols-3">
           {/* Brand / blurb */}
           <div>
-            <img
-              src="/lovable-uploads/0e70d349-e446-43b6-b64d-5fab0610534c.png"
-              alt="WhyteHorse Contracting"
-              className="h-12 w-auto mb-5 filter brightness-0 invert"
-            />
-            <p className="text-white/80 leading-relaxed">
-              Framing specialists delivering structural integrity—on spec and on schedule.
+            <a
+              href="#"
+              className="flex items-center group"
+              aria-label="WhyteHorse Contracting - Home"
+            >
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl lg:text-3xl font-bold tracking-tight">
+                  <span className="text-white">Whyte</span>
+                  <span className="text-construction-green">horse</span>
+                </span>
+                <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-white/70 group-hover:text-white transition-colors">
+                  Contracting
+                </span>
+              </div>
+            </a>
+
+            <p className="mt-5 text-white/80 leading-relaxed max-w-xs">
+              Framing specialists delivering structural integrity—on spec and on
+              schedule.
             </p>
 
             {/* Quick CTA */}

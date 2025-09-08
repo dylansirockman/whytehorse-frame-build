@@ -9,16 +9,6 @@ const NAV = [
   { href: "#contact", label: "Contact" },
 ];
 
-// Read the same header offset var your Index.tsx maintains
-const getHeaderOffset = (fallback = 96) => {
-  if (typeof window === "undefined") return fallback;
-  const v = getComputedStyle(document.documentElement)
-    .getPropertyValue("--app-header-h")
-    .trim();
-  const n = parseInt(v, 10);
-  return Number.isFinite(n) && n > 0 ? n : fallback;
-};
-
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -32,71 +22,28 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Track active section + clear at top so Hero shows no underline
+  // Track active section (simple hash + scroll position)
   useEffect(() => {
-    const sectionIds = NAV.map((n) => n.href.slice(1));
+    const sectionIds = NAV.map(n => n.href.replace("#", ""));
     const nodes = sectionIds
-      .map((id) => document.getElementById(id))
+      .map(id => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
 
     if (nodes.length === 0) return;
 
-    let lastFromObserver = ""; // remember what observer thinks is active
-
-    const updateTopState = () => {
-      const hh = getHeaderOffset(96);
-      const first = nodes[0]; // "#about"
-      const firstTop = first.getBoundingClientRect().top + window.scrollY;
-      // If we are above the first section's top (minus a small buffer for header),
-      // consider ourselves in the Hero region -> clear active.
-      if (window.scrollY < firstTop - hh - 4) {
-        if (active !== "") setActive(""); // clear when in hero
-      } else {
-        // Once we're past About, restore what observer saw
-        if (lastFromObserver !== active) setActive(lastFromObserver);
-      }
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
-        const hh = getHeaderOffset(96);
-        // Pick the most visible section that is below the header line
         const visible = entries
-          .filter((e) => e.isIntersecting)
+          .filter(e => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]) {
-          lastFromObserver = visible[0].target.id;
-        }
-        // Sync with top-state logic
-        updateTopState();
+        if (visible[0]) setActive(visible[0].target.id);
       },
-      {
-        // Top margin: push the intersection line down by header height + 8px,
-        // so sections only count as active after they clear the sticky header.
-        rootMargin: `-${getHeaderOffset(96) + 8}px 0px -60% 0px`,
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
-    nodes.forEach((el) => observer.observe(el));
-
-    // Keep things correct when resizing/scrolling (header height can change)
-    const onScroll = () => updateTopState();
-    const onResize = () => updateTopState();
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
-
-    // Initialize correct state on mount
-    updateTopState();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [active]);
+    nodes.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   // Close mobile when navigating
   const handleNavClick = () => setOpen(false);
@@ -114,13 +61,8 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top row */}
         <div className="h-20 flex items-center justify-between gap-4">
-          {/* Brand -> go to Hero */}
-          <a
-            href="#hero"
-            className="flex items-center group"
-            aria-label="WhyteHorse Contracting - Home"
-            onClick={handleNavClick}
-          >
+          {/* Brand */}
+          <a href="#" className="flex items-center group" aria-label="WhyteHorse Contracting - Home">
             <div className="flex flex-col leading-none">
               <span className="text-2xl lg:text-3xl font-bold tracking-tight">
                 <span className="text-construction-dark">Whyte</span>
@@ -135,7 +77,7 @@ const Header = () => {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
             {NAV.map((item) => {
-              const isActive = active === item.href.slice(1);
+              const isActive = active === item.href.replace("#", "");
               return (
                 <a
                   key={item.href}
@@ -143,13 +85,15 @@ const Header = () => {
                   onClick={handleNavClick}
                   className={[
                     "relative font-medium transition-colors",
-                    isActive ? "text-construction-green" : "text-construction-dark hover:text-construction-green"
+                    "text-construction-dark hover:text-construction-green"
                   ].join(" ")}
                 >
                   {item.label}
-                  {/* active underline */}
+                  {/* underline on hover */}
+                  <span className="absolute left-0 -bottom-1 h-px w-0 bg-construction-green/80 transition-all duration-300 group-hover:w-full peer-hover:w-full"></span>
+                  {/* active dot/underline */}
                   {isActive && (
-                    <span className="absolute left-0 -bottom-1 h-[2px] w-full rounded bg-construction-green" />
+                    <span className="absolute left-0 -bottom-1 h-[2px] w-full rounded bg-construction-green"></span>
                   )}
                 </a>
               );
@@ -201,7 +145,7 @@ const Header = () => {
           <div className="pb-6 border-t border-black/10">
             <nav className="flex flex-col py-3" aria-label="Mobile">
               {NAV.map((item) => {
-                const isActive = active === item.href.slice(1);
+                const isActive = active === item.href.replace("#", "");
                 return (
                   <a
                     key={item.href}
