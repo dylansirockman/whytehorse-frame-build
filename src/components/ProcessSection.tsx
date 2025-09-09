@@ -135,7 +135,7 @@ const ProcessSection = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="relative py-32 overflow-hidden bg-white"
+      className="relative py-24 lg:py-32 overflow-hidden bg-white"
     >
       {/* Top paper fold / shadow */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
@@ -146,8 +146,8 @@ const ProcessSection = () => {
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              repeating-linear-gradient(to right, rgba(31,41,55,0.02) 0, rgba(31,41,55,0.02) 1px, transparent 1px, transparent 36px),
-              repeating-linear-gradient(to bottom, rgba(31,41,55,0.02) 0, rgba(31,41,55,0.02) 1px, transparent 1px, transparent 36px)
+              repeating-linear-gradient(to right, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px),
+              repeating-linear-gradient(to bottom, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px)
             `,
           }}
         />
@@ -161,10 +161,10 @@ const ProcessSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6">
+      <div className="relative z-20 container mx-auto px-4">
         <div
-          className={`text-center mb-20 transition-all duration-700 ease-out motion-reduce:transition-none ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 motion-reduce:translate-y-0"
+          className={`text-center mb-16 lg:mb-20 transition-all duration-700 ease-out motion-reduce:transition-none ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 motion-reduce:translate-y-0"
           }`}
         >
           <div className="flex justify-center mb-6">
@@ -175,55 +175,55 @@ const ProcessSection = () => {
               as="div"
             />
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6 leading-tight">
+          <h2 className="text-3xl lg:text-6xl font-bold text-construction-dark mb-6 leading-tight">
             Systematic <span className="text-construction-green">Excellence</span>
           </h2>
-          <p className="text-xl text-construction-gray max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base lg:text-xl text-construction-gray max-w-3xl mx-auto leading-relaxed">
             A proven methodology that ensures quality, speed, and precision at every stage of your
             framing project.
           </p>
         </div>
 
-        <div className="space-y-24">
+        <div className="space-y-16 lg:space-y-24">
           {processSteps.map((step, i) => {
-            const variant = (["A", "B", "C", "D"] as const)[i % 4];
+            const variant = "A"; // Use only Variant A on mobile for simplicity
             return (
               <div
                 key={step.number}
-                className={`grid lg:grid-cols-2 gap-16 items-center ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
                   i % 2 === 1 ? "lg:grid-flow-col-dense" : ""
                 } transition-all duration-700 ease-out motion-reduce:transition-none ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 motion-reduce:translate-y-0"
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 motion-reduce:translate-y-0"
                 }`}
                 style={{ transitionDelay: isVisible ? `${0.2 + i * 0.1}s` : "0s" }}
               >
                 {/* Text */}
-                <div className={i % 2 === 1 ? "lg:col-start-2" : ""}>
-                  <div className="flex items-center mb-6">
-                    <div className="w-20 h-20 rounded-xl border border-construction-green/40 flex items-center justify-center text-2xl font-bold text-construction-green mr-6 bg-white shadow-sm">
+                <div className={`order-2 lg:order-none ${i % 2 === 1 ? "lg:col-start-2" : ""}`}>
+                  <div className="flex flex-col sm:flex-row sm:items-center mb-6">
+                    <div className="w-14 h-14 lg:w-20 lg:h-20 rounded-xl border border-construction-green/40 flex items-center justify-center text-xl lg:text-2xl font-bold text-construction-green mr-0 sm:mr-6 mb-4 sm:mb-0 bg-white shadow-sm">
                       {step.number}
                     </div>
-                    <h3 className="text-2xl lg:text-3xl font-bold text-construction-dark">
+                    <h3 className="text-xl lg:text-3xl font-bold text-construction-dark">
                       {step.title}
                     </h3>
                   </div>
 
-                  <p className="text-lg text-construction-gray leading-relaxed mb-6">
+                  <p className="text-base lg:text-lg text-construction-gray leading-relaxed mb-6 max-w-prose">
                     {step.description}
                   </p>
 
                   <ul className="space-y-2">
                     {step.checks.map((check) => (
                       <li key={check} className="flex items-center text-construction-green">
-                        <CheckCircle className="w-5 h-5 mr-3" />
-                        <span className="font-medium text-construction-dark/80">{check}</span>
+                        <CheckCircle className="w-5 h-5 mr-3 shrink-0" />
+                        <span className="font-medium text-construction-dark/80 text-sm lg:text-base">{check}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Image */}
-                <div className={i % 2 === 1 ? "lg:col-start-1" : ""}>
+                <div className={`order-1 lg:order-none ${i % 2 === 1 ? "lg:col-start-1" : ""}`}>
                   <ImageFrame
                     src={step.image}
                     alt={step.title}

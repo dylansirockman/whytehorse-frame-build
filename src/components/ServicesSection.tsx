@@ -64,7 +64,7 @@ const ServicesSection = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="relative py-32 overflow-hidden bg-white"
+      className="relative py-24 lg:py-32 overflow-hidden bg-white"
       aria-label="Framing Services"
     >
       {/* Background */}
@@ -73,8 +73,8 @@ const ServicesSection = () => {
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              repeating-linear-gradient(to right, rgba(31,41,55,0.025) 0, rgba(31,41,55,0.025) 1px, transparent 1px, transparent 36px),
-              repeating-linear-gradient(to bottom, rgba(31,41,55,0.025) 0, rgba(31,41,55,0.025) 1px, transparent 1px, transparent 36px)
+              repeating-linear-gradient(to right, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px),
+              repeating-linear-gradient(to bottom, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px)
             `,
           }}
         />
@@ -85,26 +85,26 @@ const ServicesSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6">
+      <div className="relative z-20 container mx-auto px-4">
         {/* Header (reveals only when section enters) */}
         <div
-          className={`text-center mb-16 transition-[opacity,transform,filter] duration-700 ease-out motion-reduce:transition-none
+          className={`text-center mb-12 lg:mb-16 transition-[opacity,transform,filter] duration-700 ease-out motion-reduce:transition-none
             ${sectionVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-2 blur-[1px] motion-reduce:translate-y-0 motion-reduce:blur-0"}
           `}
         >
           <div className="flex justify-center mb-5">
             <BlueprintPillHeader index="2" title="Service Portfolio" metaRight="Rev. 2025.1" as="div" />
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-4 leading-tight">
+          <h2 className="text-3xl lg:text-6xl font-bold text-construction-dark mb-4 leading-tight">
             Comprehensive Framing Solutions
           </h2>
-          <p className="text-lg text-construction-gray max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base lg:text-lg text-construction-gray max-w-3xl mx-auto leading-relaxed">
             From single homes to complex multi-family structures, our framing teams deliver engineered precision aligned to your schedule and spec.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
             const baseDelay = 0.05; // base delay once a card is visible
@@ -126,26 +126,26 @@ const ServicesSection = () => {
                 <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
                 <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
 
-                <div className="p-8">
+                <div className="p-6 lg:p-8">
                   {/* Icon + Title */}
                   <div className="flex items-start gap-4 mb-3">
                     {/* Icon pop-in */}
                     <div
-                      className={`w-12 h-12 rounded-xl bg-construction-green/10 grid place-items-center shrink-0
-                        transition-[opacity,transform,filter,background-color] duration-500 ease-out
-                        ${isCardVisible ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-[0.5px]"}
+                      className={`w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-construction-green/10 grid place-items-center shrink-0
+                        transition-[opacity,transform,filter,background-color] duration-500 ease-out motion-reduce:transition-none
+                        ${isCardVisible ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-[0.5px] motion-reduce:scale-100 motion-reduce:blur-0 motion-reduce:opacity-100"}
                         group-hover:bg-construction-green
                       `}
                       style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.04}s` : "0s" }}
                     >
-                      <Icon className="w-7 h-7 text-construction-green transition-colors duration-300 group-hover:text-white" aria-hidden="true" />
+                      <Icon className="w-5 h-5 lg:w-7 lg:h-7 text-construction-green transition-colors duration-300 group-hover:text-white" aria-hidden="true" />
                     </div>
 
                     {/* Title slide-in */}
                     <h3
-                      className={`text-xl font-semibold text-construction-dark leading-snug
-                        transition-[opacity,transform,filter] duration-600 ease-out
-                        ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                      className={`text-lg lg:text-xl font-semibold text-construction-dark leading-snug
+                        transition-[opacity,transform,filter] duration-600 ease-out motion-reduce:transition-none
+                        ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px] motion-reduce:translate-y-0 motion-reduce:blur-0 motion-reduce:opacity-100"}
                       `}
                       style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.08}s` : "0s" }}
                     >
@@ -155,9 +155,9 @@ const ServicesSection = () => {
 
                   {/* Description */}
                   <p
-                    className={`text-construction-gray leading-relaxed mb-5
-                      transition-[opacity,transform,filter] duration-600 ease-out
-                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                    className={`text-sm lg:text-base text-construction-gray leading-relaxed mb-5
+                      transition-[opacity,transform,filter] duration-600 ease-out motion-reduce:transition-none
+                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px] motion-reduce:translate-y-0 motion-reduce:blur-0 motion-reduce:opacity-100"}
                     `}
                     style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.14}s` : "0s" }}
                   >
@@ -165,13 +165,13 @@ const ServicesSection = () => {
                   </p>
 
                   {/* Features (cascade after card is visible) */}
-                  <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                     {service.features.map((feature, idx) => (
                       <li
                         key={feature}
                         className={`flex items-center text-sm text-construction-gray
-                          transition-[opacity,transform,filter] duration-500 ease-out
-                          ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                          transition-[opacity,transform,filter] duration-500 ease-out motion-reduce:transition-none
+                          ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px] motion-reduce:translate-y-0 motion-reduce:blur-0 motion-reduce:opacity-100"}
                         `}
                         style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.18 + idx * 0.05}s` : "0s" }}
                       >
@@ -183,7 +183,7 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Light divider + tags */}
-                <div className="px-8 pb-6">
+                <div className="px-6 lg:px-8 pb-6">
                   {/* Divider wipe */}
                   <div className="h-px overflow-hidden mb-3">
                     <div
@@ -198,8 +198,8 @@ const ServicesSection = () => {
                   {/* Tags fade-up */}
                   <div
                     className={`flex flex-wrap gap-2
-                      transition-[opacity,transform,filter] duration-600 ease-out
-                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px]"}
+                      transition-[opacity,transform,filter] duration-600 ease-out motion-reduce:transition-none
+                      ${isCardVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-1 blur-[0.5px] motion-reduce:translate-y-0 motion-reduce:blur-0 motion-reduce:opacity-100"}
                     `}
                     style={{ transitionDelay: isCardVisible ? `${baseDelay + 0.18 + services[i].features.length * 0.05 + 0.12}s` : "0s" }}
                   >

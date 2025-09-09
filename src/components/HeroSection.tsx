@@ -78,7 +78,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20 bg-construction-white"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-24 pb-16 lg:pb-20 bg-construction-white"
     >
       {/* ===== Blueprint Background (subtle) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -141,49 +141,49 @@ const HeroSection = () => {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[15vh] z-10 bg-gradient-to-b from-transparent to-white" />
 
       {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 md:pb-28">
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-16 min-h-[calc(100vh-8rem)] lg:min-h-[calc(100vh-7rem)] pt-8 lg:pt-6">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 pb-20 lg:pb-28">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-16 min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-7rem)] pt-6 lg:pt-6">
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             {/* Typewriter headline */}
-            <h1 className="mb-8 lg:mb-10 font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger" style={{ animationDelay: '0.3s' }}>
+            <h1 className="mb-6 lg:mb-10 font-bold text-3xl sm:text-4xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.3s' }}>
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret"
+                    className="pointer-events-none absolute -right-[0.02em] top-0 bottom-0 border-r-2 border-construction-green animate-caret motion-reduce:animate-none"
                   />
                 )}
               </span>{" "}
               you can rely on
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger" style={{ animationDelay: '0.5s' }}>
+            <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
               Specialists in house framing — delivering precision, deadlines, and quality you can trust.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.7s' }}>
-              <Button variant="hero" size="lg" className="text-base font-semibold">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.7s' }}>
+              <Button variant="hero" size="lg" className="text-base font-semibold min-h-[44px]">
                 Get Quote
               </Button>
-              <Button variant="outline" size="lg" className="text-base font-semibold">
+              <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px]">
                 Contact Us
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 mb-6 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.9s' }}>
+            <div className="flex flex-col gap-3 lg:gap-4 mb-4 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.9s' }}>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
-                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
-                <span className="font-medium text-sm sm:text-base">500+ Projects Completed</span>
+                <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
+                <span className="font-medium text-sm lg:text-base">500+ Projects Completed</span>
               </div>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
-                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
-                <span className="font-medium text-sm sm:text-base">15+ Years Experience</span>
+                <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
+                <span className="font-medium text-sm lg:text-base">15+ Years Experience</span>
               </div>
               <div className="flex items-center justify-center lg:justify-start text-construction-gray">
-                <div className="w-3 h-3 bg-construction-green rounded-full mr-3 lg:mr-4" />
-                <span className="font-medium text-sm sm:text-base">100% On Schedule</span>
+                <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
+                <span className="font-medium text-sm lg:text-base">100% On Schedule</span>
               </div>
             </div>
           </div>
@@ -301,25 +301,25 @@ const HeroSection = () => {
 
       {/* ===== Anchored "Trusted by" band (inside Hero bottom) ===== */}
       <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
-          <div className="text-center mb-4">
-            <h3 className="text-sm md:text-base font-semibold text-construction-gray">
+        <div className="max-w-7xl mx-auto px-4 py-3 lg:py-5">
+          <div className="text-center mb-3 lg:mb-4">
+            <h3 className="text-xs lg:text-base font-semibold text-construction-gray">
               Trusted by Alberta&apos;s Top Builders
             </h3>
           </div>
 
-          <div className="flex justify-center items-center gap-8 flex-wrap" aria-label="Trusted by logos">
+          <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8 items-center justify-items-center max-w-4xl mx-auto" aria-label="Trusted by logos">
             {LOGOS.map((client, index) => (
               <div
                 key={client.name}
-                className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
-                style={{ width: '140px', height: '60px', minWidth: '140px' }}
+                className="flex items-center justify-center bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-2 lg:p-3"
+                style={{ width: '100px', height: '40px', minWidth: '100px' }}
                 aria-label={client.name}
               >
                 <img
                   src={client.logo}
                   alt={`Client: ${client.name}`}
-                  className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
+                  className="max-h-6 lg:max-h-10 max-w-[80px] lg:max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
                   loading="lazy"
                 />
               </div>

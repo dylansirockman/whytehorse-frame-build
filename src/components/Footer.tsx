@@ -29,8 +29,8 @@ const Footer = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-3">
+      <div className="relative z-20 container mx-auto px-4 py-12 lg:py-16">
+        <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-3">
           {/* Brand / blurb */}
           <div>
             <div className="flex items-center group" aria-label="WhyteHorse Contracting - Logo">
@@ -45,7 +45,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <p className="mt-5 text-white/80 leading-relaxed max-w-xs">
+            <p className="mt-5 text-white/80 leading-relaxed max-w-sm lg:max-w-xs">
               Framing specialists delivering structural integrity—on spec and on
               schedule.
             </p>
@@ -54,7 +54,7 @@ const Footer = () => {
             <div className="mt-6">
               <a
                 href="tel:+14035550123"
-                className="inline-flex items-center gap-2 rounded-xl bg-construction-green px-4 py-2 font-medium text-construction-dark hover:brightness-95 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-construction-green px-4 py-3 font-medium text-construction-dark hover:brightness-95 transition min-h-[44px] w-full lg:w-auto"
               >
                 Request a Quote
                 <span aria-hidden="true">→</span>
@@ -65,24 +65,24 @@ const Footer = () => {
           {/* Services (nav) */}
           <nav aria-label="Services">
             <h4 className="font-semibold text-lg mb-4">Services</h4>
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-3 text-white/80">
               <li>
-                <a href="#services" className="hover:text-white transition">
+                <a href="#services" className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center">
                   Residential House Framing
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition">
+                <a href="#services" className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center">
                   Additions &amp; Renovations
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition">
+                <a href="#services" className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center">
                   Multi-Family Framing
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition">
+                <a href="#services" className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center">
                   Structural Repairs
                 </a>
               </li>
@@ -92,21 +92,21 @@ const Footer = () => {
           {/* Contact (address) */}
           <address className="not-italic">
             <h4 className="font-semibold text-lg mb-4">Contact</h4>
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-3 text-white/80">
               <li>
-                <a href="tel:+14035550123" className="hover:text-white transition">
+                <a href="tel:+14035550123" className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center">
                   Phone: (403) 555-0123
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:info@whytehorsecontracting.com"
-                  className="hover:text-white transition break-all"
+                  className="hover:text-white transition py-1 inline-block min-h-[44px] flex items-center break-all"
                 >
                   info@whytehorsecontracting.com
                 </a>
               </li>
-              <li>Serving Alberta</li>
+              <li className="py-1 min-h-[44px] flex items-center">Serving Alberta</li>
             </ul>
 
             {/* Inline “plan strip” */}
@@ -125,20 +125,20 @@ const Footer = () => {
         <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
         {/* Bottom row */}
-        <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-white/60">
-          <p>&copy; {year} WhyteHorse Contracting. All rights reserved.</p>
+        <div className="mt-8 lg:mt-6 flex flex-col lg:flex-row items-center justify-between gap-4 text-white/60">
+          <p className="text-center lg:text-left">&copy; {year} WhyteHorse Contracting. All rights reserved.</p>
 
-          <div className="flex items-center gap-6">
-            <a href="#about" className="hover:text-white transition">
+          <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-6">
+            <a href="#about" className="hover:text-white transition py-2 px-2 min-h-[44px] flex items-center">
               About
             </a>
-            <a href="#process" className="hover:text-white transition">
+            <a href="#process" className="hover:text-white transition py-2 px-2 min-h-[44px] flex items-center">
               Process
             </a>
-            <a href="#services" className="hover:text-white transition">
+            <a href="#services" className="hover:text-white transition py-2 px-2 min-h-[44px] flex items-center">
               Services
             </a>
-            <a href="#contact" className="hover:text-white transition">
+            <a href="#contact" className="hover:text-white transition py-2 px-2 min-h-[44px] flex items-center">
               Contact
             </a>
           </div>

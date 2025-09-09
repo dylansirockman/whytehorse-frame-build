@@ -26,7 +26,7 @@ const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative py-32 overflow-hidden bg-white"
+      className="relative py-24 lg:py-32 overflow-hidden bg-white"
     >
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -37,15 +37,15 @@ const AboutSection = () => {
             backgroundImage: `
               repeating-linear-gradient(
                 to right,
-                rgba(31,41,55,0.03) 0,
-                rgba(31,41,55,0.03) 1px,
+                rgba(31,41,55,0.015) 0,
+                rgba(31,41,55,0.015) 1px,
                 transparent 1px,
                 transparent 32px
               ),
               repeating-linear-gradient(
                 to bottom,
-                rgba(31,41,55,0.03) 0,
-                rgba(31,41,55,0.03) 1px,
+                rgba(31,41,55,0.015) 0,
+                rgba(31,41,55,0.015) 1px,
                 transparent 1px,
                 transparent 32px
               )
@@ -59,15 +59,15 @@ const AboutSection = () => {
             backgroundImage: `
               repeating-linear-gradient(
                 to right,
-                rgba(31,41,55,0.025) 0,
-                rgba(31,41,55,0.025) 1.5px,
+                rgba(31,41,55,0.02) 0,
+                rgba(31,41,55,0.02) 1.5px,
                 transparent 1.5px,
                 transparent 160px
               ),
               repeating-linear-gradient(
                 to bottom,
-                rgba(31,41,55,0.025) 0,
-                rgba(31,41,55,0.025) 1.5px,
+                rgba(31,41,55,0.02) 0,
+                rgba(31,41,55,0.02) 1.5px,
                 transparent 1.5px,
                 transparent 160px
               )
@@ -109,14 +109,14 @@ const AboutSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/10 to-transparent z-10" />
 
       {/* ===== Content ===== */}
-      <div className="relative z-20 container mx-auto px-6">
-        <div className="grid gap-12 items-center lg:grid-cols-[1fr_1.2fr]">
+      <div className="relative z-20 container mx-auto px-4">
+        <div className="grid gap-8 lg:gap-12 items-center lg:grid-cols-[1fr_1.2fr]">
           {/* === Image column with blueprint outline === */}
           <div
-            className={`relative transition-all duration-1000 ease-out ${
+            className={`relative order-first lg:order-none transition-all duration-1000 ease-out motion-reduce:transition-none ${
               isVisible
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-8"
+                : "opacity-0 -translate-x-3 motion-reduce:translate-x-0"
             }`}
           >
             <div className="relative rounded-2xl p-4 border-2 border-solid border-construction-dark/15">
@@ -160,10 +160,10 @@ const AboutSection = () => {
 
             {/* heading */}
             <h2
-              className={`text-4xl lg:text-6xl font-bold text-construction-dark mb-8 leading-tight transition-all duration-800 ease-out ${
+              className={`text-3xl lg:text-6xl font-bold text-construction-dark mb-6 lg:mb-8 leading-tight transition-all duration-800 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
-                  : "opacity-0 translate-y-6 blur-sm"
+                  : "opacity-0 translate-y-3 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
               }`}
               style={{ transitionDelay: isVisible ? "0.4s" : "0s" }}
             >
@@ -174,10 +174,10 @@ const AboutSection = () => {
 
             {/* body */}
             <div
-              className={`space-y-6 text-lg text-construction-gray leading-relaxed transition-all duration-900 ease-out ${
+              className={`space-y-4 lg:space-y-6 text-base lg:text-lg text-construction-gray leading-relaxed max-w-prose transition-all duration-900 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
-                  : "opacity-0 translate-y-4 blur-sm"
+                  : "opacity-0 translate-y-2 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
               }`}
               style={{ transitionDelay: isVisible ? "0.6s" : "0s" }}
             >
@@ -197,34 +197,34 @@ const AboutSection = () => {
 
             {/* Stats card */}
             <div
-              className={`relative mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out ${
+              className={`relative mt-8 lg:mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 scale-100 blur-0"
-                  : "opacity-0 translate-y-8 scale-95 blur-sm"
+                  : "opacity-0 translate-y-3 scale-95 blur-sm motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:blur-0"
               }`}
               style={{ transitionDelay: isVisible ? "0.8s" : "0s" }}
             >
-              <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
+              <div className="flex flex-col items-center justify-center p-4 lg:p-6">
+                <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   500+
                 </div>
-                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
                   Projects
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
+              <div className="flex flex-col items-center justify-center p-4 lg:p-6">
+                <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   15+
                 </div>
-                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
                   Years
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center p-6">
-                <div className="text-4xl font-bold text-construction-green mb-1 tracking-tight">
+              <div className="flex flex-col items-center justify-center p-4 lg:p-6">
+                <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   100%
                 </div>
-                <div className="text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
                   On Schedule
                 </div>
               </div>
