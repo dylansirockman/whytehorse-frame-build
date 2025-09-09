@@ -308,30 +308,22 @@ const HeroSection = () => {
             </h3>
           </div>
 
-          <div className="relative overflow-hidden" aria-label="Trusted by logos">
-            {/* The track contains TWO copies of the exact same sequence; we animate -50% for a seamless loop */}
-            <div
-              className="flex w-max will-change-transform animate-marquee"
-              style={{ gap: '3rem' }}
-            >
-              {[0, 1].map((rep) =>
-                LOGOS.map((client, index) => (
-                  <div
-                    key={`${client.name}-${rep}-${index}`}
-                    className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
-                    style={{ width: '140px', height: '60px', minWidth: '140px' }}
-                    aria-label={client.name}
-                  >
-                    <img
-                      src={client.logo}
-                      alt={`Client: ${client.name}`}
-                      className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ))
-              )}
-            </div>
+          <div className="flex justify-center items-center gap-8 flex-wrap" aria-label="Trusted by logos">
+            {LOGOS.map((client, index) => (
+              <div
+                key={client.name}
+                className="flex items-center justify-center flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
+                style={{ width: '140px', height: '60px', minWidth: '140px' }}
+                aria-label={client.name}
+              >
+                <img
+                  src={client.logo}
+                  alt={`Client: ${client.name}`}
+                  className="max-h-8 md:max-h-10 max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
+                  loading="lazy"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
