@@ -1,39 +1,46 @@
-import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin } from "lucide-react";
-import BlueprintPillHeader from "./BlueprintPillHeader";
+import React, { useEffect, useRef } from "react";
 
-const CTASection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+const ClientShowcaseSection = () => {
+  const clients = [
+    { name: "Builder One", logo: "/client-logo1.svg" },
+    { name: "Construction Co", logo: "/client-logo2.svg" },
+    { name: "Homes Ltd", logo: "/client-logo3.svg" },
+    { name: "Prairie Build", logo: "/client-logo4.svg" },
+    { name: "Alberta Framing", logo: "/client-logo5.svg" },
+    { name: "Summit Builders", logo: "/client-logo6.svg" },
+    { name: "Rockwood Homes", logo: "/client-logo7.svg" },
+    { name: "Northern Contractors", logo: "/client-logo8.svg" },
+  ];
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Optional: pause animation when section is offscreen to save cycles
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setIsVisible(true),
-      { threshold: 0.12, rootMargin: "-40px" }
+      ([entry]) => {
+        el.style.animationPlayState = entry.isIntersecting ? "running" : "paused";
+      },
+      { threshold: 0.1 }
     );
-    sectionRef.current && obs.observe(sectionRef.current);
+    obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="contact"
-      className="relative py-32 overflow-hidden bg-white"
-      aria-label="Contact WhyteHorse Contracting"
-    >
-      {/* Top paper fold / shadow */}
+    <section className="relative py-16 overflow-hidden bg-white">
+      {/* subtle top fold to match site */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
 
-      {/* Blueprint background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* blueprint-lite background */}
+      <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              repeating-linear-gradient(to right, rgba(31,41,55,0.025) 0, rgba(31,41,55,0.025) 1px, transparent 1px, transparent 36px),
-              repeating-linear-gradient(to bottom, rgba(31,41,55,0.025) 0, rgba(31,41,55,0.025) 1px, transparent 1px, transparent 36px)
+              repeating-linear-gradient(to right, rgba(31,41,55,0.02) 0, rgba(31,41,55,0.02) 1px, transparent 1px, transparent 36px),
+              repeating-linear-gradient(to bottom, rgba(31,41,55,0.02) 0, rgba(31,41,55,0.02) 1px, transparent 1px, transparent 36px)
             `,
           }}
         />
@@ -47,126 +54,94 @@ const CTASection = () => {
       </div>
 
       <div className="relative z-20 container mx-auto px-6">
-        {/* Header */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-construction-dark">
+            Trusted by Alberta’s Top Builders
+          </h2>
+        </div>
+
+        {/* marquee viewport with edge fade mask */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-          }`}
+          className="relative overflow-hidden"
+          style={{
+            // fade logos at edges (works in Safari with -webkit- prefix)
+            maskImage:
+              "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          }}
         >
-          <div className="flex justify-center mb-6">
-            <BlueprintPillHeader
-              index="4"
-              title="Project Inquiry"
-              metaRight="Contact Form Rev. A"
-              as="div"
-            />
+          {/* animated track */}
+          <div
+            ref={containerRef}
+            className="flex gap-14 will-change-transform select-none"
+            style={
+              {
+                // two groups inside -> 0% to -50% is seamless
+                animation: "wh-marquee var(--marquee-duration, 28s) linear infinite",
+              } as React.CSSProperties
+            }
+          >
+            {/* group A */}
+            <div className="flex gap-14 shrink-0">
+              {clients.map((client) => (
+                <LogoItem key={`A-${client.name}`} {...client} />
+              ))}
+            </div>
+            {/* group B (identical) */}
+            <div className="flex gap-14 shrink-0" aria-hidden="true">
+              {clients.map((client) => (
+                <LogoItem key={`B-${client.name}`} {...client} />
+              ))}
+            </div>
           </div>
 
-          <h2 className="text-4xl lg:text-6xl font-bold text-construction-dark mb-6 leading-tight">
-            Start Your Next Build
-            <br />
-            <span className="text-construction-green">with Confidence</span>
-          </h2>
-
-          <p className="text-xl text-construction-gray mb-12 max-w-3xl mx-auto leading-relaxed">
-            Contact WhyteHorse Contracting today and discover why Alberta&apos;s top builders
-            trust us for framing that&apos;s fast, reliable, and built to last.
-          </p>
-        </div>
-
-        {/* Contact blocks */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {/* Phone */}
-          <article
-            className={`rounded-2xl bg-white/85 backdrop-blur-sm ring-1 ring-construction-dark/10 shadow-sm transition-all duration-700 ease-out ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-            }`}
-            style={{ transitionDelay: isVisible ? "0.1s" : "0s" }}
-          >
-            <div className="p-8 text-center">
-              <div className="w-16 h-16 rounded-xl bg-construction-green/10 grid place-items-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-construction-green" aria-hidden="true" />
-              </div>
-              <h3 className="font-semibold text-construction-dark mb-1">Call Us</h3>
-              <a
-                href="tel:+14035550123"
-                className="text-construction-green font-medium hover:underline"
-              >
-                (403) 555-0123
-              </a>
-            </div>
-          </article>
-
-          {/* Email */}
-          <article
-            className={`rounded-2xl bg-white/85 backdrop-blur-sm ring-1 ring-construction-dark/10 shadow-sm transition-all duration-700 ease-out ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-            }`}
-            style={{ transitionDelay: isVisible ? "0.18s" : "0s" }}
-          >
-            <div className="p-8 text-center">
-              <div className="w-16 h-16 rounded-xl bg-construction-green/10 grid place-items-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-construction-green" aria-hidden="true" />
-              </div>
-              <h3 className="font-semibold text-construction-dark mb-1">Email Us</h3>
-              <a
-                href="mailto:info@whytehorsecontracting.com"
-                className="text-construction-green font-medium hover:underline break-all"
-              >
-                info@whytehorsecontracting.com
-              </a>
-            </div>
-          </article>
-
-          {/* Service area */}
-          <article
-            className={`rounded-2xl bg-white/85 backdrop-blur-sm ring-1 ring-construction-dark/10 shadow-sm transition-all duration-700 ease-out ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-            }`}
-            style={{ transitionDelay: isVisible ? "0.26s" : "0s" }}
-          >
-            <div className="p-8 text-center">
-              <div className="w-16 h-16 rounded-xl bg-construction-green/10 grid place-items-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-construction-green" aria-hidden="true" />
-              </div>
-              <h3 className="font-semibold text-construction-dark mb-1">Service Area</h3>
-              <p className="text-construction-gray">Alberta &amp; Surrounding Areas</p>
-            </div>
-          </article>
-        </div>
-
-        {/* Actions */}
-        <div
-          className={`flex flex-col sm:flex-row gap-6 justify-center items-center transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          }`}
-          style={{ transitionDelay: isVisible ? "0.34s" : "0s" }}
-        >
-          <Button
-            variant="hero"
-            size="lg"
-            className="text-lg px-12 py-6 h-auto font-semibold"
-            asChild
-          >
-            <a href="tel:+14035550123" aria-label="Request a quote by phone">
-              Request Free Quote
-            </a>
-          </Button>
-
-          <Button
-            variant="outline"
-            size="lg"
-            className="text-lg px-12 py-6 h-auto font-semibold border-construction-green text-construction-green hover:bg-construction-green hover:text-white"
-            asChild
-          >
-            <a href="mailto:info@whytehorsecontracting.com" aria-label="Schedule a consultation by email">
-              Schedule Consultation
-            </a>
-          </Button>
+          {/* pause on hover/tap target */}
+          <button
+            aria-label="Pause client carousel"
+            className="absolute inset-0 z-10 cursor-default md:cursor-auto"
+            onMouseEnter={() => {
+              if (containerRef.current) containerRef.current.style.animationPlayState = "paused";
+            }}
+            onMouseLeave={() => {
+              if (containerRef.current) containerRef.current.style.animationPlayState = "running";
+            }}
+            onTouchStart={() => {
+              if (containerRef.current) containerRef.current.style.animationPlayState = "paused";
+            }}
+            onTouchEnd={() => {
+              if (containerRef.current) containerRef.current.style.animationPlayState = "running";
+            }}
+          />
         </div>
       </div>
+
+      {/* local keyframes so you don't have to touch tailwind.config */}
+      <style>{`
+        @keyframes wh-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="wh-marquee"] { animation: none !important; transform: none !important; }
+        }
+      `}</style>
     </section>
   );
 };
 
-export default CTASection;
+function LogoItem({ name, logo }: { name: string; logo: string }) {
+  return (
+    <div className="flex items-center justify-center min-w-[160px] md:min-w-[200px] opacity-80 hover:opacity-100 transition-opacity">
+      <img
+        src={logo}
+        alt={`Client: ${name}`}
+        className="h-10 md:h-12 w-auto grayscale hover:grayscale-0 transition-[filter] duration-300"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+  );
+}
+
+export default ClientShowcaseSection;
