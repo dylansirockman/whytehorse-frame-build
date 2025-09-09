@@ -32,7 +32,7 @@ const HeroSection = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
   // === Typewriter headline ===
-  const headlineWords = ["Framing", "Precision", "Deadlines", "Integrity", "Framing"];
+  const headlineWords = ["Framing", "Precision", "Deadlines", "Quality", "Framing"];
   type Phase = "initialPause" | "typing" | "deleting" | "done";
   const [wordIndex, setWordIndex] = useState(0);
   const [typed, setTyped] = useState("Framing");
@@ -160,7 +160,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slideUpStagger" style={{ animationDelay: '0.5s' }}>
-              Specialists in house framing — delivering precision, deadlines, and quality you can trust.
+              Specialists in house framing — delivering precision, speed, and structural integrity you can trust.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger" style={{ animationDelay: '0.7s' }}>
