@@ -196,7 +196,6 @@ const Index = () => {
         <AboutSection />
         <ServicesSection />
         <ProcessSection />
-        <TrustSection />
         <CTASection />
         <Footer />
       </main>
