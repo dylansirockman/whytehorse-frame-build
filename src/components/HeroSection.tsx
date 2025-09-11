@@ -280,10 +280,10 @@ const HeroSection = () => {
       </div> {/* end content wrapper */}
 
       {/* ===== Anchored "Trusted by" band (inside Hero bottom) ===== */}
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-construction-dark/90 backdrop-blur-md border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3 lg:py-5">
           <div className="text-center mb-3 lg:mb-4">
-            <h3 className="text-xs lg:text-base font-semibold text-construction-gray">
+            <h3 className="text-xs lg:text-base font-semibold text-white/80">
               Trusted by Alberta&apos;s Top Builders
             </h3>
           </div>
@@ -299,7 +299,7 @@ const HeroSection = () => {
                 <img
                   src={client.logo}
                   alt={`Client: ${client.name}`}
-                  className="max-h-6 lg:max-h-10 max-w-[80px] lg:max-w-[120px] w-auto opacity-60 hover:opacity-80 transition-all duration-300 grayscale hover:grayscale-0 transform-gpu object-contain"
+                  className="max-h-6 lg:max-h-10 max-w-[80px] lg:max-w-[120px] w-auto opacity-80 hover:opacity-100 transition-all duration-300 filter brightness-0 invert hover:brightness-110 transform-gpu object-contain"
                   loading="lazy"
                 />
               </div>
