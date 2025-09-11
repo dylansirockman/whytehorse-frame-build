@@ -18,7 +18,7 @@ const ServicesSection = () => {
   const [revealed, setRevealed] = useState<boolean[]>(() => services.map(() => false));
 
   useEffect(() => {
-    // Reveal header only when ~30% of the section is on screen
+    // Reveal header when section enters viewport - more mobile-friendly thresholds
     const sectionObs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,8 +27,8 @@ const ServicesSection = () => {
         }
       },
       {
-        threshold: 0.3,
-        rootMargin: "0px 0px -20% 0px", // avoid firing too early
+        threshold: 0.1, // Lower threshold for mobile
+        rootMargin: "0px 0px -10% 0px", // Less aggressive margin for mobile
       }
     );
     if (sectionRef.current) sectionObs.observe(sectionRef.current);
