@@ -3,58 +3,15 @@ import BlueprintPillHeader from './BlueprintPillHeader';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const demoPlayedRef = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
-
-        // Auto-play the hover animation ONCE the first time this section appears
-        const prefersReduced =
-          typeof window !== "undefined" &&
-          window.matchMedia &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (
-          entry.isIntersecting &&
-          !demoPlayedRef.current &&
-          galleryRef.current &&
-          !prefersReduced
-        ) {
-          demoPlayedRef.current = true;
-
-          const el = galleryRef.current;
-          // Step 1: simulate hover (same visuals as .wh-gallery:hover)
-          el.classList.add("is-demo");
-
-          // Keep in sync with your CSS transition (clip-path .4s .05s)
-          const forwardMs = 500; // slight buffer over 400ms
-          const backMs = 500;
-
-          const t1 = window.setTimeout(() => {
-            // Step 2: return to default (like hover out)
-            el.classList.remove("is-demo");
-          }, forwardMs);
-
-          // Optional: brief pause at rest; adjust or remove as you like
-          const t2 = window.setTimeout(() => {
-            // Done. Do nothing further; normal hover works now.
-          }, forwardMs + backMs);
-
-          // Clean up if user navigates away mid-animation
-          return () => {
-            window.clearTimeout(t1);
-            window.clearTimeout(t2);
-            el.classList.remove("is-demo");
-          };
-        }
       },
-      { threshold: 0.2, rootMargin: "-40px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "-50px" }
     );
-
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -122,16 +79,7 @@ const AboutSection = () => {
 
               {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div
-                  ref={galleryRef}
-                  className="wh-gallery w-full"
-                  style={
-                    {
-                      ["--splitA" as any]: "75%", // top-left share on hover
-                      ["--splitB" as any]: "25%", // bottom-right share on hover
-                    } as React.CSSProperties
-                  }
-                >
+                <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
@@ -240,14 +188,13 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px;       /* diagonal gap */
-          --splitA: 75%;  /* top-left share on hover */
-          --splitB: 25%;  /* bottom-right share on hover */
+          --g: 8px; /* gap/overlap along the diagonal */
+          --size-w: 100%;
           display: grid;
           grid-template-areas: "stack";
-          width: 100%;
+          width: var(--size-w);
           aspect-ratio: 4 / 3;
-          clip-path: inset(1px);
+          clip-path: inset(1px); /* avoid hairline gaps on edges */
           cursor: pointer;
         }
         .wh-gallery > img {
@@ -256,7 +203,7 @@ const AboutSection = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .4s .05s, clip-path .4s .05s;
+          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
           will-change: clip-path, transform;
         }
         .wh-gallery > img:first-child {
@@ -267,23 +214,17 @@ const AboutSection = () => {
           /* bottom-right triangle */
           clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
-
-        /* Normal hover state */
-        .wh-gallery:hover > img:first-child,
-        .wh-gallery.is-demo > img:first-child {
-          --_p: calc(-1 * var(--splitA) - var(--g));
-        }
+        /* On hover, push triangles apart for reveal */
         .wh-gallery:hover > img:last-child,
-        .wh-gallery.is-demo > img:last-child {
-          --_p: calc(var(--splitB) - var(--g));
+        .wh-gallery:hover > img:first-child:hover {
+          --_p: calc(50% - var(--g));
         }
-
-        /* tiny lift */
-        .wh-gallery:hover > img,
-        .wh-gallery.is-demo > img {
-          transform: translateY(-0.5px);
+        .wh-gallery:hover > img:first-child,
+        .wh-gallery:hover > img:first-child:hover + img {
+          --_p: calc(-50% - var(--g));
         }
-
+        /* Optional tiny lift on hover for a bit of pop */
+        .wh-gallery:hover > img { transform: translateY(-0.5px); }
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
         }
