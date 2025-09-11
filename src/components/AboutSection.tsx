@@ -20,7 +20,8 @@ const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="section-surface relative py-24 lg:py-32 overflow-hidden bg-white"
+      className="section-surface relative py-24 lg:py-32 overflow-hidden"
+      style={{ backgroundColor: "hsl(var(--section-alternate))" }}
       data-grid-opacity="0.05"
       data-rugged="true"
     >

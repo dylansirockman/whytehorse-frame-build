@@ -64,7 +64,8 @@ const ServicesSection = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="section-surface relative py-24 lg:py-32 overflow-hidden bg-white"
+      className="section-surface relative py-24 lg:py-32 overflow-hidden"
+      style={{ backgroundColor: "hsl(var(--section-primary))" }}
       data-grid-opacity="0.07"
       aria-label="Framing Services"
     >

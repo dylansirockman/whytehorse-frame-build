@@ -78,7 +78,8 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="section-surface relative min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-24 pb-16 lg:pb-20 bg-construction-white"
+      className="section-surface relative min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-24 pb-16 lg:pb-20"
+      style={{ backgroundColor: "hsl(var(--section-primary))" }}
       data-grid-opacity="0.06"
     >
       {/* ===== Blueprint Background (subtle) ===== */}

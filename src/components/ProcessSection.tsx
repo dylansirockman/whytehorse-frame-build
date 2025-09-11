@@ -135,7 +135,8 @@ const ProcessSection = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="section-surface relative py-24 lg:py-32 overflow-hidden bg-white"
+      className="section-surface relative py-24 lg:py-32 overflow-hidden"
+      style={{ backgroundColor: "hsl(var(--section-alternate))" }}
       data-grid-opacity="0.04"
       data-rugged="true"
     >
