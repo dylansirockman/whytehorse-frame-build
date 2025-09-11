@@ -317,12 +317,34 @@ All colors MUST be HSL.
   background: var(--gradient-primary);
   border: 1px solid hsl(0 0% 0% / 0.1);
   transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-modern::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 200%;
+  background: hsl(var(--construction-green-dark));
+  z-index: -1;
+  transform-origin: 0 bottom;
+  transform: translate3D(-50%, 0, 0) rotate(-50deg);
+  transition: all 0.5s cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 
 .btn-primary-modern:hover {
-  background: var(--gradient-primary-hover);
+  color: white;
   box-shadow: 0 4px 12px hsl(158 64% 32% / 0.2);
   transform: translateY(-1px) scale(1.02);
+}
+
+.btn-primary-modern:hover::after {
+  transform: rotate(0deg);
 }
 
 .btn-secondary-modern {
