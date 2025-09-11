@@ -4,40 +4,17 @@ import BlueprintPillHeader from './BlueprintPillHeader';
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
-  const [autoPlayPhase, setAutoPlayPhase] = useState<'none' | 'top' | 'bottom'>('none');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Trigger auto-play if it hasn't happened yet
-          if (!hasAutoPlayed) {
-            setTimeout(() => {
-              setHasAutoPlayed(true);
-              
-              // Start with showing top image
-              setAutoPlayPhase('top');
-              
-              // After 1s, slide to show bottom image
-              setTimeout(() => {
-                setAutoPlayPhase('bottom');
-                
-                // After another 1s, return to normal
-                setTimeout(() => {
-                  setAutoPlayPhase('none');
-                }, 1000);
-              }, 1000);
-            }, 800); // Delay to let other animations settle
-          }
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1, rootMargin: "-50px" }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, [hasAutoPlayed]);
+  }, []);
 
   return (
     <section
@@ -102,17 +79,18 @@ const AboutSection = () => {
 
               {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className={`wh-gallery w-full ${autoPlayPhase !== 'none' ? `auto-${autoPlayPhase}` : ''}`}>
+                <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
-                    src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
-                    alt="House construction site with framing and equipment"
+                    src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
+                    alt="House construction framing — interior structure"
                     loading="lazy"
                   />
-                  {/* Secondary image (bottom-right triangle) */}
+                  {/* Secondary image (bottom-right triangle).
+                      Replace with another project image when you have it. */}
                   <img
-                    src="/lovable-uploads/42d53fb7-1475-4233-ab00-71614ca9c3ea.png"
-                    alt="Custom home with mixed siding materials near completion"
+                    src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
+                    alt="Framing team on site — exterior framing progress"
                     loading="lazy"
                   />
                 </div>
@@ -248,33 +226,8 @@ const AboutSection = () => {
         }
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
-        
-        /* Auto-play sliding animations */
-        .wh-gallery.auto-top > img:first-child {
-          /* Show only top image */
-          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .wh-gallery.auto-top > img:last-child {
-          /* Hide bottom image */
-          clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
-        }
-        
-        .wh-gallery.auto-bottom > img:first-child {
-          /* Hide top image */
-          clip-path: polygon(0 0, 0 0, 0 0);
-        }
-        .wh-gallery.auto-bottom > img:last-child {
-          /* Show only bottom image */
-          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
-          .wh-gallery.auto-top > img,
-          .wh-gallery.auto-bottom > img { 
-            transition: none; 
-            transform: none; 
-          }
         }
       `}</style>
     </section>
