@@ -3,7 +3,9 @@ import BlueprintPillHeader from './BlueprintPillHeader';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [autoPlayComplete, setAutoPlayComplete] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,6 +17,24 @@ const AboutSection = () => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  // Auto-play animation when section becomes visible
+  useEffect(() => {
+    if (isVisible && !autoPlayComplete && galleryRef.current) {
+      const gallery = galleryRef.current;
+      
+      // Add auto-play class to trigger animation
+      gallery.classList.add('auto-play');
+      
+      // Remove class after animation completes
+      const timer = setTimeout(() => {
+        gallery.classList.remove('auto-play');
+        setAutoPlayComplete(true);
+      }, 3200); // Total animation duration: 1.6s hover + 1.6s return
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, autoPlayComplete]);
 
   return (
     <section
@@ -79,7 +99,7 @@ const AboutSection = () => {
 
               {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className="wh-gallery w-full">
+                <div ref={galleryRef} className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
@@ -226,8 +246,36 @@ const AboutSection = () => {
         }
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
+        
+        /* Auto-play animation */
+        .wh-gallery.auto-play > img:last-child,
+        .wh-gallery.auto-play > img:first-child:hover {
+          --_p: calc(50% - var(--g));
+          animation: auto-play-sequence 3.2s ease-in-out;
+        }
+        .wh-gallery.auto-play > img:first-child,
+        .wh-gallery.auto-play > img:first-child:hover + img {
+          --_p: calc(-50% - var(--g));
+          animation: auto-play-sequence 3.2s ease-in-out;
+        }
+        .wh-gallery.auto-play > img { 
+          transform: translateY(-0.5px);
+          animation: auto-play-lift 3.2s ease-in-out;
+        }
+        
+        @keyframes auto-play-sequence {
+          0%, 100% { --_p: calc(-1 * var(--g)); }
+          25%, 75% { --_p: calc(50% - var(--g)); }
+        }
+        
+        @keyframes auto-play-lift {
+          0%, 100% { transform: translateY(0); }
+          25%, 75% { transform: translateY(-0.5px); }
+        }
+        
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
+          .wh-gallery.auto-play > img { animation: none; }
         }
       `}</style>
     </section>
