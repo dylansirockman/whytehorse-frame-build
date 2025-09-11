@@ -5,7 +5,7 @@ const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [autoPlayPhase, setAutoPlayPhase] = useState<'none' | 'top' | 'bottom'>('none');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,13 +15,20 @@ const AboutSection = () => {
           // Trigger auto-play if it hasn't happened yet
           if (!hasAutoPlayed) {
             setTimeout(() => {
-              setIsAutoPlaying(true);
               setHasAutoPlayed(true);
               
-              // Remove auto-play after 1.5s
+              // Start with showing top image
+              setAutoPlayPhase('top');
+              
+              // After 1s, slide to show bottom image
               setTimeout(() => {
-                setIsAutoPlaying(false);
-              }, 1500);
+                setAutoPlayPhase('bottom');
+                
+                // After another 1s, return to normal
+                setTimeout(() => {
+                  setAutoPlayPhase('none');
+                }, 1000);
+              }, 1000);
             }, 800); // Delay to let other animations settle
           }
         }
@@ -95,7 +102,7 @@ const AboutSection = () => {
 
               {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className={`wh-gallery w-full ${isAutoPlaying ? 'auto-reveal' : ''}`}>
+                <div className={`wh-gallery w-full ${autoPlayPhase !== 'none' ? `auto-${autoPlayPhase}` : ''}`}>
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
@@ -242,19 +249,32 @@ const AboutSection = () => {
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
         
-        /* Auto-reveal animation (mimics hover state) */
-        .wh-gallery.auto-reveal > img:last-child,
-        .wh-gallery.auto-reveal > img:first-child {
-          --_p: calc(50% - var(--g));
+        /* Auto-play sliding animations */
+        .wh-gallery.auto-top > img:first-child {
+          /* Show only top image */
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
-        .wh-gallery.auto-reveal > img:first-child {
-          --_p: calc(-50% - var(--g));
+        .wh-gallery.auto-top > img:last-child {
+          /* Hide bottom image */
+          clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
         }
-        .wh-gallery.auto-reveal > img { transform: translateY(-0.5px); }
+        
+        .wh-gallery.auto-bottom > img:first-child {
+          /* Hide top image */
+          clip-path: polygon(0 0, 0 0, 0 0);
+        }
+        .wh-gallery.auto-bottom > img:last-child {
+          /* Show only bottom image */
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
         
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
-          .wh-gallery.auto-reveal > img { transform: none; }
+          .wh-gallery.auto-top > img,
+          .wh-gallery.auto-bottom > img { 
+            transition: none; 
+            transform: none; 
+          }
         }
       `}</style>
     </section>
