@@ -4,17 +4,33 @@ import BlueprintPillHeader from './BlueprintPillHeader';
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Trigger auto-play if it hasn't happened yet
+          if (!hasAutoPlayed) {
+            setTimeout(() => {
+              setIsAutoPlaying(true);
+              setHasAutoPlayed(true);
+              
+              // Remove auto-play after 1.5s
+              setTimeout(() => {
+                setIsAutoPlaying(false);
+              }, 1500);
+            }, 800); // Delay to let other animations settle
+          }
+        }
       },
       { threshold: 0.1, rootMargin: "-50px" }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [hasAutoPlayed]);
 
   return (
     <section
@@ -79,7 +95,7 @@ const AboutSection = () => {
 
               {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className="wh-gallery w-full">
+                <div className={`wh-gallery w-full ${isAutoPlaying ? 'auto-reveal' : ''}`}>
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
@@ -225,8 +241,20 @@ const AboutSection = () => {
         }
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
+        
+        /* Auto-reveal animation (mimics hover state) */
+        .wh-gallery.auto-reveal > img:last-child,
+        .wh-gallery.auto-reveal > img:first-child {
+          --_p: calc(50% - var(--g));
+        }
+        .wh-gallery.auto-reveal > img:first-child {
+          --_p: calc(-50% - var(--g));
+        }
+        .wh-gallery.auto-reveal > img { transform: translateY(-0.5px); }
+        
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
+          .wh-gallery.auto-reveal > img { transform: none; }
         }
       `}</style>
     </section>
