@@ -12,18 +12,16 @@ const AboutSection = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Trigger auto-play sequence if it hasn't happened yet
+          // Trigger auto-play if it hasn't happened yet
           if (!hasAutoPlayed) {
-            setHasAutoPlayed(true);
-            
-            // Start auto-play after other animations settle
             setTimeout(() => {
               setIsAutoPlaying(true);
+              setHasAutoPlayed(true);
               
-              // Return to default state after showing the reveal
+              // Remove auto-play after 1.5s
               setTimeout(() => {
                 setIsAutoPlaying(false);
-              }, 1000); // Duration of the reveal effect
+              }, 1500);
             }, 800); // Delay to let other animations settle
           }
         }
@@ -244,58 +242,19 @@ const AboutSection = () => {
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
         
-        /* Auto-reveal animation sequence: default → hover → default */
-        .wh-gallery.auto-reveal > img {
-          animation: gallery-auto-reveal 1s ease-in-out forwards;
-        }
-        
-        @keyframes gallery-auto-reveal {
-          0% {
-            /* Default state */
-            --_p: calc(-1 * var(--g));
-            transform: translateY(0);
-          }
-          50% {
-            /* Hover state */
-            --_p: calc(50% - var(--g));
-            transform: translateY(-0.5px);
-          }
-          100% {
-            /* Back to default */
-            --_p: calc(-1 * var(--g));
-            transform: translateY(0);
-          }
-        }
-        
-        /* Override for first image in auto-reveal */
+        /* Auto-reveal animation (mimics hover state) */
+        .wh-gallery.auto-reveal > img:last-child,
         .wh-gallery.auto-reveal > img:first-child {
-          animation: gallery-auto-reveal-first 1s ease-in-out forwards;
+          --_p: calc(50% - var(--g));
         }
-        
-        @keyframes gallery-auto-reveal-first {
-          0% {
-            /* Default state */
-            --_p: calc(-1 * var(--g));
-            transform: translateY(0);
-          }
-          50% {
-            /* Hover state */
-            --_p: calc(-50% - var(--g));
-            transform: translateY(-0.5px);
-          }
-          100% {
-            /* Back to default */
-            --_p: calc(-1 * var(--g));
-            transform: translateY(0);
-          }
+        .wh-gallery.auto-reveal > img:first-child {
+          --_p: calc(-50% - var(--g));
         }
+        .wh-gallery.auto-reveal > img { transform: translateY(-0.5px); }
         
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
-          .wh-gallery.auto-reveal > img { 
-            animation: none;
-            transform: none;
-          }
+          .wh-gallery.auto-reveal > img { transform: none; }
         }
       `}</style>
     </section>
