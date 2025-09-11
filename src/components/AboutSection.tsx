@@ -8,17 +8,11 @@ const AboutSection = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1, rootMargin: "-50px" }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -32,30 +26,21 @@ const AboutSection = () => {
     >
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Grid layers using new system */}
         <div className="grid-layer grid-layer-fine" />
         <div className="grid-layer grid-layer-bold" />
-        {/* Faint blueprint scribbles/dimensions */}
         <svg
           className="absolute inset-0 opacity-[0.03] z-[3]"
           viewBox="0 0 1200 800"
           preserveAspectRatio="none"
         >
           <g stroke="#1F2937" strokeWidth="1" fill="none">
-            <line
-              x1="200"
-              y1="600"
-              x2="1000"
-              y2="600"
-              strokeDasharray="6 10"
-            />
+            <line x1="200" y1="600" x2="1000" y2="600" strokeDasharray="6 10" />
             <path d="M200 600 l14 -8 v16 z" />
             <path d="M1000 600 l-14 -8 v16 z" />
             <line x1="420" y1="380" x2="470" y2="380" />
             <line x1="445" y1="355" x2="445" y2="405" />
           </g>
         </svg>
-        {/* Soft paper vignette */}
         <div
           className="absolute inset-0 z-[3]"
           style={{
@@ -91,12 +76,25 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-construction-dark/15" />
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
-              {/* content */}
-              <img
-                src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
-                alt="House construction framing"
-                className="relative w-full rounded-xl shadow-[var(--shadow-premium)]"
-              />
+
+              {/* content — Split-reveal hover gallery */}
+              <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
+                <div className="wh-gallery w-full">
+                  {/* Primary image (top-left triangle) */}
+                  <img
+                    src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
+                    alt="House construction framing — interior structure"
+                    loading="lazy"
+                  />
+                  {/* Secondary image (bottom-right triangle).
+                      Replace with another project image when you have it. */}
+                  <img
+                    src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
+                    alt="Framing team on site — exterior framing progress"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -111,12 +109,7 @@ const AboutSection = () => {
               }`}
               style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}
             >
-              <BlueprintPillHeader
-                index="1"
-                title="Company Profile"
-                metaRight="Est. 2019"
-                as="div"
-              />
+              <BlueprintPillHeader index="1" title="Company Profile" metaRight="Est. 2019" as="div" />
             </div>
 
             {/* heading */}
@@ -143,16 +136,14 @@ const AboutSection = () => {
               style={{ transitionDelay: isVisible ? "0.6s" : "0s" }}
             >
               <p>
-                Framing isn't just one of many services — it's all we do. Our
-                crews are dedicated specialists who ensure every project starts
-                strong, stays on schedule, and meets the highest standards of
-                quality.
+                Framing isn't just one of many services — it's all we do. Our crews are dedicated
+                specialists who ensure every project starts strong, stays on schedule, and meets the
+                highest standards of quality.
               </p>
               <p>
-                With years of experience in residential construction across
-                Alberta, we understand that proper framing is the foundation of
-                every successful build. That's why builders trust us to deliver
-                structural integrity that stands the test of time.
+                With years of experience in residential construction across Alberta, we understand
+                that proper framing is the foundation of every successful build. That's why builders
+                trust us to deliver structural integrity that stands the test of time.
               </p>
             </div>
 
@@ -194,6 +185,51 @@ const AboutSection = () => {
           {/* === /Text column === */}
         </div>
       </div>
+
+      {/* Component-scoped CSS for the split-reveal gallery */}
+      <style>{`
+        .wh-gallery {
+          --g: 8px; /* gap/overlap along the diagonal */
+          --size-w: 100%;
+          display: grid;
+          grid-template-areas: "stack";
+          width: var(--size-w);
+          aspect-ratio: 4 / 3;
+          clip-path: inset(1px); /* avoid hairline gaps on edges */
+          cursor: pointer;
+        }
+        .wh-gallery > img {
+          --_p: calc(-1 * var(--g));
+          grid-area: stack;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
+          will-change: clip-path, transform;
+        }
+        .wh-gallery > img:first-child {
+          /* top-left triangle */
+          clip-path: polygon(0 0, calc(100% + var(--_p)) 0, 0 calc(100% + var(--_p)));
+        }
+        .wh-gallery > img:last-child {
+          /* bottom-right triangle */
+          clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
+        }
+        /* On hover, push triangles apart for reveal */
+        .wh-gallery:hover > img:last-child,
+        .wh-gallery:hover > img:first-child:hover {
+          --_p: calc(50% - var(--g));
+        }
+        .wh-gallery:hover > img:first-child,
+        .wh-gallery:hover > img:first-child:hover + img {
+          --_p: calc(-50% - var(--g));
+        }
+        /* Optional tiny lift on hover for a bit of pop */
+        .wh-gallery:hover > img { transform: translateY(-0.5px); }
+        @media (prefers-reduced-motion: reduce) {
+          .wh-gallery > img { transition: none; }
+        }
+      `}</style>
     </section>
   );
 };
