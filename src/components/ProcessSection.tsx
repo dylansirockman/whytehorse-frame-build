@@ -142,6 +142,9 @@ const ProcessSection = () => {
     >
       {/* Top paper fold / shadow */}
       <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
+      
+      {/* Bottom shadow */}
+      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/10 to-transparent z-10" />
 
       {/* Subtle blueprint background */}
       <div className="absolute inset-0 z-0 pointer-events-none">

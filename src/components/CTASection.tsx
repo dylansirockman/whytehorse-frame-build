@@ -33,8 +33,6 @@ const CTASection = () => {
       role="region"
       aria-labelledby="cta-heading"
     >
-      {/* Top paper fold / shadow */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
 
       {/* Blueprint grid background (stays consistent with site) */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
