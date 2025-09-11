@@ -77,15 +77,14 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
 
-              {/* content — Split-reveal hover gallery (75/25 on hover) */}
+              {/* content — Split-reveal hover gallery (75/25 default; flips to 25/75 when BR image hovered) */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
                 <div
                   className="wh-gallery w-full"
                   style={
                     {
-                      // control split here: A = top-left %, B = bottom-right %
-                      ["--splitA" as any]: "75%",
-                      ["--splitB" as any]: "25%",
+                      ["--splitA" as any]: "75%", // top-left share on hover
+                      ["--splitB" as any]: "25%", // bottom-right share on hover
                     } as React.CSSProperties
                   }
                 >
@@ -197,15 +196,15 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px;       /* gap/overlap along the diagonal */
+          --g: 8px;       /* diagonal gap */
           --size-w: 100%;
-          --splitA: 75%;  /* top-left portion on hover */
-          --splitB: 25%;  /* bottom-right portion on hover */
+          --splitA: 75%;  /* top-left share */
+          --splitB: 25%;  /* bottom-right share */
           display: grid;
           grid-template-areas: "stack";
           width: var(--size-w);
           aspect-ratio: 4 / 3;
-          clip-path: inset(1px); /* avoids hairline gaps on edges */
+          clip-path: inset(1px); /* avoid hairline gaps on edges */
           cursor: pointer;
         }
         .wh-gallery > img {
@@ -214,7 +213,7 @@ const AboutSection = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
+          transition: transform .4s .05s, clip-path .4s .05s;
           will-change: clip-path, transform;
         }
         .wh-gallery > img:first-child {
@@ -226,19 +225,31 @@ const AboutSection = () => {
           clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
 
-        /* On hover, push triangles to a 75/25 split (configurable via --splitA/B) */
-        .wh-gallery:hover > img:last-child,
-        .wh-gallery:hover > img:first-child:hover {
-          /* bottom-right reveals ~25% */
-          --_p: calc(var(--splitB) - var(--g));
-        }
-        .wh-gallery:hover > img:first-child,
-        .wh-gallery:hover > img:first-child:hover + img {
-          /* top-left covers ~75% */
+        /* DEFAULT ON HOVER: 75/25 favoring top-left */
+        .wh-gallery:hover > img:first-child {
           --_p: calc(-1 * var(--splitA) - var(--g));
         }
+        .wh-gallery:hover > img:last-child {
+          --_p: calc(var(--splitB) - var(--g));
+        }
 
-        /* Optional tiny lift on hover for a bit of pop */
+        /* FLIP TO 25/75 WHEN the smaller (bottom-right) image ITSELF is hovered */
+        .wh-gallery:has(img:last-child:hover) > img:first-child {
+          --_p: calc(-1 * var(--splitB) - var(--g)); /* shrink TL to 25% */
+        }
+        .wh-gallery:has(img:last-child:hover) > img:last-child {
+          --_p: calc(var(--splitA) - var(--g));      /* grow BR to 75% */
+        }
+
+        /* (Optional) keep TL dominant when TL is hovered explicitly */
+        .wh-gallery:has(img:first-child:hover) > img:first-child {
+          --_p: calc(-1 * var(--splitA) - var(--g));
+        }
+        .wh-gallery:has(img:first-child:hover) > img:last-child {
+          --_p: calc(var(--splitB) - var(--g));
+        }
+
+        /* tiny lift */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
 
         @media (prefers-reduced-motion: reduce) {
