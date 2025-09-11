@@ -77,9 +77,18 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
 
-              {/* content — Split-reveal hover gallery */}
+              {/* content — Split-reveal hover gallery (75/25 on hover) */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className="wh-gallery w-full">
+                <div
+                  className="wh-gallery w-full"
+                  style={
+                    {
+                      // control split here: A = top-left %, B = bottom-right %
+                      ["--splitA" as any]: "75%",
+                      ["--splitB" as any]: "25%",
+                    } as React.CSSProperties
+                  }
+                >
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
@@ -188,13 +197,15 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px; /* gap/overlap along the diagonal */
+          --g: 8px;       /* gap/overlap along the diagonal */
           --size-w: 100%;
+          --splitA: 75%;  /* top-left portion on hover */
+          --splitB: 25%;  /* bottom-right portion on hover */
           display: grid;
           grid-template-areas: "stack";
           width: var(--size-w);
           aspect-ratio: 4 / 3;
-          clip-path: inset(1px); /* avoid hairline gaps on edges */
+          clip-path: inset(1px); /* avoids hairline gaps on edges */
           cursor: pointer;
         }
         .wh-gallery > img {
@@ -214,17 +225,22 @@ const AboutSection = () => {
           /* bottom-right triangle */
           clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
-        /* On hover, push triangles apart for reveal */
+
+        /* On hover, push triangles to a 75/25 split (configurable via --splitA/B) */
         .wh-gallery:hover > img:last-child,
         .wh-gallery:hover > img:first-child:hover {
-          --_p: calc(50% - var(--g));
+          /* bottom-right reveals ~25% */
+          --_p: calc(var(--splitB) - var(--g));
         }
         .wh-gallery:hover > img:first-child,
         .wh-gallery:hover > img:first-child:hover + img {
-          --_p: calc(-50% - var(--g));
+          /* top-left covers ~75% */
+          --_p: calc(-1 * var(--splitA) - var(--g));
         }
+
         /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
+
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
         }
