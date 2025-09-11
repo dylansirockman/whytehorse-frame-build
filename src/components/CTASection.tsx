@@ -26,10 +26,10 @@ const CTASection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 lg:py-32 overflow-hidden bg-construction-dark text-white"
+      className="relative py-24 lg:py-32 overflow-hidden bg-white text-construction-dark"
     >
       {/* Top paper fold / shadow */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/40 to-transparent z-10" />
+      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
 
       {/* Blueprint grid background */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.25]">
@@ -37,8 +37,8 @@ const CTASection = () => {
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              repeating-linear-gradient(to right, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 36px),
-              repeating-linear-gradient(to bottom, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 36px)
+              repeating-linear-gradient(to right, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px),
+              repeating-linear-gradient(to bottom, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px)
             `,
           }}
         />
@@ -46,7 +46,7 @@ const CTASection = () => {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1200px 600px at 50% 20%, rgba(0,0,0,0.35), transparent 60%)",
+              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)",
           }}
         />
       </div>
@@ -61,7 +61,7 @@ const CTASection = () => {
           <h2 className="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">
             Ready to <span className="text-construction-green">Frame</span> Your Vision?
           </h2>
-          <p className="text-base lg:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base lg:text-xl text-construction-gray max-w-2xl mx-auto leading-relaxed">
             Get your framing project started with a free consultation and detailed quote. Let's build something exceptional together.
           </p>
         </div>
@@ -73,14 +73,14 @@ const CTASection = () => {
           style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}
         >
           {/* Phone Contact */}
-          <div className="p-6 lg:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div className="p-6 lg:p-8 rounded-2xl bg-construction-dark/5 backdrop-blur-sm border border-construction-dark/10 hover:bg-construction-dark/10 transition-colors duration-300">
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-xl bg-construction-green/20 flex items-center justify-center mr-4">
                 <Phone className="w-6 h-6 text-construction-green" />
               </div>
               <h3 className="text-xl font-semibold">Quick Call</h3>
             </div>
-            <p className="text-white/70 mb-6 text-sm lg:text-base">
+            <p className="text-construction-gray mb-6 text-sm lg:text-base">
               Speak directly with our framing specialists. Get immediate answers and schedule your consultation.
             </p>
             <Button 
@@ -96,14 +96,14 @@ const CTASection = () => {
           </div>
 
           {/* Email Contact */}
-          <div className="p-6 lg:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300">
+          <div className="p-6 lg:p-8 rounded-2xl bg-construction-dark/5 backdrop-blur-sm border border-construction-dark/10 hover:bg-construction-dark/10 transition-colors duration-300">
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-xl bg-construction-green/20 flex items-center justify-center mr-4">
                 <Mail className="w-6 h-6 text-construction-green" />
               </div>
               <h3 className="text-xl font-semibold">Email Quote</h3>
             </div>
-            <p className="text-white/70 mb-6 text-sm lg:text-base">
+            <p className="text-construction-gray mb-6 text-sm lg:text-base">
               Send us your project details and plans. We'll respond with a detailed quote within 24 hours.
             </p>
             <Button 
@@ -126,7 +126,7 @@ const CTASection = () => {
           }`}
           style={{ transitionDelay: isVisible ? "0.4s" : "0s" }}
         >
-          <p className="text-white/60 text-sm lg:text-base">
+          <p className="text-construction-gray/60 text-sm lg:text-base">
             Licensed • Insured • COR Safety Certified
           </p>
         </div>

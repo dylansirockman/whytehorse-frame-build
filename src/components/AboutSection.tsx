@@ -26,7 +26,7 @@ const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative py-24 lg:py-32 overflow-hidden bg-white"
+      className="relative py-24 lg:py-32 overflow-hidden bg-construction-dark text-white"
     >
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -37,15 +37,15 @@ const AboutSection = () => {
             backgroundImage: `
               repeating-linear-gradient(
                 to right,
-                rgba(31,41,55,0.015) 0,
-                rgba(31,41,55,0.015) 1px,
+                rgba(255,255,255,0.03) 0,
+                rgba(255,255,255,0.03) 1px,
                 transparent 1px,
                 transparent 32px
               ),
               repeating-linear-gradient(
                 to bottom,
-                rgba(31,41,55,0.015) 0,
-                rgba(31,41,55,0.015) 1px,
+                rgba(255,255,255,0.03) 0,
+                rgba(255,255,255,0.03) 1px,
                 transparent 1px,
                 transparent 32px
               )
@@ -59,15 +59,15 @@ const AboutSection = () => {
             backgroundImage: `
               repeating-linear-gradient(
                 to right,
-                rgba(31,41,55,0.02) 0,
-                rgba(31,41,55,0.02) 1.5px,
+                rgba(255,255,255,0.04) 0,
+                rgba(255,255,255,0.04) 1.5px,
                 transparent 1.5px,
                 transparent 160px
               ),
               repeating-linear-gradient(
                 to bottom,
-                rgba(31,41,55,0.02) 0,
-                rgba(31,41,55,0.02) 1.5px,
+                rgba(255,255,255,0.04) 0,
+                rgba(255,255,255,0.04) 1.5px,
                 transparent 1.5px,
                 transparent 160px
               )
@@ -80,7 +80,7 @@ const AboutSection = () => {
           viewBox="0 0 1200 800"
           preserveAspectRatio="none"
         >
-          <g stroke="#1F2937" strokeWidth="1" fill="none">
+          <g stroke="#FFFFFF" strokeWidth="1" fill="none">
             <line
               x1="200"
               y1="600"
@@ -99,14 +99,14 @@ const AboutSection = () => {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)",
+              "radial-gradient(1200px 600px at 50% 20%, rgba(0,0,0,0.35), transparent 60%)",
           }}
         />
       </div>
 
       {/* ===== Fold effects ===== */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/10 to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/10 to-transparent z-10" />
+      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/10 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/10 to-transparent z-10" />
 
       {/* ===== Content ===== */}
       <div className="relative z-20 container mx-auto px-4">
@@ -119,17 +119,17 @@ const AboutSection = () => {
                 : "opacity-0 -translate-x-3 motion-reduce:translate-x-0"
             }`}
           >
-            <div className="relative rounded-2xl p-4 border-2 border-solid border-construction-dark/15">
-              <div className="pointer-events-none absolute inset-2 rounded-xl border border-dashed border-construction-dark/8" />
+            <div className="relative rounded-2xl p-4 border-2 border-solid border-white/15">
+              <div className="pointer-events-none absolute inset-2 rounded-xl border border-dashed border-white/8" />
               {/* corner ticks */}
-              <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -top-2 right-6 h-4 w-px bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -right-2 top-6 h-px w-4 bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -bottom-2 left-6 h-4 w-px bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
-              <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
+              <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-white/15" />
+              <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-white/15" />
+              <div className="pointer-events-none absolute -top-2 right-6 h-4 w-px bg-white/15" />
+              <div className="pointer-events-none absolute -right-2 top-6 h-px w-4 bg-white/15" />
+              <div className="pointer-events-none absolute -bottom-2 left-6 h-4 w-px bg-white/15" />
+              <div className="pointer-events-none absolute -left-2 bottom-6 h-px w-4 bg-white/15" />
+              <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-white/15" />
+              <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-white/15" />
               {/* content */}
               <img
                 src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
@@ -160,7 +160,7 @@ const AboutSection = () => {
 
             {/* heading */}
             <h2
-              className={`text-3xl lg:text-6xl font-bold text-construction-dark mb-6 lg:mb-8 leading-tight transition-all duration-800 ease-out motion-reduce:transition-none ${
+              className={`text-3xl lg:text-6xl font-bold text-white mb-6 lg:mb-8 leading-tight transition-all duration-800 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
                   : "opacity-0 translate-y-3 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
@@ -174,7 +174,7 @@ const AboutSection = () => {
 
             {/* body */}
             <div
-              className={`space-y-4 lg:space-y-6 text-base lg:text-lg text-construction-gray leading-relaxed max-w-prose transition-all duration-900 ease-out motion-reduce:transition-none ${
+              className={`space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed max-w-prose transition-all duration-900 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
                   : "opacity-0 translate-y-2 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
@@ -197,7 +197,7 @@ const AboutSection = () => {
 
             {/* Stats card */}
             <div
-              className={`relative mt-8 lg:mt-12 grid grid-cols-3 divide-x divide-construction-dark/10 rounded-xl border border-dashed border-construction-dark/15 bg-white/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out motion-reduce:transition-none ${
+              className={`relative mt-8 lg:mt-12 grid grid-cols-3 divide-x divide-white/10 rounded-xl border border-dashed border-white/15 bg-construction-dark/70 backdrop-blur-sm shadow-[var(--shadow-premium)] transition-all duration-1000 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 scale-100 blur-0"
                   : "opacity-0 translate-y-3 scale-95 blur-sm motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:blur-0"
@@ -208,7 +208,7 @@ const AboutSection = () => {
                 <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   500+
                 </div>
-                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-white/70">
                   Projects
                 </div>
               </div>
@@ -216,7 +216,7 @@ const AboutSection = () => {
                 <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   15+
                 </div>
-                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-white/70">
                   Years
                 </div>
               </div>
@@ -224,7 +224,7 @@ const AboutSection = () => {
                 <div className="text-2xl lg:text-4xl font-bold text-construction-green mb-1 tracking-tight">
                   100%
                 </div>
-                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-construction-gray">
+                <div className="text-[11px] lg:text-xs uppercase tracking-wider text-white/70">
                   On Schedule
                 </div>
               </div>
