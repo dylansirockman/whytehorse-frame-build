@@ -82,15 +82,14 @@ const AboutSection = () => {
                 <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
-                    src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
-                    alt="House construction framing — interior structure"
+                    src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
+                    alt="House construction site with framing and equipment"
                     loading="lazy"
                   />
-                  {/* Secondary image (bottom-right triangle).
-                      Replace with another project image when you have it. */}
+                  {/* Secondary image (bottom-right triangle) */}
                   <img
-                    src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
-                    alt="Framing team on site — exterior framing progress"
+                    src="/lovable-uploads/42d53fb7-1475-4233-ab00-71614ca9c3ea.png"
+                    alt="Custom home with mixed siding materials near completion"
                     loading="lazy"
                   />
                 </div>
