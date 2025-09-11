@@ -168,20 +168,17 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Image + “Crane” */}
+          {/* Image Carousel with Mobile Optimization */}
           <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop">
-            {/* Pendulum only */}
-            <div
-              className="relative w-full aspect-[4/5] z-[60] will-change-transform"
-              style={
-                {
-                  ["--swing-angle" as any]: "3.2deg",
-                  ["--swing-lift" as any]: "3px",
-                  ["--swing-duration" as any]: "4.2s",
-                  animation: "pendulum var(--swing-duration) infinite",
-                  transformOrigin: "top center",
-                } as React.CSSProperties
-              }
+            {/* Desktop - with crane animation */}
+            <div className="hidden lg:block relative w-full aspect-[4/5] z-[60] will-change-transform"
+              style={{
+                ["--swing-angle" as any]: "3.2deg",
+                ["--swing-lift" as any]: "3px",
+                ["--swing-duration" as any]: "4.2s",
+                animation: "pendulum var(--swing-duration) infinite",
+                transformOrigin: "top center",
+              } as React.CSSProperties}
             >
               {/* Crooked → straight on hover */}
               <div className="relative w-full h-full rotate-2 sm:rotate-3 hover:rotate-0 transition-transform duration-500 transform-gpu">
@@ -272,6 +269,91 @@ const HeroSection = () => {
                       ))}
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile - clean image carousel with touch swipe */}
+            <div className="lg:hidden relative w-full aspect-[4/5] z-40">
+              <div
+                className="w-full h-full overflow-hidden rounded-3xl shadow-xl bg-white relative touch-pan-x"
+                onTouchStart={(e) => {
+                  const touch = e.touches[0];
+                  const startX = touch.clientX;
+                  
+                  const handleTouchMove = (moveEvent: TouchEvent) => {
+                    const currentTouch = moveEvent.touches[0];
+                    const diffX = startX - currentTouch.clientX;
+                    
+                    if (Math.abs(diffX) > 50) {
+                      if (diffX > 0) {
+                        // Swipe left - next image
+                        setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+                      } else {
+                        // Swipe right - previous image
+                        setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+                      }
+                      document.removeEventListener('touchmove', handleTouchMove);
+                      document.removeEventListener('touchend', handleTouchEnd);
+                    }
+                  };
+                  
+                  const handleTouchEnd = () => {
+                    document.removeEventListener('touchmove', handleTouchMove);
+                    document.removeEventListener('touchend', handleTouchEnd);
+                  };
+                  
+                  document.addEventListener('touchmove', handleTouchMove);
+                  document.addEventListener('touchend', handleTouchEnd);
+                }}
+                onClick={handleImageClick}
+              >
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
+                      index === currentImageIndex
+                        ? "translate-x-0"
+                        : index > currentImageIndex
+                        ? "translate-x-full"
+                        : "-translate-x-full"
+                    }`}
+                  >
+                    <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 active:opacity-100 transition-opacity duration-300 z-20" />
+
+                <button
+                  className="absolute top-4 right-4 z-30 bg-gradient-to-r from-pink-500 to-purple-600 text-white p-2.5 rounded-full shadow-xl transition-all duration-300 active:scale-95"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open("https://instagram.com", "_blank");
+                  }}
+                  aria-label="Open Instagram"
+                >
+                  <Instagram size={20} strokeWidth={2.5} />
+                </button>
+
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-30" role="tablist" aria-label="Hero image pagination">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(index);
+                      }}
+                      className={`w-3 h-3 rounded-full transition-all duration-500 ${
+                        index === currentImageIndex
+                          ? "bg-construction-green shadow-lg scale-125"
+                          : "bg-white/40 active:bg-white/60"
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                      aria-selected={index === currentImageIndex}
+                      role="tab"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
