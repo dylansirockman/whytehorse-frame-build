@@ -142,20 +142,35 @@ const ProcessSection = () => {
 
       {/* Subtle blueprint background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Fine grid (32px) */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
-            backgroundImage: `
-              repeating-linear-gradient(to right, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px),
-              repeating-linear-gradient(to bottom, rgba(31,41,55,0.015) 0, rgba(31,41,55,0.015) 1px, transparent 1px, transparent 36px)
-            `,
+            backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+              <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'>
+                <path d='M 32 0 H 0 V 32' fill='none' stroke='#1F2937' stroke-opacity='0.9' stroke-width='1' stroke-linecap='round'/>
+              </svg>
+            `)}")`,
+            backgroundRepeat: "repeat",
+          }}
+        />
+        {/* Bold grid (every 5 cells → 160px) */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(`
+              <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
+                <path d='M 160 0 H 0 V 160' fill='none' stroke='#1F2937' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round'/>
+              </svg>
+            `)}")`,
+            backgroundRepeat: "repeat",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1200px 600px at 50% 12%, rgba(2,6,23,0.02), transparent 60%)",
+              "radial-gradient(1200px 600px at 50% 12%, rgba(2,6,23,0.04), transparent 60%)",
           }}
         />
       </div>
