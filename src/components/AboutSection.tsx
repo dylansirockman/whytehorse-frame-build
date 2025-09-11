@@ -5,6 +5,9 @@ const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  // gallery mode: 'tl' (top-left dominant) or 'br' (bottom-right dominant)
+  const [galleryMode, setGalleryMode] = useState<"tl" | "br">("tl");
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -77,21 +80,30 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
 
-              {/* content — Split-reveal hover gallery */}
+              {/* content — Split-reveal gallery (75/25; flips when BR hovered) */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div className="wh-gallery w-full">
+                <div
+                  className={[
+                    "wh-gallery w-full",
+                    galleryMode === "br" ? "wh--br" : "wh--tl",
+                  ].join(" ")}
+                  onMouseEnter={() => setGalleryMode("tl")}   // container hover defaults to TL-dominant
+                  onMouseLeave={() => setGalleryMode("tl")}   // keep TL-dominant on leave
+                >
                   {/* Primary image (top-left triangle) */}
                   <img
-                    src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
-                    alt="House construction framing — interior structure"
+                    src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
+                    alt="House construction site with framing and equipment"
                     loading="lazy"
+                    onMouseEnter={() => setGalleryMode("tl")}
                   />
-                  {/* Secondary image (bottom-right triangle).
-                      Replace with another project image when you have it. */}
+                  {/* Secondary image (bottom-right triangle) */}
                   <img
-                    src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
-                    alt="Framing team on site — exterior framing progress"
+                    src="/lovable-uploads/42d53fb7-1475-4233-ab00-71614ca9c3ea.png"
+                    alt="Custom home with mixed siding materials near completion"
                     loading="lazy"
+                    onMouseEnter={() => setGalleryMode("br")}
+                    onMouseLeave={() => setGalleryMode("tl")}
                   />
                 </div>
               </div>
@@ -189,24 +201,24 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px; /* gap/overlap along the diagonal */
-          --size-w: 100%;
+          --g: 8px;             /* diagonal gap */
           display: grid;
           grid-template-areas: "stack";
-          width: var(--size-w);
+          width: 100%;
           aspect-ratio: 4 / 3;
           clip-path: inset(1px); /* avoid hairline gaps on edges */
           cursor: pointer;
         }
         .wh-gallery > img {
-          --_p: calc(-1 * var(--g));
+          --_p: calc(-1 * var(--g)); /* default small overlap */
           grid-area: stack;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
+          transition: clip-path .35s ease, transform .35s ease;
           will-change: clip-path, transform;
         }
+        /* Triangles */
         .wh-gallery > img:first-child {
           /* top-left triangle */
           clip-path: polygon(0 0, calc(100% + var(--_p)) 0, 0 calc(100% + var(--_p)));
@@ -215,17 +227,20 @@ const AboutSection = () => {
           /* bottom-right triangle */
           clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
-        /* On hover, push triangles apart for reveal */
-        .wh-gallery:hover > img:last-child,
-        .wh-gallery:hover > img:first-child:hover {
-          --_p: calc(50% - var(--g));
-        }
-        .wh-gallery:hover > img:first-child,
-        .wh-gallery:hover > img:first-child:hover + img {
-          --_p: calc(-50% - var(--g));
-        }
-        /* Optional tiny lift on hover for a bit of pop */
-        .wh-gallery:hover > img { transform: translateY(-0.5px); }
+
+        /* ===== Ratios controlled by a class (no :has) ===== */
+        /* TL dominant ≈ 75% */
+        .wh--tl > img:first-child { --_p: calc(-75% - var(--g)); }
+        .wh--tl > img:last-child  { --_p: calc( 25% - var(--g)); }
+
+        /* BR dominant ≈ 75% */
+        .wh--br > img:first-child { --_p: calc(-25% - var(--g)); }
+        .wh--br > img:last-child  { --_p: calc( 75% - var(--g)); }
+
+        /* Tiny lift */
+        .wh-gallery.wh--tl > img:first-child,
+        .wh-gallery.wh--br > img:last-child { transform: translateY(-0.5px); }
+
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
         }
