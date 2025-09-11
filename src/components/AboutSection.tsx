@@ -1,12 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import BlueprintPillHeader from "./BlueprintPillHeader";
+import BlueprintPillHeader from './BlueprintPillHeader';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-
-  // Which image dominates the split: 'tl' (top-left) or 'br' (bottom-right)
-  const [galleryMode, setGalleryMode] = useState<"tl" | "br">("tl");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,28 +77,20 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
 
-              {/* content — Split-reveal gallery */}
+              {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div
-                  className={[
-                    "wh-gallery w-full",
-                    galleryMode === "br" ? "mode-br" : "mode-tl",
-                  ].join(" ")}
-                  onMouseLeave={() => setGalleryMode("tl")}
-                >
+                <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
                     src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
                     alt="House construction site with framing and equipment"
                     loading="lazy"
-                    onMouseEnter={() => setGalleryMode("tl")}
                   />
                   {/* Secondary image (bottom-right triangle) */}
                   <img
                     src="/lovable-uploads/42d53fb7-1475-4233-ab00-71614ca9c3ea.png"
                     alt="Custom home with mixed siding materials near completion"
                     loading="lazy"
-                    onMouseEnter={() => setGalleryMode("br")}
                   />
                 </div>
               </div>
@@ -119,12 +108,7 @@ const AboutSection = () => {
               }`}
               style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}
             >
-              <BlueprintPillHeader
-                index="1"
-                title="Company Profile"
-                metaRight="Est. 2019"
-                as="div"
-              />
+              <BlueprintPillHeader index="1" title="Company Profile" metaRight="Est. 2019" as="div" />
             </div>
 
             {/* heading */}
@@ -151,16 +135,14 @@ const AboutSection = () => {
               style={{ transitionDelay: isVisible ? "0.6s" : "0s" }}
             >
               <p>
-                Framing isn't just one of many services — it's all we do. Our
-                crews are dedicated specialists who ensure every project starts
-                strong, stays on schedule, and meets the highest standards of
-                quality.
+                Framing isn't just one of many services — it's all we do. Our crews are dedicated
+                specialists who ensure every project starts strong, stays on schedule, and meets the
+                highest standards of quality.
               </p>
               <p>
-                With years of experience in residential construction across
-                Alberta, we understand that proper framing is the foundation of
-                every successful build. That's why builders trust us to deliver
-                structural integrity that stands the test of time.
+                With years of experience in residential construction across Alberta, we understand
+                that proper framing is the foundation of every successful build. That's why builders
+                trust us to deliver structural integrity that stands the test of time.
               </p>
             </div>
 
@@ -206,51 +188,43 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px;            /* tiny gap along the diagonal */
-          --cut: 75%;          /* TL-dominant by default (can be 70/30 etc.) */
+          --g: 8px; /* gap/overlap along the diagonal */
+          --size-w: 100%;
           display: grid;
           grid-template-areas: "stack";
-          width: 100%;
+          width: var(--size-w);
           aspect-ratio: 4 / 3;
-          clip-path: inset(0); /* no edge shaving required now */
+          clip-path: inset(1px); /* avoid hairline gaps on edges */
           cursor: pointer;
-          position: relative;
         }
         .wh-gallery > img {
+          --_p: calc(-1 * var(--g));
           grid-area: stack;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: clip-path .35s ease, transform .35s ease;
+          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
           will-change: clip-path, transform;
         }
-
-        /* Top-left triangle uses --cut directly */
         .wh-gallery > img:first-child {
-          clip-path: polygon(
-            0 0,
-            var(--cut) 0,
-            0 var(--cut)
-          );
+          /* top-left triangle */
+          clip-path: polygon(0 0, calc(100% + var(--_p)) 0, 0 calc(100% + var(--_p)));
         }
-
-        /* Bottom-right triangle uses the complementary (100% - --cut) */
         .wh-gallery > img:last-child {
-          clip-path: polygon(
-            100% 100%,
-            100% calc(100% - var(--cut)),
-            calc(100% - var(--cut)) 100%
-          );
+          /* bottom-right triangle */
+          clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
-
-        /* Modes set the cut value */
-        .wh-gallery.mode-tl { --cut: 75%; } /* TL ~75%, BR ~25% */
-        .wh-gallery.mode-br { --cut: 25%; } /* TL ~25%, BR ~75% */
-
-        /* tiny lift for the dominant corner */
-        .wh-gallery.mode-tl > img:first-child { transform: translateY(-0.5px); }
-        .wh-gallery.mode-br > img:last-child  { transform: translateY(-0.5px); }
-
+        /* On hover, push triangles apart for reveal */
+        .wh-gallery:hover > img:last-child,
+        .wh-gallery:hover > img:first-child:hover {
+          --_p: calc(50% - var(--g));
+        }
+        .wh-gallery:hover > img:first-child,
+        .wh-gallery:hover > img:first-child:hover + img {
+          --_p: calc(-50% - var(--g));
+        }
+        /* Optional tiny lift on hover for a bit of pop */
+        .wh-gallery:hover > img { transform: translateY(-0.5px); }
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
         }
