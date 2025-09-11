@@ -26,57 +26,18 @@ const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative py-24 lg:py-32 overflow-hidden bg-white"
+      className="section-surface relative py-24 lg:py-32 overflow-hidden bg-white"
+      data-grid-opacity="0.05"
+      data-rugged="true"
     >
       {/* ===== Blueprint background (z-0) ===== */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Fine grid */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(
-                to right,
-                rgba(31,41,55,0.015) 0,
-                rgba(31,41,55,0.015) 1px,
-                transparent 1px,
-                transparent 32px
-              ),
-              repeating-linear-gradient(
-                to bottom,
-                rgba(31,41,55,0.015) 0,
-                rgba(31,41,55,0.015) 1px,
-                transparent 1px,
-                transparent 32px
-              )
-            `,
-          }}
-        />
-        {/* Bold grid every ~160px */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(
-                to right,
-                rgba(31,41,55,0.02) 0,
-                rgba(31,41,55,0.02) 1.5px,
-                transparent 1.5px,
-                transparent 160px
-              ),
-              repeating-linear-gradient(
-                to bottom,
-                rgba(31,41,55,0.02) 0,
-                rgba(31,41,55,0.02) 1.5px,
-                transparent 1.5px,
-                transparent 160px
-              )
-            `,
-          }}
-        />
+        {/* Grid layers using new system */}
+        <div className="grid-layer grid-layer-fine" />
+        <div className="grid-layer grid-layer-bold" />
         {/* Faint blueprint scribbles/dimensions */}
         <svg
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.03] z-[3]"
           viewBox="0 0 1200 800"
           preserveAspectRatio="none"
         >
@@ -96,7 +57,7 @@ const AboutSection = () => {
         </svg>
         {/* Soft paper vignette */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 z-[3]"
           style={{
             background:
               "radial-gradient(1200px 600px at 50% 20%, rgba(2,6,23,0.025), transparent 60%)",

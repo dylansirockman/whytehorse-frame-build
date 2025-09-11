@@ -2,8 +2,15 @@ import { Star } from "lucide-react";
 
 const TrustSection = () => {
   return (
-    <section className="py-24 bg-construction-dark text-white">
-      <div className="container mx-auto px-4">
+    <section className="section-surface py-24 bg-construction-dark text-white" data-grid-opacity="0.08">
+      {/* Blueprint grid background */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        {/* Grid layers using new system */}
+        <div className="grid-layer grid-layer-fine" />
+        <div className="grid-layer grid-layer-bold" />
+      </div>
+      
+      <div className="relative z-20 container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Trusted by Builders Across Alberta

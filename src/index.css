@@ -178,6 +178,60 @@ All colors MUST be HSL.
 
 @layer utilities {
 
+  /* === Section Surface System === */
+  .section-surface {
+    --grid-alpha: 0.06;
+    --rugged-alpha: 0.045;
+    --rugged-scale: 900px;
+    --rugged-rotation: 12deg;
+    position: relative;
+  }
+  
+  .section-surface[data-grid-opacity="0.04"] { --grid-alpha: 0.04; }
+  .section-surface[data-grid-opacity="0.045"] { --grid-alpha: 0.045; }
+  .section-surface[data-grid-opacity="0.05"] { --grid-alpha: 0.05; }
+  .section-surface[data-grid-opacity="0.055"] { --grid-alpha: 0.055; }
+  .section-surface[data-grid-opacity="0.06"] { --grid-alpha: 0.06; }
+  .section-surface[data-grid-opacity="0.065"] { --grid-alpha: 0.065; }
+  .section-surface[data-grid-opacity="0.07"] { --grid-alpha: 0.07; }
+  .section-surface[data-grid-opacity="0.075"] { --grid-alpha: 0.075; }
+  .section-surface[data-grid-opacity="0.08"] { --grid-alpha: 0.08; }
+
+  /* Rugged paper texture */
+  .section-surface[data-rugged="true"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--rugged-alpha);
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cdefs%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.3'/%3E%3C/svg%3E");
+    background-size: var(--rugged-scale);
+    background-repeat: repeat;
+    transform: rotate(var(--rugged-rotation));
+    mix-blend-mode: multiply;
+  }
+
+  /* Blueprint grid layers with CSS variables */
+  .section-surface .grid-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .section-surface .grid-layer-fine {
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M 32 0 H 0 V 32' fill='none' stroke='%231F2937' stroke-opacity='0.9' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: var(--grid-alpha);
+  }
+  
+  .section-surface .grid-layer-bold {
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cpath d='M 160 0 H 0 V 160' fill='none' stroke='%231F2937' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: var(--grid-alpha);
+  }
+
     /* === Blueprint background layers === */
   .bg-blueprint-grid {
     background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M 32 0 H 0 V 32' fill='none' stroke='%231F2937' stroke-opacity='0.9' stroke-width='1' stroke-linecap='round'/></svg>");
