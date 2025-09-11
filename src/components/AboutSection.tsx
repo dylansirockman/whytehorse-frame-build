@@ -82,7 +82,7 @@ const AboutSection = () => {
                 <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
-                    src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
+                    src="/lovable-uploads/dde69cfb-06eb-450b-ad49-7b8400c583e8.png"
                     alt="House construction site with framing and equipment"
                     loading="lazy"
                   />
