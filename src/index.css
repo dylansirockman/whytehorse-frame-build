@@ -330,7 +330,7 @@ All colors MUST be HSL.
   bottom: 0;
   height: 100%;
   width: 200%;
-  background: hsl(var(--construction-green-dark));
+  background: hsl(var(--construction-secondary));
   z-index: -1;
   transform-origin: 0 bottom;
   transform: translate3D(-50%, 0, 0) rotate(-50deg);
@@ -339,7 +339,7 @@ All colors MUST be HSL.
 
 .btn-primary-modern:hover {
   color: white;
-  box-shadow: 0 4px 12px hsl(158 64% 32% / 0.2);
+  box-shadow: 0 4px 12px hsl(var(--construction-secondary) / 0.3);
   transform: translateY(-1px) scale(1.02);
 }
 
