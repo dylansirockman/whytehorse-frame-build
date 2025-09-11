@@ -77,27 +77,20 @@ const AboutSection = () => {
               <div className="pointer-events-none absolute -bottom-2 right-6 h-4 w-px bg-construction-dark/15" />
               <div className="pointer-events-none absolute -right-2 bottom-6 h-px w-4 bg-construction-dark/15" />
 
-              {/* content — Split-reveal hover gallery (75/25 default; flips to 25/75 when BR image hovered) */}
+              {/* content — Split-reveal hover gallery */}
               <div className="rounded-xl overflow-hidden shadow-[var(--shadow-premium)]">
-                <div
-                  className="wh-gallery w-full"
-                  style={
-                    {
-                      ["--splitA" as any]: "75%", // top-left share on hover
-                      ["--splitB" as any]: "25%", // bottom-right share on hover
-                    } as React.CSSProperties
-                  }
-                >
+                <div className="wh-gallery w-full">
                   {/* Primary image (top-left triangle) */}
                   <img
-                    src="/lovable-uploads/58fb429d-aab0-4aa8-851c-a3a33083628c.png"
-                    alt="House construction site with framing and equipment"
+                    src="/lovable-uploads/8797fcd7-de65-4382-b9c5-96ab756b936d.png"
+                    alt="House construction framing — interior structure"
                     loading="lazy"
                   />
-                  {/* Secondary image (bottom-right triangle) */}
+                  {/* Secondary image (bottom-right triangle).
+                      Replace with another project image when you have it. */}
                   <img
-                    src="/lovable-uploads/42d53fb7-1475-4233-ab00-71614ca9c3ea.png"
-                    alt="Custom home with mixed siding materials near completion"
+                    src="/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png"
+                    alt="Framing team on site — exterior framing progress"
                     loading="lazy"
                   />
                 </div>
@@ -196,10 +189,8 @@ const AboutSection = () => {
       {/* Component-scoped CSS for the split-reveal gallery */}
       <style>{`
         .wh-gallery {
-          --g: 8px;       /* diagonal gap */
+          --g: 8px; /* gap/overlap along the diagonal */
           --size-w: 100%;
-          --splitA: 75%;  /* top-left share */
-          --splitB: 25%;  /* bottom-right share */
           display: grid;
           grid-template-areas: "stack";
           width: var(--size-w);
@@ -213,7 +204,7 @@ const AboutSection = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .4s .05s, clip-path .4s .05s;
+          transition: transform .4s .05s, clip-path .4s .05s, filter .2s;
           will-change: clip-path, transform;
         }
         .wh-gallery > img:first-child {
@@ -224,34 +215,17 @@ const AboutSection = () => {
           /* bottom-right triangle */
           clip-path: polygon(100% 100%, 100% calc(0% - var(--_p)), calc(0% - var(--_p)) 100%);
         }
-
-        /* DEFAULT ON HOVER: 75/25 favoring top-left */
-        .wh-gallery:hover > img:first-child {
-          --_p: calc(-1 * var(--splitA) - var(--g));
+        /* On hover, push triangles apart for reveal */
+        .wh-gallery:hover > img:last-child,
+        .wh-gallery:hover > img:first-child:hover {
+          --_p: calc(50% - var(--g));
         }
-        .wh-gallery:hover > img:last-child {
-          --_p: calc(var(--splitB) - var(--g));
+        .wh-gallery:hover > img:first-child,
+        .wh-gallery:hover > img:first-child:hover + img {
+          --_p: calc(-50% - var(--g));
         }
-
-        /* FLIP TO 25/75 WHEN the smaller (bottom-right) image ITSELF is hovered */
-        .wh-gallery:has(img:last-child:hover) > img:first-child {
-          --_p: calc(-1 * var(--splitB) - var(--g)); /* shrink TL to 25% */
-        }
-        .wh-gallery:has(img:last-child:hover) > img:last-child {
-          --_p: calc(var(--splitA) - var(--g));      /* grow BR to 75% */
-        }
-
-        /* (Optional) keep TL dominant when TL is hovered explicitly */
-        .wh-gallery:has(img:first-child:hover) > img:first-child {
-          --_p: calc(-1 * var(--splitA) - var(--g));
-        }
-        .wh-gallery:has(img:first-child:hover) > img:last-child {
-          --_p: calc(var(--splitB) - var(--g));
-        }
-
-        /* tiny lift */
+        /* Optional tiny lift on hover for a bit of pop */
         .wh-gallery:hover > img { transform: translateY(-0.5px); }
-
         @media (prefers-reduced-motion: reduce) {
           .wh-gallery > img { transition: none; }
         }
