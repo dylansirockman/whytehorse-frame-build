@@ -26,7 +26,7 @@ const AboutSection = () => {
       data-rugged="true"
     >
       {/* ===== Blueprint background (z-0) ===== */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
         <div className="grid-layer grid-layer-fine" />
         <div className="grid-layer grid-layer-bold" />
         <svg
