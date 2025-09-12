@@ -170,7 +170,7 @@ const HeroSection = () => {
           </div>
 
           {/* Image Carousel with Mobile Optimization */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop mb-12 lg:mb-0">
             {/* Desktop - with crane animation */}
             <div className="hidden lg:block relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={{
