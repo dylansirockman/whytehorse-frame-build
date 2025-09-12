@@ -50,7 +50,7 @@ All colors MUST be HSL.
     
     /* Alternating section backgrounds for visual texture */
     --section-primary: 0 0% 100%;     /* Pure white */
-    --section-alternate: 210 20% 98%; /* Slightly off-white with subtle cool tone */
+    --section-alternate: 0 0% 100%;   /* Pure white - same as primary */
 
     --card: 0 0% 100%;
     --card-foreground: 220 13% 13%;
