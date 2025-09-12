@@ -27,7 +27,7 @@ const CTASection = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="section-surface relative py-24 lg:py-32 overflow-hidden text-construction-dark"
+      className="section-surface relative py-16 lg:py-32 overflow-hidden text-construction-dark"
       style={{ backgroundColor: "hsl(var(--section-primary))" }}
       data-grid-opacity="0.055"
       role="region"
