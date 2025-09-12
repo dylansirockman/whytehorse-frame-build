@@ -371,7 +371,7 @@ const HeroSection = () => {
             </h3>
           </div>
 
-          <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8 items-center justify-items-center max-w-4xl mx-auto" aria-label="Trusted by logos">
+          <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8 items-center justify-items-center justify-center max-w-4xl mx-auto" aria-label="Trusted by logos">
             {LOGOS.map((client, index) => (
               <div
                 key={client.name}
