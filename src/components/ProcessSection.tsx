@@ -147,7 +147,7 @@ const ProcessSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/10 to-transparent z-10" />
 
       {/* Subtle blueprint background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-90">
         {/* Grid layers using new system */}
         <div className="grid-layer grid-layer-fine" />
         <div className="grid-layer grid-layer-bold" />
