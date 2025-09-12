@@ -128,7 +128,7 @@ const AboutSection = () => {
 
             {/* body */}
             <div
-              className={`space-y-4 lg:space-y-6 text-base lg:text-lg text-construction-gray leading-relaxed max-w-prose transition-all duration-900 ease-out motion-reduce:transition-none ${
+              className={`space-y-4 lg:space-y-6 text-base lg:text-lg text-construction-gray leading-relaxed max-w-prose text-center lg:text-left mx-auto lg:mx-0 transition-all duration-900 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
                   : "opacity-0 translate-y-2 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
