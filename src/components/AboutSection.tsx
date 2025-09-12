@@ -114,7 +114,7 @@ const AboutSection = () => {
 
             {/* heading */}
             <h2
-              className={`text-3xl lg:text-6xl font-bold text-construction-dark mb-6 lg:mb-8 leading-tight transition-all duration-800 ease-out motion-reduce:transition-none ${
+              className={`text-3xl lg:text-6xl font-bold text-construction-dark mb-6 lg:mb-8 leading-tight text-center lg:text-left transition-all duration-800 ease-out motion-reduce:transition-none ${
                 isVisible
                   ? "opacity-100 translate-y-0 blur-0"
                   : "opacity-0 translate-y-3 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0"
