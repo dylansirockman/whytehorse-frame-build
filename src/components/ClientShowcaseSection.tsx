@@ -16,10 +16,13 @@ const ClientShowcaseSection = () => {
   return (
     <section className="py-12 lg:py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8 lg:mb-12">
-          <h2 className="text-2xl lg:text-4xl font-bold text-construction-dark">
+        <div className="text-center mb-10 lg:mb-16">
+          <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-construction-dark mb-4">
             Trusted by Alberta's Top Builders
           </h2>
+          <p className="text-lg lg:text-xl text-construction-gray max-w-2xl mx-auto">
+            Leading construction companies across Alberta trust WhyteHorse for their framing needs
+          </p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-center justify-items-center max-w-4xl mx-auto">
