@@ -295,13 +295,13 @@ const ProcessCarousel = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons - Hidden on small mobile, visible on larger screens */}
+          {/* Navigation Buttons - Desktop/Tablet only */}
           <button
             onClick={goToPrevious}
             disabled={currentStep === 0}
             className={cn(
-              "absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
-              "hidden xs:flex items-center justify-center text-construction-dark",
+              "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
+              "hidden md:flex items-center justify-center text-construction-dark",
               "transition-all duration-200 motion-reduce:transition-none",
               "hover:bg-white hover:shadow-xl hover:scale-110 motion-reduce:hover:scale-100",
               "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-white/90",
@@ -309,15 +309,15 @@ const ProcessCarousel = () => {
             )}
             aria-label="Previous step"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           <button
             onClick={goToNext}
             disabled={currentStep === processSteps.length - 1}
             className={cn(
-              "absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
-              "hidden xs:flex items-center justify-center text-construction-dark",
+              "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
+              "hidden md:flex items-center justify-center text-construction-dark",
               "transition-all duration-200 motion-reduce:transition-none",
               "hover:bg-white hover:shadow-xl hover:scale-110 motion-reduce:hover:scale-100",
               "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-white/90",
@@ -325,7 +325,7 @@ const ProcessCarousel = () => {
             )}
             aria-label="Next step"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Step Indicators */}
