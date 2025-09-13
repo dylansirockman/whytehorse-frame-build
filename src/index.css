@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 
-
+html {
+  scrollbar-gutter: stable both-edges;
+}
 
 
 /* Crane swing animation */
