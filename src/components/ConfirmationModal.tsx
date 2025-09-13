@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -9,7 +7,6 @@ interface ConfirmationModalProps {
   refId?: string;
   title?: string;
   message?: string;
-  onViewNextSteps?: () => void;
 }
 
 interface Confetti {
@@ -27,17 +24,12 @@ const ConfirmationModal = ({
   onOpenChange,
   refId,
   title = "Request received",
-  message = "Thanks—your residential framing quote is on its way. We'll contact you within 24 hours.",
-  onViewNextSteps
+  message = "Thanks—your residential framing quote is on its way. We'll contact you within 24 hours."
 }: ConfirmationModalProps) => {
   const [showCheckmark, setShowCheckmark] = useState(false);
   const [confetti, setConfetti] = useState<Confetti[]>([]);
   const [timeLeft, setTimeLeft] = useState(3000);
   const [isPaused, setIsPaused] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout>();
-  const confettiRef = useRef<NodeJS.Timeout>();
-  const intervalRef = useRef<NodeJS.Timeout>();
-
   const colors = ['#10B981', '#FB923C', '#1F2937', '#23D3A0'];
 
   // Generate confetti particles
@@ -69,7 +61,7 @@ const ConfirmationModal = ({
       })));
 
       if (frame < 60) {
-        confettiRef.current = setTimeout(animateConfetti, 16);
+        setTimeout(animateConfetti, 16);
       } else {
         setConfetti([]);
       }
@@ -77,14 +69,14 @@ const ConfirmationModal = ({
 
     // Check for reduced motion
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      confettiRef.current = setTimeout(animateConfetti, 16);
+      setTimeout(animateConfetti, 16);
     }
   };
 
   // Auto-dismiss timer
   useEffect(() => {
     if (open && !isPaused && timeLeft > 0) {
-      intervalRef.current = setInterval(() => {
+      const id = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 100) {
             onOpenChange(false);
@@ -93,13 +85,8 @@ const ConfirmationModal = ({
           return prev - 100;
         });
       }, 100);
-    } else {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      return () => clearInterval(id);
     }
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
   }, [open, isPaused, timeLeft, onOpenChange]);
 
   // Reset state when modal opens
@@ -110,25 +97,16 @@ const ConfirmationModal = ({
       setTimeLeft(3000);
       setIsPaused(false);
       
-      // Start checkmark animation
-      timerRef.current = setTimeout(() => {
+      setTimeout(() => {
         setShowCheckmark(true);
-        // Start confetti after checkmark completes
         setTimeout(generateConfetti, 450);
       }, 200);
     } else {
-      // Reset state when closed
       setShowCheckmark(false);
       setConfetti([]);
       setTimeLeft(3000);
       setIsPaused(false);
     }
-
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-      if (confettiRef.current) clearTimeout(confettiRef.current);
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
   }, [open]);
 
   const handleClose = () => {
@@ -137,27 +115,17 @@ const ConfirmationModal = ({
 
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
-  const handleFocus = () => setIsPaused(true);
-  const handleBlur = () => setIsPaused(false);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent 
+        hideClose
         className="sm:max-w-md mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border-0 p-0 overflow-hidden"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         aria-labelledby="confirmation-title"
         aria-describedby="confirmation-message"
-        style={{
-          animation: open 
-            ? 'scale-in 260ms cubic-bezier(0.4, 0, 0.2, 1)' 
-            : 'scale-out 180ms cubic-bezier(0.4, 0, 0.2, 1)'
-        }}
       >
-        {/* Backdrop */}
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-md -z-10" />
         
         {/* Confetti particles */}
         {confetti.map(particle => (
@@ -175,15 +143,6 @@ const ConfirmationModal = ({
         ))}
 
         <div className="relative p-8 text-center">
-          {/* Close button */}
-          <button
-            onClick={handleClose}
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/5 transition-colors"
-            aria-label="Close confirmation"
-          >
-            <X className="h-4 w-4 text-construction-gray" />
-          </button>
-
           {/* Success icon */}
           <div className="mx-auto w-16 h-16 mb-6 relative">
             <div className="w-full h-full rounded-full bg-construction-green/10 flex items-center justify-center">
@@ -241,39 +200,6 @@ const ConfirmationModal = ({
             </p>
           )}
 
-          {/* Auto-dismiss progress bar */}
-          <div className="w-full bg-construction-light/20 rounded-full h-1 mb-6 overflow-hidden">
-            <div 
-              className="h-full bg-construction-green transition-all duration-100 ease-linear rounded-full"
-              style={{ 
-                width: `${(timeLeft / 3000) * 100}%`,
-                opacity: isPaused ? 0.5 : 1
-              }}
-            />
-          </div>
-
-          {/* Actions */}
-          <div className="flex gap-3 justify-center">
-            <Button
-              onClick={handleClose}
-              variant="outline"
-              size="sm"
-              className="px-6 border-construction-light text-construction-gray hover:bg-construction-light/10"
-            >
-              Close
-            </Button>
-            
-            {onViewNextSteps && (
-              <Button
-                onClick={onViewNextSteps}
-                variant="hero"
-                size="sm"
-                className="px-6 bg-gradient-to-b from-[#23D3A0] to-[#10B981] text-white shadow-lg hover:brightness-105"
-              >
-                View next steps
-              </Button>
-            )}
-          </div>
         </div>
       </DialogContent>
     </Dialog>

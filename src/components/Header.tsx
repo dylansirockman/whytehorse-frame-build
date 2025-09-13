@@ -138,6 +138,7 @@ const Header = () => {
               onClick={() => setQuoteModalOpen(true)}
               variant="hero"
               size="sm"
+              data-quote-trigger
               className="hidden md:inline-flex font-semibold px-4 py-2 rounded-xl
                          bg-gradient-to-b from-[#23D3A0] to-[#10B981]
                          text-white shadow-[0_6px_20px_rgba(16,185,129,0.25)]
@@ -201,6 +202,7 @@ const Header = () => {
                 onClick={() => setQuoteModalOpen(true)}
                 variant="hero"
                 size="sm"
+                data-quote-trigger
                 className="font-semibold px-4 py-2 rounded-xl
                            bg-gradient-to-b from-[#23D3A0] to-[#10B981]
                            text-white shadow-[0_6px_20px_rgba(16,185,129,0.25)]

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { X, Upload, CheckCircle } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import ConfirmationModal from '@/components/ConfirmationModal';
 import { generateRefId } from '@/utils/generateRefId';
@@ -41,6 +41,8 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationRefId, setConfirmationRefId] = useState('');
+  const prevActiveElementRef = useRef<HTMLElement | null>(null);
+  const prevConfirmationOpenRef = useRef(false);
 
   // Prevent layout shift when modal opens
   useScrollLock(open);
@@ -64,6 +66,9 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
     e.preventDefault();
     
     if (!validateForm()) return;
+
+    // Remember current focus to restore later
+    prevActiveElementRef.current = (document.activeElement as HTMLElement) || null;
 
     // Mock submit function - log to console for now
     console.log('Quote submission:', {
@@ -126,9 +131,22 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
 
   const handleViewNextSteps = () => {
     setShowConfirmation(false);
-    // You can implement navigation to a "What happens next?" section here
     console.log('Navigate to next steps section');
   };
+
+  useEffect(() => {
+    // When confirmation closes, restore focus to previous element or fall back to header trigger
+    if (prevConfirmationOpenRef.current && !showConfirmation) {
+      const prevEl = prevActiveElementRef.current;
+      if (prevEl && document.contains(prevEl)) {
+        prevEl.focus();
+      } else {
+        const trigger = document.querySelector('[data-quote-trigger]') as HTMLElement | null;
+        trigger?.focus();
+      }
+    }
+    prevConfirmationOpenRef.current = showConfirmation;
+  }, [showConfirmation]);
 
   return (
     <>
@@ -136,7 +154,6 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
         open={showConfirmation}
         onOpenChange={setShowConfirmation}
         refId={confirmationRefId}
-        onViewNextSteps={handleViewNextSteps}
       />
       
       <Dialog open={open} onOpenChange={onOpenChange}>
