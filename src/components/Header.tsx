@@ -61,8 +61,8 @@ const Header = () => {
       className={[
         "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
         scrolled
-          ? "bg-white/85 backdrop-blur-md border-b border-black/10 shadow-sm"
-          : "bg-white/60 backdrop-blur-md border-b border-transparent",
+          ? "bg-construction-dark/90 backdrop-blur-md border-b border-white/10 shadow-sm"
+          : "bg-construction-dark/80 backdrop-blur-md border-b border-transparent",
         mounted 
           ? "animate-fade-in translate-y-0 opacity-100" 
           : "-translate-y-full opacity-0"
@@ -83,10 +83,10 @@ const Header = () => {
               mounted ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
             ].join(" ")}>
               <span className="text-2xl lg:text-3xl font-bold tracking-tight">
-                <span className="text-construction-dark">Whyte</span>
+                <span className="text-construction-light">Whyte</span>
                 <span className="text-construction-green">horse</span>
               </span>
-              <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-construction-gray group-hover:text-construction-dark/80 transition-colors">
+              <span className="mt-0.5 text-[11px] lg:text-xs font-medium tracking-[0.14em] uppercase text-construction-light/70 group-hover:text-construction-light/90 transition-colors">
                 Contracting
               </span>
             </div>
@@ -106,7 +106,7 @@ const Header = () => {
                   onClick={handleNavClick}
                   className={[
                     "relative font-medium transition-colors",
-                    "text-construction-dark hover:text-construction-green"
+                    "text-construction-light hover:text-construction-green"
                   ].join(" ")}
                 >
                   {item.label}
@@ -128,7 +128,7 @@ const Header = () => {
           ].join(" ")}>
             <a
               href="tel:+14035550123"
-              className="hidden md:inline-flex items-center gap-2 text-construction-dark font-medium hover:text-construction-green transition-colors"
+              className="hidden md:inline-flex items-center gap-2 text-construction-light font-medium hover:text-construction-green transition-colors"
             >
               <Phone className="h-4 w-4 opacity-70" />
               (403) 555-0123
@@ -150,7 +150,7 @@ const Header = () => {
             {/* Mobile toggle */}
             <button
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-black/10 bg-white/70 hover:bg-white transition"
+              className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 transition text-construction-light"
               aria-label="Toggle menu"
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -168,7 +168,7 @@ const Header = () => {
             open ? "max-h-[320px] opacity-100" : "max-h-0 opacity-0"
           ].join(" ")}
         >
-          <div className="pb-6 border-t border-black/10">
+          <div className="pb-6 border-t border-white/20">
             <nav className="flex flex-col py-3" aria-label="Mobile">
               {NAV.map((item) => {
                 const isActive = active === item.href.replace("#", "");
@@ -181,7 +181,7 @@ const Header = () => {
                       "px-1 py-3 text-base font-medium transition-colors",
                       isActive
                         ? "text-construction-green"
-                        : "text-construction-dark hover:text-construction-green"
+                        : "text-construction-light hover:text-construction-green"
                     ].join(" ")}
                   >
                     {item.label}
@@ -193,7 +193,7 @@ const Header = () => {
             <div className="mt-2 flex flex-col gap-3">
               <a
                 href="tel:+14035550123"
-                className="inline-flex items-center gap-2 text-construction-dark hover:text-construction-green transition-colors"
+                className="inline-flex items-center gap-2 text-construction-light hover:text-construction-green transition-colors"
               >
                 <Phone className="h-4 w-4 opacity-70" />
                 (403) 555-0123
