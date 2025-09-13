@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { X, Upload, CheckCircle } from 'lucide-react';
+import { useScrollLock } from '@/hooks/useScrollLock';
 
 interface QuoteModalProps {
   open: boolean;
@@ -36,6 +37,9 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  // Prevent layout shift when modal opens
+  useScrollLock(open);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {};
