@@ -5,27 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-construction-green focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-construction-green focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "btn-primary-modern text-white rounded-lg min-h-[48px]",
+        default: "btn-construction-primary text-white shadow-sm hover:shadow-md",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
         outline:
-          "btn-secondary-modern text-construction-green hover:text-construction-green-dark rounded-lg min-h-[48px]",
+          "btn-construction-outline text-construction-green border-construction-green hover:bg-construction-green hover:text-white shadow-sm hover:shadow-md",
         secondary:
-          "btn-secondary-modern text-construction-green hover:text-construction-green-dark rounded-lg min-h-[48px]",
-        ghost: "hover:bg-accent hover:text-accent-foreground rounded-lg",
-        link: "text-construction-green underline-offset-4 hover:underline",
-        hero: "btn-primary-modern text-white rounded-xl font-semibold min-h-[48px]",
-        cta: "btn-primary-modern text-white rounded-lg font-semibold min-h-[48px]",
+          "btn-construction-secondary bg-construction-light text-construction-green hover:bg-construction-green-light hover:text-white shadow-sm hover:shadow-md",
+        ghost: "hover:bg-construction-green/10 hover:text-construction-green",
+        link: "text-construction-green underline-offset-4 hover:underline hover:text-construction-green-dark",
+        hero: "btn-construction-hero text-white shadow-lg hover:shadow-xl",
+        cta: "btn-construction-cta text-white shadow-md hover:shadow-lg",
       },
       size: {
-        default: "h-12 px-6 py-3",
-        sm: "h-10 rounded-lg px-4 py-2",
-        lg: "h-14 rounded-xl px-8 py-4 text-base",
-        icon: "h-12 w-12",
+        default: "h-12 px-6 py-3 rounded-lg",
+        sm: "h-10 px-4 py-2 rounded-md text-sm",
+        lg: "h-14 px-8 py-4 rounded-xl text-base font-semibold",
+        icon: "h-12 w-12 rounded-lg",
       },
     },
     defaultVariants: {

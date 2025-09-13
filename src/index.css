@@ -310,63 +310,100 @@ All colors MUST be HSL.
   animation-delay: -4s;
 }
 
-/* Modern button animations */
-@keyframes button-gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Modern Construction Button System */
+.btn-construction-primary {
+  background: linear-gradient(135deg, hsl(var(--construction-green)), hsl(var(--construction-green-dark)));
+  border: none;
+  transition: all 0.2s ease-out;
+  transform: translateY(0);
 }
 
-.btn-primary-modern {
-  background: var(--gradient-primary);
-  border: 1px solid hsl(0 0% 0% / 0.1);
-  transition: all 0.3s ease-in-out;
+.btn-construction-primary:hover {
+  background: linear-gradient(135deg, hsl(var(--construction-green-light)), hsl(var(--construction-green)));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px hsl(var(--construction-green) / 0.25);
+}
+
+.btn-construction-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px hsl(var(--construction-green) / 0.3);
+}
+
+.btn-construction-outline {
+  background: transparent;
+  border: 2px solid hsl(var(--construction-green));
+  transition: all 0.2s ease-out;
+}
+
+.btn-construction-outline:hover {
+  background: hsl(var(--construction-green));
+  border-color: hsl(var(--construction-green));
+  transform: translateY(-1px);
+}
+
+.btn-construction-secondary {
+  background: hsl(var(--construction-light));
+  border: 1px solid hsl(var(--construction-green) / 0.2);
+  transition: all 0.2s ease-out;
+}
+
+.btn-construction-secondary:hover {
+  background: hsl(var(--construction-green-light));
+  border-color: hsl(var(--construction-green-light));
+  transform: translateY(-1px);
+}
+
+.btn-construction-hero {
+  background: linear-gradient(135deg, hsl(var(--construction-green)), hsl(var(--construction-green-dark)));
+  border: none;
+  transition: all 0.3s ease-out;
   position: relative;
   overflow: hidden;
 }
 
-.btn-primary-modern::after {
+.btn-construction-hero::before {
   content: '';
   position: absolute;
-  left: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
+  left: -100%;
+  width: 100%;
   height: 100%;
-  width: 200%;
-  background: hsl(var(--construction-secondary));
-  z-index: -1;
-  transform-origin: 0 bottom;
-  transform: translate3D(-50%, 0, 0) rotate(-50deg);
-  transition: all 0.5s cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.2), transparent);
+  transition: left 0.5s ease-out;
 }
 
-.btn-primary-modern:hover {
-  color: white;
-  box-shadow: 0 4px 12px hsl(var(--construction-secondary) / 0.3);
-  transform: translateY(-1px) scale(1.02);
+.btn-construction-hero:hover::before {
+  left: 100%;
 }
 
-.btn-primary-modern:hover::after {
-  transform: rotate(0deg);
+.btn-construction-hero:hover {
+  background: linear-gradient(135deg, hsl(var(--construction-green-light)), hsl(var(--construction-green)));
+  transform: translateY(-2px);
 }
 
-.btn-secondary-modern {
-  background: transparent;
-  border: 1px solid hsl(var(--construction-green));
-  transition: all 0.3s ease-in-out;
+.btn-construction-cta {
+  background: linear-gradient(135deg, hsl(var(--construction-secondary)), hsl(var(--construction-secondary-dark)));
+  border: none;
+  transition: all 0.2s ease-out;
 }
 
-.btn-secondary-modern:hover {
-  background: hsl(var(--construction-green) / 0.05);
-  border-color: hsl(var(--construction-green-dark));
-  box-shadow: 0 2px 8px hsl(158 64% 32% / 0.15);
+.btn-construction-cta:hover {
+  background: linear-gradient(135deg, hsl(var(--construction-secondary-light)), hsl(var(--construction-secondary)));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px hsl(var(--construction-secondary) / 0.3);
 }
 
 /* Accessibility - reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .btn-primary-modern:hover,
-  .btn-secondary-modern:hover {
+  .btn-construction-primary:hover,
+  .btn-construction-outline:hover,
+  .btn-construction-secondary:hover,
+  .btn-construction-hero:hover,
+  .btn-construction-cta:hover {
     transform: none;
+  }
+  
+  .btn-construction-hero::before {
+    display: none;
   }
 }
