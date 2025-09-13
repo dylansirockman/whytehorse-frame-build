@@ -15,6 +15,12 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Mount animation trigger
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Solidify header on scroll
   useEffect(() => {
@@ -53,20 +59,29 @@ const Header = () => {
   return (
     <header
       className={[
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
         scrolled
           ? "bg-white/85 backdrop-blur-md border-b border-black/10 shadow-sm"
-          : "bg-white/60 backdrop-blur-md border-b border-transparent"
+          : "bg-white/60 backdrop-blur-md border-b border-transparent",
+        mounted 
+          ? "animate-fade-in translate-y-0 opacity-100" 
+          : "-translate-y-full opacity-0"
       ].join(" ")}
       role="banner"
-      style={{ paddingRight: 'var(--scrollbar-compensation, 0px)' }}
+      style={{ 
+        paddingRight: 'var(--scrollbar-compensation, 0px)',
+        transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease-out'
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top row */}
         <div className="h-20 flex items-center justify-between gap-4">
           {/* Brand */}
           <a href="#" className="flex items-center group" aria-label="WhyteHorse Contracting - Home">
-            <div className="flex flex-col leading-none">
+            <div className={[
+              "flex flex-col leading-none transition-all duration-700 delay-200",
+              mounted ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
+            ].join(" ")}>
               <span className="text-2xl lg:text-3xl font-bold tracking-tight">
                 <span className="text-construction-dark">Whyte</span>
                 <span className="text-construction-green">horse</span>
@@ -78,7 +93,10 @@ const Header = () => {
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
+          <nav className={[
+            "hidden lg:flex items-center gap-10 transition-all duration-700 delay-300",
+            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          ].join(" ")} aria-label="Primary">
             {NAV.map((item) => {
               const isActive = active === item.href.replace("#", "");
               return (
@@ -104,7 +122,10 @@ const Header = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className={[
+            "flex items-center gap-3 transition-all duration-700 delay-400",
+            mounted ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+          ].join(" ")}>
             <a
               href="tel:+14035550123"
               className="hidden md:inline-flex items-center gap-2 text-construction-dark font-medium hover:text-construction-green transition-colors"
