@@ -373,7 +373,7 @@ const HeroSection = () => {
       <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
         <div className="max-w-7xl mx-auto px-4 py-3 lg:py-5">
           <div className="text-center mb-4 lg:mb-6">
-            <h3 className="text-sm lg:text-xl xl:text-2xl font-bold text-construction-dark">
+            <h3 className="text-sm lg:text-xl xl:text-2xl font-semibold text-construction-gray">
               Trusted by Alberta&apos;s Top Builders
             </h3>
           </div>

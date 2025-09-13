@@ -17,7 +17,7 @@ const ClientShowcaseSection = () => {
     <section className="py-12 lg:py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 lg:mb-16">
-          <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-construction-dark mb-4">
+          <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-construction-gray mb-4">
             Trusted by Alberta's Top Builders
           </h2>
           <p className="text-lg lg:text-xl text-construction-gray max-w-2xl mx-auto">
