@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html {
-  scrollbar-gutter: stable both-edges;
-}
-
-
 /* Crane swing animation */
 @keyframes crane-swing {
   0% { transform: rotateZ(-3deg); }
