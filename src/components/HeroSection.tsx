@@ -143,7 +143,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
-              Specialists in house framing — delivering precision, deadlines, and quality you can trust.
+              Specialists in residential framing — delivering precision, deadlines, and quality you can trust.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.7s' }}>
@@ -372,8 +372,8 @@ const HeroSection = () => {
       {/* ===== Anchored "Trusted by" band (inside Hero bottom) ===== */}
       <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
         <div className="max-w-7xl mx-auto px-4 py-3 lg:py-5">
-          <div className="text-center mb-4 lg:mb-6">
-            <h3 className="text-sm lg:text-xl xl:text-2xl font-semibold text-construction-gray">
+          <div className="text-center mb-3 lg:mb-4">
+            <h3 className="text-xs lg:text-base font-semibold text-construction-gray">
               Trusted by Alberta&apos;s Top Builders
             </h3>
           </div>
