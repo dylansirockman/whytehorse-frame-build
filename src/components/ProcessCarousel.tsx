@@ -165,7 +165,7 @@ const ProcessCarousel = () => {
           {/* Main Carousel */}
           <div
             ref={carouselRef}
-            className="relative overflow-hidden rounded-2xl bg-white/50 backdrop-blur-sm border border-construction-dark/10 shadow-lg"
+            className="relative overflow-hidden rounded-xl lg:rounded-2xl bg-white/50 backdrop-blur-sm border border-construction-dark/10 shadow-lg"
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
@@ -184,13 +184,13 @@ const ProcessCarousel = () => {
               {processSteps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="w-full flex-shrink-0 p-6 lg:p-12"
+                  className="w-full flex-shrink-0 p-4 sm:p-6 lg:p-12"
                   role="group"
                   aria-roledescription="slide"
                   aria-current={index === currentStep ? "true" : "false"}
                   aria-label={`Step ${step.number}: ${step.title}`}
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
                     {/* Content */}
                     <div className="order-2 lg:order-1">
                       <div
@@ -205,32 +205,32 @@ const ProcessCarousel = () => {
                         }}
                       >
                         {/* Step Badge */}
-                        <div className="flex items-center gap-4 mb-6">
-                          <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-xl border-2 border-construction-green/40 flex items-center justify-center text-2xl lg:text-3xl font-bold text-construction-green bg-white shadow-md">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl border-2 border-construction-green/40 flex items-center justify-center text-lg sm:text-2xl lg:text-3xl font-bold text-construction-green bg-white shadow-md mx-auto sm:mx-0">
                             {step.number}
                           </div>
-                          <div>
-                            <h3 className="text-2xl lg:text-4xl font-bold text-construction-dark mb-2">
+                          <div className="text-center sm:text-left">
+                            <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold text-construction-dark mb-1 sm:mb-2">
                               {step.title}
                             </h3>
-                            <div className="flex items-center gap-2 text-sm text-construction-gray">
+                            <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-construction-gray">
                               <span>Step {index + 1} of {processSteps.length}</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className="text-lg lg:text-xl text-construction-gray leading-relaxed mb-8 max-w-prose">
+                        <p className="text-base sm:text-lg lg:text-xl text-construction-gray leading-relaxed mb-6 sm:mb-8 max-w-prose text-center sm:text-left mx-auto sm:mx-0">
                           {step.description}
                         </p>
 
                         {/* Checks */}
-                        <div className="space-y-3 mb-8">
+                        <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                           {step.checks.map((check, checkIndex) => (
                             <div
                               key={check}
                               className={cn(
-                                "flex items-center text-construction-green transition-all duration-300 ease-out motion-reduce:transition-none",
+                                "flex items-center text-construction-green transition-all duration-300 ease-out motion-reduce:transition-none justify-center sm:justify-start",
                                 index === currentStep
                                   ? "opacity-100 translate-x-0"
                                   : "opacity-0 translate-x-4 motion-reduce:translate-x-0"
@@ -239,8 +239,8 @@ const ProcessCarousel = () => {
                                 transitionDelay: index === currentStep ? `${0.3 + checkIndex * 0.1}s` : "0s",
                               }}
                             >
-                              <CheckCircle className="w-5 h-5 mr-3 shrink-0" />
-                              <span className="font-medium text-construction-dark/80 text-base lg:text-lg">
+                              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 shrink-0" />
+                              <span className="font-medium text-construction-dark/80 text-sm sm:text-base lg:text-lg text-center sm:text-left">
                                 {check}
                               </span>
                             </div>
@@ -248,21 +248,23 @@ const ProcessCarousel = () => {
                         </div>
 
                         {/* Micro CTA */}
-                        <button
-                          onClick={scrollToCTA}
-                          className={cn(
-                            "inline-flex items-center gap-2 text-construction-green hover:text-construction-green/80 font-semibold transition-all duration-200 group motion-reduce:transition-none",
-                            index === currentStep
-                              ? "opacity-100 translate-y-0"
-                              : "opacity-0 translate-y-2 motion-reduce:translate-y-0"
-                          )}
-                          style={{
-                            transitionDelay: index === currentStep ? "0.5s" : "0s",
-                          }}
-                        >
-                          Get Your Quote
-                          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
-                        </button>
+                        <div className="flex justify-center sm:justify-start">
+                          <button
+                            onClick={scrollToCTA}
+                            className={cn(
+                              "inline-flex items-center gap-2 text-construction-green hover:text-construction-green/80 font-semibold transition-all duration-200 group motion-reduce:transition-none text-sm sm:text-base",
+                              index === currentStep
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-2 motion-reduce:translate-y-0"
+                            )}
+                            style={{
+                              transitionDelay: index === currentStep ? "0.5s" : "0s",
+                            }}
+                          >
+                            Get Your Quote
+                            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
+                          </button>
+                        </div>
                       </div>
                     </div>
 
@@ -282,7 +284,7 @@ const ProcessCarousel = () => {
                         <img
                           src={step.image}
                           alt={`${step.title} process step`}
-                          className="w-full rounded-xl shadow-lg border border-construction-dark/10"
+                          className="w-full rounded-lg lg:rounded-xl shadow-lg border border-construction-dark/10"
                           loading="lazy"
                         />
                       </div>
@@ -293,13 +295,13 @@ const ProcessCarousel = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons - Hidden on small mobile, visible on larger screens */}
           <button
             onClick={goToPrevious}
             disabled={currentStep === 0}
             className={cn(
-              "absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
-              "flex items-center justify-center text-construction-dark",
+              "absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
+              "hidden xs:flex items-center justify-center text-construction-dark",
               "transition-all duration-200 motion-reduce:transition-none",
               "hover:bg-white hover:shadow-xl hover:scale-110 motion-reduce:hover:scale-100",
               "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-white/90",
@@ -307,15 +309,15 @@ const ProcessCarousel = () => {
             )}
             aria-label="Previous step"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={goToNext}
             disabled={currentStep === processSteps.length - 1}
             className={cn(
-              "absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
-              "flex items-center justify-center text-construction-dark",
+              "absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm border border-construction-dark/20 shadow-lg",
+              "hidden xs:flex items-center justify-center text-construction-dark",
               "transition-all duration-200 motion-reduce:transition-none",
               "hover:bg-white hover:shadow-xl hover:scale-110 motion-reduce:hover:scale-100",
               "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-white/90",
@@ -323,17 +325,17 @@ const ProcessCarousel = () => {
             )}
             aria-label="Next step"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {/* Step Indicators */}
-          <div className="flex justify-center mt-8 gap-3">
+          <div className="flex justify-center mt-6 sm:mt-8 gap-2 sm:gap-3">
             {processSteps.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToStep(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300 motion-reduce:transition-none",
+                  "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 motion-reduce:transition-none",
                   "focus:outline-none focus:ring-2 focus:ring-construction-green focus:ring-offset-2",
                   index === currentStep
                     ? "bg-construction-green scale-125"
@@ -346,17 +348,22 @@ const ProcessCarousel = () => {
           </div>
 
           {/* Progress Bar */}
-          <div className="mt-6 mx-auto max-w-md">
+          <div className="mt-4 sm:mt-6 mx-auto max-w-xs sm:max-w-md">
             <div className="h-1 bg-construction-dark/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-construction-green transition-all duration-400 ease-out motion-reduce:transition-none rounded-full"
                 style={{ width: `${((currentStep + 1) / processSteps.length) * 100}%` }}
               />
             </div>
-            <div className="flex justify-between mt-2 text-sm text-construction-gray">
+            <div className="flex justify-between mt-2 text-xs sm:text-sm text-construction-gray">
               <span>Step {currentStep + 1}</span>
               <span>{processSteps.length} Steps</span>
             </div>
+          </div>
+
+          {/* Mobile Swipe Hint - Only shown on first load for mobile */}
+          <div className="flex sm:hidden justify-center mt-4 text-xs text-construction-gray/70 animate-pulse">
+            <span>← Swipe to navigate →</span>
           </div>
         </div>
       </div>
