@@ -59,6 +59,7 @@ const Header = () => {
           : "bg-white/60 backdrop-blur-md border-b border-transparent"
       ].join(" ")}
       role="banner"
+      style={{ right: 'var(--scrollbar-compensation, 0px)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top row */}

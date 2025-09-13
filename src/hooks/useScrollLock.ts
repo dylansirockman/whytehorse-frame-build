@@ -2,27 +2,37 @@ import { useEffect } from 'react';
 
 /**
  * Custom hook to lock scroll and prevent layout shift when modals open
- * Adds padding-right to body equivalent to scrollbar width
+ * - Locks body scroll
+ * - Computes scrollbar width and applies compensation to body AND fixed elements via CSS var
  */
 export const useScrollLock = (isLocked: boolean) => {
   useEffect(() => {
     if (!isLocked) return;
 
-    const originalStyle = window.getComputedStyle(document.body);
-    const originalOverflow = originalStyle.overflow;
-    const originalPaddingRight = originalStyle.paddingRight;
+    const originalBodyStyle = window.getComputedStyle(document.body);
+    const originalOverflow = originalBodyStyle.overflow;
+    const originalPaddingRight = originalBodyStyle.paddingRight;
 
-    // Calculate scrollbar width
+    // Calculate scrollbar width BEFORE changing overflow
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-    // Apply scroll lock with padding compensation
+    // Expose width to CSS for fixed elements
+    document.documentElement.style.setProperty('--scrollbar-compensation', `${scrollbarWidth}px`);
+    document.documentElement.classList.add('scroll-locked');
+
+    // Apply scroll lock with padding compensation (only if there's a scrollbar)
+    if (scrollbarWidth > 0) {
+      const currentPadding = parseFloat(originalPaddingRight || '0');
+      document.body.style.paddingRight = `${currentPadding + scrollbarWidth}px`;
+    }
     document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = `${parseInt(originalPaddingRight) + scrollbarWidth}px`;
 
     return () => {
       // Restore original styles
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
+      document.documentElement.style.removeProperty('--scrollbar-compensation');
+      document.documentElement.classList.remove('scroll-locked');
     };
   }, [isLocked]);
 };
