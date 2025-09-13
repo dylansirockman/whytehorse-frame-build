@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BlueprintPillHeader from './BlueprintPillHeader';
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
+import QuoteModal from "@/components/QuoteModal";
 
 const LOGOS = [
   { name: "Cantiro", logo: "/lovable-uploads/39d2f415-ffb6-4974-ad22-f5a3a3e321e5.png" },
@@ -12,6 +13,7 @@ const LOGOS = [
 ];
 
 const HeroSection = () => {
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const images = [
     "/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png",
     "/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png",
@@ -145,7 +147,12 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.7s' }}>
-              <Button variant="hero" size="lg" className="text-base font-semibold min-h-[44px]">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="text-base font-semibold min-h-[44px]"
+                onClick={() => setQuoteModalOpen(true)}
+              >
                 Get Quote
               </Button>
               <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px]">
@@ -460,6 +467,11 @@ const HeroSection = () => {
           .animate-marquee { animation: none !important; }
         }
       `}</style>
+      
+      <QuoteModal 
+        open={quoteModalOpen} 
+        onOpenChange={setQuoteModalOpen} 
+      />
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
+import QuoteModal from "@/components/QuoteModal";
 
 const NAV = [
   { href: "#about", label: "About" },
@@ -13,6 +14,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
 
   // Solidify header on scroll
   useEffect(() => {
@@ -111,6 +113,7 @@ const Header = () => {
             </a>
 
             <Button
+              onClick={() => setQuoteModalOpen(true)}
               variant="hero"
               size="sm"
               className="hidden md:inline-flex font-semibold px-4 py-2 rounded-xl
@@ -173,6 +176,7 @@ const Header = () => {
                 (403) 555-0123
               </a>
               <Button
+                onClick={() => setQuoteModalOpen(true)}
                 variant="hero"
                 size="sm"
                 className="font-semibold px-4 py-2 rounded-xl
@@ -186,6 +190,11 @@ const Header = () => {
           </div>
         </div>
       </div>
+      
+      <QuoteModal 
+        open={quoteModalOpen} 
+        onOpenChange={setQuoteModalOpen} 
+      />
     </header>
   );
 };
