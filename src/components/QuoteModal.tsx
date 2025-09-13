@@ -139,8 +139,8 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border-0 p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="p-6 pb-4 border-b border-construction-light/20">
+      <DialogContent className="sm:max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border-0 p-0 overflow-hidden max-h-[95vh] overflow-y-auto">
+        <DialogHeader className="p-4 sm:p-6 pb-3 sm:pb-4 border-b border-construction-light/20">
           <DialogTitle className="text-2xl font-bold text-construction-green font-poppins">
             Request a Residential Framing Quote
           </DialogTitle>
@@ -149,9 +149,9 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </p>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {/* Full Name */}
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             <Label htmlFor="fullName" className="text-sm font-semibold text-construction-dark">
               Full Name *
             </Label>
@@ -169,8 +169,8 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </div>
 
           {/* Email & Phone Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <div className="space-y-1.5 sm:space-y-2">
               <Label htmlFor="email" className="text-sm font-semibold text-construction-dark">
                 Email Address *
               </Label>
@@ -188,7 +188,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
               )}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <Label htmlFor="phone" className="text-sm font-semibold text-construction-dark">
                 Phone Number *
               </Label>
@@ -208,7 +208,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </div>
 
           {/* Project Location */}
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             <Label htmlFor="projectLocation" className="text-sm font-semibold text-construction-dark">
               Project Location *
             </Label>
@@ -226,8 +226,8 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </div>
 
           {/* Project Type & Square Footage Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <div className="space-y-1.5 sm:space-y-2">
               <Label className="text-sm font-semibold text-construction-dark">
                 Project Type *
               </Label>
@@ -253,7 +253,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
               )}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <Label htmlFor="squareFootage" className="text-sm font-semibold text-construction-dark">
                 Approx. Square Footage
               </Label>
@@ -269,7 +269,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </div>
 
           {/* Timeline */}
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             <Label className="text-sm font-semibold text-construction-dark">
               Timeline *
             </Label>
@@ -297,7 +297,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
           </div>
 
           {/* File Upload */}
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             <Label htmlFor="fileUpload" className="text-sm font-semibold text-construction-dark">
               Upload Plans/Drawings (Optional)
             </Label>
