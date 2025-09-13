@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Label } from '@/components/ui/label';
 import { X, Upload, CheckCircle } from 'lucide-react';
 import { useScrollLock } from '@/hooks/useScrollLock';
+import ConfirmationModal from '@/components/ConfirmationModal';
+import { generateRefId } from '@/utils/generateRefId';
 
 interface QuoteModalProps {
   open: boolean;
@@ -37,6 +39,8 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmationRefId, setConfirmationRefId] = useState('');
 
   // Prevent layout shift when modal opens
   useScrollLock(open);
@@ -67,24 +71,27 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
       files: formData.files ? Array.from(formData.files).map(f => f.name) : null
     });
 
-    setIsSubmitted(true);
+    // Generate ref ID and show confirmation modal
+    const refId = generateRefId();
+    setConfirmationRefId(refId);
+    setShowConfirmation(true);
     
-    // Reset form after 3 seconds and close modal
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        projectLocation: '',
-        projectType: '',
-        squareFootage: '',
-        timeline: '',
-        files: null,
-      });
-      setErrors({});
-      onOpenChange(false);
-    }, 3000);
+    // Close the quote form modal
+    onOpenChange(false);
+    
+    // Reset form state
+    setFormData({
+      fullName: '',
+      email: '',
+      phone: '',
+      projectLocation: '',
+      projectType: '',
+      squareFootage: '',
+      timeline: '',
+      files: null,
+    });
+    setErrors({});
+    setIsSubmitted(false);
   };
 
   const handleInputChange = (field: keyof FormData, value: string | FileList | null) => {
@@ -117,28 +124,22 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
     handleInputChange('files', files);
   };
 
-  if (isSubmitted) {
-    return (
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-md mx-auto bg-white rounded-2xl shadow-xl border-0 p-0 overflow-hidden">
-          <div className="p-8 text-center">
-            <div className="mb-6">
-              <CheckCircle className="w-16 h-16 text-construction-green mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-construction-green mb-2">
-                Thank You!
-              </h2>
-              <p className="text-construction-gray text-base leading-relaxed">
-                Thanks for reaching out! A member of our team will contact you within 24 hours.
-              </p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    );
-  }
+  const handleViewNextSteps = () => {
+    setShowConfirmation(false);
+    // You can implement navigation to a "What happens next?" section here
+    console.log('Navigate to next steps section');
+  };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <>
+      <ConfirmationModal
+        open={showConfirmation}
+        onOpenChange={setShowConfirmation}
+        refId={confirmationRefId}
+        onViewNextSteps={handleViewNextSteps}
+      />
+      
+      <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border-0 p-0 overflow-hidden max-h-[95vh] overflow-y-auto">
         <DialogHeader className="p-4 sm:p-6 pb-3 sm:pb-4 border-b border-construction-light/20">
           <DialogTitle className="text-2xl font-bold text-construction-green font-poppins">
@@ -334,6 +335,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
         </form>
       </DialogContent>
     </Dialog>
+    </>
   );
 };
 
