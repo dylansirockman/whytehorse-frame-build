@@ -159,12 +159,13 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
               id="fullName"
               value={formData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
-              className={`h-12 border-construction-light focus:border-construction-green ${
-                errors.fullName ? 'border-red-500' : ''
-              }`}
               placeholder="Enter your full name"
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              required
             />
-            {errors.fullName && <p className="text-red-500 text-xs">{errors.fullName}</p>}
+            {errors.fullName && (
+              <p className="text-red-500 text-xs" role="alert">{errors.fullName}</p>
+            )}
           </div>
 
           {/* Email & Phone Row */}
@@ -178,12 +179,13 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`h-12 border-construction-light focus:border-construction-green ${
-                  errors.email ? 'border-red-500' : ''
-                }`}
                 placeholder="your.email@example.com"
+                aria-invalid={errors.email ? 'true' : 'false'}
+                required
               />
-              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs" role="alert">{errors.email}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -195,12 +197,13 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
-                className={`h-12 border-construction-light focus:border-construction-green ${
-                  errors.phone ? 'border-red-500' : ''
-                }`}
                 placeholder="(555) 123-4567"
+                aria-invalid={errors.phone ? 'true' : 'false'}
+                required
               />
-              {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs" role="alert">{errors.phone}</p>
+              )}
             </div>
           </div>
 
@@ -213,12 +216,13 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
               id="projectLocation"
               value={formData.projectLocation}
               onChange={(e) => handleInputChange('projectLocation', e.target.value)}
-              className={`h-12 border-construction-light focus:border-construction-green ${
-                errors.projectLocation ? 'border-red-500' : ''
-              }`}
               placeholder="City, State or full address"
+              aria-invalid={errors.projectLocation ? 'true' : 'false'}
+              required
             />
-            {errors.projectLocation && <p className="text-red-500 text-xs">{errors.projectLocation}</p>}
+            {errors.projectLocation && (
+              <p className="text-red-500 text-xs" role="alert">{errors.projectLocation}</p>
+            )}
           </div>
 
           {/* Project Type & Square Footage Row */}
@@ -230,19 +234,23 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
               <Select 
                 value={formData.projectType} 
                 onValueChange={(value) => handleInputChange('projectType', value)}
+                required
               >
-                <SelectTrigger className={`h-12 border-construction-light focus:border-construction-green ${
-                  errors.projectType ? 'border-red-500' : ''
-                }`}>
+                <SelectTrigger 
+                  className="h-12"
+                  aria-invalid={errors.projectType ? 'true' : 'false'}
+                >
                   <SelectValue placeholder="Select project type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border border-gray-300 shadow-lg rounded-lg">
                   <SelectItem value="new-custom-home">New Custom Home</SelectItem>
                   <SelectItem value="addition">Addition</SelectItem>
                   <SelectItem value="renovation">Renovation</SelectItem>
                 </SelectContent>
               </Select>
-              {errors.projectType && <p className="text-red-500 text-xs">{errors.projectType}</p>}
+              {errors.projectType && (
+                <p className="text-red-500 text-xs" role="alert">{errors.projectType}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -254,7 +262,6 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
                 type="number"
                 value={formData.squareFootage}
                 onChange={(e) => handleInputChange('squareFootage', e.target.value)}
-                className="h-12 border-construction-light focus:border-construction-green"
                 placeholder="e.g. 2500"
                 min="0"
               />
@@ -269,20 +276,24 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
             <Select 
               value={formData.timeline} 
               onValueChange={(value) => handleInputChange('timeline', value)}
+              required
             >
-              <SelectTrigger className={`h-12 border-construction-light focus:border-construction-green ${
-                errors.timeline ? 'border-red-500' : ''
-              }`}>
+              <SelectTrigger 
+                className="h-12"
+                aria-invalid={errors.timeline ? 'true' : 'false'}
+              >
                 <SelectValue placeholder="When do you need this completed?" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white border border-gray-300 shadow-lg rounded-lg">
                 <SelectItem value="ready-now">Ready Now</SelectItem>
                 <SelectItem value="1-3-months">1–3 Months</SelectItem>
                 <SelectItem value="3-6-months">3–6 Months</SelectItem>
                 <SelectItem value="just-planning">Just Planning</SelectItem>
               </SelectContent>
             </Select>
-            {errors.timeline && <p className="text-red-500 text-xs">{errors.timeline}</p>}
+            {errors.timeline && (
+              <p className="text-red-500 text-xs" role="alert">{errors.timeline}</p>
+            )}
           </div>
 
           {/* File Upload */}
@@ -297,7 +308,7 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
                 multiple
                 accept=".pdf,.jpg,.jpeg,.png"
                 onChange={handleFileChange}
-                className="h-12 border-construction-light focus:border-construction-green file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-construction-green file:text-white hover:file:bg-construction-green-dark"
+                className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-construction-green file:text-white hover:file:bg-construction-green-dark cursor-pointer"
               />
               <Upload className="absolute right-3 top-3 h-6 w-6 text-construction-gray pointer-events-none" />
             </div>
