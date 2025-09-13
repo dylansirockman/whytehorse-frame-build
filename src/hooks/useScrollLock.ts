@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 
 /**
  * Custom hook to lock scroll and prevent layout shift when modals open
- * - Locks body scroll
- * - Computes scrollbar width and applies compensation to body AND fixed elements via CSS var
+ * - Uses CSS scrollbar-gutter when available (no padding compensation)
+ * - Falls back to JS padding compensation when not supported
  */
 export const useScrollLock = (isLocked: boolean) => {
   useEffect(() => {
     if (!isLocked) return;
+
+    const supportsGutter = CSS?.supports?.('scrollbar-gutter: stable both-edges') ?? false;
 
     const originalBodyStyle = window.getComputedStyle(document.body);
     const originalOverflow = originalBodyStyle.overflow;
@@ -16,15 +18,15 @@ export const useScrollLock = (isLocked: boolean) => {
     // Calculate scrollbar width BEFORE changing overflow
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-    // Expose width to CSS for fixed elements
-    document.documentElement.style.setProperty('--scrollbar-compensation', `${scrollbarWidth}px`);
-    document.documentElement.classList.add('scroll-locked');
-
-    // Apply scroll lock with padding compensation (only if there's a scrollbar)
-    if (scrollbarWidth > 0) {
+    if (!supportsGutter && scrollbarWidth > 0) {
+      // Expose width to CSS for fixed elements (header)
+      document.documentElement.style.setProperty('--scrollbar-compensation', `${scrollbarWidth}px`);
+      // Apply scroll lock with padding compensation
       const currentPadding = parseFloat(originalPaddingRight || '0');
       document.body.style.paddingRight = `${currentPadding + scrollbarWidth}px`;
     }
+
+    // Always lock scroll
     document.body.style.overflow = 'hidden';
 
     return () => {
@@ -32,7 +34,6 @@ export const useScrollLock = (isLocked: boolean) => {
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
       document.documentElement.style.removeProperty('--scrollbar-compensation');
-      document.documentElement.classList.remove('scroll-locked');
     };
   }, [isLocked]);
 };
