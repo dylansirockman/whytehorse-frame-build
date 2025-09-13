@@ -301,18 +301,25 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ open, onOpenChange }) => {
             <Label htmlFor="fileUpload" className="text-sm font-semibold text-construction-dark">
               Upload Plans/Drawings (Optional)
             </Label>
-            <div className="relative">
-              <Input
+            <div className="flex items-center gap-3">
+              <input
                 id="fileUpload"
                 type="file"
                 multiple
                 accept=".pdf,.jpg,.jpeg,.png"
                 onChange={handleFileChange}
-                className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-construction-green file:text-white hover:file:bg-construction-green-dark cursor-pointer"
+                className="sr-only peer"
+                aria-describedby="fileUploadHelp"
               />
-              <Upload className="absolute right-3 top-3 h-6 w-6 text-construction-gray pointer-events-none" />
+              <label
+                htmlFor="fileUpload"
+                className="inline-flex items-center gap-2 rounded-lg bg-construction-green text-white px-4 py-2 text-sm font-medium hover:bg-construction-green-dark focus:outline-none focus:ring-2 focus:ring-construction-green/30 focus:ring-offset-0 peer-focus:ring-2 peer-focus:ring-construction-green/30 peer-focus:ring-offset-0 cursor-pointer"
+              >
+                <Upload className="h-5 w-5" aria-hidden="true" />
+                Upload drawings (PDF/JPG/PNG)
+              </label>
             </div>
-            <p className="text-xs text-construction-gray">
+            <p id="fileUploadHelp" className="text-xs text-construction-gray">
               PDF, JPG, PNG files only. Max 10MB per file.
             </p>
           </div>
