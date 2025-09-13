@@ -143,7 +143,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
-              Specialists in house framing — delivering precision, deadlines, and quality you can trust.
+              Specialists in residential framing — delivering precision, deadlines, and quality you can trust.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-6 lg:mb-10 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.7s' }}>
