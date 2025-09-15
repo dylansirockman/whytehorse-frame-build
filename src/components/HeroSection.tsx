@@ -139,7 +139,7 @@ const HeroSection = () => {
             <img 
               src={image} 
               alt="Construction project showcase" 
-              className="w-full h-full object-contain bg-gradient-to-br from-slate-50 to-slate-100 animate-mobileHeroFadeIn"
+              className="w-full h-full object-cover animate-mobileHeroFadeIn"
             />
           </div>
         ))}
@@ -268,7 +268,7 @@ const HeroSection = () => {
                             : "-translate-x-full"
                         }`}
                       >
-                        <img src={image} alt="Construction project showcase" className="w-full h-full object-contain bg-gradient-to-br from-slate-50 to-slate-100" />
+                        <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
                       </div>
                     ))}
 
