@@ -123,13 +123,33 @@ const HeroSection = () => {
       {/* ===== Soft bottom fade-out (seamless handoff) ===== */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[15vh] z-10 bg-gradient-to-b from-transparent to-white" />
 
+      {/* Mobile Background Slideshow */}
+      <div className="lg:hidden absolute inset-0 z-10">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img 
+              src={image} 
+              alt="Construction project showcase" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+        {/* Gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      </div>
+
       {/* Content */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 pb-20 lg:pb-28">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-16 min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-7rem)] pt-6 lg:pt-6">
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             {/* Typewriter headline */}
-            <h1 className="mb-6 lg:mb-10 font-bold text-3xl sm:text-4xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.3s' }}>
+            <h1 className="mb-6 lg:mb-10 font-bold text-3xl sm:text-4xl lg:text-7xl leading-tight text-white lg:text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.3s' }}>
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
@@ -142,7 +162,7 @@ const HeroSection = () => {
               you can rely on
             </h1>
 
-            <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
+            <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-white/90 lg:text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
               Specialists in residential framing — delivering precision, deadlines, and quality you can trust.
             </p>
 
@@ -155,31 +175,31 @@ const HeroSection = () => {
               >
                 Get Quote
               </Button>
-              <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px]">
+              <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px] lg:text-[#1F2937] lg:border-[#1F2937] text-white border-white hover:bg-white hover:text-[#1F2937]">
                 Contact Us
               </Button>
             </div>
 
             <div className="flex flex-col gap-3 lg:gap-4 mb-4 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.9s' }}>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">500+ Projects Completed</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">15+ Years Experience</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">100% On Schedule</span>
               </div>
             </div>
           </div>
 
-          {/* Image Carousel with Mobile Optimization */}
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop mb-12 lg:mb-0">
+          {/* Desktop Image Carousel with Crane Animation */}
+          <div className="hidden lg:block w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop mb-12 lg:mb-0">
             {/* Desktop - with crane animation */}
-            <div className="hidden lg:block relative w-full aspect-[4/5] z-[60] will-change-transform"
+            <div className="relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={{
                 ["--swing-angle" as any]: "3.2deg",
                 ["--swing-lift" as any]: "3px",
@@ -278,30 +298,6 @@ const HeroSection = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Mobile - automatic, non-interactive slideshow */}
-            <div className="lg:hidden relative w-full aspect-[4/5] z-40">
-              <div
-                className="w-full h-full overflow-hidden rounded-3xl shadow-xl bg-white relative pointer-events-none"
-              >
-                {images.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                      index === currentImageIndex
-                        ? "translate-x-0"
-                        : index > currentImageIndex
-                        ? "translate-x-full"
-                        : "-translate-x-full"
-                    }`}
-                  >
-                    <img src={image} alt="Construction project showcase" className="w-full h-full object-cover" />
-                  </div>
-                ))}
-
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-construction-green/10 opacity-0 transition-opacity duration-300 z-20" />
               </div>
             </div>
           </div>
