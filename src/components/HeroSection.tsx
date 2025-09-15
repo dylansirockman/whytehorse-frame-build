@@ -15,10 +15,7 @@ const LOGOS = [
 const HeroSection = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const images = [
-    "/lovable-uploads/c134fe50-b338-4170-a0d5-f053aef93ab4.png",
-    "/lovable-uploads/689f2580-07f0-486a-9dd7-ee8fe8a3b906.png",
-    "/lovable-uploads/073b7385-c711-4d21-bdf2-a27e21f46e1c.png",
-    "/lovable-uploads/7f4a1d23-20ba-4078-85b6-248cba2c8d83.png",
+    "/hero-images/hero-5.webp",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
