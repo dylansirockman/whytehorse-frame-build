@@ -132,8 +132,8 @@ const HeroSection = () => {
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
             style={{
-              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 80%)",
-              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 80%)"
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 80%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 80%)"
             }}
           >
             <img 
@@ -151,7 +151,7 @@ const HeroSection = () => {
           {/* Text (staggered reveal animation) */}
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             {/* Typewriter headline */}
-            <h1 className="mb-6 lg:mb-10 font-bold text-3xl sm:text-4xl lg:text-7xl leading-tight text-white lg:text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.3s' }}>
+            <h1 className="mb-6 lg:mb-10 font-bold text-3xl sm:text-4xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.3s' }}>
               <span className="relative text-construction-green" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
@@ -164,7 +164,7 @@ const HeroSection = () => {
               you can rely on
             </h1>
 
-            <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-white/90 lg:text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
+            <p className="text-base lg:text-2xl mb-6 lg:mb-8 text-construction-gray leading-relaxed max-w-prose mx-auto lg:mx-0 animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.5s' }}>
               Specialists in residential framing — delivering precision, deadlines, and quality you can trust.
             </p>
 
@@ -177,21 +177,21 @@ const HeroSection = () => {
               >
                 Get Quote
               </Button>
-              <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px] lg:text-[#1F2937] lg:border-[#1F2937] text-white border-white hover:bg-white hover:text-[#1F2937]">
+              <Button variant="outline" size="lg" className="text-base font-semibold min-h-[44px]">
                 Contact Us
               </Button>
             </div>
 
             <div className="flex flex-col gap-3 lg:gap-4 mb-4 lg:mb-8 justify-center lg:justify-start animate-slideUpStagger motion-reduce:animate-none" style={{ animationDelay: '0.9s' }}>
-              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">500+ Projects Completed</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">15+ Years Experience</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-white/90 lg:text-construction-gray">
+              <div className="flex items-center justify-center lg:justify-start text-construction-gray">
                 <div className="w-2 h-2 lg:w-3 lg:h-3 bg-construction-green rounded-full mr-3" />
                 <span className="font-medium text-sm lg:text-base">100% On Schedule</span>
               </div>
