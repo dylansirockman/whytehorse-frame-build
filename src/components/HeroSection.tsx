@@ -139,7 +139,7 @@ const HeroSection = () => {
             <img 
               src={image} 
               alt="Construction project showcase" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover animate-mobileHeroFadeIn"
             />
           </div>
         ))}
@@ -377,6 +377,21 @@ const HeroSection = () => {
         @keyframes caret {
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0; }
+        }
+
+        /* Mobile hero image entrance animation */
+        @keyframes mobileHeroFadeIn {
+          0% { 
+            opacity: 0; 
+            transform: scale(1.1);
+          }
+          100% { 
+            opacity: 1; 
+            transform: scale(1);
+          }
+        }
+        .animate-mobileHeroFadeIn {
+          animation: mobileHeroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
         .animate-caret { animation: caret 1s step-end infinite; }
 
