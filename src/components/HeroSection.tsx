@@ -131,6 +131,10 @@ const HeroSection = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
+            style={{
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 80%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 80%)"
+            }}
           >
             <img 
               src={image} 
@@ -139,8 +143,6 @@ const HeroSection = () => {
             />
           </div>
         ))}
-        {/* Gradient overlay for text readability - fade out in middle */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-black/40" />
       </div>
 
       {/* Content */}
