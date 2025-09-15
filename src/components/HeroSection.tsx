@@ -15,6 +15,9 @@ const LOGOS = [
 const HeroSection = () => {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const images = [
+    "/hero-images/hero-1.jpg",
+    "/hero-images/hero-2.jpg", 
+    "/hero-images/hero-3.png",
     "/hero-images/hero-5.webp",
   ];
 
