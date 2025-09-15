@@ -152,7 +152,7 @@ const HeroSection = () => {
           <div className="w-full lg:w-[55%] text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
             {/* Typewriter headline */}
             <h1 className="mb-6 lg:mb-10 font-bold text-4xl sm:text-5xl lg:text-7xl leading-tight text-[#1F2937] animate-slideUpStagger motion-reduce:animate-none drop-shadow-lg lg:drop-shadow-none" style={{ animationDelay: '0.3s', textShadow: 'lg:hidden 0 2px 4px rgba(0,0,0,0.1)' }}>
-              <span className="relative text-construction-green inline-block min-w-[220px] sm:min-w-[280px] lg:min-w-[480px]" aria-live="polite" aria-atomic="true">
+              <span className="relative text-construction-green inline-block min-w-[160px] sm:min-w-[200px] lg:min-w-[480px]" aria-live="polite" aria-atomic="true">
                 {typed}
                 {(phase === "initialPause" || phase === "typing" || phase === "deleting") && (
                   <span
