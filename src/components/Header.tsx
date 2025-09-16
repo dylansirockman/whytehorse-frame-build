@@ -115,7 +115,7 @@ const Header = () => {
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out",
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50"
-            : "bg-white/80 backdrop-blur-sm border-b border-transparent"
+            : "lg:bg-white/80 lg:backdrop-blur-sm lg:border-b lg:border-transparent bg-transparent backdrop-blur-0 border-b border-transparent"
         )}
         role="banner"
         style={{ 
