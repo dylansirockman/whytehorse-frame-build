@@ -184,14 +184,19 @@ const ProcessCarousel = () => {
 
           {/* Construction Timeline - Desktop */}
           <div className="hidden lg:block mb-8">
-            <div className="relative max-w-4xl mx-auto">
-              {/* Timeline Line */}
-              <div className="absolute top-1/2 left-0 right-0 h-1 bg-construction-dark/20 -translate-y-1/2 rounded-full">
+            <div className="relative max-w-4xl mx-auto px-8">
+              {/* Timeline Line Background */}
+              <div className="absolute top-1/2 left-8 right-8 h-1 bg-construction-dark/20 -translate-y-1/2 rounded-full" />
+              
+              {/* Timeline Progress Line */}
+              {currentStep > 0 && (
                 <div 
-                  className="h-full bg-gradient-to-r from-construction-green to-construction-green/80 rounded-full transition-all duration-500"
-                  style={{ width: `${((currentStep + 1) / processSteps.length) * 100}%` }}
+                  className="absolute top-1/2 left-8 h-1 bg-gradient-to-r from-construction-green to-construction-green/80 -translate-y-1/2 rounded-full transition-all duration-500"
+                  style={{ 
+                    width: `calc(${(currentStep / (processSteps.length - 1)) * 100}% - ${8}px)`
+                  }}
                 />
-              </div>
+              )}
               
               {/* Timeline Steps */}
               <div className="flex justify-between items-center">
