@@ -194,49 +194,84 @@ const ProcessCarousel = () => {
                 />
               </div>
               
-              {/* Timeline Steps */}
-              <div className="relative z-10 flex justify-between items-center">
-                {processSteps.map((step, index) => {
-                  const Icon = step.icon;
-                  const isActive = index === currentStep;
-                  const isCompleted = index < currentStep;
-                  
-                  return (
-                    <button
-                      key={step.number}
-                      onClick={() => goToStep(index)}
-                      className={cn(
-                        "relative w-16 h-16 rounded-full border-4 transition-all duration-300",
-                        "flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-construction-green focus:ring-offset-4",
-                        isActive 
-                          ? "bg-construction-green border-construction-green text-white scale-110 shadow-lg" 
-                          : isCompleted
-                          ? "bg-construction-green/20 border-construction-green text-construction-green"
-                          : "bg-white border-construction-dark/30 text-construction-dark/60 hover:border-construction-green/50"
-                      )}
-                    >
-                      <Icon className="w-6 h-6" />
+              {/* Timeline Steps Container */}
+              <div className="relative">
+                {/* Progress Connections Between Steps */}
+                <div className="absolute top-1/2 left-0 right-0 h-1 -translate-y-1/2 flex items-center">
+                  <div className="w-full flex justify-between">
+                    {processSteps.map((_, index) => {
+                      if (index === processSteps.length - 1) return null;
                       
-                      {/* Step Number Badge */}
-                      <div className={cn(
-                        "absolute -top-2 -right-2 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center",
-                        isActive || isCompleted
-                          ? "bg-construction-green text-white"
-                          : "bg-construction-dark/20 text-construction-dark/60"
-                      )}>
-                        {step.number}
-                      </div>
+                      const isCompleted = index < currentStep;
+                      const isActive = index === currentStep - 1;
                       
-                      {/* Tooltip */}
-                      <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                        <div className="bg-construction-dark text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap">
-                          {step.title}
+                      return (
+                        <div 
+                          key={index}
+                          className="flex-1 mx-8 first:ml-0 last:mr-0"
+                        >
+                          <div className={cn(
+                            "h-1 rounded-full transition-all duration-500",
+                            isCompleted || isActive 
+                              ? "bg-construction-green" 
+                              : "bg-construction-dark/20"
+                          )} />
                         </div>
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 border-4 border-transparent border-b-construction-dark" />
-                      </div>
-                    </button>
-                  );
-                })}
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Timeline Step Buttons */}
+                <div className="relative z-10 flex justify-between items-center">
+                  {processSteps.map((step, index) => {
+                    const Icon = step.icon;
+                    const isActive = index === currentStep;
+                    const isCompleted = index < currentStep;
+                    
+                    return (
+                      <button
+                        key={step.number}
+                        onClick={() => goToStep(index)}
+                        className={cn(
+                          "relative w-16 h-16 rounded-full border-4 transition-all duration-300",
+                          "flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-construction-green focus:ring-offset-4",
+                          "bg-white shadow-lg",
+                          isActive 
+                            ? "border-construction-green text-construction-green scale-110 shadow-xl ring-4 ring-construction-green/20" 
+                            : isCompleted
+                            ? "border-construction-green text-construction-green shadow-md"
+                            : "border-construction-dark/30 text-construction-dark/60 hover:border-construction-green/50 hover:shadow-md"
+                        )}
+                      >
+                        <Icon className="w-6 h-6" strokeWidth={isActive ? 2.5 : 2} />
+                        
+                        {/* Step Number Badge */}
+                        <div className={cn(
+                          "absolute -top-2 -right-2 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center border-2 border-white",
+                          isActive || isCompleted
+                            ? "bg-construction-green text-white"
+                            : "bg-construction-dark/20 text-construction-dark/60"
+                        )}>
+                          {step.number}
+                        </div>
+                        
+                        {/* Active Step Indicator */}
+                        {isActive && (
+                          <div className="absolute inset-0 rounded-full bg-construction-green/10 animate-pulse" />
+                        )}
+                        
+                        {/* Tooltip */}
+                        <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+                          <div className="bg-construction-dark text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+                            {step.title}
+                          </div>
+                          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 border-4 border-transparent border-b-construction-dark" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
