@@ -185,21 +185,17 @@ const ProcessCarousel = () => {
           {/* Construction Timeline - Desktop */}
           <div className="hidden lg:block mb-8">
             <div className="relative max-w-4xl mx-auto px-8">
-              {/* Timeline Line Background */}
-              <div className="absolute top-1/2 left-8 right-8 h-1 bg-construction-dark/20 -translate-y-1/2 rounded-full" />
-              
-              {/* Timeline Progress Line */}
-              {currentStep > 0 && (
-                <div 
-                  className="absolute top-1/2 left-8 h-1 bg-gradient-to-r from-construction-green to-construction-green/80 -translate-y-1/2 rounded-full transition-all duration-500"
-                  style={{ 
-                    width: `calc(${(currentStep / (processSteps.length - 1)) * 100}% - ${8}px)`
-                  }}
+              {/* Timeline Track */}
+              <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 h-1">
+                <div className="w-full h-full bg-construction-dark/20 rounded-full" />
+                <div
+                  className="absolute top-0 left-0 h-full w-full bg-construction-green rounded-full origin-left transition-transform duration-500"
+                  style={{ transform: `scaleX(${processSteps.length > 1 ? currentStep / (processSteps.length - 1) : 0})` }}
                 />
-              )}
+              </div>
               
               {/* Timeline Steps */}
-              <div className="flex justify-between items-center">
+              <div className="relative z-10 flex justify-between items-center">
                 {processSteps.map((step, index) => {
                   const Icon = step.icon;
                   const isActive = index === currentStep;
