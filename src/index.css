@@ -180,6 +180,16 @@ All colors MUST be HSL.
     scrollbar-gutter: stable both-edges;
   }
 
+  /* Hide scrollbar for all browsers */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
   body {
     @apply bg-background text-foreground;
   }
