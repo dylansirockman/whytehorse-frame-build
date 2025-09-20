@@ -161,7 +161,7 @@ const ServicesSection = () => {
                   </p>
 
                   {/* Features (cascade after card is visible) */}
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                  <ul className="grid grid-cols-1 gap-y-2">
                     {service.features.map((feature, idx) => (
                       <li
                         key={feature}
