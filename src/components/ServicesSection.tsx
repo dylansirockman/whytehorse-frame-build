@@ -100,7 +100,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
           {services.map((service, i) => {
             const Icon = service.icon;
             const baseDelay = 0.05; // base delay once a card is visible
