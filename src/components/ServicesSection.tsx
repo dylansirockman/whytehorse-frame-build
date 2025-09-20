@@ -161,7 +161,7 @@ const ServicesSection = () => {
                   </p>
 
                   {/* Features (cascade after card is visible) */}
-                  <ul className="grid grid-cols-1 gap-y-2">
+                  <ul className="grid grid-cols-1 gap-y-2 mb-5">
                     {service.features.map((feature, idx) => (
                       <li
                         key={feature}
@@ -176,11 +176,8 @@ const ServicesSection = () => {
                       </li>
                     ))}
                   </ul>
-                </div>
 
-                {/* Light divider + tags */}
-                <div className="px-6 lg:px-8 pb-6 mt-auto">
-                  {/* Divider wipe */}
+                  {/* Light divider */}
                   <div className="h-px overflow-hidden mb-3">
                     <div
                       className={`h-px bg-construction-dark/10 origin-left
@@ -191,7 +188,7 @@ const ServicesSection = () => {
                     />
                   </div>
 
-                  {/* Tags fade-up */}
+                  {/* Tags */}
                   <div
                     className={`flex flex-wrap gap-2
                       transition-[opacity,transform,filter] duration-600 ease-out motion-reduce:transition-none
