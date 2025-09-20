@@ -309,6 +309,15 @@ const HeroSection = () => {
         </div>
       </div> {/* end content wrapper */}
 
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-32 lg:bottom-40 left-1/2 -translate-x-1/2 z-40 animate-pulse-slow">
+        <div className="flex flex-col items-center text-construction-gray/60 hover:text-construction-green transition-colors duration-300 cursor-pointer">
+          <ChevronDown size={24} className="animate-bounce" />
+          <span className="text-xs font-medium mt-1 hidden sm:block">Scroll</span>
+        </div>
+      </div>
+      {/* ===== /Scroll Down Indicator ===== */}
+
       {/* ===== Anchored "Trusted by" band (inside Hero bottom) ===== */}
       <div className="absolute inset-x-0 bottom-0 z-30 bg-white/70 backdrop-blur-md border-t border-black/10">
         <div className="max-w-7xl mx-auto px-4 py-3 lg:py-5">
@@ -338,15 +347,6 @@ const HeroSection = () => {
         </div>
       </div>
       {/* ===== /Anchored "Trusted by" ===== */}
-
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 animate-pulse-slow">
-        <div className="flex flex-col items-center text-construction-gray/60 hover:text-construction-green transition-colors duration-300 cursor-pointer">
-          <ChevronDown size={24} className="animate-bounce" />
-          <span className="text-xs font-medium mt-1 hidden sm:block">Scroll</span>
-        </div>
-      </div>
-      {/* ===== /Scroll Down Indicator ===== */}
 
       {/* Keyframes for pendulum + caret + modern staggered entrance */}
       <style>{`
