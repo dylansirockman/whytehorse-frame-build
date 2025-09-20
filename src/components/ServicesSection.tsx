@@ -100,7 +100,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
             const baseDelay = 0.05; // base delay once a card is visible
@@ -122,7 +122,7 @@ const ServicesSection = () => {
                 <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
                 <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
 
-                <div className="p-6 lg:p-8">
+                <div className="p-6 lg:p-8 h-full flex flex-col">
                   {/* Icon + Title */}
                   <div className="flex items-start gap-4 mb-3">
                     {/* Icon pop-in */}
@@ -179,7 +179,7 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Light divider + tags */}
-                <div className="px-6 lg:px-8 pb-6">
+                <div className="px-6 lg:px-8 pb-6 mt-auto">
                   {/* Divider wipe */}
                   <div className="h-px overflow-hidden mb-3">
                     <div
