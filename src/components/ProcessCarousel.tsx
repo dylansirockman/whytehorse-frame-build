@@ -245,7 +245,7 @@ const ProcessCarousel = () => {
                       </div>
 
                       {/* CTA with Construction Theme */}
-                      <div className="text-center sm:text-left mb-8">
+                      <div className="text-center sm:text-left">
                         <button
                           onClick={scrollToCTA}
                           className={cn(
@@ -261,8 +261,8 @@ const ProcessCarousel = () => {
                         </button>
                       </div>
 
-                      {/* Image Section */}
-                      <div className="mt-8">
+                      {/* Image Section - Mobile Only */}
+                      <div className="lg:hidden mt-8">
                         <div className="relative">
                           {/* Construction Frame */}
                           <div className="absolute -inset-4 bg-gradient-to-br from-construction-dark/10 to-construction-dark/5 rounded-2xl transform rotate-1" />
@@ -287,7 +287,7 @@ const ProcessCarousel = () => {
               </div>
             </div>
 
-            {/* Right Side: Step Navigation Only - Desktop Only */}
+            {/* Right Side: Step Navigation & Image - Desktop Only */}
             <div className="hidden lg:block">
               <div className="space-y-6">
                 {/* Step Navigation */}
@@ -343,6 +343,27 @@ const ProcessCarousel = () => {
                         </button>
                       );
                     })}
+                  </div>
+                </div>
+
+                {/* Current Step Image */}
+                <div className="bg-white/90 backdrop-blur-sm border-2 border-construction-dark/10 shadow-xl rounded-2xl p-6">
+                  <div className="relative">
+                    {/* Construction Frame */}
+                    <div className="absolute -inset-4 bg-gradient-to-br from-construction-dark/10 to-construction-dark/5 rounded-2xl transform rotate-1" />
+                    <div className="absolute -inset-2 bg-white rounded-xl shadow-md" />
+                    
+                    <img
+                      src={processSteps[currentStep].image}
+                      alt={`${processSteps[currentStep].title} process step`}
+                      className="relative w-full rounded-lg shadow-lg border-2 border-construction-dark/10"
+                      loading="lazy"
+                    />
+                    
+                    {/* Construction Badge */}
+                    <div className="absolute top-4 right-4 bg-construction-green text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                      Step {processSteps[currentStep].number}
+                    </div>
                   </div>
                 </div>
               </div>
