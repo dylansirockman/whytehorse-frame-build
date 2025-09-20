@@ -166,17 +166,12 @@ const ProcessCarousel = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Left Side: Step Content */}
             <div className="lg:col-span-2">
-              <div className="relative bg-white/90 backdrop-blur-sm border-2 border-construction-dark/10 shadow-xl rounded-2xl p-6 sm:p-8 lg:p-12">
-                {/* Blueprint Grid Overlay */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-                  <div className="w-full h-full" style={{
-                    backgroundImage: `
-                      linear-gradient(to right, #1F2937 1px, transparent 1px),
-                      linear-gradient(to bottom, #1F2937 1px, transparent 1px)
-                    `,
-                    backgroundSize: '20px 20px'
-                  }} />
-                </div>
+              <div className="relative group rounded-2xl border border-construction-dark/10 bg-white/80 backdrop-blur-sm shadow-sm
+                transition-[opacity,transform,box-shadow,filter] duration-600 ease-out motion-reduce:transition-none
+                hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-construction-green/50 p-6 sm:p-8 lg:p-12">
+                {/* Corner ticks */}
+                <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
+                <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
 
                 {processSteps.map((step, index) => {
                   const Icon = step.icon;
@@ -291,7 +286,13 @@ const ProcessCarousel = () => {
             <div className="hidden lg:block">
               <div className="space-y-6">
                 {/* Step Navigation */}
-                <div className="bg-white/90 backdrop-blur-sm border-2 border-construction-dark/10 shadow-xl rounded-2xl p-6">
+                <div className="relative group rounded-2xl border border-construction-dark/10 bg-white/80 backdrop-blur-sm shadow-sm
+                  transition-[opacity,transform,box-shadow,filter] duration-600 ease-out motion-reduce:transition-none
+                  hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 p-6">
+                  
+                  {/* Corner ticks */}
+                  <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
+                  <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
                   <h4 className="text-lg font-semibold text-construction-dark mb-4">Construction Steps</h4>
                   <div className="space-y-3">
                     {processSteps.map((step, index) => {
@@ -347,7 +348,13 @@ const ProcessCarousel = () => {
                 </div>
 
                 {/* Current Step Image */}
-                <div className="bg-white/90 backdrop-blur-sm border-2 border-construction-dark/10 shadow-xl rounded-2xl p-6">
+                <div className="relative group rounded-2xl border border-construction-dark/10 bg-white/80 backdrop-blur-sm shadow-sm
+                  transition-[opacity,transform,box-shadow,filter] duration-600 ease-out motion-reduce:transition-none
+                  hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 p-6">
+                  
+                  {/* Corner ticks */}
+                  <div className="pointer-events-none absolute -top-2 left-6 h-4 w-px bg-construction-dark/15" />
+                  <div className="pointer-events-none absolute -left-2 top-6 h-px w-4 bg-construction-dark/15" />
                   <div className="relative">
                     {/* Construction Frame */}
                     <div className="absolute -inset-4 bg-gradient-to-br from-construction-dark/10 to-construction-dark/5 rounded-2xl transform rotate-1" />
