@@ -203,6 +203,18 @@ const HeroSection = () => {
 
           {/* Desktop Image Carousel with Crane Animation */}
           <div className="hidden lg:block w-full max-w-md sm:max-w-lg lg:max-w-xl lg:w-1/2 mx-auto relative animate-imageDrop mb-12 lg:mb-0">
+            {/* Construction Animation Video */}
+            <div className="absolute -top-20 -left-20 w-32 h-32 z-50">
+              <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-full h-full object-cover opacity-80"
+              >
+                <source src="/construction-animation.mp4" type="video/mp4" />
+              </video>
+            </div>
             {/* Desktop - with crane animation */}
             <div className="relative w-full aspect-[4/5] z-[60] will-change-transform"
               style={{
