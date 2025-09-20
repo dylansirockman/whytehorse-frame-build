@@ -21,32 +21,33 @@ const BlueprintPillHeader: React.FC<BlueprintPillHeaderProps> = ({
   return (
     <Component
       className={cn(
-        'flex items-center gap-3 mb-6',
+        'flex items-center gap-4 mb-6',
         dense ? 'py-2' : 'py-3',
         className
       )}
     >
-      {/* Index Box */}
+      {/* Blueprint Index Circle */}
       {index && (
-        <div className="shrink-0 border-[1.5px] border-slate-900 px-2 py-1 leading-none">
-          <span className="text-sm font-medium text-slate-900 select-none">
+        <div className="shrink-0 w-8 h-8 rounded-full border-2 border-hsl(var(--construction-dark)) bg-hsl(var(--construction-light)) flex items-center justify-center">
+          <span className="text-xs font-bold text-hsl(var(--construction-dark)) select-none">
             {index}
           </span>
         </div>
       )}
 
-      {/* Title with underline */}
-      <div className="relative uppercase font-semibold tracking-wider text-sm md:text-base text-slate-900 pb-0.5">
-        {title}
-        <span className="absolute left-0 -bottom-[2px] w-full h-[1.5px] bg-slate-900/90" />
+      {/* Blueprint Title Block */}
+      <div className="bg-hsl(var(--construction-light)) border-2 border-hsl(var(--construction-dark)) px-3 py-1.5">
+        <div className="uppercase font-bold tracking-wide text-sm text-hsl(var(--construction-dark))">
+          {title}
+        </div>
       </div>
 
-      {/* Rule/Line extension */}
-      <div className="flex-1 h-[1.5px] bg-slate-900/80 min-w-[20px]" />
+      {/* Blueprint Grid Line */}
+      <div className="flex-1 h-0 border-t-2 border-dashed border-hsl(var(--construction-dark))/40 min-w-[20px]" />
 
-      {/* Right Meta */}
+      {/* Right Meta in Blueprint Style */}
       {metaRight && (
-        <div className="uppercase text-[11px] tracking-widest font-normal text-slate-900/80 whitespace-nowrap">
+        <div className="bg-hsl(var(--construction-dark)) text-hsl(var(--construction-light)) px-2 py-1 text-xs font-mono uppercase tracking-wide">
           {metaRight}
         </div>
       )}
